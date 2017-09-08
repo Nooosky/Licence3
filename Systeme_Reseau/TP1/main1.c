@@ -58,14 +58,16 @@ int main () {
         default : // père
             printf("pere : %d\n", getpid());
             
-            // met une valeur dans message
+            // alloue de la mémoire et met une valeur dans message
             p->message = malloc(sizeof(char) * 10);
             p->message = "bonjour";
 
             sleep(100);
 
-            // détache le segment mémoire
+            // libère la mémoire
             free( p->message);
+
+            // détache le segment mémoire
             if (shmdt(p) < 0)
             {
                 perror("shmdt");
