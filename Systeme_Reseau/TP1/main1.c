@@ -4,54 +4,50 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <string.h>
 
 int main () {
 
      // défini la structure à partager
-    struct Data 
-    {
-        char* message;
-    };
+    char *message;
+   
 
     key_t key; // clé pour la création du segment mémoir partagée
     int shmID; // id du segment mémoir partagée
-    struct Data* p; // pointeur sur l'adresse du segment de mémoire partagée
+    char *p; // pointeur sur l'adresse du segment de mémoire partagée
     pid_t pid; // id processus crée
 
     // définition de la clé
     // key = 1234;
     key = ftok("./", 'h');
 
-    // instancie Data
-    struct Data data;
-
-    // création du segment mémorie partagée
-    if ((shmID = shmget(key, sizeof(data), IPC_CREAT | 0644)) < 0)
+    // création du segment mémoire partagée
+    if ((shmID = shmget(key, sizeof(message), IPC_CREAT | 0644)) < 0)
     {
         perror("shmget");
-        exit (-1);
+        exit (1);
     }
 
     switch (pid = fork()) 
     {
         case -1 : // erreur
             perror("fork");
-            exit (-1);
+            exit (1);
         break;
 
         case 0 : // fils
             printf("fils : %d\n", getpid());
-
-            sleep(100);
             
             // attache le segment de mémoire partagée
-            if ((p = (struct Data *) shmat(shmID, NULL, 0)) == (void*) -1)
+            if ((p = (char *) shmat(shmID, NULL, 0)) == (void*) -1)
             {
                 perror("shmat");
-                exit(-1);
+                exit(1);
             }
 
-            printf("%s\n", data.message);
+            sleep(1);
+
+            printf("%s\n", p);
 
         break;
 
@@ -59,19 +55,23 @@ int main () {
             printf("pere : %d\n", getpid());
             
             // alloue de la mémoire et met une valeur dans message
-            p->message = malloc(sizeof(char) * 10);
-            p->message = "bonjour";
+            //p = malloc(sizeof(char) * 7);
+            //p = "bonjour";
+            sleep(1);
+            *message = p;
+            *message = '\0';
+            strcat(message, "Hello from the child");
 
-            sleep(100);
+            sleep(1);
 
             // libère la mémoire
-            free( p->message);
+            //free(p);
 
             // détache le segment mémoire
             if (shmdt(p) < 0)
             {
                 perror("shmdt");
-                exit(-1);
+                exit(1);
             }
             
         break;
