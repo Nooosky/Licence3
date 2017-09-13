@@ -4,8 +4,11 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <string.h>
 
 int main () {
+
+    char *message;
 
     key_t key; // clé pour la création du segment mémoir partagée
     int shmID; // id du segment mémoir partagée
@@ -44,13 +47,28 @@ int main () {
             }
 
             // donne une valeur
-            p = "bonjour";
-
+            *message = p;
+            *message = '\0';
+            strcat(message, "bonjour");
+            
+            // détache le segment mémoire
+            if (shmdt(p) < 0)
+            {
+                perror("shmdt");
+                exit(1);
+            }
         break;
 
         default : // père
             printf("pid pere : %d\n", getpid());
             
+            // attache le segment de mémoire partagée
+            if ((p = (char *) shmat(shmID, NULL, 0)) == (void*) -1)
+            {
+                perror("shmat");
+                exit(1);
+            }
+
             // on attend pour que le fils est le temps d'écrire le message
             sleep(1);
 
@@ -64,20 +82,23 @@ int main () {
                 exit(1);
             }
             
-            // Q1, on vérifie que le shmId n'existe plus
-            system("ipcs");
-
-            // Q2, on identifie le segment et on le supprime
-            system("ipcs");
-            system("ipcrm -M " + key);
-            system("ipcs");
-
-            //Q3, on supprime assurément le segment de mémoire partagée
-
-
-            
+            /*if (shmctl(shmID,IPC_RMID,NULL) == -1)
+            {
+                perror("shmctl") ;
+                exit(1) ;
+            }*/
         break;
     }
+
+    // Q1, on vérifie que le shmId n'existe plus
+    system("ipcs -m");
+
+    // Q2, on identifie le segment et on le supprime
+   system("ipcs");
+   system("ipcrm -m " + key);
+   system("ipcs");
+
+    //Q3, on supprime assurément le segment de mémoire partagée
 
     return 0;
 }
