@@ -4,13 +4,8 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <string.h>
 
 int main () {
-
-     // défini la structure à partager
-    char *message;
-   
 
     key_t key; // clé pour la création du segment mémoir partagée
     int shmID; // id du segment mémoir partagée
@@ -21,12 +16,15 @@ int main () {
     // key = 1234;
     key = ftok("./", 'h');
 
-    // création du segment mémoire partagée
-    if ((shmID = shmget(key, sizeof(message), IPC_CREAT | 0644)) < 0)
+    // création du segment mémoire partagée avec les droits rw r r
+    if ((shmID = shmget(key, sizeof(char), IPC_CREAT | 0644)) < 0)
     {
         perror("shmget");
         exit (1);
     }
+
+    // affichage du shmID du semgent crée
+    printf("shmid segment : %i\n",shmID);
 
     switch (pid = fork()) 
     {
@@ -36,7 +34,7 @@ int main () {
         break;
 
         case 0 : // fils
-            printf("fils : %d\n", getpid());
+            printf("pid fils : %d\n", getpid());
             
             // attache le segment de mémoire partagée
             if ((p = (char *) shmat(shmID, NULL, 0)) == (void*) -1)
@@ -45,27 +43,19 @@ int main () {
                 exit(1);
             }
 
-            sleep(1);
-
-            printf("%s\n", p);
+            // donne une valeur
+            p = "bonjour";
 
         break;
 
         default : // père
-            printf("pere : %d\n", getpid());
+            printf("pid pere : %d\n", getpid());
             
-            // alloue de la mémoire et met une valeur dans message
-            //p = malloc(sizeof(char) * 7);
-            //p = "bonjour";
-            sleep(1);
-            *message = p;
-            *message = '\0';
-            strcat(message, "Hello from the child");
-
+            // on attend pour que le fils est le temps d'écrire le message
             sleep(1);
 
-            // libère la mémoire
-            //free(p);
+            // on affiche le message du fils
+            printf("%s\n", p);
 
             // détache le segment mémoire
             if (shmdt(p) < 0)
@@ -73,6 +63,18 @@ int main () {
                 perror("shmdt");
                 exit(1);
             }
+            
+            // Q1, on vérifie que le shmId n'existe plus
+            system("ipcs");
+
+            // Q2, on identifie le segment et on le supprime
+            system("ipcs");
+            system("ipcrm -M " + key);
+            system("ipcs");
+
+            //Q3, on supprime assurément le segment de mémoire partagée
+
+
             
         break;
     }
