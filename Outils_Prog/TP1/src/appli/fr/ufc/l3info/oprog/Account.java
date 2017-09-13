@@ -1,5 +1,6 @@
 package fr.ufc.l3info.oprog;
 
+
 /**
  *  Simplified class for a bank account.
  *  @author Frederic Dadeau (frederic.dadeau@univ-fcomte.fr)

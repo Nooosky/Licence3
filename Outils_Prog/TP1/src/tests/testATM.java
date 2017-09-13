@@ -23,40 +23,41 @@ public class testATM {
         ATMUnderTest = new ATM();
     }
 
-    @Test
-    public void testInsertCard1() {
+    @Test(expected = ATM.NullCardException.class)
+    public void testInsertCard1() throws ATM.NullCardException {
 
-        //assertFalse(ATMUnderTest.insertCard(null));
+        ATMUnderTest.insertCard(null);
     }
 
-    @Test
-    public void testInsertCard2() {
+    @Test(expected = ATM.NullCardException.class)
+    public void testInsertCard2() throws ATM.NullCardException {
 
         Card card = Mockito.mock(Card.class);
-        card.isBlocked();
         ATMUnderTest.insertCard(card);
-        Mockito.when(mockedCard.isBlocked()).thenReturn(false)
+        assertEquals(ATMUnderTest.insertCard(card), -1);       
     }
 
-    @Test
-    public void testInsertCard3() {
+    @Test(expected = ATM.NullCardException.class)
+    public void testInsertCard3() throws ATM.NullCardException {
 
         Card card = Mockito.mock(Card.class);
-        card.isBlocked();
+        Mockito.when(card.isBlocked()).thenReturn(true);
         assertEquals(ATMUnderTest.insertCard(card), -2);
     }
 
-    @Test
-    public void testInsertCard4() {
+    @Test(expected = ATM.NullCardException.class)
+    public void testInsertCard4() throws ATM.NullCardException {
 
         Card card = Mockito.mock(Card.class);
         assertEquals(ATMUnderTest.insertCard(card), 0);
     }
 
 
-    @Test
-    public void testInputPin1() {
-
+    @Test(expected = ATM.NullCardException.class)
+    public void testInputPin1() throws ATM.NullCardException {
+        Card card = Mockito.mock(Card.class);
+        Mockito.when(card.isBlocked()).thenReturn(true);
+        ATMUnderTest.insertCard(card);
         assertEquals(ATMUnderTest.inputPin(0), -1);
     }
 
@@ -64,14 +65,15 @@ public class testATM {
     public void testInputPin2() {
 
         Card card = Mockito.mock(Card.class);
-
+        Mockito.when(card.checkPin(0)).thenReturn(true);
+        assertEquals(ATMUnderTest.inputPin(0), 0);
     }
 
     @Test
     public void testInputPin3() {
 
         Card card = Mockito.mock(Card.class);
-        card.isBlcoked();
+        Mockito.when(card.isBlocked()).thenReturn(true);
         assertEquals(ATMUnderTest.inputPin(0), -3);
     }
 
@@ -79,6 +81,8 @@ public class testATM {
     public void testInputPin4() {
 
         Card card = Mockito.mock(Card.class);
+        Mockito.when(card.checkPin(0)).thenReturn(false);
+        Mockito.when(card.isBlocked()).thenReturn(false);
         assertEquals(ATMUnderTest.inputPin(0), -2);
     }
 
@@ -90,10 +94,35 @@ public class testATM {
         assertEquals(ATMUnderTest.chooseAmount(0), -1);
     }
 
-        @Test
-    public void testChooseAmount2() {
+    @Test(expected = ATM.NullCardException.class)
+    public void testChooseAmount2() throws ATM.NullCardException {
 
-        assertEquals(ATMUnderTest.chooseAmount(1), -2);
+        Card card = Mockito.mock(Card.class);
+        ATMUnderTest.insertCard(card);
+
+        for (int a = 0; a<100; ++a)
+        {
+            if (a != 0 && a != 20 && a != 30 && a != 40 && a != 50 && a != 80 && a != 100)
+                assertEquals(ATMUnderTest.chooseAmount(a), -2);
+        }
     }
 
+    @Test
+    public void testChooseAmount3() {
+
+        Card card = Mockito.mock(Card.class);
+        Mockito.when(card.getAccount().canWithdraw(-1)).thenReturn(false);
+
+        assertEquals(ATMUnderTest.chooseAmount(0), 0);
+        assertEquals(ATMUnderTest.chooseAmount(-1), 0);
+    }
+
+    @Test
+    public void testChooseAmount4() {
+
+        Card card = Mockito.mock(Card.class);
+        Mockito.when(card.checkPin(0)).thenReturn(true);
+        ATMUnderTest.inputPin(0);
+        assertEquals(ATMUnderTest.chooseAmount(20), -3);
+    }
 }

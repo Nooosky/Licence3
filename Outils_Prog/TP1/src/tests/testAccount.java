@@ -1,4 +1,4 @@
-package fr.ufc.l3info.oprog;
+package tests;
 
 import org.junit.Test;
 import org.junit.Before;
