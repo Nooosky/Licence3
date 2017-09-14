@@ -6,9 +6,9 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count) {
     self->state_count = state_count;
 
     for (int i = 0; i < state_count; ++i) {
-        struct state new_state = (strcut state) malloc(sizeof(struct state));
+        struct state new_state = (struct state) malloc(sizeof(struct state));
         
-        state new_state = {.is_initial = 0, .is_final =0};
+        new_state = {.is_initial = 0, .is_final =0};
         self->states = &new_state;
     }
 }
@@ -19,7 +19,7 @@ void fa_destroy(struct fa *self)
 
 }
 //make a state initial
-void fa_set_state_initial(struct fa *self, size_t state) {
+void fa_set_state_initial(struct fa *selstrcutf, size_t state) {
     self->states[state].is_initial = 1;
 }
 
