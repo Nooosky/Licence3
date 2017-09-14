@@ -1,4 +1,4 @@
-CC := gcc -O2
+CC := gcc -std=c11 -O2
 CFLAGS := -Wall
 
 DIRECSRC := ./src

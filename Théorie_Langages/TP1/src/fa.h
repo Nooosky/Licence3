@@ -1,3 +1,33 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+struct fa{
+    size_t alpha_count;     //size of the alphabet
+    size_t state_count;     //number of states of the automaton
+
+    struct state *states;   //stores the states of the automaton
+
+    struct state_set **transitions;
+};
+
+struct state {          //state structure
+    bool is_initial;
+    bool is_final;
+};
+
+//linked list
+struct state_node {
+    size_t state;
+    struct state_node *next;    //next node
+};
+
+
+struct state_set {
+    struct state_node *first;   //first node
+};
+
+
+
 // crée un automate
 void fa_create(struct fa *self, size_t alpha_count, size_t state_count);
 

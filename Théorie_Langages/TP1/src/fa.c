@@ -1,3 +1,5 @@
+#include "fa.h"
+
 // crée un automate
 void fa_create(struct fa *self, size_t alpha_count, size_t state_count) {
     self->alpha_count = alpha_count;
