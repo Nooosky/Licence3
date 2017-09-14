@@ -8,7 +8,7 @@
 
 int main () {
 
-    char *message;
+    char *message = (char *) malloc(sizeof(char) * 8);
 
     key_t key; // clé pour la création du segment mémoir partagée
     int shmID; // id du segment mémoir partagée
@@ -20,7 +20,7 @@ int main () {
     key = ftok("./", 'h');
 
     // création du segment mémoire partagée avec les droits rw r r
-    if ((shmID = shmget(key, sizeof(char), IPC_CREAT | 0644)) < 0)
+    if ((shmID = shmget(key, sizeof(message), IPC_CREAT | 0644)) < 0)
     {
         perror("shmget");
         exit (1);
@@ -47,9 +47,7 @@ int main () {
             }
 
             // donne une valeur
-            *message = p;
-            *message = '\0';
-            strcat(message, "bonjour");
+            message = "bonjour";
             
             // détache le segment mémoire
             if (shmdt(p) < 0)
@@ -82,21 +80,22 @@ int main () {
                 exit(1);
             }
             
-            /*if (shmctl(shmID,IPC_RMID,NULL) == -1)
+            // supprime le segment de mémoire partagée
+            if (shmctl(shmID,IPC_RMID,NULL) == -1)
             {
                 perror("shmctl") ;
                 exit(1) ;
-            }*/
+            }
         break;
     }
 
     // Q1, on vérifie que le shmId n'existe plus
-    system("ipcs -m");
+    //system("ipcs -m");
 
     // Q2, on identifie le segment et on le supprime
-   system("ipcs");
-   system("ipcrm -m " + key);
-   system("ipcs");
+    //system("ipcs");
+     //system("ipcrm -m " + key);
+    //system("ipcs");
 
     //Q3, on supprime assurément le segment de mémoire partagée
 
