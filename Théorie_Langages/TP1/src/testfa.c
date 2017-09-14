@@ -29,10 +29,10 @@ struct state_set {
 };
 
 int main() {
-
-
-
-
+    
+    //Creation of a automaton
+    struct fa self = (struct fa) {.state_count = 3, .alpha_count = 3};
+    fa_create(&self, 3, 3);
 
     printf("Hello, World!\n");
     return 0;
