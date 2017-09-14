@@ -6,7 +6,9 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count) {
     self->state_count = state_count;
 
     for (int i = 0; i < state_count; ++i) {
-        struct state new_state = (struct state) {.is_initial = 0, .is_final =0};
+        struct state new_state = (strcut state) malloc(sizeof(struct state));
+        
+        state new_state = {.is_initial = 0, .is_final =0};
         self->states = &new_state;
     }
 }
