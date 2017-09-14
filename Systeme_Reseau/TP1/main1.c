@@ -48,6 +48,7 @@ int main () {
 
             // donne une valeur
             message = "bonjour";
+            strcat(p, message);
             
             // détache le segment mémoire
             if (shmdt(p) < 0)
@@ -93,9 +94,9 @@ int main () {
     //system("ipcs -m");
 
     // Q2, on identifie le segment et on le supprime
-    //system("ipcs");
+    //system("ipcs -m");
      //system("ipcrm -m " + key);
-    //system("ipcs");
+    //system("ipcs -m");
 
     //Q3, on supprime assurément le segment de mémoire partagée
 
