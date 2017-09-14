@@ -16,17 +16,14 @@ void fa_destroy(struct fa *self)
 {
 
 }
-
-// rentre un état initial
-void fa_set_state_initial(struct fa *self, size_t state)
-{
-
+//make a state initial
+void fa_set_state_initial(struct fa *self, size_t state) {
+    self->states[state].is_initial = 1;
 }
 
-// rendre un état final
-void fa_set_state_final(struct fa *self, size_t state)
-{
-
+//make a state final
+void fa_set_state_final(struct fa *self, size_t state) {
+    self->states[state].is_final = 1;
 }
 
 // ajouter un transition à l'automate
