@@ -10,8 +10,8 @@
 int flag = 1;
 void handler(int sig) {flag = 0;}
 
-int main () {
-
+int main () 
+{
     if (signal(SIGUSR1, handler) == SIG_ERR)
     {  
         perror("signal" ); 
