@@ -99,7 +99,8 @@ int main () {
     //system("ipcs -m");
 
     //Q3, on supprime assurément le segment de mémoire partagée seulement si il est 
-	// detacher par tous les processus
+	//On peut utiliser la commande ipcs -m afin de voir si l'id du segment partage est dans la liste
+	//auquel cas il existe encore.
 
 
     return 0;
