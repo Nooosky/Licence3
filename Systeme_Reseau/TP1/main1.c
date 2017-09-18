@@ -95,10 +95,12 @@ int main () {
 
     // Q2, on identifie le segment et on le supprime
     //system("ipcs -m");
-     //system("ipcrm -m " + key);
+    //system("ipcrm -m " + key);
     //system("ipcs -m");
 
-    //Q3, on supprime assurément le segment de mémoire partagée
+    //Q3, on supprime assurément le segment de mémoire partagée seulement si il est 
+	// detacher par tous les processus
+
 
     return 0;
 }
