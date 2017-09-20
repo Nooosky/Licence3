@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	printf("%s\n", textChiffre);
+	//printf("%s\n", textChiffre);
 
 	// trie le tableau par ordre decroissant de la frequence de lettre utilise
 	int j = TAILLE_ALPHA, k = 0, tmpi = 0;
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	}
 
 	//correction probleme d'affichage en affichant la premiere valeur
-	printf("\n\n probleme %c\n\n", tableauFreqChiffre[0]);
+	//printf("\n\n probleme %c\n\n", tableauFreqChiffre[0]);
 
 
 	// affiche l'alphabet, le nb de chaque lettre, la frequence en pourcentage de chaque lettre precision 0.001
