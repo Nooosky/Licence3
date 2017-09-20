@@ -13,7 +13,7 @@ all: $(EXENAME) install
 
 $(EXENAME): $(OBJ)
 	@echo "** Building"
-	$(CC) -o DIRECSRC/$@ $^
+	$(CC) -o $(DIRECSRC)/$@ $^
 
 $(DIRECSRC)/%.o: $(DIRECSRC)/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
