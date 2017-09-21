@@ -49,7 +49,29 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 // afficher un automate
 void fa_pretty_print(const struct fa *self, FILE *out)
 {
+  fprint("Initial states:\n\t");
+  for (int i = 0; i < self->state_count; ++i)
+  {
+    if (self->states[i].is_initial)
+      fprint("%d ", i);
+  }
 
+  fprint("\nFinal states:\n\t");
+  for (int i = 0; i < self->state_count; ++i)
+  {
+    if (self->states[i].is_final)
+      fprint("%d ", i);
+  }
+
+  fprint("\nTransitions:\n");
+  for (int i = 0; i < self->state_count; ++i)
+  {
+    fprint("\tFor state %d:\n", i);
+    for (int j = 0; j < self->state_count; ++j)
+    {
+      fprint("\t\tFor letter %c:\n", j);
+    }
+  }
 }
 
 // affiche en automate en format DOT
