@@ -10,6 +10,8 @@ ILS ONT BIEN SUR ETE LEGEREMENT MODIFIES, POUR LES RENDRE
 PLUS COMPREHENSIBLES POUR QUELQU'UN QUI N'A PAS ETUDIE A
 L'ECOLE POLYTECHNIQUE.*/
 
+/*BULML TTLWH ZZHKB ULTHP UMHZA BLBZL ZVBSL CHUAI HSHUJ HUASL MLZAV ULASV BYSLA*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,12 +22,16 @@ L'ECOLE POLYTECHNIQUE.*/
 int main(int argc, char *argv[])
 {
 
+	// tableau qui represente les lettres de plus present au moins present
 	char tableauFreq[] = {'E','S','A','N','T','I','R','U','L','O','D','C','P','M','Q','V','G','F','B','H','X','Y','J','Z','K','W'};
 
 	int nbCaractereTotal = 0;
 	char *textChiffre = (char *) malloc(sizeof(char));
 
+	// tableau qui servira a compter le nombre de chaque lettre present dans le message chiffre
 	int nbChaqueLettre[TAILLE_ALPHA] = {0};
+
+	// alphabet nor;al qui servira a donner l,ordre des lettre les plus presente dans le message chiffre
 	char tableauFreqChiffre[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
 	// incremente le tableau de frequence et insere les caracteres dans un tableau de caracteres
@@ -35,17 +41,16 @@ int main(int argc, char *argv[])
 		unsigned char c = (unsigned char) i;
 		int ascii = (int) c;
 
+		// si le caractere est une lettre en majuscule alors j'incremente la lettre
 		if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
 				++nbChaqueLettre[ascii - ASCII_MAJ_DEBUT];
 		++nbCaractereTotal;
 
+		// j'ajoute le caractere au texte chiffre
 		textChiffre = (char *) realloc(textChiffre, sizeof(char) * nbCaractereTotal);
 		textChiffre[nbCaractereTotal - 1] = c;
 		//printf("%c = %d\n", c, ascii);
 	}
-
-
-	//printf("%s\n", textChiffre);
 
 	// trie le tableau par ordre decroissant de la frequence de lettre utilise
 	int j = TAILLE_ALPHA, k = 0, tmpi = 0;
@@ -68,10 +73,6 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	//correction probleme d'affichage en affichant la premiere valeur
-	//printf("\n\n probleme %c\n\n", tableauFreqChiffre[0]);
-
-
 	// affiche l'alphabet, le nb de chaque lettre, la frequence en pourcentage de chaque lettre precision 0.001
 	printf("alphaFreqNormal nombreChiffre alphaFreqChiffree\n");
 	for (i=0; i<TAILLE_ALPHA; ++i)
@@ -84,10 +85,11 @@ int main(int argc, char *argv[])
 	i = 0;
 	do
 	{
+		// on estime que la lettre la plus presente est la lettre la plus presente dans l'alphabet francais si ce n'ai pas le cas on passe a la lettre suivante pour calculer l'ecart
 		clef =  (int)tableauFreq[i] - (int)tableauFreqChiffre[0];
 		++i;
 
-		// analyse si bonne clef en rentrant la modification dans un autre tableau et comparant au dictionnaire
+		// on modifie le texte chiffre avec la clef pour afficher le texte origiginal
 		text = textChiffre;
 		for (i = 0; text[i] != '\0'; ++i)
 		{
@@ -106,6 +108,7 @@ int main(int argc, char *argv[])
 			}
 		}
 
+		// affichage le texte dechiffre
 		printf("\n%s\n", text);
 
 		trouver = 1;
@@ -113,7 +116,6 @@ int main(int argc, char *argv[])
 
 	// affiche la clef
 	printf("%d \n", clef);
-
 
 	free(text);
 

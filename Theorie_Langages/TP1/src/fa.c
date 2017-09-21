@@ -10,21 +10,14 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 
     for (int i = 0; i < self->state_count; ++i)
     {
-        struct state * new_state = (struct state *) malloc(sizeof(struct state));
-
-        new_state->is_initial = 0;
-        new_state->is_final = 0;
-
-        self->states[i] = &new_state;
+        self->states[i].is_initial = 0;
+        self->states[i].is_final = 0;
     }
 }
 
 // détruire un automate
 void fa_destroy(struct fa *self)
 {
-  for (int i = 0; i < self->state_count; ++i)
-    free(self->states[i]);
-
   free(self->states);
   free(self);
 }
