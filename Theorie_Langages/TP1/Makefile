@@ -21,7 +21,7 @@ $(DIRECSRC)/%.o: $(DIRECSRC)/%.c
 install:
 	@echo "** Installing..."
 	cp $(DIRECSRC)/$(EXENAME) $(DIRECBIN)
-	cp $(DIRECSRC)/$(OBJ) $(DIRECOBJ)
+	cp $(OBJ) $(DIRECOBJ)
 	chmod u+x $(DIRECBIN)/$(EXENAME)
 
 clean:
@@ -31,4 +31,4 @@ clean:
 
 execute:
 	@echo "** start .."
-	./$(DIRECBIN)/$(EXENAME)
+	$(DIRECBIN)/$(EXENAME)
