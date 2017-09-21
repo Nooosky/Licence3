@@ -43,7 +43,11 @@ void fa_set_state_final(struct fa *self, size_t state)
 // ajouter un transition à l'automate
 void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 {
-
+    int int_alpha = (int) alpha - 97;
+    ++ self->transitions[int_alpha][from].size;
+    ++ self->transitions[int_alpha][from].capacity;
+    self->transitions[int_alpha][from].states = (size_t *) malloc(self->transitions[int_alpha][from].size * sizeof(size_t));
+    self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size - 1] = to;
 }
 
 // afficher un automate
