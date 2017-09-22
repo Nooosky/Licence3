@@ -13,6 +13,19 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
         self->states[i].is_initial = 0;
         self->states[i].is_final = 0;
     }
+
+    struct state_set new_state_set = {.capacity = 0, .size = 0};
+
+    self->transitions = (struct state_set**) malloc(alpha_count*sizeof(struct state_set*));
+    for (int i = 0; i < alpha_count; i++)
+        self->transitions[i] = (struct state_set*) malloc(state_count*sizeof(struct state_set));
+
+    for (int j = 0; j <alpha_count; ++j) {
+        for (int i = 0; i < state_count; ++i) {
+            self->transitions[j][i] = new_state_set;
+            self->transitions[j][i].states = (size_t *) malloc(sizeof(size_t));
+        }
+    }
 }
 
 // détruire un automate
@@ -41,12 +54,11 @@ void fa_set_state_final(struct fa *self, size_t state)
 }
 
 // ajouter un transition à l'automate
-void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
-{
+void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to){
     int int_alpha = (int) alpha - 97;
     ++ self->transitions[int_alpha][from].size;
     ++ self->transitions[int_alpha][from].capacity;
-    self->transitions[int_alpha][from].states = (size_t *) malloc(self->transitions[int_alpha][from].size * sizeof(size_t));
+    self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] = malloc(sizeof(size_t));
     self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size - 1] = to;
 }
 
@@ -67,15 +79,22 @@ void fa_pretty_print(const struct fa *self, FILE *out)
       fprint("%d ", i);
   }
 
-  fprint("\nTransitions:\n");
-  for (int i = 0; i < self->state_count; ++i)
-  {
-    fprint("\tFor state %d:\n", i);
-    for (int j = 0; j < self->state_count; ++j)
+ printf("\nTransitions:\n");
+    for (int i = 0; i < self->state_count; ++i)
     {
-      fprint("\t\tFor letter %c:\n", j);
+        printf("\tFor state %d:\n", i);
+        for (int j = 0; j < self->alpha_count; ++j)
+        {
+            printf("\t\tFor letter %c: ", 97 + j);
+
+            for (int k = 0; k < self->transitions[j][i].size; ++k) {
+                printf("%d ", self->transitions[j][i].states[k]);
+
+            }
+
+            printf("\n");
+        }
     }
-  }
 }
 
 // affiche en automate en format DOT
