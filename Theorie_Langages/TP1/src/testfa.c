@@ -35,7 +35,7 @@ int main() {
     fa_pretty_print(self, file);
 
     // print automaton in file .dot
-    //fa_dot_print(self, file);
+    fa_dot_print(self, file);
 
     //destruction of a automaton
     fa_destroy(self);
