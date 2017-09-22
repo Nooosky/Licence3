@@ -9,7 +9,7 @@ EXENAME := app
 OBJ := $(DIRECSRC)/fa.o $(DIRECSRC)/testfa.o
 
 
-all: $(EXENAME) install
+all: $(EXENAME) install execute
 
 $(EXENAME): $(OBJ)
 	@echo "** Building"

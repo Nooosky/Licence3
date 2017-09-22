@@ -53,27 +53,27 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 // afficher un automate
 void fa_pretty_print(const struct fa *self, FILE *out)
 {
-  fprint("Initial states:\n\t");
+  printf("Initial states:\n\t");
   for (int i = 0; i < self->state_count; ++i)
   {
     if (self->states[i].is_initial)
-      fprint("%d ", i);
+      printf("%d ", i);
   }
 
-  fprint("\nFinal states:\n\t");
+  printf("\nFinal states:\n\t");
   for (int i = 0; i < self->state_count; ++i)
   {
     if (self->states[i].is_final)
-      fprint("%d ", i);
+      printf("%d ", i);
   }
 
-  fprint("\nTransitions:\n");
+  printf("\nTransitions:\n");
   for (int i = 0; i < self->state_count; ++i)
   {
-    fprint("\tFor state %d:\n", i);
+    printf("\tFor state %d:\n", i);
     for (int j = 0; j < self->state_count; ++j)
     {
-      fprint("\t\tFor letter %c:\n", j);
+      printf("\t\tFor letter %c:\n", j);
     }
   }
 }
@@ -81,5 +81,35 @@ void fa_pretty_print(const struct fa *self, FILE *out)
 // affiche en automate en format DOT
 void fa_dot_print(const struct fa *self, FILE *out)
 {
+  out = fopen("/img/automaton.dot", "w+");
+  if(out == NULL)
+  {
+    perror("fopen");
+    exit (1);
+  }
 
+  fprintf(out, "This is testing for fprintf...\n");
+  fputs("This is testing for fputs...\n", out);
+  fclose(out);
+
+  /*digraph finite_state_machine {
+    rankdir=LR;
+    size="8,5";
+    node [shape = doublecircle]; 0 3 4 8;
+    node [shape = circle];
+    0 -> 2 [ label = "b" ];
+    0 -> 1 [ label = "a" ];
+    1 -> 3 [ label = "a" ];
+    1 -> 6 [ label = "b" ];
+    2 -> 5 [ label = "a" ];
+    2 -> 4 [ label = "a" ];
+    5 -> 7 [ label = "b" ];
+    5 -> 5 [ label = "a" ];
+    6 -> 6 [ label = "b" ];
+    6 -> 5 [ label = "a" ];
+    7 -> 8 [ label = "b" ];
+    7 -> 5 [ label = "a" ];
+    9 -> 6 [ label = "b" ];
+    9 -> 5 [ label = "a" ];
+  }*/
 }

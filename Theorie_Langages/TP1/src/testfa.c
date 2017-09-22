@@ -5,6 +5,7 @@
 
 int main() {
 
+    FILE *file;
     struct fa *self = (struct fa *) malloc(sizeof(struct fa));
 
 
@@ -30,8 +31,11 @@ int main() {
     fa_add_transition(self, 3, 'b', 4);
     fa_add_transition(self, 4, 'a', 4);
 
-    // afficher l'utomate
-    fa_pretty_print(self, NULL);
+    // print automaton in file
+    fa_pretty_print(self, file);
+
+    // print automaton in file .dot
+    //fa_dot_print(self, file);
 
     //destruction of a automaton
     fa_destroy(self);
