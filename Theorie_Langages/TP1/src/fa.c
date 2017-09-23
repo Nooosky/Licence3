@@ -58,7 +58,7 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to){
     int int_alpha = (int) alpha - 97;
     ++ self->transitions[int_alpha][from].size;
     ++ self->transitions[int_alpha][from].capacity;
-    self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] = malloc(sizeof(size_t));
+    self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] = (size_t *)malloc(sizeof(size_t));
     self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size - 1] = to;
 }
 
@@ -91,7 +91,7 @@ void fa_pretty_print(const struct fa *self, FILE *out)
             fprintf(out, "\t\tFor letter %c: ", 97 + j);
             for (int k = 0; k < self->transitions[j][i].size; ++k)
             {
-                fprintf(out, "%d ", self->transitions[j][i].states[k]);
+                fprintf(out, "%d ", (int)self->transitions[j][i].states[k]);
             }
             fprintf(out, "\n");
         }
@@ -122,7 +122,7 @@ void fa_dot_print(const struct fa *self, FILE *out)
    for (int i = 0; i < self->state_count; ++i)
        for (int j = 0; j < self->alpha_count; ++j)
            for (int k = 0; k < self->transitions[j][i].size; ++k)
-               fprintf(out, "\t%d -> %d [ label = \"%c\" ];\n", i, self->transitions[j][i].states[k], 97 + j);
+               fprintf(out, "\t%d -> %d [ label = \"%c\" ];\n", i, (int)self->transitions[j][i].states[k], 97 + j);
    fprintf(out, "}");
 
   fclose(out);
