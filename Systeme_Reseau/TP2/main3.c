@@ -31,13 +31,13 @@ int main (int argc, char *argv[])
   struct info *info = (struct info *) malloc(sizeof(struct info));
   info->aleaMin = atoi(argv[1]);
   info->aleaMax = atoi(argv[2]);
-  info->ligne = (struct int *) malloc(sizeof(struct int) * LARGEUR_MATRICE);
-  info->ligne = matrice[0];
+  info->ligne = (int *) malloc(sizeof(int) * LARGEUR_MATRICE);
 
   pthread_t *threadInit = (pthread_t *) malloc(sizeof(pthread_t) * HAUTEUR_MATRICE);
   int i = 0;
   for (i = 0; i < HAUTEUR_MATRICE; ++i)
   {
+    info->ligne = matrice[i];
     if(pthread_create(&threadInit[i], NULL, &initMatrice, &info) == -1)
     {
       perror("pthread_create");
@@ -62,17 +62,20 @@ int main (int argc, char *argv[])
 
 void* initMatrice(void* ptr)
 {
-  struct info info = (struct info*) ptr;
-  int min =  ((struct info) ptr).min;
-  int max =  ((struct info) ptr).max;
-  int matrice = ((struct info) ptr).matrice;
+  struct info *info = (struct info *) malloc(sizeof(struct info));
+  info = (struct info*) ptr;
+  int min =  info->aleaMin;
+  int max =  info->aleaMax;
+  int *ligne = (int *) malloc(sizeof(int) * LARGEUR_MATRICE);
+  ligne = info->ligne;
 
   printf("%d %d", min, max);
 
-  int i = 0, j = 0;
-  for(i = 0; i<3; ++i)
-    for(j = 0; j<3; ++j)
-      matrice[i][j] = (rand() % (max - min + 1)) + min;;
+  int i = 0;
+  for(i = 0; i<LARGEUR_MATRICE; ++i)
+      ligne[i] = (rand() % (max - min + 1)) + min;
 
+  free(ligne);
+  free(info);
   pthread_exit(NULL);
 }
