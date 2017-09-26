@@ -1,7 +1,8 @@
 cmake_minimum_required( VERSION 2.8 )
 project( TP2_cmake )
 add_executable( app main.cpp )
-add_subdirectory( lib )
+#add_subdirectory( lib )
+add_subdirectory( dll )
 target_link_libraries ( app DiplayMessage )
 MESSAGE( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
 

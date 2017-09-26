@@ -175,6 +175,12 @@ TP2_cmake_BINARY_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/
 TP2_cmake_SOURCE_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake
 
 //Value Computed by CMake
+dll_BINARY_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/dll
+
+//Value Computed by CMake
+dll_SOURCE_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/dll
+
+//Value Computed by CMake
 lib_BINARY_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib
 
 //Value Computed by CMake

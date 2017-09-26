@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 		// affichage le texte dechiffre
 		printf("\n%s\n", text);
 
-		trouver = 1;
+		trouver = 1; 
 	}while(fgetc(stdin) != EOF);
 
 	// affiche la clef

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib/DiplayMessage.h
+/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/dll/DiplayMessage.h
 
 /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/main.cpp
 iostream
@@ -15,6 +15,6 @@ stdio.h
 -
 windows.h
 -
-lib/DiplayMessage.h
-/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib/DiplayMessage.h
+dll/DiplayMessage.h
+/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/dll/DiplayMessage.h
 

@@ -133,7 +133,7 @@ DiplayMessage: cmake_check_build_system
 
 # fast build rule for target.
 DiplayMessage/fast:
-	$(MAKE) -f lib/CMakeFiles/DiplayMessage.dir/build.make lib/CMakeFiles/DiplayMessage.dir/build
+	$(MAKE) -f dll/CMakeFiles/DiplayMessage.dir/build.make dll/CMakeFiles/DiplayMessage.dir/build
 .PHONY : DiplayMessage/fast
 
 main.o: main.cpp.o

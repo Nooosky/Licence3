@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib/DiplayMessage.cpp
+DiplayMessage.h
+/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib/DiplayMessage.h
+
+/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib/DiplayMessage.h
+

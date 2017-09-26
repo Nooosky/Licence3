@@ -11,7 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.7.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.7.2/CMakeSystem.cmake"
   "CMakeLists.txt"
-  "lib/CMakeLists.txt"
+  "dll/CMakeLists.txt"
   "/usr/share/cmake-3.7/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.7/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.7/Modules/CMakeCommonLanguageInclude.cmake"
@@ -38,11 +38,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "lib/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "dll/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/app.dir/DependInfo.cmake"
-  "lib/CMakeFiles/DiplayMessage.dir/DependInfo.cmake"
+  "dll/CMakeFiles/DiplayMessage.dir/DependInfo.cmake"
   )

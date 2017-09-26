@@ -6,7 +6,7 @@
   #include <windows.h>
 #endif
 
-#include "lib/DiplayMessage.h"
+#include "dll/DiplayMessage.h"
 
 
 int main (void)

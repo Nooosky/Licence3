@@ -30,7 +30,7 @@ int main () {
     // affichage du shmID du semgent crée
     printf("shmid segment : %i\n",shmID);
 
-    switch (pid = fork()) 
+    switch (pid = fork())
     {
         case -1 : // erreur
             perror("fork");
@@ -39,7 +39,7 @@ int main () {
 
         case 0 : // fils
             printf("pid fils : %d\n", getpid());
-            
+
             // attache le segment de mémoire partagée
             if ((p = (char *) shmat(shmID, NULL, 0)) == (void*) -1)
             {
@@ -50,7 +50,7 @@ int main () {
             // donne une valeur
             message = "bonjour";
             strcat(p, message);
-            
+
             // détache le segment mémoire
             if (shmdt(p) < 0)
             {
@@ -61,7 +61,7 @@ int main () {
 
         default : // père
             printf("pid pere : %d\n", getpid());
-            
+
             // attache le segment de mémoire partagée
             if ((p = (char *) shmat(shmID, NULL, 0)) == (void*) -1)
             {
@@ -81,7 +81,7 @@ int main () {
                 perror("shmdt");
                 exit(1);
             }
-            
+
             // supprime le segment de mémoire partagée
             if (shmctl(shmID,IPC_RMID,NULL) == -1)
             {
@@ -99,9 +99,10 @@ int main () {
     //system("ipcrm -m " + key);
     //system("ipcs -m");
 
-    //Q3, on supprime assurément le segment de mémoire partagée seulement si il est 
+    //Q3, on supprime assurément le segment de mémoire partagée seulement si il est
 	//On peut utiliser la commande ipcs -m afin de voir si l'id du segment partage est dans la liste
 	//auquel cas il existe encore.
+  // ipcs -s si le semgent etait a zero et on peut donc supprimer avec ipcrm -m  + key
 
 
     return 0;

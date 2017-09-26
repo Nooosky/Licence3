@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/app.dir/main.cpp.o  -o app -rdynamic lib/libDiplayMessage.a 
+/usr/bin/c++      CMakeFiles/app.dir/main.cpp.o  -o app -Wl,-rpath,/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/dll -rdynamic dll/libDiplayMessage.so 
