@@ -63,10 +63,10 @@ CMAKE_BINARY_DIR = /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake
 # Target rules for target CMakeFiles/app.dir
 
 # All Build rule for target.
-CMakeFiles/app.dir/all:
+CMakeFiles/app.dir/all: lib/CMakeFiles/DiplayMessage.dir/all
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles --progress-num=1,2 "Built target app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles --progress-num=3,4 "Built target app"
 .PHONY : CMakeFiles/app.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles 0
 .PHONY : CMakeFiles/app.dir/rule
@@ -93,6 +93,61 @@ CMakeFiles/app.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/app.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory lib
+
+# Convenience name for "all" pass in the directory.
+lib/all: lib/CMakeFiles/DiplayMessage.dir/all
+
+.PHONY : lib/all
+
+# Convenience name for "clean" pass in the directory.
+lib/clean: lib/CMakeFiles/DiplayMessage.dir/clean
+
+.PHONY : lib/clean
+
+# Convenience name for "preinstall" pass in the directory.
+lib/preinstall:
+
+.PHONY : lib/preinstall
+
+#=============================================================================
+# Target rules for target lib/CMakeFiles/DiplayMessage.dir
+
+# All Build rule for target.
+lib/CMakeFiles/DiplayMessage.dir/all:
+	$(MAKE) -f lib/CMakeFiles/DiplayMessage.dir/build.make lib/CMakeFiles/DiplayMessage.dir/depend
+	$(MAKE) -f lib/CMakeFiles/DiplayMessage.dir/build.make lib/CMakeFiles/DiplayMessage.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles --progress-num=1,2 "Built target DiplayMessage"
+.PHONY : lib/CMakeFiles/DiplayMessage.dir/all
+
+# Include target in all.
+all: lib/CMakeFiles/DiplayMessage.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+lib/CMakeFiles/DiplayMessage.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 lib/CMakeFiles/DiplayMessage.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles 0
+.PHONY : lib/CMakeFiles/DiplayMessage.dir/rule
+
+# Convenience name for target.
+DiplayMessage: lib/CMakeFiles/DiplayMessage.dir/rule
+
+.PHONY : DiplayMessage
+
+# clean rule for target.
+lib/CMakeFiles/DiplayMessage.dir/clean:
+	$(MAKE) -f lib/CMakeFiles/DiplayMessage.dir/build.make lib/CMakeFiles/DiplayMessage.dir/clean
+.PHONY : lib/CMakeFiles/DiplayMessage.dir/clean
+
+# clean rule for target.
+clean: lib/CMakeFiles/DiplayMessage.dir/clean
 
 .PHONY : clean
 

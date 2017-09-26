@@ -123,6 +123,19 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
+#=============================================================================
+# Target rules for targets named DiplayMessage
+
+# Build rule for target.
+DiplayMessage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 DiplayMessage
+.PHONY : DiplayMessage
+
+# fast build rule for target.
+DiplayMessage/fast:
+	$(MAKE) -f lib/CMakeFiles/DiplayMessage.dir/build.make lib/CMakeFiles/DiplayMessage.dir/build
+.PHONY : DiplayMessage/fast
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +172,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... app"
+	@echo "... DiplayMessage"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

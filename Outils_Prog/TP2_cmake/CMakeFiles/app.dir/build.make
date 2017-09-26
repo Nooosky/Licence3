@@ -90,6 +90,7 @@ app_EXTERNAL_OBJECTS =
 
 app: CMakeFiles/app.dir/main.cpp.o
 app: CMakeFiles/app.dir/build.make
+app: lib/libDiplayMessage.a
 app: CMakeFiles/app.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)

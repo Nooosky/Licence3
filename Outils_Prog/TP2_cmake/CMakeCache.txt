@@ -165,11 +165,20 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Dependencies for target
+DiplayMessage_LIB_DEPENDS:STATIC=
+
 //Value Computed by CMake
 TP2_cmake_BINARY_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake
 
 //Value Computed by CMake
 TP2_cmake_SOURCE_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake
+
+//Value Computed by CMake
+lib_BINARY_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib
+
+//Value Computed by CMake
+lib_SOURCE_DIR:STATIC=/home/bastien/Documents/github/Licence3/Outils_Prog/TP2_cmake/lib
 
 
 ########################
@@ -264,7 +273,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

@@ -1,1 +1,1 @@
-/usr/bin/c++      CMakeFiles/app.dir/main.cpp.o  -o app -rdynamic -lDiplayMessage 
+/usr/bin/c++      CMakeFiles/app.dir/main.cpp.o  -o app -rdynamic lib/libDiplayMessage.a 
