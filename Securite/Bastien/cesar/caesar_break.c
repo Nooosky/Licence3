@@ -121,3 +121,34 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+int chercheMot(char *tableau)
+{
+    FILE *fichier = NULL;
+    char car = 0;   //Contient temporairement chaque caractère du fichier dico.txt
+    long i = 0;
+
+    fichier = fopen("dico.txt", "r+");
+
+    while(car != EOF)
+    {
+        car = fgetc(fichier);   //On lit un caractère de dico.txt
+
+        if(tableau[i] == car)   //Si le 1er caractère correspond, on augmente i pour tester le second caractère au tour suivant
+        {
+            i++;
+            if(tableau[i] == '0' && fgetc(fichier) == '\n') //Si cette condition est vraie, c'est que la chaine est déja dans le dico
+            {
+                return 1;
+            }
+            fseek(fichier, -1, SEEK_CUR);   //Si la condition précedente est fausse, on remet la position dans le fichier tel qu'elle était avant cette condition
+        }
+
+        else
+        {
+            i = 0;
+        }
+    }
+
+    return 0;   //Si on a rien trouvé, on retourne 0
+}
