@@ -1,0 +1,11 @@
+cmake_minimum_required( VERSION 2.8 )
+project( TP2_cmake )
+add_executable( app main.cpp )
+target_link_libraries ( app DiplayMessage )
+MESSAGE( STATUS "CMAKE_SYSTEM_NAME: " ${CMAKE_SYSTEM_NAME} )
+
+if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  add_definitions(-D _SYSTEM_LINUX)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+  add_definitions(-D _SYSTEM_WINDOWS)
+endif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
