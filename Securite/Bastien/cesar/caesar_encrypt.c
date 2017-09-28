@@ -1,32 +1,61 @@
+/*DEPUIS LONGTEMPS, J'AI LA MANIE DE GLISSER DES JEUX
+DE MOTS LORS DES CONVERSATIONS.
+LES GENS DE MON ENTOURAGE NE POUVANT PLUS ME SUPPORTER, JE
+ME SUIS MIS A LES ECRIRE.
+LORSQUE JE SUIS ENTRE A L'ECOLE POLYTECHNIQUE DE MONTREAL,
+J'AI EU L'OCCASION D'ECRIRE UNE CHRONIQUE HEBDOMADAIRE DANS
+LE JOURNAL ETUDIANT, LE ``POLYSCOPE''.
+CE SONT CES TEXTES QUI SE RETROUVENT DANS LE PRESENT RECUEIL.
+ILS ONT BIEN SUR ETE LEGEREMENT MODIFIES, POUR LES RENDRE
+PLUS COMPREHENSIBLES POUR QUELQU'UN QUI N'A PAS ETUDIE A
+L'ECOLE POLYTECHNIQUE.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+
+/* constante */
 #define TAILLE_ALPHA 26
 #define ASCII_MAJ_DEBUT 65
 
+
+/* prototype */
+// test le nombre d,argument
 void testArgument(int argc);
-void lectureText(char * text);
-void modificationText(char * text, int clef);
-void affichageText(char * text);
+
+ // fonction pour la reallocation securisee
+void* realloc_s(void *ptr, size_t taille);
+
+// lit le text pour le mettre dans un tableau de caractere
+void lectureText(char *text);
+
+// modifie le tableau de caractere en fonction de la clef
+void modificationText(char *text, int clef);
+
+// affiche le text
+void affichageText(char *text);
 
 
+/* main */
 int main (int argc, char *argv[])
 {
-  int clef = 0;
-  char *text = (char *) malloc(sizeof(char));
-
   testArgument(argc);
-  clef = atoi(argv[1]);
+  int clef = atoi(argv[1]);
+
+  char *text = (char *) malloc(sizeof(char));
 
   lectureText(text);
   modificationText(text, clef);
   affichageText(text);
 
+  free(text);
+
   return 0;
 }
 
 
+/* definition des fonctions */
 void testArgument(int argc)
 {
   if (argc != 2)
@@ -36,19 +65,34 @@ void testArgument(int argc)
   }
 }
 
-void lectureText(char * text)
+void* realloc_s(void *ptr, size_t taille)
+{
+     void *ptr_realloc = realloc(ptr, taille);
+
+     if (ptr_realloc != NULL)
+         ptr = ptr_realloc;
+
+     return ptr_realloc;
+}
+
+void lectureText(char *text)
 {
   int i = 0, nb = 0;
   while((i = fgetc(stdin)) != EOF) // ctrl + d
   {
+    // ajoute caractere au tableau de caractere
     unsigned char c = (unsigned char) i;
-    ++nb;
-    text = (char *) realloc(text, sizeof(char) * nb);
-    text[nb - 1] = c;
+    if(realloc_s(text, sizeof(char) * ++nb))
+      text[nb - 1] = c;
+    else
+      printf("probleme");
+
+    affichageText(text);
+    printf("%d %p \n", nb, &text[nb - 1]);
   }
 }
 
-void modificationText(char * text, int clef)
+void modificationText(char *text, int clef)
 {
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
@@ -68,7 +112,7 @@ void modificationText(char * text, int clef)
   }
 }
 
-void affichageText(char * text)
+void affichageText(char *text)
 {
   printf("############ \n");
   printf("%s\n", text);

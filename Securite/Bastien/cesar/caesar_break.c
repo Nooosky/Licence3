@@ -10,47 +10,50 @@ ILS ONT BIEN SUR ETE LEGEREMENT MODIFIES, POUR LES RENDRE
 PLUS COMPREHENSIBLES POUR QUELQU'UN QUI N'A PAS ETUDIE A
 L'ECOLE POLYTECHNIQUE.*/
 
-/*BULML TTLWH ZZHKB ULTHP UMHZA BLBZL ZVBSL CHUAI HSHUJ HUASL MLZAV ULASV BYSLA*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+
+/* constante */
 #define TAILLE_ALPHA 26
 #define ASCII_MAJ_DEBUT 65
 
+
+/* prototype */
+// test le nombre d,argument
+void testArgument(int argc);
+
+// lit le text pour le mettre dans un tableau de caractere
+void lectureText(char *text, int *nbLettre);
+
+// modifie le tableau de caractere en fonction de la clef
+void modificationText(char *text, int clef);
+
+// affiche le text
+void affichageText(char *text);
+
+
+/* main */
 int main(int argc, char *argv[])
 {
+	testArgument(argc);
 
-	// tableau qui represente les lettres de plus present au moins present
+	char *text = (char *) malloc(sizeof(char));
+	int *nbLettre = (int *) calloc(TAILLE_ALPHA, sizeof(int));
+
+	lectureText(text, nbLettre);
+
+  affichageText(text);
+
+	printf("alphaFreqNormal nombreChiffre alphaFreqChiffree\n");
+	for (i=0; i<TAILLE_ALPHA; ++i)
+		printf("%c %d %c \n", tableauFreq[i], nbChaqueLettre[i], tableauFreqChiffre[i]);
+/*
+	// tableau qui represente les lettres les plus presentes dans la langue francais par ordre decroissant
 	char tableauFreq[] = {'E','S','A','N','T','I','R','U','L','O','D','C','P','M','Q','V','G','F','B','H','X','Y','J','Z','K','W'};
-
-	int nbCaractereTotal = 0;
-	char *textChiffre = (char *) malloc(sizeof(char));
-
-	// tableau qui servira a compter le nombre de chaque lettre present dans le message chiffre
-	int nbChaqueLettre[TAILLE_ALPHA] = {0};
-
-	// alphabet nor;al qui servira a donner l,ordre des lettre les plus presente dans le message chiffre
+	// tableau de l'alphabet qui servira a donner l'ordre des lettres les plus presentes dans le message chiffre
 	char tableauFreqChiffre[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-
-	// incremente le tableau de frequence et insere les caracteres dans un tableau de caracteres
-	int i;
-	while((i = fgetc(stdin)) != EOF) // ctrl + d
-	{
-		unsigned char c = (unsigned char) i;
-		int ascii = (int) c;
-
-		// si le caractere est une lettre en majuscule alors j'incremente la lettre
-		if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-				++nbChaqueLettre[ascii - ASCII_MAJ_DEBUT];
-		++nbCaractereTotal;
-
-		// j'ajoute le caractere au texte chiffre
-		textChiffre = (char *) realloc(textChiffre, sizeof(char) * nbCaractereTotal);
-		textChiffre[nbCaractereTotal - 1] = c;
-		//printf("%c = %d\n", c, ascii);
-	}
 
 	// trie le tableau par ordre decroissant de la frequence de lettre utilise
 	int j = TAILLE_ALPHA, k = 0, tmpi = 0;
@@ -111,15 +114,69 @@ int main(int argc, char *argv[])
 		// affichage le texte dechiffre
 		printf("\n%s\n", text);
 
-		trouver = 1; 
+		trouver = 1;
 	}while(fgetc(stdin) != EOF);
 
 	// affiche la clef
 	printf("%d \n", clef);
-
+*/
 	free(text);
 
 	return 0;
+}
+
+
+/* definition des fonctions */
+void testArgument(int argc)
+{
+  if (argc != 1)
+  {
+      fprintf(stderr, "USAGE: ./main <clef> \n");
+      exit(1);
+  }
+}
+
+void lectureText(char *text, int *nbLettre)
+{
+  int i = 0, nb = 0;
+  while((i = fgetc(stdin)) != EOF) // ctrl + d
+  {
+		// ajoute caractere au tableau de caractere
+    unsigned char c = (unsigned char) i;
+    text = (char *) realloc(text, sizeof(char) * ++nb);
+    text[nb - 1] = c;
+
+		// incremente le tableau du nombre de lettre pour connaitre le nombre present de chaque lettre
+		int ascii = (int) c;
+		if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+				++nbLettre[ascii - ASCII_MAJ_DEBUT];
+  }
+}
+
+void modificationText(char *text, int clef)
+{
+  int i = 0;
+  for (i = 0; text[i] != '\0'; ++i)
+  {
+    int ascii = (int) text[i];
+    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    {
+      ascii = text[i] + clef;
+
+      while (ascii < 65)
+        ascii += 26;
+      while (ascii > 90)
+        ascii -= 26;
+
+      text[i] = (char) ascii;
+    }
+  }
+}
+
+void affichageText(char *text)
+{
+  printf("############ \n");
+  printf("%s\n", text);
 }
 
 int chercheMot(char *tableau)

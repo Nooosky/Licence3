@@ -5,9 +5,8 @@
 
 int main() {
 
-    FILE *file;
+    FILE *file = NULL;
     struct fa *self = (struct fa *) malloc(sizeof(struct fa));
-
 
     //Creation of a automaton
     fa_create(self, 2, 5);

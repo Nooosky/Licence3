@@ -17,11 +17,11 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
     struct state_set new_state_set = {.capacity = 0, .size = 0};
 
     self->transitions = (struct state_set**) malloc(alpha_count*sizeof(struct state_set*));
-    for (int i = 0; i < alpha_count; i++)
+    for (int i = 0; i < self->alpha_count; i++)
         self->transitions[i] = (struct state_set*) malloc(state_count*sizeof(struct state_set));
 
-    for (int j = 0; j <alpha_count; ++j) {
-        for (int i = 0; i < state_count; ++i) {
+    for (int j = 0; j < self->alpha_count; ++j) {
+        for (int i = 0; i < self->state_count; ++i) {
             self->transitions[j][i] = new_state_set;
             self->transitions[j][i].states = (size_t *) malloc(sizeof(size_t));
         }
@@ -31,6 +31,11 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 // détruire un automate
 void fa_destroy(struct fa *self)
 {
+  for (int j = 0; j < self->alpha_count; ++j) {
+      for (int i = 0; i < self->state_count; ++i) {
+          free(self->transitions[j][i].states);
+      }
+  }
   free(self->states);
   free(self);
 }
@@ -58,7 +63,6 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to){
     int int_alpha = (int) alpha - 97;
     ++ self->transitions[int_alpha][from].size;
     ++ self->transitions[int_alpha][from].capacity;
-    self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] = (size_t *)malloc(sizeof(size_t));
     self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size - 1] = to;
 }
 
