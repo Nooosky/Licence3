@@ -159,10 +159,13 @@ void fa_dot_print(const struct fa *self, FILE *out)
 // delete a transition
 void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
-    int int_alpha = (int) alpha - 97;
+  int int_alpha = (int) alpha - 97;
+  if (self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] == to)
+  {
     self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size-1] = 0;
     -- self->transitions[int_alpha][from].size;
     -- self->transitions[int_alpha][from].capacity;
+  }
 }
 
 // delete a state

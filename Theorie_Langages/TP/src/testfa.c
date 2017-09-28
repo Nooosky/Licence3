@@ -31,7 +31,7 @@ int main() {
     fa_add_transition(self, 4, 'a', 4);
 
     // remove transitions to automaton
-    //fa_remove_transition(self, 4, 'a', 4);
+    fa_remove_transition(self, 4, 'a', 4);
 
     // print automaton in file
     fa_pretty_print(self, file);
