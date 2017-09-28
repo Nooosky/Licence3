@@ -10,7 +10,7 @@ Transitions:
 		For letter a: 
 		For letter b: 3 
 	For state 2:
-		For letter a: 3 
+		For letter a: 
 		For letter b: 4 
 	For state 3:
 		For letter a: 3 

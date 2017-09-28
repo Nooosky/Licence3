@@ -32,6 +32,12 @@ int main() {
 
     // remove transitions to automaton
     fa_remove_transition(self, 4, 'a', 4);
+    fa_remove_transition(self, 2, 'a', 3);
+
+    // remove states
+
+    //count transition
+    printf("nb transition : %d\n", (int)fa_count_transitions(self));
 
     // print automaton in file
     fa_pretty_print(self, file);
