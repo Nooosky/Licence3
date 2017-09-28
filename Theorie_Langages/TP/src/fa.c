@@ -16,9 +16,9 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 
     struct state_set new_state_set = {.capacity = 0, .size = 0};
 
-    self->transitions = (struct state_set**) malloc(alpha_count*sizeof(struct state_set*));
+    self->transitions = (struct state_set**) malloc(self->alpha_count*sizeof(struct state_set*));
     for (int i = 0; i < self->alpha_count; i++)
-        self->transitions[i] = (struct state_set*) malloc(state_count*sizeof(struct state_set));
+        self->transitions[i] = (struct state_set*) malloc(self->state_count*sizeof(struct state_set));
 
     for (int j = 0; j < self->alpha_count; ++j) {
         for (int i = 0; i < self->state_count; ++i) {
@@ -35,7 +35,9 @@ void fa_destroy(struct fa *self)
       for (int i = 0; i < self->state_count; ++i) {
           free(self->transitions[j][i].states);
       }
+          free(self->transitions[j]);
   }
+  free(self->transitions);
   free(self->states);
   free(self);
 }
