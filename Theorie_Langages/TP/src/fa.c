@@ -152,7 +152,7 @@ void fa_remove_state(const struct fa *self, size_t state)
 
 }
 
-//Count the transitions in the automaton
+//count transition in an automaton
 size_t fa_count_transitions(const struct fa *self){
     size_t nbTransitions = 0;
 
@@ -160,14 +160,24 @@ size_t fa_count_transitions(const struct fa *self){
     {
         for (int j = 0; j < self->alpha_count; ++j)
         {
-            for (int k = 0; k < self->transitions[j][i].size; ++k)
-            {
-                if(self->transitions[j][i].states[k] > 0)
-                {
-                    ++ nbTransitions;
-                }
+            if(self->transitions[j][i].size > 0){
+                nbTransitions = nbTransitions + self->transitions[j][i].size;
             }
         }
     }
     return nbTransitions;
+}
+
+//check if an automaton is deterministic
+bool fa_is_deterministic(const struct fa *self){
+    for (int i = 0; i < self->state_count; ++i)
+    {
+        for (int j = 0; j < self->alpha_count; ++j)
+        {
+            if(self->transitions[j][i].size < 1){
+                return false;
+            }
+        }
+    }
+    return true;
 }
