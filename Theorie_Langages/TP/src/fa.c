@@ -151,3 +151,23 @@ void fa_remove_state(const struct fa *self, size_t state)
 {
 
 }
+
+//Count the transitions in the automaton
+size_t fa_count_transitions(const struct fa *self){
+    size_t nbTransitions = 0;
+
+    for (int i = 0; i < self->state_count; ++i)
+    {
+        for (int j = 0; j < self->alpha_count; ++j)
+        {
+            for (int k = 0; k < self->transitions[j][i].size; ++k)
+            {
+                if(self->transitions[j][i].states[k] > 0)
+                {
+                    ++ nbTransitions;
+                }
+            }
+        }
+    }
+    return nbTransitions;
+}
