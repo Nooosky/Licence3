@@ -45,7 +45,7 @@ void fa_destroy(struct fa *self)
 //make a state initial
 void fa_set_state_initial(struct fa *self, size_t state)
 {
-    if(-1 < state && state < self->state_count)
+    if(-1 < (int)state && state < self->state_count)
       self->states[state].is_initial = 1;
     else
       perror("fa_set_state_initial");
@@ -54,7 +54,7 @@ void fa_set_state_initial(struct fa *self, size_t state)
 //make a state final
 void fa_set_state_final(struct fa *self, size_t state)
 {
-    if(-1 < state && state < self->state_count)
+    if(-1 < (int)state && state < self->state_count)
       self->states[state].is_final = 1;
     else
       perror("fa_set_state_final");
@@ -63,11 +63,11 @@ void fa_set_state_final(struct fa *self, size_t state)
 // ajouter un transition à l'automate
 void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 {
-  if(-1 < from && from < self->state_count)
+  if(-1 < (int)from && from < self->state_count)
   {
     if(-1 < ((int) alpha - 97) && ((int) alpha - 97) < self->alpha_count)
     {
-      if(-1 < to && to < self->state_count)
+      if(-1 < (int)to && to < self->state_count)
       {
         int int_alpha = (int) alpha - 97;
         ++ self->transitions[int_alpha][from].size;
