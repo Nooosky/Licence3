@@ -22,23 +22,41 @@ struct state_set {
     size_t *states;
 };
 
-// crée un automate
+// automaton creation
 void fa_create(struct fa *self, size_t alpha_count, size_t state_count);
 
-// détruire un automate
+// automaton deletion
 void fa_destroy(struct fa *self);
 
-// rentre un état initial
+// make a state initial
 void fa_set_state_initial(struct fa *self, size_t state);
 
-// rendre un état final
+// make a state final
 void fa_set_state_final(struct fa *self, size_t state);
 
-// ajouter un transition à l'automate
+// add a transition to the automaton
 void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
 
-// afficher un automate
+// print an automaton
 void fa_pretty_print(const struct fa *self, FILE *out);
 
-// affiche en automate en format DOT
+// print an automaton (DOT)
 void fa_dot_print(const struct fa *self, FILE *out);
+
+// delete a transition
+void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
+
+// delete a state
+void fa_remove_state(const struct fa *self, size_t state);
+
+// count transitions
+size_t fa_count_transitions(const struct fa *self);
+
+// tells if a automaton is deterministic
+bool fa_is_deterministic(const struct fa *self);
+
+//tells if a automaton is complete
+bool fa_is_complete(const struct fa *self);
+
+//makes an automaton complete
+void fa_make_complete(const struct fa *self);
