@@ -75,19 +75,13 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
         self->transitions[int_alpha][from].states[self->transitions[int_alpha][from].size - 1] = to;
       }
       else
-      {
         perror("fa_add_transition, to");
-      }
     }
     else
-    {
       perror("fa_add_transition, alpha");
-    }
   }
   else
-  {
     perror("fa_add_transition, from");
-  }
 }
 
 // afficher un automate
@@ -166,6 +160,8 @@ void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t
     -- self->transitions[int_alpha][from].size;
     -- self->transitions[int_alpha][from].capacity;
   }
+  else
+    perror("fa_remove_transition");
 }
 
 // delete a state
