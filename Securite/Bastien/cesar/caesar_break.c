@@ -33,7 +33,10 @@ void lectureText(char** text, int *nbLettre);
 void trieDecroissant(int *nbLettre, char *tableauFreqtext);
 
 //cherche la clef de dechiffrage
-void chercheClef(char *text, int* clef, char tableauFreqFrance[], char tableauFreqtext[]);
+void chercheClef(char text[], int* clef, char tableauFreqFrance[], char tableauFreqtext[]);
+
+//cherche le mot si il est present dans le dictionnaire
+int chercheMotDansDico(char *tableau);
 
 //modifie le tableau en fonction de la clef
 void modificationText(char *text, int *clef);
@@ -118,9 +121,8 @@ void lectureText(char** text, int *nbLettre)
 		(*text)[i++] = c;	// ajoute le caractere
 
 		// incremente le tableau du nombre de lettre pour connaitre le nombre present de chaque lettre
-		int ascii = (int) c;
-		if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-				++nbLettre[ascii - ASCII_MAJ_DEBUT];
+		if(ASCII_MAJ_DEBUT <= c && c < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+				++nbLettre[c - ASCII_MAJ_DEBUT];
 	}
 
 	if (*text != NULL)	// si stdin n'est pas vide
@@ -133,11 +135,6 @@ void lectureText(char** text, int *nbLettre)
 
 void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 {
-
-	int i = 0;
-	for (i=0; i<TAILLE_ALPHA; ++i)
-		printf(" %d \n",nbLettre[i]);
-
 	int j = TAILLE_ALPHA - 1, k = 0, tmpi = 0;
 	char tmpc = ' ';
 	for(j = TAILLE_ALPHA - 1; j != 0; --j)
@@ -160,42 +157,90 @@ void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 	}
 }
 
-void chercheClef(char *text, int *clef, char tableauFreqFrance[], char tableauFreqtext[])
+void chercheClef(char text[], int *clef, char tableauFreqFrance[], char tableauFreqtext[])
 {
 	// calcule la clef en fonction de la frequence des lettres
-	char *copieText;
-	int trouver = 0, i = 0, j = 0;
+	char *textCopy = (char *)malloc(strlen(text) * sizeof(char));
+	strcpy(textCopy, text);
+
+	int compteurMot = 0, compteurMotTrouve = 0, i = 0;
 	do
 	{
+		compteurMot = 0, compteurMotTrouve = 0;
+
 		// on estime que la lettre la plus presente est la lettre la plus presente dans l'alphabet francais si ce n'ai pas le cas on passe a la lettre suivante pour calculer l'ecart
 		*clef =  (int)tableauFreqtext[0] - (int)tableauFreqFrance[i];
 		++i;
 
 		// on modifie le texte chiffre avec la clef pour afficher le texte origiginal
-		copieText = text;
-		for (j = 0; copieText[j] != '\0'; ++j)
+		int j = 0;
+		for (j = 0; text[j] != '\0'; ++j)
 		{
-			int ascii = (int) copieText[j];
-			if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+			if(ASCII_MAJ_DEBUT <= text[j] && text[j]  < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
 			{
-				ascii = (int)copieText[j] + *clef;
+				text[j] -= *clef;
 
-				while (ascii < ASCII_MAJ_DEBUT)
-					ascii += TAILLE_ALPHA;
+				while (text[j] < ASCII_MAJ_DEBUT)
+					text[j] += TAILLE_ALPHA;
 
-				while (ascii >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-					ascii -= TAILLE_ALPHA;
-
-				copieText[j] = (char) ascii;
+				while (text[j] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+					text[j] -= TAILLE_ALPHA;
 			}
 		}
 
 		// affichage le texte dechiffre
-		printf("\n%s\n", text);
-		printf("\n%d\n", *clef);
+		affichageText(text);
+		affichageClef(clef);
 
-		trouver = 1;
-	}while(fgetc(stdin) != EOF);
+		// verifie la presence des mot dans le dictionnaire
+		char * pch = strtok (text,"\n ,.-'`:;\"");
+		while (pch != NULL)
+		{
+			if ((int)strlen(pch) != 1)
+			{
+				compteurMot++;
+				if(chercheMotDansDico(pch))
+					compteurMotTrouve++;
+			}
+
+			pch = strtok (NULL, "\n ,.-'`:;\"");
+
+		}
+		strcpy(text, textCopy);
+	}while(i < TAILLE_ALPHA && compteurMotTrouve < (int)((double)compteurMot * 0.75));
+}
+
+int chercheMotDansDico(char *tableau)
+{
+    FILE *fichier = NULL;
+    char car = 0;
+    long i = 0;
+
+    fichier = fopen("../dico.txt", "r+");
+
+    while(!feof(fichier))
+    {
+        car = fgetc(fichier);
+				//printf("%c == %c\n",car, tableau[i]);
+
+        if(tableau[i] == car)
+        {
+            i++;
+            if(tableau[i] == '\0' && fgetc(fichier) == '\n')
+						{
+							fclose(fichier);
+              return 1;
+						}
+            //fseek(fichier, -1, SEEK_CUR);
+        }
+        else
+				{
+          i = 0;
+				}
+    }
+
+		fclose(fichier);
+    return 0;
 }
 
 void modificationText(char *text, int *clef)
@@ -203,17 +248,14 @@ void modificationText(char *text, int *clef)
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    int ascii = (int) text[i];
-    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if(ASCII_MAJ_DEBUT <= text[i] && text[i] < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
     {
-      ascii = (int)text[i] + *clef;
+      text[i] -= *clef;
 
-      while (ascii < 65)
-        ascii += 26;
-      while (ascii > 90)
-        ascii -= 26;
-
-      text[i] = (char) ascii;
+      while (text[i] < ASCII_MAJ_DEBUT)
+		  	text[i] += TAILLE_ALPHA;
+      while (text[i] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+		  	text[i] -= TAILLE_ALPHA;
     }
   }
 }
@@ -222,12 +264,14 @@ void affichageText(char *text)
 {
   printf("############ \n");
   printf("%s\n", text);
+	printf("############ \n");
 }
 
 void affichageClef(int *clef)
 {
   printf("############ \n");
   printf("%d\n", *clef);
+	printf("############ \n");
 }
 
 void viderBuffer()
@@ -237,35 +281,4 @@ void viderBuffer()
 	{
 		c = getchar();
 	}
-}
-
-int chercheMot(char *tableau)
-{
-    FILE *fichier = NULL;
-    char car = 0;   //Contient temporairement chaque caractère du fichier dico.txt
-    long i = 0;
-
-    fichier = fopen("dico.txt", "r+");
-
-    while(car != EOF)
-    {
-        car = fgetc(fichier);   //On lit un caractère de dico.txt
-
-        if(tableau[i] == car)   //Si le 1er caractère correspond, on augmente i pour tester le second caractère au tour suivant
-        {
-            i++;
-            if(tableau[i] == '0' && fgetc(fichier) == '\n') //Si cette condition est vraie, c'est que la chaine est déja dans le dico
-            {
-                return 1;
-            }
-            fseek(fichier, -1, SEEK_CUR);   //Si la condition précedente est fausse, on remet la position dans le fichier tel qu'elle était avant cette condition
-        }
-
-        else
-        {
-            i = 0;
-        }
-    }
-
-    return 0;   //Si on a rien trouvé, on retourne 0
 }

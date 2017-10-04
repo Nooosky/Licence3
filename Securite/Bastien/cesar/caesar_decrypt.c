@@ -41,7 +41,7 @@ void viderBuffer(void);
 int main (int argc, char *argv[])
 {
   testArgument(argc);
-  
+
   int clef = atoi(argv[1]);
   char *text = NULL;
 
@@ -101,14 +101,14 @@ void modificationText(char *text, int clef)
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    if(ASCII_MAJ_DEBUT <= text[i] && text[i] <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if(ASCII_MAJ_DEBUT <= text[i] && text[i] < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
     {
       text[i] -= clef;
 
-      while (text[i] < 65)
-		  text[i] += 26;
-      while (text[i] > 90)
-		  text[i] -= 26;
+      while (text[i] < ASCII_MAJ_DEBUT)
+		  text[i] += TAILLE_ALPHA;
+      while (text[i] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+		  text[i] -= TAILLE_ALPHA;
     }
   }
 }
