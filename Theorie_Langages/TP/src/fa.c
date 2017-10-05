@@ -31,11 +31,12 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 // détruire un automate
 void fa_destroy(struct fa *self)
 {
-  for (int j = 0; j < self->alpha_count; ++j) {
-      for (int i = 0; i < self->state_count; ++i) {
-          free(self->transitions[j][i].states);
-      }
-        free(self->transitions[j]);
+  for (int j = 0; j < self->alpha_count; ++j)
+  {
+      for (int i = 0; i < self->state_count; ++i)
+        free(self->transitions[j][i].states);
+
+      free(self->transitions[j]);
   }
   free(self->transitions);
   free(self->states);
@@ -193,7 +194,7 @@ size_t fa_count_transitions(const struct fa *self)
     for (int i = 0; i < self->state_count; ++i)
         for (int j = 0; j < self->alpha_count; ++j)
             if(self->transitions[j][i].size > 0)
-                nbTransitions = nbTransitions + self->transitions[j][i].size;
+                nbTransitions += self->transitions[j][i].size;
 
     return nbTransitions;
 }
@@ -201,10 +202,19 @@ size_t fa_count_transitions(const struct fa *self)
 //check if an automaton is deterministic
 bool fa_is_deterministic(const struct fa *self)
 {
+
+    size_t nbStatesInitiaux = 0;
+    for (int i = 0; i < self->state_count; ++i)
+        if (self->states[i].is_initial == 1)
+          ++nbStatesInitiaux;
+
+    if (nbStatesInitiaux != 1)
+      return false;
+
     for (int i = 0; i < self->state_count; ++i)
         for (int j = 0; j < self->alpha_count; ++j)
-            if(self->transitions[j][i].size < 1)
-                return false;
-
+          if(self->transitions[j][i].size > 1)
+              return false;
+            
     return true;
 }

@@ -4,8 +4,8 @@ Final states:
 	1 4 
 Transitions:
 	For state 0:
-		For letter a: 1 2 3 
-		For letter b: 
+		For letter a: 1 
+		For letter b: 2 
 	For state 1:
 		For letter a: 
 		For letter b: 3 
