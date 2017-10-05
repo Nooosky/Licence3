@@ -197,6 +197,97 @@
       (let ((first (car j-list))
             (more (those-that p1? (cdr j-list) f1)))
       (if (p1? first) (cons (f1 first) more) more))))
+
+(writeln/return (those-that (lambda (j) (= (year j) 1972)) miles-davis-r title))
+
+
+(define (those-that-v2 p1? j-list f1)
+  (let loop ((j-list-0 j-list)
+             (accumulator '()))
+    (if (null? j-list-0)
+        accumulator
+        (loop (cdr j-list-0)
+              (let ((first (car j-list-0)))
+                (if (p1? first)
+                    (cons (f1 first) accumulator)
+                    accumulator))))))
+
+; liste des oeuvres enregistrees par miles davis en 1972
+(writeln/return (those-that-v2 (lambda (j) (= (year j) 1972)) miles-davis-r title))
+
+; liste des cles des enregistrements de stan getz concernant les pieces ayant plusieurs auteurs
+(writeln/return (those-that-v2 (lambda (j)
+                                 (let ((authors-0 (authors j)))
+                                   (and (pair? authors-0) (pair? (cdr authors-0)))))
+                                        stan-getz-r key))
+
+; la liste des cles des enregistrements de miles davis concernant les pieces ayant un seul auteur
+(writeln/return (those-that-v2 (lambda (j)
+                                 (let ((authors-0 (authors j)))
+                                   (and (pair? authors-0) (null? (cdr authors-0)))))
+                                        miles-davis-r key))
+
+; la liste des noms des pieces enregistrees par miles davis ou stan getz pour lesquelles l'editeur est inconnu
+(writeln/return (those-that-v2 (lambda (j)
+                                 (unknown? (publisher j)))
+                                        (append stan-getz-r miles-davis-r)
+                                        title))
+
+; la liste des cles des oeuvres enregistrees par miles david dont l'editeur est EMI
+(writeln/return (those-that-v2 (lambda (j)
+                                 (equal? (publisher j) 'EMI))
+                                        miles-davis-r key))
+
+; la liste des noms des oeuvres de milea david qu'il a lui meme enregistrees
+(writeln/return (those-that-v2 (lambda (j)
+                                 (let ((authors-0 (authors j)))
+                                   (and (not (unknown? authors-0))
+                                   (memq 'Miles-Davis authors-0))))
+                                        miles-davis-r title))
+
+; la liste des cles des oeuvres enregistrees par stan getz et reprises sur plusieurs compact discs
+(writeln/return (those-that-v2 (lambda (j)
+                                 (let ((cds-0 (cds j)))
+                                   (and (pair? cds-0) (pair? (cdr cds-0)))))
+                                        stan-getz-r key))
+
+(define year-alist '((1960 . 2) (2000 . 3) (1950 . 2) (2010 . 3) (2017 . 1)))
+
+(define (find-top-years year-alist-0)
+  (let thru ((year-alist-1 year-alist-0)
+             (current-maximum 0)
+             (hit-parade '()))
+    (if (null? year-alist-1)
+        hit-parade
+        (let* ((first (car year-alist-1))
+               (first-occ-nb (cdr first)))
+        (cond ((< first-occ-nb current-maximum)
+               (thru (cdr year-alist-1) current-maximum hit-parade))
+              ((= first-occ-nb current-maximum)
+               (thru (cdr year-alist-1) current-maximum (cons (car first) hit-parade)))
+              (else (thru (cdr year-alist-1) first-occ-nb (list (car first)))))))))
+               
+(writeln/return (find-top-years year-alist))
+
+(define (update-year-alist j-list-0 year-alist)
+  (if (null? j-list-0)
+      year-alist
+      (let ((first-year (year (car j-list-0))))
+        (update-year-alist (cdr j-list-0)                  
+                           (let loop ((year-alist-0 year-alist))
+                            (if (null? year-alist-0)
+                                (list (cons first-year 1)
+                                      (let ((year-alist-1 (cdr year-alist-0)))
+                                        (if (= (caar year-alist-0) first-year)
+                                            (cons (cons first-year (+ (cdar year-alist-0) 1))
+                                        year-alist-1)
+                                      (cons (car year-alist-0) (loop year-alist-1)))))))))))
+
+;(writeln/return (update-year-alist miles-davis-r '()))
+;(writeln/return (top-year miles-davis-r))
+
+
+
   
 ;;;  ==========================================================================
 ;;;  Merge Sort
@@ -240,6 +331,21 @@
 
 (define cp-list-example
   '((5 . 5) (6 . 0) (3 . 3) (6 . 1) (7 . 7) (1 . 1) (6 . 2)))
+
+(writeln/return (mergesort cp-list-example (lambda (c0 c1)
+                                             (let ((left-0 (car c0))
+                                                   (left-1 (car c1)))
+                                               (or (< left-0 left-1)
+                                                   (and (= left-0 left-1)
+                                                        (<= (cdr c0) (cdr c1))))))))
+
+
+(writeln/return (mergesort miles-davis-r (lambda (j0 j1)
+                                                 (let ((y0 (year j0))
+                                                       (y1 (year j1)))
+                                                           (or (< y0 y1)
+                                                               (and (= y0 y1)
+                                                                    (string<=? (title j0) (title j1))))))))
 
 (define (pretty-writeln/return x)
   ;;  Writes "x", followed by an end-of-line character, and returns "x".  If

@@ -34,10 +34,17 @@ int main() {
     fa_remove_transition(self, 4, 'a', 4);
     fa_remove_transition(self, 2, 'a', 3);
 
-    // remove states
-
     //count transition
-    printf("nb transition : %d\n", (int)fa_count_transitions(self));
+    printf("number transitions : %d\n", (int)fa_count_transitions(self));
+
+    // remove states
+    fa_remove_state(self, 2);
+
+    //count state
+    printf("number states : %d\n", self->state_count);
+
+    //if automaton is deterministic
+    printf("is deterministic : %s\n", fa_is_deterministic(self) ? "true" : "false");
 
     // print automaton in file
     fa_pretty_print(self, file);

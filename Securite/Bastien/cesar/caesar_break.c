@@ -66,13 +66,6 @@ int main(int argc, char *argv[])
 
 	lectureText(&text, nbLettre);
 	trieDecroissant(nbLettre, tableauFreqtext);
-
-	// affiche l'alphabet, le nb de chaque lettre, la frequence en pourcentage de chaque lettre precision 0.001
-	int i = 0;
-	printf("alphaFreqNormal nombreChiffre alphaFreqChiffree\n");
-	for (i=0; i<TAILLE_ALPHA; ++i)
-		printf("%c %d %c \n", tableauFreqFrance[i], nbLettre[i], tableauFreqtext[i]);
-
 	chercheClef(text, clef, tableauFreqFrance, tableauFreqtext);
 	modificationText(text, clef);
   affichageText(text);
@@ -189,8 +182,8 @@ void chercheClef(char text[], int *clef, char tableauFreqFrance[], char tableauF
 		}
 
 		// affichage le texte dechiffre
-		affichageText(text);
-		affichageClef(clef);
+		//affichageText(text);
+		//affichageClef(clef);
 
 		// verifie la presence des mot dans le dictionnaire
 		char * pch = strtok (text,"\n ,.-'`:;\"");
