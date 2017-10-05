@@ -215,6 +215,17 @@ bool fa_is_deterministic(const struct fa *self)
         for (int j = 0; j < self->alpha_count; ++j)
           if(self->transitions[j][i].size > 1)
               return false;
-            
+
+    return true;
+}
+
+//tells if a automaton is complete
+bool fa_is_complete(const struct fa *self)
+{
+  for (int i = 0; i < self->state_count; ++i)
+    for (int j = 0; j < self->alpha_count; ++j)
+      if(self->transitions[j][i].size != 1)
+          return false;
+
     return true;
 }

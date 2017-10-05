@@ -1,5 +1,5 @@
 Initial states:
-	0 1 
+	1 
 Final states:
 	1 4 
 Transitions:
@@ -7,14 +7,14 @@ Transitions:
 		For letter a: 1 
 		For letter b: 2 
 	For state 1:
-		For letter a: 
+		For letter a: 3 
 		For letter b: 3 
 	For state 2:
-		For letter a: 
+		For letter a: 3 
 		For letter b: 4 
 	For state 3:
 		For letter a: 3 
 		For letter b: 4 
 	For state 4:
-		For letter a: 
-		For letter b: 
+		For letter a: 4 
+		For letter b: 4 

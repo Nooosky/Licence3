@@ -46,6 +46,9 @@ int main() {
     //if automaton is deterministic
     printf("is deterministic : %s\n", fa_is_deterministic(self) ? "true" : "false");
 
+    //if automaton is complete
+    printf("is complete : %s\n", fa_is_complete(self) ? "true" : "false");
+
     // print automaton in file
     fa_pretty_print(self, file);
 
