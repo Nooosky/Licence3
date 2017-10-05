@@ -229,3 +229,15 @@ bool fa_is_complete(const struct fa *self)
 
     return true;
 }
+
+//makes an automaton complete
+void fa_make_complete(const struct fa *self)
+{
+
+}
+
+//fusion 2 states
+void fa_merge_states(struct fa *self, size_t s1, size_t s2)
+{
+  
+}
