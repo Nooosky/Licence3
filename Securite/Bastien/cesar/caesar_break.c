@@ -85,7 +85,7 @@ void testArgument(int argc)
 {
   if (argc != 1)
   {
-      fprintf(stderr, "USAGE: ./main <clef> \n");
+      fprintf(stderr, "USAGE: ./main \n");
       exit(1);
   }
 }

@@ -2,78 +2,123 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+/* macro */
 #define TAILLE_ALPHA 26
 #define ASCII_MAJ_DEBUT 65
 
-void supprimeNonLettre(char * s);
-void supprimeNonLettre(char * s)
-{
-  char * newS = (char *) malloc(sizeof(char));
-  int i = 0, nombre = 0;
-  for (i = 0; s[i] != '\0'; ++i)
-  {
-    int ascii = (int) s[i];
-    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-    {
-      ++ nombre;
-      newS = (char *) realloc(newS, sizeof(char) * nombre);
-      newS[nombre - 1] = s[i];
-    }
-  }
 
-  s =  (char *) realloc(s, sizeof(newS));
-  s = newS;
+/* prototype */
+//verifie le nombre d'arguement passe dans le programme
+void testArgument(int argc);
+
+//lit l'entree standard et enregistre tout dans text
+void lectureText(char** text);
+
+//modifie le tableau en fonction de la clef
+void modificationText(char *text, char *clef);
+
+//affiche le contenu d'un tableau de char
+void affichageText(char *text);
+
+//vide le buffer d'entree
+void viderBuffer(void);
+
+
+/* main */
+int main (int argc, char *argv[])
+{
+  testArgument(argc);
+
+  char *clef = (char *)malloc(strlen(argv[1]) * sizeof(char));
+  clef = argv[1];
+  char *text = NULL;
+
+  lectureText(&text);
+  modificationText(text, clef);
+  affichageText(text);
+
+  free(text);
+
+  viderBuffer();
+
+  return 0;
 }
 
 
-
-
-int main (int argc, char *argv[])
+/* definition des fonctions */
+void testArgument(int argc)
 {
   if (argc != 2)
   {
       fprintf(stderr, "USAGE: ./main <clef> \n");
       exit(1);
   }
+}
 
-  char *clef = argv[1];
-  printf("%s\n", clef);
-  supprimeNonLettre(clef);
-  printf("%s\n", clef);
+void lectureText(char** text)
+{
+	int c;
+	size_t p4kB = 4096, i = 0;
+	void *newPtr = NULL;
+	*text = (char *)malloc(p4kB * sizeof(char));
 
-  int nbCaractereTotal = 0;
-  char *textChiffre = (char *) malloc(sizeof(char));
-
-  int i;
-	while((i = fgetc(stdin)) != EOF) // ctrl + d
+	while ((c = fgetc(stdin)) != EOF)	// EOF = ctrl+d sous Unix, ctrl+z sous Windows
 	{
-		unsigned char c = (unsigned char) i;
-		int ascii = (int) c;
-
-		++nbCaractereTotal;
-		textChiffre = (char *) realloc(textChiffre, sizeof(char) * nbCaractereTotal);
-		textChiffre[nbCaractereTotal - 1] = c;
-		//printf("%c = %d\n", c, ascii);
+		if (i == p4kB * sizeof(char))	// si i vaut 4096, on a deja remplis "*text" -> On realloue 4096 char en plus
+		{
+			p4kB += 4096;	// ajoute 4096 a p4kB pour allouer 8128 char
+			if ((newPtr = realloc(*text, p4kB * sizeof(char))) != NULL)	// tente la reallocation
+        *text = (char*)newPtr;
+			else // probleme d'allocation, on desalloue et on quitte le programme
+			{
+				free(*text);
+				exit(1);
+			}
+		}
+		(*text)[i++] = c;	// ajoute le caractere
 	}
 
-/*
-  text = textChiffre;
+	if (*text != NULL)	// si stdin n'est pas vide
+	{
+		(*text)[i] = '\0';
+		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	}
+	else return;	// sinon on quitte
+}
+
+void modificationText(char *text, char *clef)
+{
+  int i = 0, j = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    int ascii = (int) text[i];
-    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if(ASCII_MAJ_DEBUT <= text[i] && text[i] < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
     {
-      ascii = (int)text[i] + clef;
+      text[i] -= ((int)clef[j] - ASCII_MAJ_DEBUT);
 
-      while (ascii < ASCII_MAJ_DEBUT)
-        ascii += TAILLE_ALPHA;
+      ++j;
+      if (j > strlen(clef) - 1)
+        j = 0;
 
-      while (ascii >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-        ascii -= TAILLE_ALPHA;
-
-      text[i] = (char) ascii;
+      while (text[i] < ASCII_MAJ_DEBUT)
+		  text[i] += TAILLE_ALPHA;
+      while (text[i] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+		  text[i] -= TAILLE_ALPHA;
     }
-  }*/
+  }
+}
 
-  return 0;
+void affichageText(char *text)
+{
+  printf("############ \n");
+  printf("%s\n", text);
+}
+
+void viderBuffer()
+{
+	int c = 0;
+	while (c != '\n' && c != EOF)
+	{
+		c = getchar();
+	}
 }
