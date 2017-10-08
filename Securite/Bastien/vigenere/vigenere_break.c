@@ -24,6 +24,9 @@ void modificationText(char *text, char *clef);
 //affiche le contenu d'un tableau de char
 void affichageText(char *text);
 
+// affiche la clef
+void affichageClef(char *clef);
+
 //vide le buffer d'entree
 void viderBuffer(void);
 
@@ -33,14 +36,14 @@ int main(int argc, char *argv[])
 {
   testArgument(argc);
 
-  char *clef = (char *) malloc(sizeof(char));
+  char *clef = NULL;
   char *text = NULL;
 
   lectureText(&text, nbLettre);
   chercheClef(text, clef);
   modificationText(text, clef);
   affichageText(text);
-  affichageText(clef);
+  affichageClef(clef);
 
   free(clef);
   free(text);
@@ -125,6 +128,14 @@ void affichageText(char *text)
 {
   printf("############ \n");
   printf("%s\n", text);
+	printf("############ \n");
+}
+
+void affichageClef(char *clef)
+{
+  printf("############ \n");
+  printf("%s\n", *clef);
+	printf("############ \n");
 }
 
 void viderBuffer()
