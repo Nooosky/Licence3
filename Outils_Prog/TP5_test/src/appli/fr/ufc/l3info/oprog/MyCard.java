@@ -1,11 +1,22 @@
 package fr.ufc.l3info.oprog;
 
+public class MyCard {
 
-public MyCard {
+    private Account account;
 
-    public void setAccount(Account account)
+
+    public MyCard()
     {
 
+    }
+
+    public boolean setAccount(Account a)
+    {
+      if (a == null)
+        return false;
+      else
+        account = a;
+      return true;
     }
 
     public void setPin(int p)
