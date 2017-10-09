@@ -14,7 +14,7 @@ MOCKITO := $(LIBS)/mockito-core-2.10.0.jar:$(LIBS)/byte-buddy-1.7.5.jar:$(LIBS)/
 JACOCO_AGENT :=  $(LIBS)/jacocoagent.jar
 JACOCO_CLI :=  $(LIBS)/jacococli.jar
 
-RUN_ARGS := tests.testAccount tests.testATM tests.MyCardTest
+RUN_ARGS := tests.testAccount tests.testATM tests.MyCardTest tests.AppliTest
 
 
 all: appli javadoc tests runtests coverage report
