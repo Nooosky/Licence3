@@ -138,7 +138,14 @@ public class MyCardTest {
 
     @Test
     public void testBlock0() {
-        // TODO: écrire les tests !
+        personalizeCard();
+        assertFalse(testCard.isBlocked());
+        assertFalse(testCard.checkPin(4321));
+        assertFalse(testCard.isBlocked());
+        assertFalse(testCard.checkPin(4321));
+        assertFalse(testCard.isBlocked());
+        assertFalse(testCard.checkPin(4321));
+        assertTrue(testCard.isBlocked());
     }
 
 }
