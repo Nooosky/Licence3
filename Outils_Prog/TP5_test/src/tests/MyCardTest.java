@@ -136,8 +136,15 @@ public class MyCardTest {
      * Tests de la phase de blocage de la carte
      */
 
+     @Test
+     public void testBlock0() {
+        assertTrue(testCard.isBlocked());
+        personalizeCard();
+        assertFalse(testCard.isBlocked());
+     }
+
     @Test
-    public void testBlock0() {
+    public void testBlock1() {
         personalizeCard();
         assertFalse(testCard.isBlocked());
         assertFalse(testCard.checkPin(4321));
