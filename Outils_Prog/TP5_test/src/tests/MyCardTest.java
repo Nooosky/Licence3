@@ -155,4 +155,14 @@ public class MyCardTest {
         assertTrue(testCard.isBlocked());
     }
 
+    @Test
+    public void testBlock2() {
+        personalizeCard();
+        assertFalse(testCard.checkPin(4321));
+        assertFalse(testCard.checkPin(4321));
+        assertFalse(testCard.checkPin(4321));
+        assertTrue(testCard.isBlocked());
+        assertFalse(testCard.checkPin(1234));
+    }
+
 }

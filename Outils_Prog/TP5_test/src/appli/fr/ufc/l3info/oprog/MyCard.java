@@ -6,6 +6,7 @@ public class MyCard implements Card {
     private int pin;
     private boolean personalizationDone;
     private int numberFailPin;
+    private boolean cardIsblocked;
 
 
     public MyCard()
@@ -14,6 +15,7 @@ public class MyCard implements Card {
       pin = 0;
       personalizationDone = false;
       numberFailPin = 0;
+      cardIsblocked = true;
     }
 
     public boolean setAccount(Account a)
@@ -48,6 +50,7 @@ public class MyCard implements Card {
       else
       {
         personalizationDone = true;
+        cardIsblocked = false;
         return true;
       }
     }
@@ -62,19 +65,21 @@ public class MyCard implements Card {
 
     public boolean isBlocked()
     {
-      if (numberFailPin == 3 || !personalizationDone)
-        return true;
-      else
-        return false;
+        return cardIsblocked;
     }
 
     public boolean checkPin(int p)
     {
       if (!personalizationDone)
         return false;
+      if (cardIsblocked)
+        return false;
       if (p != pin)
       {
         numberFailPin++;
+        if (numberFailPin == 3)
+          cardIsblocked =  true;
+
         return false;
       }
       else
