@@ -1,3 +1,5 @@
+package tests;
+
 // JUnit
 import org.junit.Test;
 import org.junit.Before;
@@ -97,10 +99,10 @@ public class MyCardTest {
         assertFalse(testCard.checkPin(4321));
         assertTrue(testCard.checkPin(1234));
     }
-    
+
 
     /**
-     * Tests de la phase d'utilisation de la carte 
+     * Tests de la phase d'utilisation de la carte
      */
 
     @Test
@@ -131,7 +133,7 @@ public class MyCardTest {
 
 
     /**
-     * Tests de la phase de blocage de la carte 
+     * Tests de la phase de blocage de la carte
      */
 
     @Test
