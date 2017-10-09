@@ -4,15 +4,24 @@ public class MyCard implements Card {
 
     private Account account;
     private int pin;
+    private boolean personalizationDone;
+    private boolean cardIsBlocked;
+    private int numberFailPin;
 
 
     public MyCard()
     {
-
+      account = null;
+      pin = 0;
+      personalizationDone = false;
+      cardIsBlocked = false;
+      numberFailPin = 0;
     }
 
     public boolean setAccount(Account a)
     {
+      if (personalizationDone)
+        return false;
       if (a == null)
         return false;
       else
@@ -22,7 +31,9 @@ public class MyCard implements Card {
 
     public boolean setPin(int p)
     {
-      if (p < 0)
+      if (personalizationDone)
+        return false;
+      if (1000 > p || p > 9999)
         return false;
       else
         pin = p;
@@ -32,9 +43,15 @@ public class MyCard implements Card {
     public boolean endPersonalization()
     {
       if (pin == 0 || account == null)
+      {
+        personalizationDone = false;
         return false;
+      }
       else
+      {
+        personalizationDone = true;
         return true;
+      }
     }
 
     public Account getAccount()
@@ -47,11 +64,25 @@ public class MyCard implements Card {
 
     public boolean isBlocked()
     {
-      return true;
+      if (numberFailPin == 3)
+        return true;
+      else
+      return false;
     }
 
     public boolean checkPin(int p)
     {
-      return true;
+      if (!personalizationDone)
+        return false;
+      if (p != pin)
+      {
+        numberFailPin++;
+        return false;
+      }
+      else
+      {
+        numberFailPin = 0;
+        return true;
+      }
     }
 }
