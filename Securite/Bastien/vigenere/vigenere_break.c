@@ -13,7 +13,7 @@
 void testArgument(int argc);
 
 //lit l'entree standard et enregistre tout dans text
-void lectureText(char** text, int *nbLettre);
+void lectureText(char** text);
 
 //cherche la clef de dechiffrage
 void chercheClef(char *text, char* clef);
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
   char *clef = NULL;
   char *text = NULL;
 
-  lectureText(&text, nbLettre);
+  lectureText(&text);
   chercheClef(text, clef);
   modificationText(text, clef);
   affichageText(text);
@@ -62,7 +62,7 @@ void testArgument(int argc)
   }
 }
 
-void lectureText(char** text, int *nbLettre)
+void lectureText(char** text)
 {
 	int c;
 	size_t p4kB = 4096, i = 0;
@@ -82,26 +82,66 @@ void lectureText(char** text, int *nbLettre)
 				exit(1);
 			}
 		}
-
 		(*text)[i++] = c;	// ajoute le caractere
-
-		// incremente le tableau du nombre de lettre pour connaitre le nombre present de chaque lettre
-		int ascii = (int) c;
-		if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-				++nbLettre[ascii - ASCII_MAJ_DEBUT];
 	}
-
-	if (*text != NULL)	// si stdin n'est pas vide
-	{
-		(*text)[i] = '\0';
-		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
-	}
-	else return;	// sinon on quitte
 }
 
 void chercheClef(char *text, char *clef)
 {
+  // enelve les carateres speciaux du text
+  size_t p4kB = 4096, i = 0;
+  void *newPtr = NULL;
+  char *textSansCaractereSpeciaux = (char *)malloc(p4kB * sizeof(char));
 
+  int j = 0;
+  for(j = 0; text[j] != '\0'; ++j)
+  {
+    if (i == p4kB * sizeof(char))	// si i vaut 4096, on a deja remplis "*text" -> On realloue 4096 char en plus
+    {
+      p4kB += 4096;	// ajoute 4096 a p4kB pour allouer 8128 char
+      if ((newPtr = realloc(*textSansCaractereSpeciaux, p4kB * sizeof(char))) != NULL)	// tente la reallocation
+        *textSansCaractereSpeciaux = (char*)newPtr;
+      else // probleme d'allocation, on desalloue et on quitte le programme
+      {
+        free(*textSansCaractereSpeciaux);
+        exit(1);
+      }
+    }
+    (*textSansCaractereSpeciaux)[i++] = text[j];	// ajoute le caractere
+  }
+
+printf("%s\n",textSansCaractereSpeciaux );
+/*
+
+  char chaineATrouver[2];
+  int i = 0, j = 0;
+  for (i = 0; i < (strlen(text) - 2); ++i)
+  {
+    chaineATrouver[0] = text[i]; chaineATrouver[1] = text[i + 1];
+    printf("%s\n",chaineATrouver);
+    char *chaineTrouve;
+    chaineTrouve = strstr(text, chaineATrouver);
+
+    int position = 0;
+    if (chaineTrouve != NULL)
+    {
+      position = chaineTrouve - text;
+      if (position != i)
+      {
+        printf("%d %d %d\n", position, i, i - position);
+
+      }
+    }
+
+    for (j = 0; j < (strlen(text) - 2); ++j)
+    {
+      chaine2[0] = text[j]; chaine2[1] = text[j + 1];
+      printf("%s = %s\n", chaine1, chaine2);
+    }
+
+
+
+  }*/
 }
 
 void modificationText(char *text, char *clef)

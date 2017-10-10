@@ -340,12 +340,14 @@
                                                         (<= (cdr c0) (cdr c1))))))))
 
 
-(writeln/return (mergesort miles-davis-r (lambda (j0 j1)
-                                                 (let ((y0 (year j0))
-                                                       (y1 (year j1)))
-                                                           (or (< y0 y1)
-                                                               (and (= y0 y1)
-                                                                    (string<=? (title j0) (title j1))))))))
+(writeln/return
+ (mergesort miles-davis-r
+            (lambda (j0 j1)
+              (let ((y0 (year j0))
+                    (y1 (year j1)))
+                (or (< y0 y1)
+                    (and (= y0 y1)
+                         (string<=? (title j0) (title j1))))))))
 
 (define (pretty-writeln/return x)
   ;;  Writes "x", followed by an end-of-line character, and returns "x".  If
@@ -374,7 +376,114 @@
 	  ((equal? (car l0) x) current-position)
 	  (else (thru (cdr l0) (+ current-position 1))))))
 
+(define publisher-name-list
+  '(Blue-Ribbon-Muic
+    Bosworth Chappell EMI Kemsington-Musc Sony Universal))
+
+(define (publisher<=? publisher-name-0 publisher-name-1)
+  (let ((p1 (position publisher-name-1 publisher-name-list)))
+    (if p1
+        (let ((p0
+               (position publisher-name-0 publisher-name-list)))
+              (and p0 (<= p0 p1)))
+          #t)))
+
+
+(define (publisher<? publisher-name-0 publisher-name-1)
+  (let ((p0 (position publisher-name-0 publisher-name-list)))
+    (and p0
+        (let ((p1
+               (position publisher-name-1 publisher-name-list)))
+              (if p1 (< p0 p1) #t)))))
+
+(pretty-writeln/return
+ (mergesort miles-davis-r
+            (lambda (j0 j1)
+              (publisher<? (publisher j0) (publisher j1)))))
+
+
+
+
 (define add-something
   (case-lambda
    ((x) (+ x 1))
    ((x y) (+ x y))))
+
+;;;  Merge Sort
+(define (mergesort-plus l rel-2?)
+  ;;  La clôture lexicale permet aux fonctions locales d'accéder à la relation
+  ;;  d'ordre "rel-2?".
+  ;;
+  (define (merge-2-groups g0 g1)
+    (cond ((null? g0) g1)
+	  ((null? g1) g0)
+	  (else (let ((first-0 (car g0))
+		      (first-1 (car g1)))
+		  (if (rel-2? first-0 first-1)
+		      (cons first-0 (merge-2-groups (cdr g0) g1))
+		      (cons first-1 (merge-2-groups g0 (cdr g1))))))))
+  ;;
+  (define (merge-groups group-list)
+    (if (or (null? group-list) (null? (cdr group-list)))
+	group-list
+	(cons (merge-2-groups (car group-list) (cadr group-list))
+	      (merge-groups (cddr group-list)))))
+  ;;
+  (define (make-groups l0)
+    ;;  "l0" est une liste linéaire non vide.
+    (let ((first (car l0))
+	  (rest (cdr l0)))
+      (if (null? rest)
+	  (list (list first))
+	  (let ((next-groups (make-groups rest)))
+	    (if (rel-2? first (car rest))
+		(cons (cons first (car next-groups)) (cdr next-groups))
+		(cons (list first) next-groups))))))
+  ;;
+  (if (null? l)
+      '()
+      (let iter-merge-groups ((group-list
+                               (make-groups
+                                (map(lambda (x)
+                                      (cons x (key-1 x)))
+	(if (null? (cdr group-list))
+	    (map car (car group-list))
+	    (iter-merge-groups (merge-groups group-list)))))))))
+
+  (case-lambda
+    ((l rel-2? key-1) (mergesort-plus 3 plus rel-2? key-1))
+    
+
+
+(pretty-writeln/return
+ (mergesort-plus miles-davis-r publisher<=? publisher))
+
+(define date-list '((9 10 1996) (7 4 1960) (29 8 1996)))
+
+
+(define (process-4-sort x y thunk)
+  (or (< x y) (and (= x y) (thunk))))
+
+(writeln/return (mergesort-plus date-list
+                                (lambda (d0 d1)
+                                  (process-4-sort
+                                   (caddr d0)
+                                   (caddr d1)
+                                   (lambda ()
+                                     (process-4-sort
+                                      (cadr d0)
+                                      (cadr d1)
+                                      (lambda () (<=( car d0) (car d1)))))))))
+
+(writeln/return (mergesort-plus miles-davis-r
+                                (lambda (j0 j1)
+                                  (process-4-sort
+                                   (year j0) (year j1)
+                                   (lambda ()
+                                     (string<=? (title j0)
+                                                (title j1)))))))
+                              
+                                               
+                             
+                                               
+

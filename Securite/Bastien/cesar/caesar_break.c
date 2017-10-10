@@ -182,10 +182,11 @@ void chercheClef(char text[], int *clef, char tableauFreqFrance[], char tableauF
 		}
 
 		// affichage le texte dechiffre
-		//affichageText(text);
-		//affichageClef(clef);
+		affichageText(text);
+		affichageClef(clef);
 
 		// verifie la presence des mot dans le dictionnaire
+		/*
 		char * pch = strtok (text,"\n ,.-'`:;\"");
 		while (pch != NULL)
 		{
@@ -198,9 +199,11 @@ void chercheClef(char text[], int *clef, char tableauFreqFrance[], char tableauF
 
 			pch = strtok (NULL, "\n ,.-'`:;\"");
 
-		}
+		}*/
 		strcpy(text, textCopy);
-	}while(i < TAILLE_ALPHA && compteurMotTrouve < (int)((double)compteurMot * 0.75));
+	//}while(i < TAILLE_ALPHA && compteurMotTrouve < (int)((double)compteurMot * 0.75));
+
+	}while(fgetc(stdin) != EOF);
 }
 
 int chercheMotDansDico(char *tableau)

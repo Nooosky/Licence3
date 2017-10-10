@@ -41,7 +41,6 @@ int main (int argc, char *argv[])
   free(text);
 
   viderBuffer();
-
   return 0;
 }
 
