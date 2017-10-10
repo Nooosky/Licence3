@@ -13,10 +13,13 @@
 void testArgument(int argc);
 
 //lit l'entree standard et enregistre tout dans text
-void lectureText(char** text);
+void lectureText(char** text, int *nbLettre);
+
+// trie par ordre decroissant les 2 tableaux passes en parametre
+void trieDecroissant(int *nbLettre, char *tableauFreqtext);
 
 //cherche la clef de dechiffrage
-void chercheClef(char *text, char* clef);
+void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauFreqtext);
 
 //modifie le tableau en fonction de la clef
 void modificationText(char *text, char *clef);
@@ -38,9 +41,15 @@ int main(int argc, char *argv[])
 
   char *clef = NULL;
   char *text = NULL;
+  int *nbLettre = (int *) calloc(TAILLE_ALPHA, sizeof(int));
+  // tableau qui represente les lettres les plus presentes dans la langue francais par ordre decroissant
+  char tableauFreqFrance[] = {'E','S','A','N','T','I','R','U','L','O','D','C','P','M','Q','V','G','F','B','H','X','Y','J','Z','K','W'};
+  // tableau de l'alphabet qui servira a donner l'ordre des lettres les plus presentes dans le message chiffre
+  char tableauFreqtext[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
-  lectureText(&text);
-  chercheClef(text, clef);
+  lectureText(&text, nbLettre);
+	trieDecroissant(nbLettre, tableauFreqtext);
+	chercheClef(text, clef, tableauFreqFrance, tableauFreqtext);
   modificationText(text, clef);
   affichageText(text);
   affichageClef(clef);
@@ -62,7 +71,7 @@ void testArgument(int argc)
   }
 }
 
-void lectureText(char** text)
+void lectureText(char** text, int *nbLettre)
 {
 	int c;
 	size_t p4kB = 4096, i = 0;
@@ -82,12 +91,52 @@ void lectureText(char** text)
 				exit(1);
 			}
 		}
+
 		(*text)[i++] = c;	// ajoute le caractere
+
+		// incremente le tableau du nombre de lettre pour connaitre le nombre present de chaque lettre
+		if(ASCII_MAJ_DEBUT <= c && c < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+				++nbLettre[c - ASCII_MAJ_DEBUT];
+	}
+
+	if (*text != NULL)	// si stdin n'est pas vide
+	{
+		(*text)[i] = '\0';
+		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	}
+	else return;	// sinon on quitte
+}
+
+void trieDecroissant(int *nbLettre, char *tableauFreqtext)
+{
+	int j = TAILLE_ALPHA - 1, k = 0, tmpi = 0;
+	char tmpc = ' ';
+	for(j = TAILLE_ALPHA - 1; j != 0; --j)
+	{
+		for(k = 0; k < j; ++k)
+		{
+			if(nbLettre[k] < nbLettre[k + 1])
+			{
+				tmpi = nbLettre[k];
+				tmpc = tableauFreqtext[k];
+
+				nbLettre[k] = nbLettre[k + 1];
+
+				tableauFreqtext[k] = tableauFreqtext[k + 1];
+
+				nbLettre[k + 1]  = tmpi;
+				tableauFreqtext[k + 1] = tmpc;
+			}
+		}
 	}
 }
 
-void chercheClef(char *text, char *clef)
+void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauFreqtext)
 {
+  int i = 0;
+  for (i = 0; text[i] != '\0';++i)
+
+    printf("%c %c \n ", tableauFreqFrance[i], tableauFreqtext[i]);
 
 }
 

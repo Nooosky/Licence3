@@ -150,7 +150,7 @@ void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 	}
 }
 
-void chercheClef(char text[], int *clef, char tableauFreqFrance[], char tableauFreqtext[])
+void chercheClef(char *text, int *clef, char *tableauFreqFrance, char *tableauFreqtext)
 {
 	// calcule la clef en fonction de la frequence des lettres
 	char *textCopy = (char *)malloc(strlen(text) * sizeof(char));
