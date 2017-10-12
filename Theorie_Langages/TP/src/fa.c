@@ -227,17 +227,33 @@ bool fa_is_complete(const struct fa *self)
       if(self->transitions[j][i].size != 1)
           return false;
 
-    return true;
+  return true;
 }
 
 //makes an automaton complete
 void fa_make_complete(const struct fa *self)
 {
+  for (int i = 0; i < self->state_count; ++i)
+    for (int j = 0; j < self->alpha_count; ++j)
+      if(self->transitions[j][i].size != 1)
+      {
+        // add new state
+        self->state_count ++;
+        self->states = realloc(self->states, self->state_count * sizeof(struct state));
+        self->states[self->state_count - 1].is_initial = 0;
+        self->states[self->state_count - 1].is_final = 0;
 
+        // add transition to new state
+        fa_add_transition(self, i, char(j + 97), self->state_count - 1);
+
+        //add all transitions from new state to new state
+        for (int k = 0; k < self->alpha_count; ++k)
+          fa_add_transition(self, self->state_count - 1, char(k + 97), self->state_count - 1);
+      }
 }
 
 //fusion 2 states
 void fa_merge_states(struct fa *self, size_t s1, size_t s2)
 {
-  
+
 }

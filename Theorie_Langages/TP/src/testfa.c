@@ -49,6 +49,12 @@ int main() {
     //if automaton is complete
     printf("is complete : %s\n", fa_is_complete(self) ? "true" : "false");
 
+    //make automaton complete
+    fa_make_complete(self);
+
+    //if automaton is complete
+    printf("is complete : %s\n", fa_is_complete(self) ? "true" : "false");
+
     // print automaton in file
     fa_pretty_print(self, file);
 
