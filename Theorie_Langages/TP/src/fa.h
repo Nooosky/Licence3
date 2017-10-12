@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct state {//state structure
+// automaton
+struct state //state structure
+{
     bool is_initial;
     bool is_final;
 };
 
-struct fa{
+struct fa
+{
     size_t alpha_count;     //size of the alphabet
     size_t state_count;     //number of states of the automaton
 
@@ -16,11 +19,26 @@ struct fa{
     struct state_set **transitions;
 };
 
-struct state_set {
+struct state_set
+{
     size_t size;
     size_t capacity;
     size_t *states;
 };
+
+// graph
+struct graph
+{
+  size_t node_count;
+  struct node *nodes;
+};
+
+struct node
+{
+  size_t number;
+  struct node *adjacent_nodes;
+};
+
 
 // automaton creation
 void fa_create(struct fa *self, size_t alpha_count, size_t state_count);
@@ -63,3 +81,24 @@ void fa_make_complete(struct fa *self);
 
 //fusion 2 states
 void fa_merge_states(struct fa *self, size_t s1, size_t s2);
+
+//
+void graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
+
+//
+bool graph_has_path(const struct graph *self, size_t from, size_t to);
+
+//
+void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted);
+
+//
+void graph_destroy(struct graph *self);
+
+//
+bool fa_is_language_empty(struct fa *self);
+
+//
+void fa_remove_non_accessible_states(struct fa *self);
+
+//
+void fa_remove_non_co_accessible_states(struct fa *self);
