@@ -224,31 +224,43 @@ bool fa_is_complete(const struct fa *self)
 {
   for (int i = 0; i < self->state_count; ++i)
     for (int j = 0; j < self->alpha_count; ++j)
-      if(self->transitions[j][i].size != 1)
+      if(self->transitions[j][i].size < 1)
+      {
           return false;
+      }
 
   return true;
 }
 
 //makes an automaton complete
-void fa_make_complete(const struct fa *self)
+void fa_make_complete(struct fa *self)
 {
   for (int i = 0; i < self->state_count; ++i)
     for (int j = 0; j < self->alpha_count; ++j)
-      if(self->transitions[j][i].size != 1)
+      if(self->transitions[j][i].size < 1)
       {
         // add new state
-        self->state_count ++;
+        self->state_count++;
         self->states = realloc(self->states, self->state_count * sizeof(struct state));
         self->states[self->state_count - 1].is_initial = 0;
         self->states[self->state_count - 1].is_final = 0;
+        struct state_set new_state_set = {.capacity = 0, .size = 0};
+
+        for (int i = 0; i < self->alpha_count; i++)
+          self->transitions[i] = realloc(self->transitions[i], self->state_count*sizeof(struct state_set));
+
+        for (int j = 0; j < self->alpha_count; ++j)
+        {
+          self->transitions[j][self->state_count - 1] = new_state_set;
+          self->transitions[j][self->state_count - 1].states = (size_t *) malloc(sizeof(size_t));
+        }
 
         // add transition to new state
-        fa_add_transition(self, i, char(j + 97), self->state_count - 1);
+        fa_add_transition(self, i, (char)(j + 97), self->state_count - 1);
 
         //add all transitions from new state to new state
         for (int k = 0; k < self->alpha_count; ++k)
-          fa_add_transition(self, self->state_count - 1, char(k + 97), self->state_count - 1);
+          fa_add_transition(self, self->state_count - 1, (char)(k + 97), self->state_count - 1);
       }
 }
 
