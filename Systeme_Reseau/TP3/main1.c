@@ -2,8 +2,9 @@
 tp3 exercice 1, realise par Jeremy Roussey et Bastien Chanez
 Ce programme creer un matrice d'entier de ligne * colonne donne par l'utilisateur
 La remplie aleatoirement et calcul la somme des elements de la matrice par passage de
-parametre avec des threads et en synchronisant avec des mutex
+parametre avec des threads en synchronisant avec des mutex
 */
+
 #include <stdio.h>
 #include <pthread.h>
 #include <time.h>
@@ -11,8 +12,6 @@ parametre avec des threads et en synchronisant avec des mutex
 
 
 /* macro */
-#define NTHREADS 2
-pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
 
 
 /* prototype */
@@ -30,6 +29,7 @@ void *calculSomme(void *args);
 void printSommeTotal();
 
 
+/* variable */
 // matrice
 struct matrice
 {
@@ -38,44 +38,48 @@ struct matrice
   int **element;
 };
 
+pthread_mutex_t mutex;
+
+struct matrice *matrice = NULL;
+
 
 /* main */
 int main(int argc, char *argv[])
 {
   srand(time(NULL));
-  
-	testArgument(argc);
 
-  int totalSomme = 0;
-  struct matrice *matrice = NULL;
-  initMatrice(matrice, atoi(argv[1]), atoi(argv[2]));
+	testArgument(argc);
+  unsigned int ligne =  atoi(argv[1]; unsigned int colonne atoi(argv[2]);
+
+  pthread_t thread_id[colonne];
+  int sommeFinal = 0;
+  initMatrice(matrice, ligne, colonne);
   fillMatrice(matrice);
 
-
-
-  pthread_t thread_id[NTHREADS];
-  int thread_args[NTHREADS];
-  int i, j;
-
-  pthread_mutex_init(&mutex1, NULL);
-
-  for (i = 0; i <= N - 1; i++ )
-      for( j = 0; j <= M - 1; j++)
-          dimensional_array[i][j] = i*j;
-
-  for(i=0; i < NTHREADS; i++)
+  // init le mutex
+  if (pthread_mutex_init(&mutex, NULL) != 0)
   {
-      thread_args[i] = i;
-      pthread_create( &thread_id[i], NULL, CalculateSum, &thread_args[i]);
+    perror("pthread_mutex_init");
+    exit (1);
   }
 
-  for(j=0; j < NTHREADS; j++)
-  {
-      pthread_join( thread_id[j], NULL);
-  }
+  // cree les thread
+  int i = 0;
+  for(i = 0; i < colonne; ++i)
+      if (pthread_create( &thread_id[i], NULL, CalculateSum, &thread_args[i]) != 0)
+      {
+        perror("pthread_create");
+        exit (1);
+      }
 
-  printf("\x1b[32m" "RESULT : %d\n", result);
-  printf("\x1b[0m" "");
+  // attend la fin des thread
+  for(i = 0; i < colonne; ++i)
+      pthread_join( thread_id[i], NULL);
+
+  // detruit le mutex
+  pthread_mutex_destroy(&mutex);
+
+  printSommeTotal();
 
   return 0;
 }
