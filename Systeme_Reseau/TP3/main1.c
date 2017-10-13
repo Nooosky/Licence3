@@ -107,9 +107,16 @@ int main(int argc, char *argv[])
 
 void *calculSomme(void *args)
 {
-    int *sommeFinal =  *((int*)args);
+    // partage de la variable par passage en parametre
+    int *sommeFinal =  (int*)args;
+
+    // calcul la somme de la ligne et l'ajoute a la somme final
+    pthread_mutex_lock( &mutex );
 
     sommeFinal++;
 
-    return NULL;
+    pthread_mutex_unlock( &mutex );
+
+    (void) args;
+    pthread_exit(NULL);
 }
