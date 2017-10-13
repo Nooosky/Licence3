@@ -1,10 +1,3 @@
-/*
-tp3 exercice 1, realise par Jeremy Roussey et Bastien Chanez
-Ce programme creer un matrice d'entier de ligne * colonne donne par l'utilisateur
-La remplie aleatoirement et calcul la somme des elements de la matrice par passage de
-parametre avec des threads en synchronisant avec des mutex
-*/
-
 #include <stdio.h>
 #include <pthread.h>
 #include <time.h>
@@ -15,26 +8,16 @@ parametre avec des threads en synchronisant avec des mutex
 
 
 /* prototype */
-//verifie le nombre d'arguement passe dans le programme
-void testArgument(int argc);
-//initialise la matrice
-void initMatrice(unsigned int ligne, unsigned int colonne);
-//remplie aleatoriement la matrice
-void fillMatrice();
-//affiche la matrice
-void printMatrice();
 //calcul la somme des lignes de la matrice
 void *calculSomme(void *args);
-//affiche le somme des elements de la matrice
-void printSommeTotal();
 
 
 /* variable */
 // matrice
 struct matrice
 {
-  unsigned int count_ligne;
-  unsigned int count_colonne;
+  unsigned int nbLigne;
+  unsigned int nbColonne;
   int **element;
 };
 
@@ -46,15 +29,43 @@ struct matrice *matrice = NULL;
 /* main */
 int main(int argc, char *argv[])
 {
-  srand(time(NULL));
+  srand(time(NULL)); // seed pour l'aleatoire
+  int i = 0, j = 0; // variable d'incrementation pour les for
 
-	testArgument(argc);
-  unsigned int ligne =  atoi(argv[1]); unsigned int colonne = atoi(argv[2]);
+  // verifie les arguments
+  if (argc != 3)
+  {
+      fprintf(stderr, "USAGE: ./main <ligne> <colonne>\n");
+      exit(1);
+  }
 
-  pthread_t thread_id[colonne];
+  // init la matrice
+  matrice = (struct matrice *) malloc(sizeof(struct matrice));
+  matrice->nbLigne = atoi(argv[1]);
+  matrice->nbColonne = atoi(argv[2]);
+  matrice->element =  (int**)malloc(matrice->nbLigne * sizeof(int *));
+  for(i = 0; i < matrice->nbLigne; ++i)
+    matrice->element[i] = (int *)calloc(matrice->nbColonne, sizeof(int));
+
+
+  pthread_t thread_id[matrice->nbColonne];
   int sommeFinal = 0;
-  initMatrice(ligne, colonne);
-  fillMatrice();
+
+
+  // remplie la matrice aleatoirement
+  for(i = 0; i < matrice->nbLigne; ++i)
+    for(j = 0; j < matrice->nbColonne; ++j)
+      matrice->element[i][j] = rand()%10;
+
+  // affiche la matrice
+  for(i = 0; i < matrice->nbLigne; ++i)
+  {
+    for(j = 0; j < matrice->nbColonne; ++j)
+    {
+      printf("%d ",matrice->element[i][j]);
+    }
+    printf("\n");
+  }
 
   // init le mutex
   if (pthread_mutex_init(&mutex, NULL) != 0)
@@ -64,8 +75,7 @@ int main(int argc, char *argv[])
   }
 
   // cree les thread
-  int i = 0;
-  for(i = 0; i < colonne; ++i)
+  for(i = 0; i < matrice->nbColonne; ++i)
       if (pthread_create( &thread_id[i], NULL, calculSomme, &sommeFinal) != 0)
       {
         perror("pthread_create");
@@ -73,42 +83,19 @@ int main(int argc, char *argv[])
       }
 
   // attend la fin des thread
-  for(i = 0; i < colonne; ++i)
+  for(i = 0; i < matrice->nbColonne; ++i)
       pthread_join( thread_id[i], NULL);
 
   // detruit le mutex
   pthread_mutex_destroy(&mutex);
 
-  printSommeTotal();
+  // affiche la somme final
 
+
+  free (matrice);
   return 0;
 }
 
-
-/* definition des fonctions */
-void testArgument(int argc)
-{
-  if (argc != 3)
-  {
-      fprintf(stderr, "USAGE: ./main <ligne> <colonne>\n");
-      exit(1);
-  }
-}
-
-void initMatrice(unsigned int ligne, unsigned int colonne)
-{
-
-}
-
-void fillMatrice()
-{
-
-}
-
-void printMatrice()
-{
-
-}
 
 void *calculSomme(void *args)
 {
@@ -123,9 +110,4 @@ void *calculSomme(void *args)
     }
 
     return NULL;
-}
-
-void printSommeTotal()
-{
-
 }
