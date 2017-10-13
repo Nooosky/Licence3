@@ -1,3 +1,13 @@
+/*
+tp3 exercice 1, realise par Jeremy Roussey et Bastien Chanez
+Ce programme creer un matrice d'entier de ligne * colonne donne par l'utilisateur
+La remplie aleatoirement et calcul la somme des elements de la matrice par passage de
+parametre avec des threads en synchronisant avec des mutex
+*/
+
+//gcc -Wall -o main main.c -lpthread
+
+//Imports
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -106,8 +116,8 @@ int main(int argc, char *argv[])
     puts ("main init");
 
     //Creating the threads
-    for(i = 0; i < mat.nbColumns; ++i)
-        if (pthread_create( &thread_id[i], NULL, sum_array, &mat) != 0)
+    for(i = 0; i < mat.nbLines; ++i)
+        if (pthread_create( &thread_id[i], NULL, &sum_array, &mat) != 0)
         {
             perror("pthread_create");
             exit(1);
@@ -115,13 +125,19 @@ int main(int argc, char *argv[])
 
 
     // Waiting the end of the threads
-    for(i = 0; i < mat.nbColumns; ++i)
+    for(i = 0; i < mat.nbLines; ++i)
         pthread_join( thread_id[i], NULL);
 
     // Printing the final sum
     printf("Final Sum  : %d\n", mat.psh->sum);
 
     puts ("main end");
+
+    //free the matrix
+    //free(mat);
+
+    //free the threads
+    free(thread_id);
 
     return 0;
 }
