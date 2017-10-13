@@ -1,7 +1,17 @@
+/*
+tp3 exercice 1, realise par Jeremy Roussey et Bastien Chanez
+Ce programme creer un matrice d'entier de ligne * colonne donne par l'utilisateur
+La remplie aleatoirement et calcul la somme des elements de la matrice par passage de
+parametre avec des threads en synchronisant avec des mutex
+*/
+
+//gcc -Wall -o main main.c -lpthread
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <pthread.h>
 #include <time.h>
-#include <stdlib.h>
 
 
 /* macro */
@@ -48,7 +58,7 @@ int main(int argc, char *argv[])
     matrice->element[i] = (int *)calloc(matrice->nbColonne, sizeof(int));
 
 
-  pthread_t thread_id[matrice->nbColonne];
+  pthread_t *thread_id = (pthread_t *) malloc(matrice->nbColonne * sizeof(pthread_t));
   int sommeFinal = 0;
 
 
@@ -61,9 +71,7 @@ int main(int argc, char *argv[])
   for(i = 0; i < matrice->nbLigne; ++i)
   {
     for(j = 0; j < matrice->nbColonne; ++j)
-    {
       printf("%d ",matrice->element[i][j]);
-    }
     printf("\n");
   }
 
@@ -76,21 +84,21 @@ int main(int argc, char *argv[])
 
   // cree les thread
   for(i = 0; i < matrice->nbColonne; ++i)
-      if (pthread_create( &thread_id[i], NULL, calculSomme, &sommeFinal) != 0)
-      {
-        perror("pthread_create");
-        exit(1);
-      }
+    if (pthread_create( &thread_id[i], NULL, &calculSomme, &sommeFinal) != 0)
+    {
+      perror("pthread_create");
+      exit(1);
+    }
 
   // attend la fin des thread
   for(i = 0; i < matrice->nbColonne; ++i)
-      pthread_join( thread_id[i], NULL);
+    pthread_join( thread_id[i], NULL);
 
   // detruit le mutex
   pthread_mutex_destroy(&mutex);
 
   // affiche la somme final
-
+  printf("somme final : %d\n", sommeFinal);
 
   free (matrice);
   return 0;
@@ -99,15 +107,9 @@ int main(int argc, char *argv[])
 
 void *calculSomme(void *args)
 {
-    int *argPtr = args;
+    int *sommeFinal =  *((int*)args);
 
-    int threadindex = *argPtr;
-
-    for (int k = 0; k < 10; ++k) {
-        pthread_mutex_lock( &mutex );
-        result = result + dimensional_array[threadindex][k];
-        pthread_mutex_unlock( &mutex );
-    }
+    sommeFinal++;
 
     return NULL;
 }
