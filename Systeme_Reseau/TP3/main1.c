@@ -18,11 +18,11 @@ parametre avec des threads en synchronisant avec des mutex
 //verifie le nombre d'arguement passe dans le programme
 void testArgument(int argc);
 //initialise la matrice
-void initMatrice(struct matrice *matrice, unsigned int ligne, unsigned int colonne);
+void initMatrice(unsigned int ligne, unsigned int colonne);
 //remplie aleatoriement la matrice
-void fillMatrice(struct matrice *matrice);
+void fillMatrice();
 //affiche la matrice
-void printMatrice(struct matrice *matrice);
+void printMatrice();
 //calcul la somme des lignes de la matrice
 void *calculSomme(void *args);
 //affiche le somme des elements de la matrice
@@ -49,27 +49,27 @@ int main(int argc, char *argv[])
   srand(time(NULL));
 
 	testArgument(argc);
-  unsigned int ligne =  atoi(argv[1]; unsigned int colonne atoi(argv[2]);
+  unsigned int ligne =  atoi(argv[1]); unsigned int colonne = atoi(argv[2]);
 
   pthread_t thread_id[colonne];
   int sommeFinal = 0;
-  initMatrice(matrice, ligne, colonne);
-  fillMatrice(matrice);
+  initMatrice(ligne, colonne);
+  fillMatrice();
 
   // init le mutex
   if (pthread_mutex_init(&mutex, NULL) != 0)
   {
     perror("pthread_mutex_init");
-    exit (1);
+    exit(1);
   }
 
   // cree les thread
   int i = 0;
   for(i = 0; i < colonne; ++i)
-      if (pthread_create( &thread_id[i], NULL, CalculateSum, &thread_args[i]) != 0)
+      if (pthread_create( &thread_id[i], NULL, calculSomme, &sommeFinal) != 0)
       {
         perror("pthread_create");
-        exit (1);
+        exit(1);
       }
 
   // attend la fin des thread
@@ -95,12 +95,17 @@ void testArgument(int argc)
   }
 }
 
-void initMatrice(struct matrice *matrice, unsigned int ligne, unsigned int colonne)
+void initMatrice(unsigned int ligne, unsigned int colonne)
 {
 
 }
 
-void printMatrice(struct matrice *matrice)
+void fillMatrice()
+{
+
+}
+
+void printMatrice()
 {
 
 }
@@ -112,10 +117,12 @@ void *calculSomme(void *args)
     int threadindex = *argPtr;
 
     for (int k = 0; k < 10; ++k) {
-        pthread_mutex_lock( &mutex1 );
+        pthread_mutex_lock( &mutex );
         result = result + dimensional_array[threadindex][k];
-        pthread_mutex_unlock( &mutex1 );
+        pthread_mutex_unlock( &mutex );
     }
+
+    return NULL;
 }
 
 void printSommeTotal()
