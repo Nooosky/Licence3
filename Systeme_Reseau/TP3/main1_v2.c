@@ -20,6 +20,7 @@ struct shared
 {
     int sum;      //sum
     pthread_mutex_t mut;        //mutex for the sum
+    int global_index;
 };
 
 
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
             {
                     .sum = 0,
                     .mut = PTHREAD_MUTEX_INITIALIZER,
+                    .global_index = 0,
             };
 
     //matrix structure initialization
@@ -124,20 +126,33 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-static void *sum_array (void *p)
+
+//Sum of the array
+static void *sum_array(void *p)
 {
-    if (p != NULL)
-    {
+    if(p != NULL){
         struct matrix *p_matrix = p;
 
-        /* Use of the mutex for the sum*/
-        pthread_mutex_lock (&p_matrix->psh->mut);
-        {
-            p_matrix->psh->sum ++;
+        int local_index, partial_sum = 0;
+
+        do {
+            pthread_mutex_lock(&p_matrix->psh->mut);
+            local_index = p_matrix->psh->global_index;
+            p_matrix->psh->global_index ++;
+            pthread_mutex_unlock(&p_matrix->psh->mut);
+
+            if (local_index < p_matrix->nbLines) {
+                for (int i = 0; i < p_matrix->nbColumns; ++i) {
+                    partial_sum += p_matrix->elements[local_index][i];
+                }
+            }
         }
-        printf (" data <- %d\n", p_matrix->psh->sum);
-        pthread_mutex_unlock (&p_matrix->psh->mut);
-        /*End of the use of the mutex*/
+        while (local_index < p_matrix->nbLines);
+
+        pthread_mutex_lock(&p_matrix->psh->mut);
+        p_matrix->psh->sum += partial_sum;
+        pthread_mutex_unlock(&p_matrix->psh->mut);
     }
+
     return NULL;
 }
