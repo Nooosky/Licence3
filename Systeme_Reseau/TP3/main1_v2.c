@@ -36,25 +36,7 @@ struct matrix
 };
 
 //function for the threads
-static void *sum_array (void *p)
-{
-    if (p != NULL)
-    {
-        struct matrix *p_matrix = p;
-
-        /* Use of the mutex for the sum*/
-        pthread_mutex_lock (&p_matrix->psh->mut);
-        {
-            int x = p_matrix->psh->sum;
-            x++;
-            p_matrix->psh->sum = x;
-        }
-        printf (" data <- %d\n", p_matrix->psh->sum);
-        pthread_mutex_unlock (&p_matrix->psh->mut);
-        /*End of the use of the mutex*/
-    }
-    return NULL;
-}
+static void *sum_array (void *p);
 
 
 int main(int argc, char *argv[])
@@ -95,7 +77,7 @@ int main(int argc, char *argv[])
         mat.elements[i] = (int *)calloc(mat.nbColumns, sizeof(int));
 
     //Array of threads
-    pthread_t *thread_id = (pthread_t *) malloc(mat.nbColumns * sizeof(pthread_t));
+    pthread_t thread_id[mat.nbColumns];
 
     // Filling the matrix with randoms integers
     for(i = 0; i < mat.nbLines; ++i)
@@ -133,11 +115,29 @@ int main(int argc, char *argv[])
 
     puts ("main end");
 
-    //free the matrix
-    //free(mat);
 
-    //free the threads
-    free(thread_id);
+    // free memory
+    for(i = 0; i < mat.nbLines; ++i)
+        free(mat.elements[i]);
+    free(mat.elements);
 
     return 0;
+}
+
+static void *sum_array (void *p)
+{
+    if (p != NULL)
+    {
+        struct matrix *p_matrix = p;
+
+        /* Use of the mutex for the sum*/
+        pthread_mutex_lock (&p_matrix->psh->mut);
+        {
+            p_matrix->psh->sum ++;
+        }
+        printf (" data <- %d\n", p_matrix->psh->sum);
+        pthread_mutex_unlock (&p_matrix->psh->mut);
+        /*End of the use of the mutex*/
+    }
+    return NULL;
 }
