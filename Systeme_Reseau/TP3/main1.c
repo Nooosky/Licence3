@@ -29,6 +29,8 @@ struct matrice
   unsigned int nbLigne;
   unsigned int nbColonne;
   int **element;
+
+  int sommeFinal;
 };
 
 pthread_mutex_t mutex;
@@ -49,18 +51,17 @@ int main(int argc, char *argv[])
       exit(1);
   }
 
-  // init la matrice
+  // alloue la memoire et init la matrice
   matrice = (struct matrice *) malloc(sizeof(struct matrice));
   matrice->nbLigne = atoi(argv[1]);
   matrice->nbColonne = atoi(argv[2]);
   matrice->element =  (int**)malloc(matrice->nbLigne * sizeof(int *));
   for(i = 0; i < matrice->nbLigne; ++i)
     matrice->element[i] = (int *)calloc(matrice->nbColonne, sizeof(int));
+  matrice->sommeFinal = 0;
 
-
+  // alloue memoire
   pthread_t *thread_id = (pthread_t *) malloc(matrice->nbColonne * sizeof(pthread_t));
-  int sommeFinal = 0;
-
 
   // remplie la matrice aleatoirement
   for(i = 0; i < matrice->nbLigne; ++i)
@@ -84,7 +85,7 @@ int main(int argc, char *argv[])
 
   // cree les thread
   for(i = 0; i < matrice->nbColonne; ++i)
-    if (pthread_create( &thread_id[i], NULL, &calculSomme, &sommeFinal) != 0)
+    if (pthread_create( &thread_id[i], NULL, &calculSomme, &matrice) != 0)
     {
       perror("pthread_create");
       exit(1);
@@ -98,25 +99,29 @@ int main(int argc, char *argv[])
   pthread_mutex_destroy(&mutex);
 
   // affiche la somme final
-  printf("somme final : %d\n", sommeFinal);
+  printf("somme final : %d\n", matrice->sommeFinal);
 
+  // libere la memoire
   free (matrice);
+
   return 0;
 }
 
 
 void *calculSomme(void *args)
 {
+  if (args != NULL)
+  {
     // partage de la variable par passage en parametre
-    int *sommeFinal = (int *)args;
+    struct matrice *p_matrice = args;
 
     // calcul la somme de la ligne et l'ajoute a la somme final
     pthread_mutex_lock(&mutex);
 
-    sommeFinal++;
-    printf("%d\n",*sommeFinal);
-    
-    pthread_mutex_unlock(&mutex);
+    p_matrice->sommeFinal++;
+    printf("%d\n",p_matrice->sommeFinal);
 
-    pthread_exit(NULL);
+    pthread_mutex_unlock(&mutex);
+  }
+  pthread_exit(NULL);
 }
