@@ -5,7 +5,6 @@
 
 /* macro */
 #define TAILLE_ALPHA 26
-#define ASCII_MAJ_DEBUT 65
 
 
 /* prototype */
@@ -43,6 +42,7 @@ int main (int argc, char *argv[])
   affichageText(text);
 
   free(text);
+  //free(clef); // probleme ?
 
   viderBuffer();
   return 0;
@@ -89,15 +89,16 @@ void lectureText(char** text)
 				exit(1);
 			}
 		}
-		(*text)[i++] = c;	// ajoute le caractere
+
+		(*text)[i++] = c;	// ajoute le caractere au text
 	}
 
-	if (*text != NULL)	// si stdin n'est pas vide
+	// si stdin n'est pas vide on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	if (*text != NULL)
 	{
 		(*text)[i] = '\0';
-		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+		*text = realloc(*text, strlen(*text) + 1);
 	}
-	else return;	// sinon on quitte
 }
 
 void modificationText(char *text, char *clef)
@@ -105,14 +106,14 @@ void modificationText(char *text, char *clef)
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    if(ASCII_MAJ_DEBUT <= text[i] && text[i] < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if('A' <= text[i] && text[i] <= 'Z')
     {
-      text[i] = (char)(strchr(clef,text[i]) - clef + ASCII_MAJ_DEBUT);
+      text[i] = (char)(strchr(clef,text[i]) - clef + 'A');
 
-      while (text[i] < ASCII_MAJ_DEBUT)
-		  text[i] += TAILLE_ALPHA;
-      while (text[i] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-		  text[i] -= TAILLE_ALPHA;
+      while (text[i] < 'A')
+		    text[i] += TAILLE_ALPHA;
+      while (text[i] > 'Z')
+		    text[i] -= TAILLE_ALPHA;
     }
   }
 }
@@ -121,6 +122,7 @@ void affichageText(char *text)
 {
   printf("############ \n");
   printf("%s\n", text);
+	printf("############ \n");
 }
 
 void viderBuffer()

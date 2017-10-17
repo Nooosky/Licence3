@@ -1,15 +1,3 @@
-/*DEPUIS LONGTEMPS, J'AI LA MANIE DE GLISSER DES JEUX
-DE MOTS LORS DES CONVERSATIONS.
-LES GENS DE MON ENTOURAGE NE POUVANT PLUS ME SUPPORTER, JE
-ME SUIS MIS A LES ECRIRE.
-LORSQUE JE SUIS ENTRE A L'ECOLE POLYTECHNIQUE DE MONTREAL,
-J'AI EU L'OCCASION D'ECRIRE UNE CHRONIQUE HEBDOMADAIRE DANS
-LE JOURNAL ETUDIANT, LE ``POLYSCOPE''.
-CE SONT CES TEXTES QUI SE RETROUVENT DANS LE PRESENT RECUEIL.
-ILS ONT BIEN SUR ETE LEGEREMENT MODIFIES, POUR LES RENDRE
-PLUS COMPREHENSIBLES POUR QUELQU'UN QUI N'A PAS ETUDIE A
-L'ECOLE POLYTECHNIQUE.*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +5,6 @@ L'ECOLE POLYTECHNIQUE.*/
 
 /* macro */
 #define TAILLE_ALPHA 26
-#define ASCII_MAJ_DEBUT 65
 
 
 /* prototype */
@@ -78,22 +65,23 @@ void lectureText(char** text)
 		{
 			p4kB += 4096;	// ajoute 4096 a p4kB pour allouer 8128 char
 			if ((newPtr = realloc(*text, p4kB * sizeof(char))) != NULL)	// tente la reallocation
-				*text = (char*)newPtr;
+        *text = (char*)newPtr;
 			else // probleme d'allocation, on desalloue et on quitte le programme
 			{
 				free(*text);
 				exit(1);
 			}
 		}
-		(*text)[i++] = c;	// ajoute le caractere
+
+		(*text)[i++] = c;	// ajoute le caractere au text
 	}
 
-	if (*text != NULL)	// si stdin n'est pas vide
+	// si stdin n'est pas vide on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	if (*text != NULL)
 	{
 		(*text)[i] = '\0';
-		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+		*text = realloc(*text, strlen(*text) + 1);
 	}
-	else return;	// sinon on quitte
 }
 
 void modificationText(char *text, int clef)
@@ -101,14 +89,14 @@ void modificationText(char *text, int clef)
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    if(ASCII_MAJ_DEBUT <= text[i] && text[i] < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if('A' <= text[i] && text[i] <= 'Z')
     {
       text[i] += clef;
 
-      while (text[i] < ASCII_MAJ_DEBUT)
-		  text[i] += TAILLE_ALPHA;
-      while (text[i] >= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-		  text[i] -= TAILLE_ALPHA;
+      while (text[i] < 'A')
+		    text[i] += TAILLE_ALPHA;
+      while (text[i] > 'Z')
+		    text[i] -= TAILLE_ALPHA;
     }
   }
 }
@@ -117,6 +105,7 @@ void affichageText(char *text)
 {
   printf("############ \n");
   printf("%s\n", text);
+	printf("############ \n");
 }
 
 void viderBuffer()

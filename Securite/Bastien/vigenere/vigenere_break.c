@@ -5,7 +5,6 @@
 
 /* macro */
 #define TAILLE_ALPHA 26
-#define ASCII_MAJ_DEBUT 65
 
 
 /* prototype */
@@ -82,7 +81,15 @@ void lectureText(char** text)
 				exit(1);
 			}
 		}
-		(*text)[i++] = c;	// ajoute le caractere
+
+		(*text)[i++] = c;	// ajoute le caractere au text
+	}
+
+	// si stdin n'est pas vide on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	if (*text != NULL)
+	{
+		(*text)[i] = '\0';
+		*text = realloc(*text, strlen(*text) + 1);
 	}
 }
 
@@ -150,14 +157,14 @@ void modificationText(char *text, char *clef)
   for (i = 0; text[i] != '\0'; ++i)
   {
     int ascii = (int) text[i];
-    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if('A' <= ascii && ascii <= 'Z')
     {
       ascii = text[i] + atoi(clef);
 
-      while (ascii < 65)
-        ascii += 26;
-      while (ascii > 90)
-        ascii -= 26;
+      while (ascii < 'A')
+        ascii += TAILLE_ALPHA;
+      while (ascii > 'Z')
+        ascii -= TAILLE_ALPHA;
 
       text[i] = (char) ascii;
     }
@@ -174,7 +181,7 @@ void affichageText(char *text)
 void affichageClef(char *clef)
 {
   printf("############ \n");
-  printf("%s\n", *clef);
+  printf("%s\n", clef);
 	printf("############ \n");
 }
 

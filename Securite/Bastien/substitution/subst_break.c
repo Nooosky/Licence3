@@ -5,7 +5,6 @@
 
 /* macro */
 #define TAILLE_ALPHA 26
-#define ASCII_MAJ_DEBUT 65
 
 
 /* prototype */
@@ -13,7 +12,10 @@
 void testArgument(int argc);
 
 //lit l'entree standard et enregistre tout dans text
-void lectureText(char** text, int *nbLettre);
+void lectureText(char **text);
+
+// incremente un tableau pour savoir le nombre de lettre presente dans le text
+void incrementeLeNombreDeLettre(char *text, int *nbLettre);
 
 // trie par ordre decroissant les 2 tableaux passes en parametre
 void trieDecroissant(int *nbLettre, char *tableauFreqtext);
@@ -39,15 +41,16 @@ int main(int argc, char *argv[])
 {
   testArgument(argc);
 
-  char *clef = NULL;
+  char *clef = (char *) malloc(TAILLE_ALPHA * sizeof(char));
   char *text = NULL;
   int *nbLettre = (int *) calloc(TAILLE_ALPHA, sizeof(int));
   // tableau qui represente les lettres les plus presentes dans la langue francais par ordre decroissant
-  char tableauFreqFrance[] = {'E','S','A','N','T','I','R','U','L','O','D','C','P','M','Q','V','G','F','B','H','X','Y','J','Z','K','W'};
-  // tableau de l'alphabet qui servira a donner l'ordre des lettres les plus presentes dans le message chiffre
-  char tableauFreqtext[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	char tableauFreqFrance[] = "EINTASLROUCMDPQFGBVHYXJKZW";
+	// tableau de l'alphabet qui servira a donner l'ordre des lettres les plus presentes dans le message chiffre
+	char tableauFreqtext[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  lectureText(&text, nbLettre);
+  lectureText(&text);
+	incrementeLeNombreDeLettre(text, nbLettre);
 	trieDecroissant(nbLettre, tableauFreqtext);
 	chercheClef(text, clef, tableauFreqFrance, tableauFreqtext);
   modificationText(text, clef);
@@ -56,6 +59,7 @@ int main(int argc, char *argv[])
 
   free(clef);
   free(text);
+  free(nbLettre);
 
   viderBuffer();
   return 0;
@@ -66,12 +70,12 @@ void testArgument(int argc)
 {
   if (argc != 1)
   {
-      fprintf(stderr, "USAGE: ./main <clef> \n");
+      fprintf(stderr, "USAGE: ./main \n");
       exit(1);
   }
 }
 
-void lectureText(char** text, int *nbLettre)
+void lectureText(char** text)
 {
 	int c;
 	size_t p4kB = 4096, i = 0;
@@ -92,19 +96,25 @@ void lectureText(char** text, int *nbLettre)
 			}
 		}
 
-		(*text)[i++] = c;	// ajoute le caractere
-
-		// incremente le tableau du nombre de lettre pour connaitre le nombre present de chaque lettre
-		if(ASCII_MAJ_DEBUT <= c && c < (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
-				++nbLettre[c - ASCII_MAJ_DEBUT];
+		(*text)[i++] = c;	// ajoute le caractere au text
 	}
 
-	if (*text != NULL)	// si stdin n'est pas vide
+	// si stdin n'est pas vide on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+	if (*text != NULL)
 	{
 		(*text)[i] = '\0';
-		*text = realloc(*text, strlen(*text) + 1);	// on reduit l'allocation a la bonne taille pour ne pas gacher de la memoire
+		*text = realloc(*text, strlen(*text) + 1);
 	}
-	else return;	// sinon on quitte
+}
+
+void incrementeLeNombreDeLettre(char *text, int *nbLettre)
+{
+	int i = 0;
+	for (i = 0; text[i] != '\0'; ++i)
+	{
+		if('A' <= text[i] && text[i] <= 'Z')
+				++nbLettre[text[i] - 'A'];
+	}
 }
 
 void trieDecroissant(int *nbLettre, char *tableauFreqtext)
@@ -133,11 +143,40 @@ void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 
 void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauFreqtext)
 {
+	char *textCopy = (char *)malloc(strlen(text) * sizeof(char));
+	strcpy(textCopy, text);
+
+  // on estime que la lettre la plus presente est la lettre la plus presente dans l'alphabet francais
+  // et on construit l'alphabet en fonction de cette frequence
   int i = 0;
-  for (i = 0; text[i] != '\0';++i)
+  for(i = 0; i < strlen(tableauFreqFrance); ++i)
+    clef[tableauFreqFrance[i] - 'A'] = tableauFreqtext[i];
 
-    printf("%c %c \n ", tableauFreqFrance[i], tableauFreqtext[i]);
+	do
+	{
+		// on modifie le texte chiffre avec la clef pour afficher le texte
+		modificationText(text, clef);
 
+		// affichage le texte dechiffre avec la clef utilise
+		affichageText(text);
+		affichageClef(clef);
+
+    // affiche la clef utilise
+    for(i = 0; i < strlen(clef); ++i)
+      printf(" %c %d \n", clef[i], i);
+
+    // inverse les 2 lettres d'index le numero donne par l'utilisateur
+    printf("\n echange lettre par indice : \n");
+    char indice1 = getchar();
+    char indice2 = getchar();
+    char tampon = clef[atoi(&indice1)];
+    clef[atoi(&indice1)] = clef[atoi(&indice2)];
+    clef[atoi(&indice2)] = tampon;
+
+		// remet le text original
+		strcpy(text, textCopy);
+
+	}while(fgetc(stdin) != EOF);
 }
 
 void modificationText(char *text, char *clef)
@@ -145,17 +184,14 @@ void modificationText(char *text, char *clef)
   int i = 0;
   for (i = 0; text[i] != '\0'; ++i)
   {
-    int ascii = (int) text[i];
-    if(ASCII_MAJ_DEBUT <= ascii && ascii <= (ASCII_MAJ_DEBUT + TAILLE_ALPHA))
+    if('A' <= text[i] && text[i] <= 'Z')
     {
-      ascii = text[i] + atoi(clef);
+      text[i] = (char)(strchr(clef,text[i]) - clef + 'A');
 
-      while (ascii < 65)
-        ascii += 26;
-      while (ascii > 90)
-        ascii -= 26;
-
-      text[i] = (char) ascii;
+      while (text[i] < 'A')
+		    text[i] += TAILLE_ALPHA;
+      while (text[i] > 'Z')
+		    text[i] -= TAILLE_ALPHA;
     }
   }
 }
@@ -170,7 +206,7 @@ void affichageText(char *text)
 void affichageClef(char *clef)
 {
   printf("############ \n");
-  printf("%s\n", *clef);
+  printf("%s\n", clef);
 	printf("############ \n");
 }
 
