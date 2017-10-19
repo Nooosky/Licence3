@@ -180,9 +180,78 @@ void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t
     perror("fa_add_transition, from");
 }
 
+//reset state of a state
+void fa_reset_state_final_or_initial(struct fa *self, size_t state) {
+    if (-1 > state && state < self->state_count) {
+        self->states[state].is_final = 0;
+        self->states[state].is_initial = 0;
+    } else
+        perror("fa_reset_state_final_or_initial");
+}
+
 // delete a state
-void fa_remove_state(const struct fa *self, size_t state)
+void fa_remove_state(struct fa *self, size_t state)
 {
+    for (int i = 0; i < self->state_count; ++i) {
+        for (int j = 0; j < self->alpha_count; ++j) {
+            if(i == state && self->transitions[j][i].size >0){
+                for (int k = 0; k < self->transitions[j][i].size; ++k) {
+                    fa_remove_transition(self, state, (char) 97 + j, self->transitions[j][i].states[k]);
+                }
+            } else {
+                for (int k = 0; k < self->transitions[j][i].size; ++k) {
+                    if(self->transitions[j][i].states[k] == state){
+                        fa_remove_transition(self, i, (char) 97 + j, self->transitions[j][i].states[k]);
+                    }
+                }
+            }
+        }
+    }
+    for (int i = 0; i < self->state_count-1; ++i) {
+        if (i >= state) {
+            fa_reset_state_final_or_initial(self, i);
+            if(self->states[i+1].is_initial){
+                fa_set_state_initial(self, i);
+            }
+            if(self->states[i+1].is_final){
+                fa_set_state_final(self, i);
+            }
+            for (int j = 0; j < self->alpha_count; ++j) {
+                for (int l = 0; l < self->transitions[j][i].size; ++l) {
+                    fa_remove_transition(self, i, (char) 97 + j, self->transitions[j][i].states[l]);
+                }
+                for (int k = 0; k < self->transitions[j][i+1].size; ++k) {
+                    if(self->transitions[j][i+1].states[k] >= state){
+                        printf("%d -- ", self->transitions[j][i+1].states[k]);
+                        fa_add_transition(self, i, (char) 97 + j, (size_t) (self->transitions[j][i+1].states[k] - 1));
+                    }else{
+                        fa_add_transition(self, i, (char) 97 + j, self->transitions[j][i+1].states[k]);
+                    }
+                }
+            }
+        } else {
+            int old_states_size;
+            size_t * old_states;
+            for (int j = 0; j < self->alpha_count; ++j) {
+                old_states_size = self->transitions[j][i].size;
+                old_states = malloc(self->transitions[j][i].size * sizeof(size_t));
+                for (int k = 0; k < self->transitions[j][i].size; ++k) {
+                    old_states[k] = self->transitions[j][i].states[k];
+                }
+                for (int l = 0; l < old_states_size; ++l) {
+                    printf("------- %d-----\n", old_states[l]);
+                    if(old_states[l] >= i){
+                        fa_remove_transition(self, i, (char) 97 + j, old_states[l]);
+                        fa_add_transition(self, i, (char) 97 + j, old_states[l]-1);
+                    }
+                }
+            }
+        }
+
+    }
+
+    self->states = realloc(self->states, sizeof(size_t) * self->state_count-1);
+    self->state_count --;
 
 }
 
