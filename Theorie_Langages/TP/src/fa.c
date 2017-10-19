@@ -202,7 +202,6 @@ size_t fa_count_transitions(const struct fa *self)
 //check if an automaton is deterministic
 bool fa_is_deterministic(const struct fa *self)
 {
-
     size_t nbStatesInitiaux = 0;
     for (int i = 0; i < self->state_count; ++i)
         if (self->states[i].is_initial == 1)
@@ -225,9 +224,7 @@ bool fa_is_complete(const struct fa *self)
   for (int i = 0; i < self->state_count; ++i)
     for (int j = 0; j < self->alpha_count; ++j)
       if(self->transitions[j][i].size < 1)
-      {
-          return false;
-      }
+        return false;
 
   return true;
 }
@@ -262,10 +259,4 @@ void fa_make_complete(struct fa *self)
         for (int k = 0; k < self->alpha_count; ++k)
           fa_add_transition(self, self->state_count - 1, (char)(k + 97), self->state_count - 1);
       }
-}
-
-//fusion 2 states
-void fa_merge_states(struct fa *self, size_t s1, size_t s2)
-{
-
 }

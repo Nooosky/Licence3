@@ -167,11 +167,11 @@ void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauF
 
     // inverse les 2 lettres d'index le numero donne par l'utilisateur
     printf("\n echange lettre par indice : \n");
-    char indice1 = getchar();
-    char indice2 = getchar();
-    char tampon = clef[atoi(&indice1)];
-    clef[atoi(&indice1)] = clef[atoi(&indice2)];
-    clef[atoi(&indice2)] = tampon;
+    int indice1 = 0; scanf("%d", &indice1);
+    int indice2 = 0; scanf("%d", &indice2);
+    char tampon = clef[indice1];
+    clef[indice1] = clef[indice2];
+    clef[indice2] = tampon;
 
 		// remet le text original
 		strcpy(text, textCopy);
