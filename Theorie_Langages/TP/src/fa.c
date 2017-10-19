@@ -337,9 +337,12 @@ void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted
 }
 
 // deletion a graph
-void graph_destroy(struct graph *self)
-{
-
+void graph_destroy(struct graph *self){
+    for (int i = 0; i < self->node_count; ++i) {
+        free(self->nodes[i].adjacent_nodes);
+    }
+    free(self->nodes);
+    free(self);
 }
 
 // make in depth
