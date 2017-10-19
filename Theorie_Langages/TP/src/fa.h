@@ -36,6 +36,7 @@ struct graph
 struct node
 {
   size_t number;
+  size_t nb_adjacent;
   struct node *adjacent_nodes;
 };
 
@@ -94,7 +95,7 @@ void graph_destroy(struct graph *self);
 // tells if graph is empty
 bool fa_is_language_empty(struct fa *self);
 
-// 
+//
 void fa_remove_non_accessible_states(struct fa *self);
 
 //

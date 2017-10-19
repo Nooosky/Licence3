@@ -264,7 +264,35 @@ void fa_make_complete(struct fa *self)
 //create graph with automaton
 void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted)
 {
-  
+  self->node_count = fa->state_count;
+
+  self->nodes = (struct node *) malloc(self->node_count * sizeof(struct node));
+
+
+  for (int i = 0; i < fa->state_count; ++i)
+  {
+      self->nodes->number = i;
+      self->nodes->nb_adjacent = 0;
+      self->nodes->adjacent_nodes = NULL;
+
+      for (int j = 0; j < fa->alpha_count; ++j)
+      {
+          for (int k = 0; k < fa->transitions[j][i].size; ++k)
+          {
+            bool trouver = false;
+            for(int l = 0; l < self->nodes->nb_adjacent; ++l)
+              if(self->nodes->adjacent_nodes[l].number == (int)fa->transitions[j][i].states[k])
+                trouver = true;
+
+            if (trouver == false)
+            {
+              self->nodes->nb_adjacent++;
+              self->nodes->adjacent_nodes = realloc (self->nodes->adjacent_nodes, self->nodes->nb_adjacent * sizeof(struct node));
+              self->nodes->adjacent_nodes[self->nodes->nb_adjacent - 1].number = (int)fa->transitions[j][i].states[k];
+            }
+          }
+      }
+  }
 }
 
 // deletion a graph
