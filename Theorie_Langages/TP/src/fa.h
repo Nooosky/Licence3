@@ -65,6 +65,9 @@ void fa_dot_print(const struct fa *self, FILE *out);
 // delete a transition
 void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
 
+//reset state of a state
+void fa_reset_state_final_or_initial(struct fa *self, size_t state);
+
 // delete a state
 void fa_remove_state(const struct fa *self, size_t state);
 
