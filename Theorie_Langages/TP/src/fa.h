@@ -79,22 +79,22 @@ bool fa_is_complete(const struct fa *self);
 //makes an automaton complete
 void fa_make_complete(struct fa *self);
 
-//
+// make in depth
 void graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
 
-//
+// find a path between from and to
 bool graph_has_path(const struct graph *self, size_t from, size_t to);
 
-//
+//create graph with automaton
 void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted);
 
-//
+// deletion a graph
 void graph_destroy(struct graph *self);
 
-//
+// tells if graph is empty
 bool fa_is_language_empty(struct fa *self);
 
-//
+// 
 void fa_remove_non_accessible_states(struct fa *self);
 
 //
