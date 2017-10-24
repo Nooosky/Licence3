@@ -5,11 +5,12 @@ Q1-
 
 I.1 
 Q2- pstree affiche les processus en cours d'execution sous la forme d'un arbre.
-
+De plus, "3*[{at-spi-bus-laun}]" signifie que le processus at-spi-bus-laun utilise 3 threads.
 
 Q3-
 
 Q4-
+On peut utiliser ps -aux
 
 Q5-
 
