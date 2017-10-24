@@ -29,6 +29,10 @@ Les differents etats d'un processus sont (selon man ps) :
        - +    is in the foreground process group.
 
 Q5-
+On peut utiliser ps -A --no-headers | wc -l
+Ou --no-headers supprime les entetes
+et wc -l compte le nombre de lignes de la commande ps -A
+On peut ajouter l'option -L a la commande ps pour avoir les threads comptabilises.
 
 Q6-
 
