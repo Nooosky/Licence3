@@ -4,7 +4,8 @@ I Systeme - Processus
 Q1- 
 
 I.1 
-Q2-
+Q2- pstree affiche les processus en cours d'execution sous la forme d'un arbre.
+
 
 Q3-
 
