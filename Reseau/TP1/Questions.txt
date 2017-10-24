@@ -344,6 +344,9 @@ et wc -l compte le nombre de lignes de la commande ps -A
 On peut ajouter l'option -L a la commande ps pour avoir les threads comptabilises.
 
 Q6-
+On peut utiliser l'utilitaire cron afin de lancer la commade precedente tout les 10 secondes par exemple.
+On peut ainsi creer un script qui affiche un message ainsi que le nomdre de processus en cours d'execution sur la
+machine, toutes les 10 minutes par exemple.
 
 I.2
 Q7-
