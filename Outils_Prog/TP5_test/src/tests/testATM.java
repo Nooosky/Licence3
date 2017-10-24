@@ -1,4 +1,3 @@
-// JUnit
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -20,7 +19,7 @@ public class testATM {
     private ATM atm;
     private Card mockedCard;
     private Account mockedAccount;
-    
+
     @Before
     public void setUp() {
         atm = new ATM();
@@ -75,7 +74,7 @@ public class testATM {
         r = atm.inputPin(4321);
         assertEquals(-3, r);
     }
-    
+
     /** Saisie d'un code pin au mauvais moment du cycle de l'ATM */
     @Test
     public void testInputPin0() {
@@ -126,7 +125,7 @@ public class testATM {
         int[] b = atm.takeBills();
         assertEquals(null, b);
     }
-    
+
     @Test
     public void testChooseAmount2() throws ATM.NullCardException {
         testChooseAmountPUT(20);
@@ -167,7 +166,7 @@ public class testATM {
     /**
      * Test unitaire paramétré par le montant à retirer.
      * PUT = Paramaterized Unit Test
-     * Réalise une séquence valide jusqu'à la récupération de l'argent. 
+     * Réalise une séquence valide jusqu'à la récupération de l'argent.
      */
     private void testChooseAmountPUT(int a) throws ATM.NullCardException {
         int r = atm.insertCard(mockedCard);

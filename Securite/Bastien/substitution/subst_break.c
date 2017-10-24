@@ -161,17 +161,19 @@ void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauF
 		affichageText(text);
 		affichageClef(clef);
 
-    // affiche la clef utilise
+    // affiche la clef utilise pour permettre a l'utilisateur d'inverser 2 lettres
     for(i = 0; i < strlen(clef); ++i)
-      printf(" %c %d \n", clef[i], i);
+      printf(" %c %d \n", clef[i], clef[i] - 65);
 
     // inverse les 2 lettres d'index le numero donne par l'utilisateur
     printf("\n echange lettre par indice : \n");
-    int indice1 = 0; scanf("%d", &indice1);
-    int indice2 = 0; scanf("%d", &indice2);
-    char tampon = clef[indice1];
-    clef[indice1] = clef[indice2];
-    clef[indice2] = tampon;
+    int indice1 = 0; int indice2 = 0;
+    if (scanf("%d", &indice1) != EOF && scanf("%d", &indice2) != EOF)
+    {
+      char tampon = clef[indice1];
+      clef[indice1] = clef[indice2];
+      clef[indice2] = tampon;
+    }
 
 		// remet le text original
 		strcpy(text, textCopy);
