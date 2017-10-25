@@ -351,7 +351,11 @@ On peut ainsi creer un script qui affiche un message ainsi que le nomdre de proc
 machine, toutes les 10 minutes par exemple.
 
 I.2
-Q7-
+Q7-On peut utiliser lscpu ou lshw
+Sur lscpu, 
+Nombre de supports (socket/processeur) : Dans Socket
+Nombre de coeur : Dans CPU(s), ici 4  
+Technologie Hyperthreading : Si Thread(s) per core est egal a 2, alors oui
 
 Q8-
 
