@@ -1,0 +1,29 @@
+#!r7rs
+
+(import (scheme base) (scheme write))
+
+(define (writeln/return x)
+  ;;  Fonction très utile pour pouvoir afficher un résultat suivi d'un passage
+  ;;  à la ligne, tout en pouvant récupérer ce résultat dans une variable. Les
+  ;;  trois expressions suivantes sont évaluées en séquence et la valeur de la
+  ;;  dernière est retournée.
+  (write x)
+  (newline)
+  x)
+
+(define (first-mystery n)
+  ;;  Rappelons que les fonctions "quotient" et "remainder" retournent
+  ;;  respectivement le quotient entier et le reste d'une division euclidienne,
+  ;;  à condition, bien sûr, que le diviseur ne soit pas nul.
+  (if (< n 10) n (+ (first-mystery (quotient n 10)) (remainder n 10))))
+
+(define (second-mystery n p)
+  ;;
+  (define (rec-mystery n0 p0)
+    ;;  Rappelons �galement qu'une forme sp�ciale "define" interne � une forme
+    ;;  "lambda " est �quivalente � l'utilisation d'une forme sp�ciale
+    ;;  "letrec*".
+    (if (zero? (remainder n0 p0)) (rec-mystery (quotient n0 p0) p0) n0))
+  ;;
+  ;;  Principal call:
+  (if (or (zero? p) (zero? n)) n (rec-mystery n p)))
