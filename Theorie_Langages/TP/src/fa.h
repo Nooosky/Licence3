@@ -98,8 +98,32 @@ void graph_destroy(struct graph *self);
 // tells if graph is empty
 bool fa_is_language_empty(struct fa *self);
 
-//
+// remove non accessible states
 void fa_remove_non_accessible_states(struct fa *self);
 
-//
+// remove non co accesible states
 void fa_remove_non_co_accessible_states(struct fa *self);
+
+// product of tho automaton
+void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs);
+
+// if there is a empty intersection
+bool fa_has_empty_intersection(const struct fa *lhs, const struct fa * rhs);
+
+// create a automaton deterministic about automaton non deterministic
+void fa_create_deterministic(struct fa *self, const struct fa *nfa);
+
+// if a automaton is included into an other automaton
+bool fa_is_included(const struct fa *lhs, const struct fa *rhs);
+
+// if two state are equivalent
+bool fa_are_nerode_equivalent(const struct fa *self, size_t s1, size_t s2);
+
+// automaton minimal with nerode
+void fa_create_minimal_nerode(struct fa *self, const struct fa *other);
+
+// automaton minimal with moore
+void fa_create_minimal_moore(struct fa *self, const struct fa *other);
+
+// delet epsilon of an automaton
+void fa_create_without_epsilon(struct fa *self, const struct fa *other);
