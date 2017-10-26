@@ -222,7 +222,7 @@ void fa_remove_state(struct fa *self, size_t state)
                 }
                 for (int k = 0; k < self->transitions[j][i+1].size; ++k) {
                     if(self->transitions[j][i+1].states[k] >= state){
-                        printf("%d -- ", (int)self->transitions[j][i+1].states[k]);
+                        //printf("%d -- ", (int)self->transitions[j][i+1].states[k]);
                         fa_add_transition(self, i, (char) 97 + j, (size_t) (self->transitions[j][i+1].states[k] - 1));
                     }else{
                         fa_add_transition(self, i, (char) 97 + j, self->transitions[j][i+1].states[k]);
@@ -239,7 +239,7 @@ void fa_remove_state(struct fa *self, size_t state)
                     old_states[k] = self->transitions[j][i].states[k];
                 }
                 for (int l = 0; l < old_states_size; ++l) {
-                    printf("------- %d-----\n", (int)old_states[l]);
+                    //printf("------- %d-----\n", (int)old_states[l]);
                     if(old_states[l] >= i){
                         fa_remove_transition(self, i, (char) 97 + j, old_states[l]);
                         fa_add_transition(self, i, (char) 97 + j, old_states[l]-1);
@@ -463,7 +463,7 @@ void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *r
 
     fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
     for (int i = 0; i < lhs->state_count; ++i) {
-        for (int j = 0; j < rhs; ++j) {
+        for (int j = 0; j < rhs->state_count; ++j) {
             if(lhs->states[i].is_initial && rhs->states[j].is_initial){
                 fa_set_state_initial(self, (i * rhs->state_count + j));
             }
@@ -481,7 +481,7 @@ void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *r
                         for (int m = 0; m < lhs->transitions[k][i].size; ++m) {
                             for (int n = 0; n < rhs->transitions[j][l].size; ++n) {
                                 fa_add_transition(self, (i * rhs->state_count + l), (char) (97 + k),
-                                (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]);
+                                (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]));
                             }
                         }
                     }
