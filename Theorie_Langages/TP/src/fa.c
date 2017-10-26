@@ -390,8 +390,72 @@ bool graph_has_path(const struct graph *self, size_t from, size_t to){
     return visited[to];
 }
 
-// tells if graph is empty
-bool fa_is_language_empty(struct fa *self)
-{
+//tells if the language of a graph is empty
+bool fa_is_language_empty(const struct fa *self){
+    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    graph_create_from_fa(graph1, self, false);
 
+    for (int i = 0; i < self->state_count; ++i) {
+        for (int j = 0; j < self->state_count; ++j) {
+            if(self->states[i].is_initial && self->states[j].is_final){
+                if(graph_has_path(graph1, i, j)){
+                    return true;
+                }
+            }
+        }
+    }
+    free(graph1);
+    return false;
+}
+
+
+//remove all non accessible states
+void fa_remove_non_accessible_states(struct fa *self){
+    size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
+
+    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    graph_create_from_fa(graph1, self, false);
+
+    for (int i = 0; i < self->state_count; ++i) {
+        for (int j = 0; j < self->state_count; ++j) {
+            if(self->states[i].is_initial){
+                if(!graph_has_path(graph1, i, j)){
+                    states_to_remove[j]++;
+                }
+            }
+        }
+    }
+    for (int k = 0; k < self->state_count; ++k) {
+        if(states_to_remove[k] > 0){
+            fa_remove_state(self, k);
+        }
+    }
+    free(states_to_remove);
+    free(graph1);
+}
+
+
+//remove all non co accessible states
+void fa_remove_non_co_accessible_states(struct fa *self){
+    size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
+
+    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    graph_create_from_fa(graph1, self, false);
+
+    for (int i = 0; i < self->state_count; ++i) {
+        for (int j = 0; j < self->state_count; ++j) {
+            if(self->states[j].is_final){
+                if(!graph_has_path(graph1, i, j)){
+                    states_to_remove[i]++;
+                }
+            }
+        }
+    }
+    for (int k = 0; k < self->state_count; ++k) {
+        if(states_to_remove[k] > 0){
+            fa_remove_state(self, k);
+        }
+    }
+    free(states_to_remove);
+    free(graph1);
 }
