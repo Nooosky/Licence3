@@ -69,7 +69,7 @@ void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t
 void fa_reset_state_final_or_initial(struct fa *self, size_t state);
 
 // delete a state
-void fa_remove_state(const struct fa *self, size_t state);
+void fa_remove_state(struct fa *self, size_t state);
 
 // count transitions
 size_t fa_count_transitions(const struct fa *self);
@@ -96,7 +96,7 @@ void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted
 void graph_destroy(struct graph *self);
 
 // tells if graph is empty
-bool fa_is_language_empty(struct fa *self);
+bool fa_is_language_empty(const struct fa *self);
 
 // remove non accessible states
 void fa_remove_non_accessible_states(struct fa *self);

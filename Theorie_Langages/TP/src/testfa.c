@@ -67,6 +67,15 @@ int main() {
     //create graph with an automaton
     graph_create_from_fa(selfGraph, selfFa, false);
 
+    // if there is path between two states
+    printf("is path : %s\n", graph_has_path(selfGraph, 1, 4) ? "true" : "false");
+
+    // if language of graph is empty
+    printf("is empty language : %s\n", fa_is_language_empty(selfFa) ? "true" : "false");
+
+    fa_remove_non_accessible_states(selfFa);
+    fa_remove_non_co_accessible_states(selfFa);
+
     //destruction of a automaton
     fa_destroy(selfFa);
 

@@ -222,7 +222,7 @@ void fa_remove_state(struct fa *self, size_t state)
                 }
                 for (int k = 0; k < self->transitions[j][i+1].size; ++k) {
                     if(self->transitions[j][i+1].states[k] >= state){
-                        printf("%d -- ", self->transitions[j][i+1].states[k]);
+                        printf("%d -- ", (int)self->transitions[j][i+1].states[k]);
                         fa_add_transition(self, i, (char) 97 + j, (size_t) (self->transitions[j][i+1].states[k] - 1));
                     }else{
                         fa_add_transition(self, i, (char) 97 + j, self->transitions[j][i+1].states[k]);
@@ -239,7 +239,7 @@ void fa_remove_state(struct fa *self, size_t state)
                     old_states[k] = self->transitions[j][i].states[k];
                 }
                 for (int l = 0; l < old_states_size; ++l) {
-                    printf("------- %d-----\n", old_states[l]);
+                    printf("------- %d-----\n", (int)old_states[l]);
                     if(old_states[l] >= i){
                         fa_remove_transition(self, i, (char) 97 + j, old_states[l]);
                         fa_add_transition(self, i, (char) 97 + j, old_states[l]-1);
@@ -377,7 +377,7 @@ void graph_destroy(struct graph *self){
 void graph_depth_first_search(const struct graph *self, size_t state, bool *visited){
     visited[state] = true;
     for (int i = 0; i < self->nodes[state].nb_adjacent; ++i) {
-        if(visited[self->nodes[state].adjacent_nodes[i].number] = false){
+        if(visited[self->nodes[state].adjacent_nodes[i].number] == false){
             graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
         }
     }
@@ -392,7 +392,7 @@ bool graph_has_path(const struct graph *self, size_t from, size_t to){
 
 //tells if the language of a graph is empty
 bool fa_is_language_empty(const struct fa *self){
-    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
     graph_create_from_fa(graph1, self, false);
 
     for (int i = 0; i < self->state_count; ++i) {
@@ -413,7 +413,7 @@ bool fa_is_language_empty(const struct fa *self){
 void fa_remove_non_accessible_states(struct fa *self){
     size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
 
-    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
     graph_create_from_fa(graph1, self, false);
 
     for (int i = 0; i < self->state_count; ++i) {
@@ -439,7 +439,7 @@ void fa_remove_non_accessible_states(struct fa *self){
 void fa_remove_non_co_accessible_states(struct fa *self){
     size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
 
-    struct graph *graph1 = (struct fa *) malloc(sizeof(struct graph));
+    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
     graph_create_from_fa(graph1, self, false);
 
     for (int i = 0; i < self->state_count; ++i) {
