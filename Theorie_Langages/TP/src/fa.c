@@ -374,15 +374,20 @@ void graph_destroy(struct graph *self){
 }
 
 // make in depth
-void graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
-{
-
+void graph_depth_first_search(const struct graph *self, size_t state, bool *visited){
+    visited[state] = true;
+    for (int i = 0; i < self->nodes[state].nb_adjacent; ++i) {
+        if(visited[self->nodes[state].adjacent_nodes[i].number] = false){
+            graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
+        }
+    }
 }
 
-// find a path between from and to
-bool graph_has_path(const struct graph *self, size_t from, size_t to)
-{
-
+//tells if a path exists in the graph between two states
+bool graph_has_path(const struct graph *self, size_t from, size_t to){
+    bool *visited = malloc(self->node_count * sizeof(bool));
+    graph_depth_first_search(self, from, visited);
+    return visited[to];
 }
 
 // tells if graph is empty
