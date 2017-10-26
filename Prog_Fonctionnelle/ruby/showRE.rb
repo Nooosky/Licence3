@@ -40,3 +40,26 @@ m0 = $r.match($s)
 p m0
 m1 = $r0.match($s)
 p m1
+
+# fonction pour le nombre de bit
+class Fixnum
+  def bit_length
+    zero? ? 1 : Math.log(self + 1,2).ceil
+  end
+end
+
+def fibonacci(n)
+  left = 0
+  right = 1
+  counter = 0
+  while counter < n
+    left,right = right,left + right
+    counter += 1
+  end
+  right
+end
+
+# ?: pour ne pas memoriser
+def match_french_departement_number(s)
+  (s =~ /\A(?:0[1-9]|[13-8][0-9]|2[AB1-9]|9(?:[0-5]|7[1-46]))\z/) == 0
+end
