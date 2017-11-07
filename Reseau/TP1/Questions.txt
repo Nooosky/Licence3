@@ -360,5 +360,6 @@ Technologie Hyperthreading : Si Thread(s) per core est egal a 2, alors oui
 Q8-
 
 I.3.2
-Q9-
+Q9- Il faut utiliser ps -aexl
+On peut remarquer que certains processus ont une priotité négative.
 
