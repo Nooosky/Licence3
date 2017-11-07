@@ -41,9 +41,6 @@ int main(int argc, char *argv[])
 
   lectureText(&text);
   chercheClef(&text, &clef);
-  modificationText(&text, &clef);
-  affichageText(&text);
-  affichageClef(&clef);
 
   free(clef);
   free(text);

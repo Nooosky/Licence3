@@ -53,9 +53,6 @@ int main(int argc, char *argv[])
 	incrementeLeNombreDeLettre(&text, &nbLettre);
 	trieDecroissant(&nbLettre, tableauFreqtext);
 	chercheClef(&text, &clef, tableauFreqFrance, tableauFreqtext);
-	modificationText(&text, &clef);
-  affichageText(&text);
-	affichageClef(&clef);
 
 	free(clef);
 	free(text);
