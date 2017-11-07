@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// A Y
-// lettre double MM NN SS TT
-// apostrophe J' QU' T' C'
-// bigramme ON EN DE TE NE QU LE ET
-// trigramme QUE EST
 
 /* macro */
 #define TAILLE_ALPHA 26
@@ -49,6 +44,8 @@ int main(int argc, char *argv[])
   char *text = NULL;
   int *nbLettre = (int *) calloc(TAILLE_ALPHA, sizeof(int));
   // tableau qui represente les lettres les plus presentes dans la langue francais par ordre decroissant
+  // on peut eventuellement changer si on ne trouve pas
+  //char tableauFreqFrance[] = "EASINTRLUODCPMVGFBQHXJYZKW";
 	char tableauFreqFrance[] = "EINTASLROUCMDPQFGBVHYXJKZW";
 	// tableau de l'alphabet qui servira a donner l'ordre des lettres les plus presentes dans le message chiffre
 	char tableauFreqtext[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -165,27 +162,15 @@ void chercheClef(char** text, char** clef, char* tableauFreqFrance, char* tablea
 		affichageText(&(*text));
 		affichageClef(&(*clef));
 
-    // affiche la clef utilise pour permettre a l'utilisateur d'inverser 2 lettres
-    for(i = 0; i < strlen(*clef); ++i)
-      printf(" %c %d \n", i + 65, i);
-
     // inverse les 2 lettres d'index le numero donne par l'utilisateur
-    /*printf("\n echange lettre : \n");
+    printf("\n echange lettre : \n");
     char lettre1; char lettre2;
     if (scanf("%c", &lettre1) != EOF && scanf("%c", &lettre2) != EOF)
     {
+      printf("%d %d\n",lettre1 - 'A', lettre2 - 'A' );
       char tampon = (*clef)[lettre1 - 'A'];
       (*clef)[lettre1 - 'A'] = (*clef)[lettre2 - 'A'];
       (*clef)[lettre2 - 'A'] = tampon;
-    }*/
-
-    printf("\n echange lettre par indice : \n");
-    int indice1 = 0; int indice2 = 0;
-    if (scanf("%d", &indice1) != EOF && scanf("%d", &indice2) != EOF)
-    {
-      char tampon = (*clef)[indice1];
-      (*clef)[indice1] = (*clef)[indice2];
-      (*clef)[indice2] = tampon;
     }
 
 		// remet le text original

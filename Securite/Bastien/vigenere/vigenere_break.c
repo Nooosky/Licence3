@@ -127,10 +127,10 @@ void chercheClef(char** text, char** clef)
     for (i = 0; i < TAILLE_ALPHA; ++i)
       indiceDeCoincidence += (nbLettre[i] * (nbLettre[i] - 1))/(double)(nombreTotalLettre * (nombreTotalLettre - 1));
 
-    //printf("IC = %f, pas = %d\n", indiceDeCoincidence, pas);
+    printf("IC = %f, pas = %d\n", indiceDeCoincidence, pas);
   }
-  while (indiceDeCoincidence <= 0.060); // on arrete quand on trouve in indice de coincidence > a 0.060
-  //while(fgetc(stdin) != EOF);
+  //while (indiceDeCoincidence <= 0.060); // on arrete quand on trouve in indice de coincidence > a 0.060
+  while(fgetc(stdin) != EOF);
 
   int tailleDeLaClef = pas;
   *clef = (char *) malloc(tailleDeLaClef * sizeof(char));
