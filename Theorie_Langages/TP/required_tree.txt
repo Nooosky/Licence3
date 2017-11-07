@@ -1,0 +1,42 @@
+/
+|
+|-/include
+|
+|-/src
+|
+|-/bin
+|     fa_tests.cc
+|
+|-/vendor
+|     |-/gtest
+|           |-/include
+|           |
+|           |-/src
+|               |-gtest_all.cc
+|
+|-/tests
+|
+|-Makefile
+
+
+fa_tests.cc -> unittest
+fa_tests va dependre de libfa.{a, so} ou tout ce qui est dans /src
+Il va dependre aussi de tout ce qu'il y a dans /tests
+Il depend aussi du framework (vendor/gtest/src/gtest_all.cc)
+
+-Include -I vendor/gtest/include
+
+#ifdef -- cplusplus
+extern "c"{
+#endif
+...
+...
+...
+...
+#ifdef -- cplusplus
+}
+#endif
+
+google_tests
+
+vendor : framework de test
