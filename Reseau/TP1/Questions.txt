@@ -370,4 +370,39 @@ On observe que le programme s'execute en moins de temps, en outre, il s'éxécut
 Ainsi, on peut penser qu'un programme qui se creer, qui doit afficher quelque chose (une fenêtre par exemple) à l'utilisateur
 changera de priorité lorsqu'il sera 'réduit' ou s'il tourne en tâche de fond.
 
+II
+Q0-
+Toutes les cartes reseaux wifi sont identifiees par 'wl...'
+Pour les reseaux ethernet, il s'agit de 'eth...'
+On peux le voir avec la commande 'dmesg'
+
+Q1-
+Il faut utiliser la commande 'ip addr show eth0'
+
+Q2-
+Il faut utiliser la commade 'ip addr show net' ou net est le nom de la carte reseau souhaitee (eth... ou wl...)
+2: wlp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP group default qlen 1000
+    link/ether a0:c5:89:43:fb:bb brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.56/24 brd 192.168.1.255 scope global dynamic wlp2s0
+       valid_lft 84560sec preferred_lft 84560sec
+    inet6 fe80::812d:ff12:196b:567a/64 scope link 
+       valid_lft forever preferred_lft forever
+
+Q3-
+On peut utiliser 'ip addr show ...' sur Linux ou ipconfig/ifconfig sur Windows.
+
+Q4-
+255.255.255.255
+255-56 =199
+24
+
+Q5-
+192.168.1.255
+
+
+Q6-
+Plus on accede a un addresse lointaine, plus le ping augmente.
+
+Q7-
+sudo ifconfig eth1 192.168.10.20 netmask 255.255.255.0
 
