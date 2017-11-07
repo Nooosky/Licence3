@@ -1,91 +1,58 @@
+//binome Jeremy ROUSSEY - Bastien CHANEZ
 package fr.ufc.l3info.oprog;
 
 public class MyCard implements Card {
 
-    private Account account;
-    private int pin;
-    private boolean personalizationDone;
-    private int numberFailPin;
-    private boolean cardIsblocked;
+    Account account;
+    int pin = -1;
+    boolean canBePerso = true;
+    int remaining_tries = 3;
 
-
-    public MyCard()
-    {
-      account = null;
-      pin = 0;
-      personalizationDone = false;
-      numberFailPin = 0;
-      cardIsblocked = true;
-    }
-
-    public boolean setAccount(Account a)
-    {
-      if (personalizationDone)
-        return false;
-      if (a == null)
-        return false;
-      else
-        account = a;
-      return true;
-    }
-
-    public boolean setPin(int p)
-    {
-      if (personalizationDone)
-        return false;
-      if (1000 > p || p > 9999)
-        return false;
-      else
-        pin = p;
-      return true;
-    }
-
-    public boolean endPersonalization()
-    {
-      if (pin == 0 || account == null)
-      {
-        personalizationDone = false;
-        return false;
-      }
-      else
-      {
-        personalizationDone = true;
-        cardIsblocked = false;
-        return true;
-      }
-    }
-
-    public Account getAccount()
-    {
-      if (account == null)
-        return null;
-      else
+    public Account getAccount() {
         return account;
     }
 
-    public boolean isBlocked()
-    {
-        return cardIsblocked;
+    public boolean isBlocked(){
+        if(canBePerso == true){
+            return true;
+        }else if(remaining_tries == 0){
+            return true;
+        }
+        return false;
     }
 
-    public boolean checkPin(int p)
-    {
-      if (!personalizationDone)
-        return false;
-      if (cardIsblocked)
-        return false;
-      if (p != pin)
-      {
-        numberFailPin++;
-        if (numberFailPin == 3)
-          cardIsblocked =  true;
-
-        return false;
-      }
-      else
-      {
-        numberFailPin = 0;
+    public boolean checkPin(int p) {
+        if(canBePerso){
+            return false;
+        }else if(p != pin){
+            remaining_tries --;
+            return false;
+        }
+        remaining_tries = 3;
         return true;
-      }
+    }
+
+    public boolean setAccount(Account a){
+        if (canBePerso && a != null){
+            account = a;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setPin(int p){
+        if (canBePerso && p >= 0 && p <=9999){
+            pin = p;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean endPersonalization(){
+        if (canBePerso && pin != -1 && account != null){
+            canBePerso = false;
+            return true;
+        }
+        return false;
     }
 }

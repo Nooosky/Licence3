@@ -1,3 +1,6 @@
+package tests;
+
+// JUnit
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -25,13 +28,13 @@ public class testATM {
         atm = new ATM();
 
         mockedCard = Mockito.mock(Card.class);
-        // comportement général : carte non bloquée, codes valides/invalides
+        // comportement gÃ©nÃ©ral : carte non bloquÃ©e, codes valides/invalides
         Mockito.when(mockedCard.isBlocked()).thenReturn(false);
         Mockito.when(mockedCard.checkPin(4321)).thenReturn(false);
         Mockito.when(mockedCard.checkPin(1234)).thenReturn(true);
 
         mockedAccount = Mockito.mock(Account.class);
-        // comportement général : accepte tous les retraits
+        // comportement gÃ©nÃ©ral : accepte tous les retraits
         Mockito.when(mockedAccount.canWithdraw(anyInt())).thenReturn(true);
         Mockito.when(mockedAccount.debit(anyInt())).thenReturn(true);
         Mockito.when(mockedCard.getAccount()).thenReturn(mockedAccount);
@@ -44,7 +47,7 @@ public class testATM {
         atm.insertCard(null);
     }
 
-    /** Insertion d'une carte alors qu'une carte est déjà insérée. */
+    /** Insertion d'une carte alors qu'une carte est dÃ©jÃ  insÃ©rÃ©e. */
     @Test
     public void testInsertCard1() throws ATM.NullCardException {
         int r = atm.insertCard(mockedCard);
@@ -53,7 +56,7 @@ public class testATM {
         assertEquals(-1, r);
     }
 
-    /** Insertion d'une carte bloquée */
+    /** Insertion d'une carte bloquÃ©e */
     @Test
     public void testInsertCard2() throws ATM.NullCardException {
         // definition du comportement voulu : isBlocked doit retourner true
@@ -62,7 +65,7 @@ public class testATM {
         assertEquals(-2, r);
     }
 
-    /** Saisie d'un code pin correct pour une carte bloquée */
+    /** Saisie d'un code pin correct pour une carte bloquÃ©e */
     @Test
     public void testInsertCard3() throws ATM.NullCardException {
         // insert la carte
@@ -108,7 +111,7 @@ public class testATM {
     }
 
     /** Demande de retrait d'une somme invalide, puis annulation et
-     *  récupération de la carte et non-récupération de billets.
+     *  rÃ©cupÃ©ration de la carte et non-rÃ©cupÃ©ration de billets.
      */
     @Test
     public void testChooseAmount1() throws ATM.NullCardException {
@@ -151,7 +154,7 @@ public class testATM {
         testChooseAmountPUT(100);
     }
 
-    /** Demande de retrait d'une somme non autorisée */
+    /** Demande de retrait d'une somme non autorisÃ©e */
     @Test
     public void testChooseAmount8() throws ATM.NullCardException {
         Mockito.when(mockedAccount.canWithdraw(anyInt())).thenReturn(false);
@@ -164,9 +167,9 @@ public class testATM {
     }
 
     /**
-     * Test unitaire paramétré par le montant à retirer.
+     * Test unitaire paramÃ©trÃ© par le montant Ã  retirer.
      * PUT = Paramaterized Unit Test
-     * Réalise une séquence valide jusqu'à la récupération de l'argent.
+     * RÃ©alise une sÃ©quence valide jusqu'Ã  la rÃ©cupÃ©ration de l'argent.
      */
     private void testChooseAmountPUT(int a) throws ATM.NullCardException {
         int r = atm.insertCard(mockedCard);
@@ -186,7 +189,7 @@ public class testATM {
         assertEquals(a, total);
     }
 
-    /** Tentative de reprendre la carte sans même l'avoir insérée */
+    /** Tentative de reprendre la carte sans mÃªme l'avoir insÃ©rÃ©e */
     @Test
     public void testChooseTakeCard0() {
         Card r = atm.takeCard();

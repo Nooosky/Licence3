@@ -1,9 +1,14 @@
+//binome Jeremy ROUSSEY - Bastien CHANEZ
 package tests;
 
 // JUnit
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 // Mockito
 import org.mockito.Mockito;
@@ -11,8 +16,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 // Systeme sous test
 import fr.ufc.l3info.oprog.*;
-
-import static org.junit.Assert.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -136,33 +139,115 @@ public class MyCardTest {
      * Tests de la phase de blocage de la carte
      */
 
+     //Testing the card
      @Test
-     public void testBlock0() {
-        assertTrue(testCard.isBlocked());
-        personalizeCard();
-        assertFalse(testCard.isBlocked());
+     public void testCard(){
+
+         //Test set pin
+         assertEquals(false, testCard.setPin(99999));
+         assertEquals(false, testCard.setPin(-1243));
+
+         //Test checkpin
+         assertEquals(false, testCard.checkPin(1234));
+
+         //Test set account null
+         assertEquals(false, testCard.setAccount(null));
+
+         //Test card blocked
+         assertEquals(true, testCard.isBlocked());
+
+         assertEquals(false, testCard.endPersonalization());
+
+         assertEquals(true, testCard.setPin(1234));
+         testCard.setPin(1234);
+
+         assertEquals(false, testCard.checkPin(1234));
+
+         assertEquals(false, testCard.endPersonalization());
+
+         assertEquals(true, testCard.setAccount(mockedAccount));
+         testCard.setAccount(mockedAccount);
+
+         assertEquals(true, testCard.endPersonalization());
+
+         assertEquals(false, testCard.checkPin(0000));
+         //remaining_tries = 2
+         assertEquals(false, testCard.isBlocked());
+         assertEquals(true, testCard.checkPin(1234));
+
+         assertEquals(false, testCard.setAccount(null));
+         assertEquals(false, testCard.setAccount(mockedAccount));
+
+         assertEquals(false, testCard.setPin(99999));
+         assertEquals(false, testCard.setPin(-99999));
+         assertEquals(false, testCard.setPin(1234));
+
+         assertEquals(false, testCard.endPersonalization());
+
+         testCard.checkPin(0001);
+         //remaining tries = 2
+         testCard.checkPin(0002);
+         //remaining tries = 1
+         testCard.checkPin(0003);
+         //remaining tries = 0
+         assertEquals(true, testCard.isBlocked());
+
+         assertEquals(mockedAccount, testCard.getAccount());
      }
 
-    @Test
-    public void testBlock1() {
-        personalizeCard();
-        assertFalse(testCard.isBlocked());
-        assertFalse(testCard.checkPin(4321));
-        assertFalse(testCard.isBlocked());
-        assertFalse(testCard.checkPin(4321));
-        assertFalse(testCard.isBlocked());
-        assertFalse(testCard.checkPin(4321));
-        assertTrue(testCard.isBlocked());
-    }
+     //Testing the card
+     @Test
+     public void testCard2(){
 
-    @Test
-    public void testBlock2() {
-        personalizeCard();
-        assertFalse(testCard.checkPin(4321));
-        assertFalse(testCard.checkPin(4321));
-        assertFalse(testCard.checkPin(4321));
-        assertTrue(testCard.isBlocked());
-        assertFalse(testCard.checkPin(1234));
-    }
+         //Test set pin
+         assertEquals(false, testCard.setPin(99999));
+         assertEquals(false, testCard.setPin(-1243));
 
+         //Test checkpin
+         assertEquals(false, testCard.checkPin(1234));
+
+         //Test set account null
+         assertEquals(false, testCard.setAccount(null));
+
+         //Test card blocked
+         assertEquals(true, testCard.isBlocked());
+
+         assertEquals(false, testCard.endPersonalization());
+
+         assertEquals(true, testCard.setPin(1234));
+         testCard.setPin(1234);
+
+         assertEquals(false, testCard.checkPin(1234));
+
+         assertEquals(false, testCard.endPersonalization());
+
+         assertEquals(true, testCard.setAccount(mockedAccount));
+         testCard.setAccount(mockedAccount);
+
+         assertEquals(true, testCard.endPersonalization());
+
+         assertEquals(false, testCard.checkPin(0000));
+         //remaining_tries = 2
+         assertEquals(false, testCard.isBlocked());
+         assertEquals(true, testCard.checkPin(1234));
+
+         assertEquals(false, testCard.setAccount(null));
+         assertEquals(false, testCard.setAccount(mockedAccount));
+
+         assertEquals(false, testCard.setPin(99999));
+         assertEquals(false, testCard.setPin(-99999));
+         assertEquals(false, testCard.setPin(1234));
+
+         assertEquals(false, testCard.endPersonalization());
+
+         testCard.checkPin(0001);
+         //remaining tries = 2
+         testCard.checkPin(0002);
+         //remaining tries = 1
+         testCard.checkPin(0003);
+         //remaining tries = 0
+         assertEquals(true, testCard.isBlocked());
+
+         assertEquals(mockedAccount, testCard.getAccount());
+     }
 }

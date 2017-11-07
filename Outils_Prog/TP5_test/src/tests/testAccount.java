@@ -10,21 +10,21 @@ import fr.ufc.l3info.oprog.*;
 
 
 public class testAccount {
-    
+
     Account accountUnderTest = null;
-    
-    @Before 
+
+    @Before
     public void setUp() {
         accountUnderTest = new Account(1000);
     }
-    
+
     @Test
     public void testCredit1() {
         assertFalse(accountUnderTest.canWithdraw(1200));
         accountUnderTest.credit(200);
         assertTrue(accountUnderTest.canWithdraw(1200));
     }
-    
+
     @Test
     public void testDebit1() {
         boolean ok = accountUnderTest.debit(500);

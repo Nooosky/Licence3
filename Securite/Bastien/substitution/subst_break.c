@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+// A Y
+// lettre double MM NN SS TT
+// apostrophe J' QU' T' C'
+// bigramme ON EN DE TE NE QU LE ET
+// trigramme QUE EST
 
 /* macro */
 #define TAILLE_ALPHA 26
@@ -9,28 +13,28 @@
 
 /* prototype */
 //verifie le nombre d'arguement passe dans le programme
-void testArgument(int argc);
+void testArgument(int* argc);
 
 //lit l'entree standard et enregistre tout dans text
-void lectureText(char **text);
+void lectureText(char** text);
 
 // incremente un tableau pour savoir le nombre de lettre presente dans le text
-void incrementeLeNombreDeLettre(char *text, int *nbLettre);
+void incrementeLeNombreDeLettre(char** text, int** nbLettre);
 
 // trie par ordre decroissant les 2 tableaux passes en parametre
-void trieDecroissant(int *nbLettre, char *tableauFreqtext);
+void trieDecroissant(int** nbLettre, char* tableauFreqtext);
 
 //cherche la clef de dechiffrage
-void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauFreqtext);
+void chercheClef(char** text, char** clef, char* tableauFreqFrance, char* tableauFreqtext);
 
 //modifie le tableau en fonction de la clef
-void modificationText(char *text, char *clef);
+void modificationText(char** text, char** clef);
 
 //affiche le contenu d'un tableau de char
-void affichageText(char *text);
+void affichageText(char** text);
 
 // affiche la clef
-void affichageClef(char *clef);
+void affichageClef(char** clef);
 
 //vide le buffer d'entree
 void viderBuffer(void);
@@ -39,7 +43,7 @@ void viderBuffer(void);
 /* main */
 int main(int argc, char *argv[])
 {
-  testArgument(argc);
+  testArgument(&argc);
 
   char *clef = (char *) malloc(TAILLE_ALPHA * sizeof(char));
   char *text = NULL;
@@ -50,12 +54,12 @@ int main(int argc, char *argv[])
 	char tableauFreqtext[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   lectureText(&text);
-	incrementeLeNombreDeLettre(text, nbLettre);
-	trieDecroissant(nbLettre, tableauFreqtext);
-	chercheClef(text, clef, tableauFreqFrance, tableauFreqtext);
-  modificationText(text, clef);
-  affichageText(text);
-  affichageClef(clef);
+	incrementeLeNombreDeLettre(&text, &nbLettre);
+	trieDecroissant(&nbLettre, tableauFreqtext);
+	chercheClef(&text, &clef, tableauFreqFrance, tableauFreqtext);
+  modificationText(&text, &clef);
+  affichageText(&text);
+  affichageClef(&clef);
 
   free(clef);
   free(text);
@@ -66,9 +70,9 @@ int main(int argc, char *argv[])
 }
 
 /* definition des fonctions */
-void testArgument(int argc)
+void testArgument(int* argc)
 {
-  if (argc != 1)
+  if (*argc != 1)
   {
       fprintf(stderr, "USAGE: ./main \n");
       exit(1);
@@ -107,17 +111,17 @@ void lectureText(char** text)
 	}
 }
 
-void incrementeLeNombreDeLettre(char *text, int *nbLettre)
+void incrementeLeNombreDeLettre(char** text, int** nbLettre)
 {
 	int i = 0;
-	for (i = 0; text[i] != '\0'; ++i)
+	for (i = 0; (*text)[i] != '\0'; ++i)
 	{
-		if('A' <= text[i] && text[i] <= 'Z')
-				++nbLettre[text[i] - 'A'];
+		if('A' <= (*text)[i] && (*text)[i] <= 'Z')
+				++(*nbLettre)[(*text)[i] - 'A'];
 	}
 }
 
-void trieDecroissant(int *nbLettre, char *tableauFreqtext)
+void trieDecroissant(int** nbLettre, char* tableauFreqtext)
 {
 	int j = TAILLE_ALPHA - 1, k = 0, tmpi = 0;
 	char tmpc = ' ';
@@ -125,90 +129,99 @@ void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 	{
 		for(k = 0; k < j; ++k)
 		{
-			if(nbLettre[k] < nbLettre[k + 1])
+			if((*nbLettre)[k] < (*nbLettre)[k + 1])
 			{
-				tmpi = nbLettre[k];
+				tmpi = (*nbLettre)[k];
 				tmpc = tableauFreqtext[k];
 
-				nbLettre[k] = nbLettre[k + 1];
+				(*nbLettre)[k] = (*nbLettre)[k + 1];
 
 				tableauFreqtext[k] = tableauFreqtext[k + 1];
 
-				nbLettre[k + 1]  = tmpi;
+				(*nbLettre)[k + 1]  = tmpi;
 				tableauFreqtext[k + 1] = tmpc;
 			}
 		}
 	}
 }
 
-void chercheClef(char *text, char *clef, char *tableauFreqFrance, char *tableauFreqtext)
+void chercheClef(char** text, char** clef, char* tableauFreqFrance, char* tableauFreqtext)
 {
-	char *textCopy = (char *)malloc(strlen(text) * sizeof(char));
-	strcpy(textCopy, text);
+	char *textCopy = (char *)malloc(strlen(*text) * sizeof(char));
+	strcpy(textCopy, *text);
 
   // on estime que la lettre la plus presente est la lettre la plus presente dans l'alphabet francais
   // et on construit l'alphabet en fonction de cette frequence
   int i = 0;
   for(i = 0; i < strlen(tableauFreqFrance); ++i)
-    clef[tableauFreqFrance[i] - 'A'] = tableauFreqtext[i];
+    (*clef)[tableauFreqFrance[i] - 'A'] = tableauFreqtext[i];
 
 	do
 	{
 		// on modifie le texte chiffre avec la clef pour afficher le texte
-		modificationText(text, clef);
+		modificationText(&(*text), &(*clef));
 
 		// affichage le texte dechiffre avec la clef utilise
-		affichageText(text);
-		affichageClef(clef);
+		affichageText(&(*text));
+		affichageClef(&(*clef));
 
     // affiche la clef utilise pour permettre a l'utilisateur d'inverser 2 lettres
-    for(i = 0; i < strlen(clef); ++i)
-      printf(" %c %d \n", clef[i], clef[i] - 65);
+    for(i = 0; i < strlen(*clef); ++i)
+      printf(" %c %d \n", i + 65, i);
 
     // inverse les 2 lettres d'index le numero donne par l'utilisateur
+    /*printf("\n echange lettre : \n");
+    char lettre1; char lettre2;
+    if (scanf("%c", &lettre1) != EOF && scanf("%c", &lettre2) != EOF)
+    {
+      char tampon = (*clef)[lettre1 - 'A'];
+      (*clef)[lettre1 - 'A'] = (*clef)[lettre2 - 'A'];
+      (*clef)[lettre2 - 'A'] = tampon;
+    }*/
+
     printf("\n echange lettre par indice : \n");
     int indice1 = 0; int indice2 = 0;
     if (scanf("%d", &indice1) != EOF && scanf("%d", &indice2) != EOF)
     {
-      char tampon = clef[indice1];
-      clef[indice1] = clef[indice2];
-      clef[indice2] = tampon;
+      char tampon = (*clef)[indice1];
+      (*clef)[indice1] = (*clef)[indice2];
+      (*clef)[indice2] = tampon;
     }
 
 		// remet le text original
-		strcpy(text, textCopy);
+		strcpy(*text, textCopy);
 
 	}while(fgetc(stdin) != EOF);
 }
 
-void modificationText(char *text, char *clef)
+void modificationText(char** text, char** clef)
 {
   int i = 0;
-  for (i = 0; text[i] != '\0'; ++i)
+  for (i = 0; (*text)[i] != '\0'; ++i)
   {
-    if('A' <= text[i] && text[i] <= 'Z')
+    if('A' <= (*text)[i] && (*text)[i] <= 'Z')
     {
-      text[i] = (char)(strchr(clef,text[i]) - clef + 'A');
+      (*text)[i] = (char)(strchr(*clef,(*text)[i]) - *clef + 'A');
 
-      while (text[i] < 'A')
-		    text[i] += TAILLE_ALPHA;
-      while (text[i] > 'Z')
-		    text[i] -= TAILLE_ALPHA;
+      while ((*text)[i] < 'A')
+		    (*text)[i] += TAILLE_ALPHA;
+      while ((*text)[i] > 'Z')
+		    (*text)[i] -= TAILLE_ALPHA;
     }
   }
 }
 
-void affichageText(char *text)
+void affichageText(char** text)
 {
   printf("############ \n");
-  printf("%s\n", text);
+  printf("%s\n", *text);
 	printf("############ \n");
 }
 
-void affichageClef(char *clef)
+void affichageClef(char** clef)
 {
   printf("############ \n");
-  printf("%s\n", clef);
+  printf("%s\n", *clef);
 	printf("############ \n");
 }
 

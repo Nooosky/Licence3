@@ -6,27 +6,27 @@
  */
 public class ATM {
 
-    /** Possible states of the ATM */
+    /** Possible states of the ATM_app.ATM */
 <span class="fc" id="L10">    enum STATES {</span>
-            /** Waiting for a card */
-<span class="fc" id="L12">            idle,</span>
-            /** Waiting for pin input */
-<span class="fc" id="L14">            input_pin,</span>
-            /** Waiting for the withdrawl amount */
-<span class="fc" id="L16">            input_amount,</span>
-            /** Waiting for the card to be taken back */
-<span class="fc" id="L18">            card_ejected,</span>
-            /** Waiting for the bills to be taken */
-<span class="fc" id="L20">            bills_ejected</span>
+        /** Waiting for a card */
+<span class="fc" id="L12">        idle,</span>
+        /** Waiting for pin input */
+<span class="fc" id="L14">        input_pin,</span>
+        /** Waiting for the withdrawl amount */
+<span class="fc" id="L16">        input_amount,</span>
+        /** Waiting for the card to be taken back */
+<span class="fc" id="L18">        card_ejected,</span>
+        /** Waiting for the bills to be taken */
+<span class="fc" id="L20">        bills_ejected</span>
     }
 
     /** Current withdrawal request */
     private int currentRequest;
 
-    /** Current state of the ATM */
+    /** Current state of the ATM_app.ATM */
     private STATES state;
 
-    /** Current card inserted in the ATM */
+    /** Current card inserted in the ATM_app.ATM */
     private Card card;
 
     /** Bills that are made available for the client */
@@ -34,7 +34,7 @@ public class ATM {
 
 
     /**
-     *  Class constructor, initializes the ATM with a given amount of money. Starts the ATM in the idle state.
+     *  Class constructor, initializes the ATM_app.ATM with a given amount of money. Starts the ATM_app.ATM in the idle state.
      */
 <span class="fc" id="L39">    public ATM() {</span>
 <span class="fc" id="L40">        state = STATES.idle;</span>
@@ -44,9 +44,9 @@ public class ATM {
 <span class="fc" id="L44">    }</span>
 
     /**
-     *  Insert card and checks that the card is valid. Only applicable when the ATM is in the idle state. Upon correct execution, expects the user to input his pin code.
-     *  @param     c the card inserted in the ATM
-     *  @return    0 if the inserted card is valid. -1 if a card is already in the ATM, -2 if the card is blocked, it is then ejected.
+     *  Insert card and checks that the card is valid. Only applicable when the ATM_app.ATM is in the idle state. Upon correct execution, expects the user to input his pin code.
+     *  @param     c the card inserted in the ATM_app.ATM
+     *  @return    0 if the inserted card is valid. -1 if a card is already in the ATM_app.ATM, -2 if the card is blocked, it is then ejected.
      */
     public int insertCard(Card c) throws NullCardException {
 <span class="fc bfc" id="L52" title="All 2 branches covered.">        if (c == null) {</span>
@@ -69,7 +69,7 @@ public class ATM {
      *  Tries to identify the card holder by checking his pin. If he authenticates with success, expects then the user to choose the amount he wants to withdraw.
      *  @param      p   the pin code to check
      *  @return     0   if the card holder is authenticated,
-     *              -1  if the ATM is in the wrong state,
+     *              -1  if the ATM_app.ATM is in the wrong state,
      *              -2  if the authentication failed,
      *              -3  if the card was blocked and is now ejected.
      */
@@ -90,9 +90,9 @@ public class ATM {
     }
 
     /**
-     *  Selects the amount to withdraw. If the amount is correct, the ATM ejects the card.
+     *  Selects the amount to withdraw. If the amount is correct, the ATM_app.ATM ejects the card.
      *  @param a    the amount to withdraw. Possible values are 0 (cancel), 20, 30, 40, 50, 80, 100.
-     *  @return 0 if the selected amount is valid, -1 if the ATM is not in the appropriate state, -2 if the amount is not in the list of the possible values, -3 if the amount is more than the balance of card's account.
+     *  @return 0 if the selected amount is valid, -1 if the ATM_app.ATM is not in the appropriate state, -2 if the amount is not in the list of the possible values, -3 if the amount is more than the balance of card's account.
      */
     public int chooseAmount(int a) {
 <span class="fc bfc" id="L98" title="All 2 branches covered.">        if (state != STATES.input_amount) {</span>
@@ -110,8 +110,8 @@ public class ATM {
     }
 
     /**
-     *  Takes back the card when it has been ejected. If a transaction was initiated, the bills are then ejected. Otherwise the ATM goes back to the idle state.
-     *  @return     the card that was ejected. null if the ATM was in the wrong state.
+     *  Takes back the card when it has been ejected. If a transaction was initiated, the bills are then ejected. Otherwise the ATM_app.ATM goes back to the idle state.
+     *  @return     the card that was ejected. null if the ATM_app.ATM was in the wrong state.
      */
     public Card takeCard() {
 <span class="fc" id="L117">        Card r = card;</span>
@@ -149,36 +149,37 @@ public class ATM {
         }
 <span class="fc bfc" id="L150" title="All 2 branches covered.">        if (currentRequest &gt; 10) {</span>
 <span class="fc" id="L151">            nb10 = 2;</span>
+<span class="fc" id="L152">            currentRequest = currentRequest - 20;</span>
         }
-        else {
-<span class="fc" id="L154">            nb10 = 1;</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        else if (currentRequest == 10){</span>
+<span class="fc" id="L155">            nb10 = 1;</span>
         }
-<span class="fc" id="L156">        bills = new int[nb50 + nb20 + nb10];</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">        for (int i=0; i &lt; nb50; i++) {</span>
-<span class="fc" id="L158">            bills[i] = 50;</span>
+<span class="fc" id="L157">        bills = new int[nb50 + nb20 + nb10];</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        for (int i=0; i &lt; nb50; i++) {</span>
+<span class="fc" id="L159">            bills[i] = 50;</span>
         }
-<span class="fc bfc" id="L160" title="All 2 branches covered.">        for (int i=0; i &lt; nb20; i++) {</span>
-<span class="fc" id="L161">            bills[nb50+i] = 20;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (int i=0; i &lt; nb20; i++) {</span>
+<span class="fc" id="L162">            bills[nb50+i] = 20;</span>
         }
-<span class="fc bfc" id="L163" title="All 2 branches covered.">        for (int i=0; i &lt; nb10; i++) {</span>
-<span class="fc" id="L164">            bills[nb50+nb20+i] = 10;</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">        for (int i=0; i &lt; nb10; i++) {</span>
+<span class="fc" id="L165">            bills[nb50+nb20+i] = 10;</span>
         }
-<span class="fc" id="L166">        currentRequest = 0;</span>
-<span class="fc" id="L167">    }</span>
+<span class="fc" id="L167">        currentRequest = 0;</span>
+<span class="fc" id="L168">    }</span>
 
 
     /**
-     *  The user takes the bills from the ATM. Upon successful execution, the ATM goes back to the idle state.
-     *  @return     An array of bill amounts. null if the ATM is in the wrong state
+     *  The user takes the bills from the ATM_app.ATM. Upon successful execution, the ATM_app.ATM goes back to the idle state.
+     *  @return     An array of bill amounts. null if the ATM_app.ATM is in the wrong state
      */
     public int[] takeBills() {
-<span class="fc bfc" id="L175" title="All 2 branches covered.">        if (state != STATES.bills_ejected) {</span>
-<span class="fc" id="L176">            return null;</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">        if (state != STATES.bills_ejected) {</span>
+<span class="fc" id="L177">            return null;</span>
         }
-<span class="fc" id="L178">        int[] r = bills;</span>
-<span class="fc" id="L179">        bills = null;</span>
-<span class="fc" id="L180">        state = STATES.idle;</span>
-<span class="fc" id="L181">        return r;</span>
+<span class="fc" id="L179">        int[] r = bills;</span>
+<span class="fc" id="L180">        bills = null;</span>
+<span class="fc" id="L181">        state = STATES.idle;</span>
+<span class="fc" id="L182">        return r;</span>
     }
 
 
@@ -186,9 +187,9 @@ public class ATM {
      *  Nested class for null values used when inserting card.
      */
     public class NullCardException extends Exception {
-<span class="fc" id="L189">        public NullCardException() {</span>
-<span class="fc" id="L190">            super(&quot;Tried to insert a null card&quot;);</span>
-<span class="fc" id="L191">        }</span>
+<span class="fc" id="L190">        public NullCardException() {</span>
+<span class="fc" id="L191">            super(&quot;Tried to insert a null card&quot;);</span>
+<span class="fc" id="L192">        }</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201708291135</span></div></body></html>

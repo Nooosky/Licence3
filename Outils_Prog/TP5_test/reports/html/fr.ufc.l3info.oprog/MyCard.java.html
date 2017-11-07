@@ -1,92 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MyCard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">MyCard.java</span></div><h1>MyCard.java</h1><pre class="source lang-java linenums">package fr.ufc.l3info.oprog;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MyCard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCo Coverage Report</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">MyCard.java</span></div><h1>MyCard.java</h1><pre class="source lang-java linenums">//binome Jeremy ROUSSEY - Bastien CHANEZ
+package fr.ufc.l3info.oprog;
 
-public class MyCard implements Card {
+<span class="fc" id="L4">public class MyCard implements Card {</span>
 
-    private Account account;
-    private int pin;
-    private boolean personalizationDone;
-    private int numberFailPin;
-    private boolean cardIsblocked;
+    Account account;
+<span class="fc" id="L7">    int pin = -1;</span>
+<span class="fc" id="L8">    boolean canBePerso = true;</span>
+<span class="fc" id="L9">    int remaining_tries = 3;</span>
 
-
-    public MyCard()
-<span class="fc" id="L13">    {</span>
-<span class="fc" id="L14">      account = null;</span>
-<span class="fc" id="L15">      pin = 0;</span>
-<span class="fc" id="L16">      personalizationDone = false;</span>
-<span class="fc" id="L17">      numberFailPin = 0;</span>
-<span class="fc" id="L18">      cardIsblocked = true;</span>
-<span class="fc" id="L19">    }</span>
-
-    public boolean setAccount(Account a)
-    {
-<span class="fc bfc" id="L23" title="All 2 branches covered.">      if (personalizationDone)</span>
-<span class="fc" id="L24">        return false;</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">      if (a == null)</span>
-<span class="fc" id="L26">        return false;</span>
-      else
-<span class="fc" id="L28">        account = a;</span>
-<span class="fc" id="L29">      return true;</span>
+    public Account getAccount() {
+<span class="fc" id="L12">        return account;</span>
     }
 
-    public boolean setPin(int p)
-    {
-<span class="fc bfc" id="L34" title="All 2 branches covered.">      if (personalizationDone)</span>
-<span class="fc" id="L35">        return false;</span>
-<span class="pc bpc" id="L36" title="1 of 4 branches missed.">      if (1000 &gt; p || p &gt; 9999)</span>
-<span class="fc" id="L37">        return false;</span>
-      else
-<span class="fc" id="L39">        pin = p;</span>
-<span class="fc" id="L40">      return true;</span>
+    public boolean isBlocked(){
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if(canBePerso == true){</span>
+<span class="fc" id="L17">            return true;</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        }else if(remaining_tries == 0){</span>
+<span class="fc" id="L19">            return true;</span>
+        }
+<span class="fc" id="L21">        return false;</span>
     }
 
-    public boolean endPersonalization()
-    {
-<span class="fc bfc" id="L45" title="All 4 branches covered.">      if (pin == 0 || account == null)</span>
-      {
-<span class="fc" id="L47">        personalizationDone = false;</span>
+    public boolean checkPin(int p) {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(canBePerso){</span>
+<span class="fc" id="L26">            return false;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        }else if(p != pin){</span>
+<span class="fc" id="L28">            remaining_tries --;</span>
+<span class="fc" id="L29">            return false;</span>
+        }
+<span class="fc" id="L31">        remaining_tries = 3;</span>
+<span class="fc" id="L32">        return true;</span>
+    }
+
+    public boolean setAccount(Account a){
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        if (canBePerso &amp;&amp; a != null){</span>
+<span class="fc" id="L37">            account = a;</span>
+<span class="fc" id="L38">            return true;</span>
+        }
+<span class="fc" id="L40">        return false;</span>
+    }
+
+    public boolean setPin(int p){
+<span class="fc bfc" id="L44" title="All 6 branches covered.">        if (canBePerso &amp;&amp; p &gt;= 0 &amp;&amp; p &lt;=9999){</span>
+<span class="fc" id="L45">            pin = p;</span>
+<span class="fc" id="L46">            return true;</span>
+        }
 <span class="fc" id="L48">        return false;</span>
-      }
-      else
-      {
-<span class="fc" id="L52">        personalizationDone = true;</span>
-<span class="fc" id="L53">        cardIsblocked = false;</span>
-<span class="fc" id="L54">        return true;</span>
-      }
     }
 
-    public Account getAccount()
-    {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">      if (account == null)</span>
-<span class="fc" id="L61">        return null;</span>
-      else
-<span class="fc" id="L63">        return account;</span>
-    }
-
-    public boolean isBlocked()
-    {
-<span class="fc" id="L68">        return cardIsblocked;</span>
-    }
-
-    public boolean checkPin(int p)
-    {
-<span class="fc bfc" id="L73" title="All 2 branches covered.">      if (!personalizationDone)</span>
-<span class="fc" id="L74">        return false;</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">      if (cardIsblocked)</span>
-<span class="fc" id="L76">        return false;</span>
-<span class="fc bfc" id="L77" title="All 2 branches covered.">      if (p != pin)</span>
-      {
-<span class="fc" id="L79">        numberFailPin++;</span>
-<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (numberFailPin == 3)</span>
-<span class="fc" id="L81">          cardIsblocked =  true;</span>
-
-<span class="fc" id="L83">        return false;</span>
-      }
-      else
-      {
-<span class="fc" id="L87">        numberFailPin = 0;</span>
-<span class="fc" id="L88">        return true;</span>
-      }
+    public boolean endPersonalization(){
+<span class="fc bfc" id="L52" title="All 6 branches covered.">        if (canBePerso &amp;&amp; pin != -1 &amp;&amp; account != null){</span>
+<span class="fc" id="L53">            canBePerso = false;</span>
+<span class="fc" id="L54">            return true;</span>
+        }
+<span class="fc" id="L56">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.10.201708291135</span></div></body></html>

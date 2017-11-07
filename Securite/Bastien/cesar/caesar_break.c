@@ -9,28 +9,28 @@
 
 /* prototype */
 //verifie le nombre d'arguement passe dans le programme
-void testArgument(int argc);
+void testArgument(int* argc);
 
 //lit l'entree standard et enregistre tout dans text
-void lectureText(char **text);
+void lectureText(char** text);
 
 // incremente un tableau pour savoir le nombre de lettre presente dans le text
-void incrementeLeNombreDeLettre(char *text, int *nbLettre);
+void incrementeLeNombreDeLettre(char** text, int** nbLettre);
 
 // trie par ordre decroissant les 2 tableaux passes en parametre
-void trieDecroissant(int *nbLettre, char *tableauFreqtext);
+void trieDecroissant(int** nbLettre, char* tableauFreqtext);
 
 //cherche la clef de dechiffrage
-void chercheClef(char text[], int* clef, char tableauFreqFrance[], char tableauFreqtext[]);
+void chercheClef(char** text, int** clef, char* tableauFreqFrance, char* tableauFreqtext);
 
 //modifie le tableau en fonction de la clef
-void modificationText(char *text, int *clef);
+void modificationText(char** text, int** clef);
 
 //affiche le contenu d'un tableau de char
-void affichageText(char *text);
+void affichageText(char** text);
 
 // affiche la clef
-void affichageClef(int *clef);
+void affichageClef(int** clef);
 
 //vide le buffer d'entree
 void viderBuffer(void);
@@ -39,7 +39,7 @@ void viderBuffer(void);
 /* main */
 int main(int argc, char *argv[])
 {
-	testArgument(argc);
+	testArgument(&argc);
 
 	int *clef = (int *) malloc(sizeof(int));
 	char *text = NULL;
@@ -50,12 +50,12 @@ int main(int argc, char *argv[])
 	char tableauFreqtext[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 	lectureText(&text);
-	incrementeLeNombreDeLettre(text, nbLettre);
-	trieDecroissant(nbLettre, tableauFreqtext);
-	chercheClef(text, clef, tableauFreqFrance, tableauFreqtext);
-	modificationText(text, clef);
-  affichageText(text);
-	affichageClef(clef);
+	incrementeLeNombreDeLettre(&text, &nbLettre);
+	trieDecroissant(&nbLettre, tableauFreqtext);
+	chercheClef(&text, &clef, tableauFreqFrance, tableauFreqtext);
+	modificationText(&text, &clef);
+  affichageText(&text);
+	affichageClef(&clef);
 
 	free(clef);
 	free(text);
@@ -66,9 +66,9 @@ int main(int argc, char *argv[])
 }
 
 /* definition des fonctions */
-void testArgument(int argc)
+void testArgument(int* argc)
 {
-  if (argc != 1)
+  if (*argc != 1)
   {
       fprintf(stderr, "USAGE: ./main \n");
       exit(1);
@@ -107,17 +107,17 @@ void lectureText(char** text)
 	}
 }
 
-void incrementeLeNombreDeLettre(char *text, int *nbLettre)
+void incrementeLeNombreDeLettre(char** text, int** nbLettre)
 {
 	int i = 0;
-	for (i = 0; text[i] != '\0'; ++i)
+	for (i = 0; (*text)[i] != '\0'; ++i)
 	{
-		if('A' <= text[i] && text[i] <= 'Z')
-				++nbLettre[text[i] - 'A'];
+		if('A' <= (*text)[i] && (*text)[i] <= 'Z')
+				++(*nbLettre)[(*text)[i] - 'A'];
 	}
 }
 
-void trieDecroissant(int *nbLettre, char *tableauFreqtext)
+void trieDecroissant(int** nbLettre, char* tableauFreqtext)
 {
 	int j = TAILLE_ALPHA - 1, k = 0, tmpi = 0;
 	char tmpc = ' ';
@@ -125,76 +125,76 @@ void trieDecroissant(int *nbLettre, char *tableauFreqtext)
 	{
 		for(k = 0; k < j; ++k)
 		{
-			if(nbLettre[k] < nbLettre[k + 1])
+			if((*nbLettre)[k] < (*nbLettre)[k + 1])
 			{
-				tmpi = nbLettre[k];
+				tmpi = (*nbLettre)[k];
 				tmpc = tableauFreqtext[k];
 
-				nbLettre[k] = nbLettre[k + 1];
+				(*nbLettre)[k] = (*nbLettre)[k + 1];
 
 				tableauFreqtext[k] = tableauFreqtext[k + 1];
 
-				nbLettre[k + 1]  = tmpi;
+				(*nbLettre)[k + 1]  = tmpi;
 				tableauFreqtext[k + 1] = tmpc;
 			}
 		}
 	}
 }
 
-void chercheClef(char *text, int *clef, char *tableauFreqFrance, char *tableauFreqtext)
+void chercheClef(char** text, int** clef, char* tableauFreqFrance, char* tableauFreqtext)
 {
 	// calcule la clef en fonction de la frequence des lettres
-	char *textCopy = (char *)malloc(strlen(text) * sizeof(char));
-	strcpy(textCopy, text);
+	char *textCopy = (char *)malloc(strlen(*text) * sizeof(char));
+	strcpy(textCopy, *text);
 
 	int i = 0;
 	do
 	{
 		// on estime que la lettre la plus presente est la lettre la plus presente dans l'alphabet francais si ce n'ai pas le cas on passe a la lettre suivante pour calculer l'ecart
-		*clef =  (int)tableauFreqtext[0] - (int)tableauFreqFrance[i];
+		**clef =  (int)tableauFreqtext[0] - (int)tableauFreqFrance[i];
 		++i;
 
 		// on modifie le texte chiffre avec la clef pour afficher le texte
-		modificationText(text, clef);
+		modificationText(&(*text), &(*clef));
 
 		// affichage le texte dechiffre avec la clef utilise
-		affichageText(text);
-		affichageClef(clef);
+		affichageText(&(*text));
+		affichageClef(&(*clef));
 
 		// remet le text original
-		strcpy(text, textCopy);
+		strcpy(*text, textCopy);
 
 	}while(fgetc(stdin) != EOF);
 }
 
-void modificationText(char *text, int *clef)
+void modificationText(char** text, int** clef)
 {
   int i = 0;
-  for (i = 0; text[i] != '\0'; ++i)
+  for (i = 0; (*text)[i] != '\0'; ++i)
   {
-    if('A' <= text[i] && text[i] <= 'Z')
+    if('A' <= (*text)[i] && (*text)[i] <= 'Z')
     {
-      text[i] -= *clef;
+      (*text)[i] -= **clef;
 
-      while (text[i] < 'A')
-		  	text[i] += TAILLE_ALPHA;
-      while (text[i] > 'Z')
-		  	text[i] -= TAILLE_ALPHA;
+      while ((*text)[i] < 'A')
+		  	(*text)[i] += TAILLE_ALPHA;
+      while ((*text)[i] > 'Z')
+		  	(*text)[i] -= TAILLE_ALPHA;
     }
   }
 }
 
-void affichageText(char *text)
+void affichageText(char** text)
 {
   printf("############ \n");
-  printf("%s\n", text);
+  printf("%s\n", *text);
 	printf("############ \n");
 }
 
-void affichageClef(int *clef)
+void affichageClef(int** clef)
 {
   printf("############ \n");
-  printf("%d\n", *clef);
+  printf("%d\n", **clef);
 	printf("############ \n");
 }
 

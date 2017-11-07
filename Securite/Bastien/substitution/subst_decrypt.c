@@ -9,19 +9,19 @@
 
 /* prototype */
 //verifie le nombre d'arguement passe dans le programme
-void testArgument(int argc);
+void testArgument(int* argc);
 
 //test de la clef si elle comprend bien 26 caractere
-void testClef(char * clef);
+void testClef(char** clef);
 
 //lit l'entree standard et enregistre tout dans text
 void lectureText(char** text);
 
 //modifie le tableau en fonction de la clef
-void modificationText(char *text, char *clef);
+void modificationText(char** text, char** clef);
 
 //affiche le contenu d'un tableau de char
-void affichageText(char *text);
+void affichageText(char** text);
 
 //vide le buffer d'entree
 void viderBuffer(void);
@@ -29,8 +29,8 @@ void viderBuffer(void);
 /* main */
 int main (int argc, char *argv[])
 {
-  testArgument(argc);
-  testClef(argv[1]);
+  testArgument(&argc);
+  testClef(&argv[1]);
 
   char *clef = (char *)malloc(strlen(argv[1]) * sizeof(char));
   clef = argv[1];
@@ -38,8 +38,8 @@ int main (int argc, char *argv[])
 
 
   lectureText(&text);
-  modificationText(text, clef);
-  affichageText(text);
+  modificationText(&text, &clef);
+  affichageText(&text);
 
   free(text);
   //free(clef); // probleme ?
@@ -49,9 +49,9 @@ int main (int argc, char *argv[])
 }
 
 /* definition des fonctions */
-void testArgument(int argc)
+void testArgument(int* argc)
 {
-  if (argc != 2)
+  if (*argc != 2)
   {
       fprintf(stderr, "USAGE: ./main <clef> \n");
       exit(1);
@@ -59,9 +59,9 @@ void testArgument(int argc)
 }
 
 //test de la clef si elle comprend bien 26 caractere
-void testClef(char * clef)
+void testClef(char** clef)
 {
-  if (strlen(clef) != 26)
+  if (strlen(*clef) != 26)
   {
       fprintf(stderr, "<clef> doit faire 26 caracteres \n");
       exit(1);
@@ -101,27 +101,27 @@ void lectureText(char** text)
 	}
 }
 
-void modificationText(char *text, char *clef)
+void modificationText(char** text, char** clef)
 {
   int i = 0;
-  for (i = 0; text[i] != '\0'; ++i)
+  for (i = 0; (*text)[i] != '\0'; ++i)
   {
-    if('A' <= text[i] && text[i] <= 'Z')
+    if('A' <= (*text)[i] && (*text)[i] <= 'Z')
     {
-      text[i] = (char)(strchr(clef,text[i]) - clef + 'A');
+      (*text)[i] = (char)(strchr(*clef,(*text)[i]) - *clef + 'A');
 
-      while (text[i] < 'A')
-		    text[i] += TAILLE_ALPHA;
-      while (text[i] > 'Z')
-		    text[i] -= TAILLE_ALPHA;
+      while ((*text)[i] < 'A')
+		    (*text)[i] += TAILLE_ALPHA;
+      while ((*text)[i] > 'Z')
+		    (*text)[i] -= TAILLE_ALPHA;
     }
   }
 }
 
-void affichageText(char *text)
+void affichageText(char** text)
 {
   printf("############ \n");
-  printf("%s\n", text);
+  printf("%s\n", *text);
 	printf("############ \n");
 }
 
