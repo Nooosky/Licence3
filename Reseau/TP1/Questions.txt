@@ -363,3 +363,11 @@ I.3.2
 Q9- Il faut utiliser ps -aexl
 On peut remarquer que certains processus ont une priotité négative.
 
+Q10- Avec le programme 'loop.c', la priorité par défaut est de 0.
+Si on change la priotité du programme à 80 (par exemple), avec la commande :
+nice -n 80 ./loop
+On observe que le programme s'execute en moins de temps, en outre, il s'éxécute plus rapidement.
+Ainsi, on peut penser qu'un programme qui se creer, qui doit afficher quelque chose (une fenêtre par exemple) à l'utilisateur
+changera de priorité lorsqu'il sera 'réduit' ou s'il tourne en tâche de fond.
+
+
