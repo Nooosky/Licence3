@@ -40,12 +40,12 @@ struct in_addr resolve_name_to_addr(const char *name)
 int main(int argc, char *argv[])
 {
   // récupération des paramètres
-  if (argc < 3)
+  if (argc != 3)
   {
     fprintf(stderr, "USAGE: ./client <adresse_serveur> <port_serveur> \n");
     exit(EXIT_FAILURE);
   }
-  
+
   const char *server = argv[1];
   const int port = atoi(argv[2]);
 
@@ -80,6 +80,13 @@ int main(int argc, char *argv[])
 
   // affiche message recu
   puts((char *)messageRecu);
+
+  //fermer le flux de connexion
+  if (shutdown(sock, SHUT_RDWR) == -1)
+  {
+    perror("shutdown()");
+    exit(errno);
+  }
 
   // fermeture de la socket
   if (close(sock) == -1)

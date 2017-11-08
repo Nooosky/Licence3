@@ -95,6 +95,13 @@ int main(int argc, char *argv[])
     }
   }
 
+  //fermer le flux de connexion
+  if (shutdown(sock, SHUT_RDWR) == -1)
+  {
+    perror("shutdown()");
+    exit(errno);
+  }
+
   // fermeture de la socket serveur
   if (close(sock) == -1)
   {
