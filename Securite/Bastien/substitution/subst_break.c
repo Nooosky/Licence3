@@ -159,12 +159,11 @@ void chercheClef(char** text, char** clef, char* tableauFreqFrance, char* tablea
 		affichageText(&(*text));
 		affichageClef(&(*clef));
 
-    // inverse les 2 lettres d'index le numero donne par l'utilisateur
-    printf("\n echange lettre : \n");
+    // inverse les 2 lettres d'index le numero donne par l'utilisateur exemple : "AB"
+    printf("\n echange lettre: \n");
     char lettre1; char lettre2;
     if (scanf("%c", &lettre1) != EOF && scanf("%c", &lettre2) != EOF)
     {
-      printf("%d %d\n",lettre1 - 'A', lettre2 - 'A' );
       char tampon = (*clef)[lettre1 - 'A'];
       (*clef)[lettre1 - 'A'] = (*clef)[lettre2 - 'A'];
       (*clef)[lettre2 - 'A'] = tampon;

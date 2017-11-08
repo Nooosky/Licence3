@@ -101,7 +101,7 @@ void chercheClef(char** text, char** clef)
   {
     indiceDeCoincidence = 0.0;
     pas++;
-    // remet a zero le tabeau qui conte les lettres
+    // remet a zero le tabeau qui compte les lettres
     int j = 0;
     for (j = 0; j < TAILLE_ALPHA; ++j)
       nbLettre[j] = 0;
@@ -124,7 +124,7 @@ void chercheClef(char** text, char** clef)
     for (i = 0; i < TAILLE_ALPHA; ++i)
       indiceDeCoincidence += (nbLettre[i] * (nbLettre[i] - 1))/(double)(nombreTotalLettre * (nombreTotalLettre - 1));
 
-    printf("IC = %f, pas = %d\n", indiceDeCoincidence, pas);
+    printf("IC = %f, tailleClef = %d\n", indiceDeCoincidence, pas);
   }
   //while (indiceDeCoincidence <= 0.060); // on arrete quand on trouve in indice de coincidence > a 0.060
   while(fgetc(stdin) != EOF);
@@ -154,7 +154,7 @@ void chercheClef(char** text, char** clef)
       if (nombre < nbLettre[j])
         nombre = nbLettre[j];
 
-    // montre la clef proposer
+    // donne la clef proposer
     for (j = 0; j < TAILLE_ALPHA; ++j)
       if (nombre == nbLettre[j])
       {
@@ -164,26 +164,28 @@ void chercheClef(char** text, char** clef)
         while (caractere > 'Z')
           caractere -= TAILLE_ALPHA;
 
-        printf("%c ",caractere);
+        (*clef)[i] = caractere;
       }
-    printf("\n");
   }
-
-  // boucle pour demander a l'utilisateur la clef a utiliser
+  (*clef)[tailleDeLaClef] = '\0';
+  
+  // boucle pour deman(*clef)der a l'utilisateur la clef a utiliser
   char* textCopy = (char *)malloc(strlen(*text) * sizeof(char));
   strcpy(textCopy, *text);
   do
   {
-    // demande a l'utilisateur de rentrer la clef
-    printf("Saisie de la clef : ");
-    scanf("%s", *clef);
-
     // on modifie le texte chiffre avec la clef pour afficher le texte
     modificationText(&(*text), &(*clef));
 
     // affichage le texte dechiffre avec la clef utilise
     affichageText(&(*text));
     affichageClef(&(*clef));
+
+    //demande a l'utilisateur si il veut modifier la clef par l'indice de 0 a tailleClef - 1 par une lettre ex ; "1B"
+    printf("\n echange lettre par indice: \n");
+    int indice; char lettre;
+    if (scanf("%d", &indice) != EOF && scanf("%c", &lettre) != EOF)
+      (*clef)[indice] = lettre;
 
     // remet le text original
     strcpy(*text, textCopy);
