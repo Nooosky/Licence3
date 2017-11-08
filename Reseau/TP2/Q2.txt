@@ -1,0 +1,6 @@
+lorsque un 2 eme client essaye de se connecter
+il y a le message suivant connect(): Connection refused
+le serveur ne peut prendre que un client a la fois
+
+le meme message apparqit lorsque le serveur n'ai pas lance en premier
+le client essaye de se connecter a un serveur qui n'existe pas.
