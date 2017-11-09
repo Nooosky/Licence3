@@ -1,5 +1,5 @@
 // gcc -g -Wall -Wextra -O -o client client.c
-// ./client 127.0.0.1 54321 Élève Chaprot
+// ./client localhost 54321
 
 #include <libgen.h>
 #include <netdb.h>
@@ -19,22 +19,43 @@
 // fait la résolution de nom : nom de domaine -> adresse IP
 struct in_addr resolve_name_to_addr(const char *name)
 {
-  struct addrinfo hints = {
-    .ai_flags = 0,
-    .ai_family = AF_INET,
-    .ai_socktype = 0,
-    .ai_protocol = 0,
-  };
-  struct addrinfo *addr;
-  int error = getaddrinfo(name, NULL, &hints, &addr);
-  if (error)
-  {
-    fprintf(stderr, "getaddrinfo(\"%s\"): %s", name, gai_strerror(error));
-    exit(errno);
-  }
-  struct in_addr res = ((struct sockaddr_in *)addr->ai_addr)->sin_addr;
-  freeaddrinfo(addr);
-  return res;
+  struct addrinfo hints;
+  struct addrinfo *result, *rp;
+  int sfd;
+
+   memset(&hints, 0, sizeof(struct addrinfo));
+   hints.ai_family = AF_UNSPEC;
+   hints.ai_socktype = SOCK_DGRAM;
+   hints.ai_flags = 0;
+   hints.ai_protocol = 0;
+
+   int error = getaddrinfo(name, NULL, &hints, &result);
+   if (error != 0)
+   {
+       fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(error));
+       exit(errno);
+   }
+
+   for (rp = result; rp != NULL; rp = rp->ai_next)
+   {
+       sfd = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+       if (sfd == -1)
+        continue;
+       if (connect(sfd, rp->ai_addr, rp->ai_addrlen) != -1)
+        break;
+       close(sfd);
+   }
+
+   if (rp == NULL)
+   {
+       fprintf(stderr, "Could not connect\n");
+       exit(EXIT_FAILURE);
+   }
+
+   freeaddrinfo(result);
+
+   struct in_addr res = ((struct sockaddr_in *)rp->ai_addr)->sin_addr;
+   return res;
 }
 
 int main(int argc, char *argv[])

@@ -62,37 +62,43 @@ int main(int argc, char *argv[])
 
   // boucle principal
   struct sockaddr_in client_addr;
-  while (1)
+
+  // attend un client
+  if (listen(sock, 1) == -1)
   {
-    // attend un client
-    if (listen(sock, 1) == -1)
-    {
-      perror("listen()");
-      exit(errno);
-    }
+    perror("listen()");
+    exit(errno);
+  }
 
-    int sockClient;
-    socklen_t size = sizeof(client_addr);
-    if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
-    {
-      perror("accept()");
-      exit(errno);
-    }
+  int sockClient;
+  socklen_t size = sizeof(client_addr);
+  if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
+  {
+    perror("accept()");
+    exit(errno);
+  }
 
-    // envoie message client
-    char reponse[] = "Message provenant du serveur!";
-    if (send(sockClient, reponse, sizeof(reponse), 0) == -1)
-    {
-      perror("send()");
-      exit(errno);
-    }
+  printf("%s\n", resolve_addr_to_name(&client_addr));
+  // envoie message client
+  char reponse[] = "Message provenant du serveur!";
+  if (send(sockClient, reponse, sizeof(reponse), 0) == -1)
+  {
+    perror("send()");
+    exit(errno);
+  }
 
-    // fermeture de la socket client
-    if (close(sockClient) == -1)
-    {
-      perror("close()");
-      exit(errno);
-    }
+  //fermer le flux de connexion
+  if (shutdown(sockClient, SHUT_RDWR) == -1)
+  {
+    perror("shutdown()");
+    exit(errno);
+  }
+
+  // fermeture de la socket client
+  if (close(sockClient) == -1)
+  {
+    perror("close()");
+    exit(errno);
   }
 
   //fermer le flux de connexion
