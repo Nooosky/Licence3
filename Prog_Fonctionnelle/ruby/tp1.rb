@@ -63,3 +63,59 @@ end
 def match_french_departement_number(s)
   (s =~ /\A(?:0[1-9]|[13-8][0-9]|2[AB1-9]|9(?:[0-5]|7[1-46]))\z/) == 0
 end
+
+def match_1811_french_departement_number(s)
+  (s =~ /\A(?:[09][1-9]|1(?:[0-2][0-9]?|3[01]?|[4-9])|[2-8][0-9])\z/) == 0
+end
+
+def process_unit(s)
+    (s =~ /\A[A-Za-z]+
+      (?:\((?:-1|-?(?:1[0-9]+|[2-9][0-9]*))\))?
+      (?:\.[A-Za-z]+
+        (?:\((?:-1|-?(?:1[0-9]+|[2-9][0-9]*))\))?)*
+      \z/x) == 0
+end
+
+def process_unit_v2(s)
+  name = '[A-Za-z]+'
+  optional_superscript = '(?:\\((?:-1|-?(?:1[0-9]+|[2-9][0-9]*))\\))?'
+  (s =~ Regexp.new('\\A' + name + optional_superscript + '(?:\\.' + name + optional_superscript + ')*\\z')) == 0
+end
+
+def process_unit_v3(s)
+  if  s =~ /\A[A-Za-z]+
+      (?:\((?:-1|-?(?:1[0-9]+|[2-9][0-9]*))\))?
+      (?:\.[A-Za-z]+
+        (?:\((?:-1|-?(?:1[0-9]+|[2-9][0-9]*))\))?)*
+      \z/x
+
+      '$' +
+      s.gsub(/([A-Za_z]+)/,'\\mathrm{\1}').
+        gsub(/\((-1|-?(?:1[0-9]+[2-9][0-9]*))\)/,'^{\1}') +
+      '$'
+    end
+end
+
+def american_date_2_french_date(s)
+  r = /(\d{4})-(\d{2})-(\d{2})/
+  if s =~ r
+    s.sub(r, '\3/\2/\1')
+  else
+    s.sub(/(\d{2})-(\d{2})-(\d{4})/, '\2/\1/\3')
+  end
+end
+
+def american_date_2_french_date!(s)
+  s.sub!(/(\d{2})-(\d{2})-(\d{4})/, '\2/\1/\3')\
+    unless s.sub!(/(\d{4})-(\d{2})-(\d{2})/, '\3/\2/\1')
+  s
+end
+
+def update_your_departement(s)
+  s.sub(/\A24/,'25').gsub(/(\D)24/,'\125')
+end
+
+def target_p(s)
+  m = s.match(/(?:.∗.*.∗)++\./)
+  m[0] if m
+end
