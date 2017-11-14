@@ -14,32 +14,20 @@
 #include <errno.h>
 #include <string.h>
 
-#define BUFSIZE 64000
+#define BUFSIZE 4096
 
-// fait la résolution de nom inverse : adresse IP -> nom de domaine
-char *resolve_addr_to_name(const struct sockaddr_in *addr)
-{
-  static char name[256];
-  int error = getnameinfo((const struct sockaddr *)addr, sizeof(*addr), name, sizeof(name), NULL, 0, 0);
-  if (error)
-  {
-    fprintf(stderr, "getnameinfo(%s): %s", inet_ntoa(addr->sin_addr), gai_strerror(error));
-    exit(errno);
-  }
-  return name;
-}
 
 int main(int argc, char *argv[])
 {
+  printf("pid : %d\n", getpid());
   // récupération des paramètres
   if (argc != 2) {
     fprintf(stderr, "USAGE: ./serveur <port_serveur>\n");
     exit(EXIT_FAILURE);
   }
 
-  const int port = atoi(argv[1]);
-
   // création de la socket
+  printf("creation de la socket\n");
   int sock;
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {
@@ -50,26 +38,30 @@ int main(int argc, char *argv[])
   // association de la socket au port donné
   struct sockaddr_in server_addr;
   server_addr.sin_family = AF_INET;
-  server_addr.sin_port = htons(port);
-  server_addr.sin_addr.s_addr = INADDR_ANY;
+  server_addr.sin_port = htons(atoi(argv[1]));
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
   // associe socket a l'adresse
+  printf("association de la socket a l'adresse\n");
   if (bind(sock, (struct sockaddr *)&server_addr, (socklen_t) sizeof(server_addr)) == -1)
   {
     perror("bind()");
+    close(sock);
     exit(errno);
   }
 
-  // boucle principal
   struct sockaddr_in client_addr;
 
   // attend un client
-  if (listen(sock, 1) == -1)
+  printf("ecoute des clients\n");
+  if (listen(sock, 20) == -1)
   {
     perror("listen()");
+    close(sock);
     exit(errno);
   }
 
+  printf("attend un client\n");
   int sockClient;
   socklen_t size = sizeof(client_addr);
   if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
@@ -78,10 +70,9 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  printf("%s\n", resolve_addr_to_name(&client_addr));
   // envoie message client
-  char reponse[] = "Message provenant du serveur!";
-  if (send(sockClient, reponse, sizeof(reponse), 0) == -1)
+  char reponse[] = "message du serveur";
+  if (send(sockClient, reponse, BUFSIZE, 0) == -1)
   {
     perror("send()");
     exit(errno);
