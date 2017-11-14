@@ -1,0 +1,12 @@
+On peut utiliser la commande suivante :
+'netstat -tulp6'
+
+Le resultat est le suivant :
+
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp6       0      0 ip6-localhost:ipp       [::]:*                  LISTEN      -                   
+tcp6       0      0 [::]:hostmon            [::]:*                  LISTEN      -                   
+udp6       0      0 [::]:54951              [::]:*                              -                   
+udp6       0      0 [::]:mdns               [::]:*                              1830/chrome         
+udp6       0      0 [::]:mdns               [::]:*                              -                   
+udp6       0      0 [::]:hostmon            [::]:*                              -    
