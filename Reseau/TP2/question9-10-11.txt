@@ -1,0 +1,21 @@
+Question 9
+Pour afficher les addresses IP de la machine courante associees a des sockets connectees, on peututiliser la commande :
+'netstat -tn'
+On obtient quelque chose de la sorte :
+................................................................................
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp      390      0 172.21.193.105:51706    172.217.23.78:443       ESTABLISHED
+tcp        0      0 172.21.193.105:42644    64.233.166.188:443      ESTABLISHED
+tcp        0      0 172.21.193.105:35086    172.217.23.67:443       ESTABLISHED
+................................................................................
+
+Pour afficher les adresses IP de la machine courante associees a des sockets en mode non connecte, on utilise la commande :
+'netstat -un'
+
+Question 10
+netstat -lp
+
+Question 11
+'netstat -tnp'
+
