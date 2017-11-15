@@ -1,35 +1,9 @@
 Initial states:
-	0 1 
+	0 
 Final states:
-	1 4 
+	0 
 Transitions:
 	For state 0:
-		For letter a: 1 2 3 
-		For letter b: 5 
+		For letter a: 0 1 
 	For state 1:
-		For letter a: 6 
-		For letter b: 3 
-	For state 2:
-		For letter a: 7 
-		For letter b: 4 
-	For state 3:
-		For letter a: 3 
-		For letter b: 4 
-	For state 4:
-		For letter a: 8 
-		For letter b: 9 
-	For state 5:
-		For letter a: 5 
-		For letter b: 5 
-	For state 6:
-		For letter a: 6 
-		For letter b: 6 
-	For state 7:
-		For letter a: 7 
-		For letter b: 7 
-	For state 8:
-		For letter a: 8 
-		For letter b: 8 
-	For state 9:
-		For letter a: 9 
-		For letter b: 9 
+		For letter a: 0 

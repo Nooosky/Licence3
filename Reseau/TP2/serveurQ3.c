@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
   }
 
   // création de la socket
-  printf("creation de la socket\n");
   int sock;
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {
@@ -42,7 +41,6 @@ int main(int argc, char *argv[])
   server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
   // associe socket a l'adresse
-  printf("association de la socket a l'adresse\n");
   if (bind(sock, (struct sockaddr *)&server_addr, (socklen_t) sizeof(server_addr)) == -1)
   {
     perror("bind()");
@@ -53,7 +51,6 @@ int main(int argc, char *argv[])
   struct sockaddr_in client_addr;
 
   // attend un client
-  printf("ecoute des clients\n");
   if (listen(sock, 20) == -1)
   {
     perror("listen()");
@@ -61,7 +58,6 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  printf("attend un client\n");
   int sockClient;
   socklen_t size = sizeof(client_addr);
   if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)

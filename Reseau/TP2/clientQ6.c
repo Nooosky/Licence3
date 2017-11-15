@@ -10,11 +10,13 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/un.h>
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
 
 #define BUFSIZE 4096
+#define SOCKET_NAME "/tmp/9Lq7BNBnBycd6nxy.socket"
 
 // fait la résolution de nom : nom de domaine -> adresse IP et se connect
 int resolve_and_connect_hostname(const char *name, const char *port)
@@ -24,7 +26,7 @@ int resolve_and_connect_hostname(const char *name, const char *port)
       int sfd;
 
       memset(&hints, 0, sizeof(struct addrinfo));
-      hints.ai_family = AF_INET;
+      hints.ai_family = AF_UNIX;
       hints.ai_socktype = SOCK_STREAM;
       hints.ai_flags = 0;
       hints.ai_protocol = 0;
@@ -68,8 +70,22 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
 
-  // se connect au serveur
-  int sock = resolve_and_connect_hostname(argv[1], argv[2]);
+  int sock = socket(AF_UNIX, SOCK_SEQPACKET, 0);
+  if (sock == -1)
+  {
+      perror("socket()");
+      exit(errno);
+  }
+
+  struct sockaddr_un addr;
+  addr.sun_family = AF_UNIX;
+  strncpy(addr.sun_path, SOCKET_NAME, sizeof(addr.sun_path) - 1);
+
+  if (connect (sock, (const struct sockaddr *) &addr, sizeof(struct sockaddr_un)) == -1)
+  {
+    perror("connect()");
+    exit(errno);
+  }
 
   // recoie message
   char messageRecu[BUFSIZE];

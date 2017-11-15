@@ -10,11 +10,13 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/un.h>
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
 
 #define BUFSIZE 4096
+#define SOCKET_NAME "/tmp/9Lq7BNBnBycd6nxy.socket"
 
 
 int main(int argc, char *argv[])
@@ -26,23 +28,22 @@ int main(int argc, char *argv[])
     exit(EXIT_FAILURE);
   }
 
+  unlink(SOCKET_NAME);
+
   // création de la socket
-  printf("creation de la socket\n");
   int sock;
-  if ((sock = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
+  if ((sock = socket(AF_UNIX, SOCK_SEQPACKET, 0)) < 0)
   {
     perror("socket()");
     exit(errno);
   }
 
   // association de la socket au port donné
-  struct sockaddr_in server_addr;
-  server_addr.sin_family = AF_INET;
-  server_addr.sin_port = htons(atoi(argv[1]));
-  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  struct sockaddr_un server_addr;
+  server_addr.sun_family = AF_UNIX;
+  strncpy(server_addr.sun_path, SOCKET_NAME, sizeof(server_addr.sun_path) - 1);
 
   // associe socket a l'adresse
-  printf("association de la socket a l'adresse\n");
   if (bind(sock, (struct sockaddr *)&server_addr, (socklen_t) sizeof(server_addr)) == -1)
   {
     perror("bind()");
@@ -50,10 +51,7 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  struct sockaddr_in client_addr;
-
   // attend un client
-  printf("ecoute des clients\n");
   if (listen(sock, 20) == -1)
   {
     perror("listen()");
@@ -61,10 +59,8 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  printf("attend un client\n");
   int sockClient;
-  socklen_t size = sizeof(client_addr);
-  if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
+  if ((sockClient = accept(sock, NULL, NULL)) == -1)
   {
     perror("accept()");
     exit(errno);
@@ -105,6 +101,8 @@ int main(int argc, char *argv[])
     perror("close()");
     exit(errno);
   }
+
+  unlink(SOCKET_NAME);
 
   return EXIT_SUCCESS;
 }
