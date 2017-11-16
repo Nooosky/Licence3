@@ -27,17 +27,18 @@ int main(int argc, char *argv[])
 
   // création de la socket
   int sock;
-  if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+  if ((sock = socket(AF_INET6, SOCK_STREAM, 0)) < 0)
   {
     perror("socket()");
     exit(errno);
   }
 
   // association de la socket au port donné
-  struct sockaddr_in server_addr;
-  server_addr.sin_family = AF_INET;
-  server_addr.sin_port = htons(atoi(argv[1]));
-  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  struct sockaddr_in6 server_addr;
+  server_addr.sin6_family = AF_INET6;
+  server_addr.sin6_port = htons(atoi(argv[1]));
+  server_addr.sin6_flowinfo = 0;
+  server_addr.sin6_addr = in6addr_any;
 
   // associe socket a l'adresse
   if (bind(sock, (struct sockaddr *)&server_addr, (socklen_t) sizeof(server_addr)) == -1)

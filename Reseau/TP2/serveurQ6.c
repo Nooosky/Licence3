@@ -21,7 +21,6 @@
 
 int main(int argc, char *argv[])
 {
-  printf("pid : %d\n", getpid());
   // récupération des paramètres
   if (argc != 2) {
     fprintf(stderr, "USAGE: ./serveur <port_serveur>\n");

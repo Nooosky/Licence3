@@ -238,3 +238,9 @@ module Perimetre_Losange
     4 * @length_0
   end
 end
+
+
+def filtermap(a, regexp)
+  result = []
+  a.each do |x| result.push(yield(x)) if ... end
+end
