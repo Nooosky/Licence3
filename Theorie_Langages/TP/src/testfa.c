@@ -8,7 +8,7 @@ int main() {
     FILE *file = NULL;
     struct fa *selfFa = (struct fa *) malloc(sizeof(struct fa));
 
-  /*  //Creation of a automaton
+    //Creation of a automaton
     fa_create(selfFa, 2, 5);
 
     //make states initials
@@ -81,88 +81,6 @@ int main() {
 
     //destruction of a graph
     graph_destroy(selfGraph);
-*/
-
-/*
-//PNJ
-fa_create(selfFa, 1, 6);
-fa_set_state_initial(selfFa, 0);
-fa_set_state_final(selfFa, 4);
-fa_add_transition(selfFa, 0, 'a', 0);
-fa_add_transition(selfFa, 0, 'a', 1);
-fa_add_transition(selfFa, 0, 'a', 2);
-fa_add_transition(selfFa, 0, 'a', 3);
-fa_add_transition(selfFa, 0, 'a', 4);
-fa_add_transition(selfFa, 0, 'a', 5);
-fa_add_transition(selfFa, 1, 'a', 0);
-fa_add_transition(selfFa, 1, 'a', 1);
-fa_add_transition(selfFa, 1, 'a', 2);
-fa_add_transition(selfFa, 1, 'a', 3);
-fa_add_transition(selfFa, 1, 'a', 4);
-fa_add_transition(selfFa, 1, 'a', 5);
-fa_add_transition(selfFa, 2, 'a', 0);
-fa_add_transition(selfFa, 2, 'a', 4);
-fa_add_transition(selfFa, 3, 'a', 0);
-fa_add_transition(selfFa, 3, 'a', 4);
-fa_add_transition(selfFa, 5, 'a', 0);
-fa_add_transition(selfFa, 5, 'a', 4);
-fa_pretty_print(selfFa, file);
-fa_dot_print(selfFa, file);
-*/
-
-/*
-//Joueur
-fa_create(selfFa, 1, 8);
-fa_set_state_initial(selfFa, 0);
-fa_set_state_final(selfFa, 6);
-fa_add_transition(selfFa, 0, 'a', 0);
-fa_add_transition(selfFa, 0, 'a', 1);
-fa_add_transition(selfFa, 0, 'a', 2);
-fa_add_transition(selfFa, 0, 'a', 3);
-fa_add_transition(selfFa, 0, 'a', 4);
-fa_add_transition(selfFa, 0, 'a', 5);
-fa_add_transition(selfFa, 0, 'a', 6);
-fa_add_transition(selfFa, 0, 'a', 7);
-fa_add_transition(selfFa, 1, 'a', 0);
-fa_add_transition(selfFa, 1, 'a', 1);
-fa_add_transition(selfFa, 1, 'a', 2);
-fa_add_transition(selfFa, 1, 'a', 4);
-fa_add_transition(selfFa, 1, 'a', 6);
-fa_add_transition(selfFa, 1, 'a', 7);
-fa_add_transition(selfFa, 2, 'a', 0);
-fa_add_transition(selfFa, 2, 'a', 1);
-fa_add_transition(selfFa, 2, 'a', 2);
-fa_add_transition(selfFa, 2, 'a', 4);
-fa_add_transition(selfFa, 2, 'a', 6);
-fa_add_transition(selfFa, 2, 'a', 7);
-fa_add_transition(selfFa, 3, 'a', 0);
-fa_add_transition(selfFa, 3, 'a', 4);
-fa_add_transition(selfFa, 3, 'a', 6);
-fa_add_transition(selfFa, 4, 'a', 5);
-fa_add_transition(selfFa, 4, 'a', 6);
-fa_add_transition(selfFa, 5, 'a', 0);
-fa_add_transition(selfFa, 5, 'a', 1);
-fa_add_transition(selfFa, 5, 'a', 2);
-fa_add_transition(selfFa, 5, 'a', 6);
-fa_add_transition(selfFa, 7, 'a', 0);
-fa_add_transition(selfFa, 7, 'a', 1);
-fa_add_transition(selfFa, 7, 'a', 2);
-fa_add_transition(selfFa, 7, 'a', 6);
-fa_pretty_print(selfFa, file);
-fa_dot_print(selfFa, file);
-*/
-
-/*
-//Evenement
-fa_create(selfFa, 1, 2);
-fa_set_state_initial(selfFa, 0);
-fa_set_state_final(selfFa, 0);
-fa_add_transition(selfFa, 0, 'a', 0);
-fa_add_transition(selfFa, 0, 'a', 1);
-fa_add_transition(selfFa, 1, 'a', 0);
-fa_pretty_print(selfFa, file);
-fa_dot_print(selfFa, file);
-*/
 
     return 0;
 }
