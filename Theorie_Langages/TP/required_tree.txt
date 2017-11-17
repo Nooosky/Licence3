@@ -1,11 +1,14 @@
-/
-|
 |-/include
+|    |fa.h
 |
 |-/src
+|    |fa.c
+|    |testfa.c
 |
 |-/bin
-|     fa_tests.cc
+|    |fa_tests.cc
+|    |*.o
+|    |app
 |
 |-/vendor
 |     |-/gtest

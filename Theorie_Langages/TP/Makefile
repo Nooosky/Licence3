@@ -3,7 +3,6 @@ CFLAGS := -Wall
 
 DIRECSRC := ./src
 DIRECBIN := ./bin
-DIRECOBJ := ./obj
 
 EXENAME := app
 OBJ := $(DIRECSRC)/fa.o $(DIRECSRC)/testfa.o
@@ -21,7 +20,7 @@ $(DIRECSRC)/%.o: $(DIRECSRC)/%.c
 install:
 	@echo "** Installing..."
 	cp $(DIRECSRC)/$(EXENAME) $(DIRECBIN)
-	cp $(OBJ) $(DIRECOBJ)
+	cp $(OBJ) $(DIRECBIN)
 	chmod u+x $(DIRECBIN)/$(EXENAME)
 
 clean:
