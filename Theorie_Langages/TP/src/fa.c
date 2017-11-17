@@ -3,9 +3,9 @@
 // crée un automate
 void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 {
-  if(-1 < alpha_count && alpha_count <= 26)
+  if(-1 < (int)alpha_count && (int)alpha_count <= 26)
   {
-    if(-1 < state_count)
+    if(-1 < (int)state_count)
     {
       self->alpha_count = alpha_count;
       self->state_count = state_count;
@@ -33,13 +33,13 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
     }
     else
     {
-      perror("fa_create, state_count");
+      perror("ERROR : fa_create() -> state_count");
       exit (1);
     }
   }
   else
   {
-    perror("fa_create, alpha_count");
+    perror("ERROR : fa_create() -> alpha_count");
     exit (1);
   }
 }
@@ -65,10 +65,7 @@ void fa_set_state_initial(struct fa *self, size_t state)
     if(-1 < (int)state && state < self->state_count)
       self->states[state].is_initial = 1;
     else
-    {
-      perror("fa_set_state_initial");
-      exit (1);
-    }
+      perror("ERROR : fa_set_state_initial() -> state");
 }
 
 //make a state final
@@ -77,10 +74,7 @@ void fa_set_state_final(struct fa *self, size_t state)
     if(-1 < (int)state && state < self->state_count)
       self->states[state].is_final = 1;
     else
-    {
-      perror("fa_set_state_final");
-      exit (1);
-    }
+      perror("ERROR : fa_set_state_final() -> state");
 }
 
 // ajouter un transition à l'automate
@@ -102,22 +96,15 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
         self->transitions[alpha - 'a'][from].states[self->transitions[alpha - 'a'][from].size - 1] = to;
       }
       else
-      {
-        perror("fa_add_transition, to");
-        exit (1);
-      }
+        perror("ERROR : fa_add_transition() -> to");
+
     }
     else
-    {
-      perror("fa_add_transition, alpha");
-      exit (1);
-    }
+      perror("ERROR : fa_add_transition() -> alpha");
   }
   else
-  {
-    perror("fa_add_transition, from");
-    exit (1);
-  }
+    perror("ERROR : fa_add_transition() -> from");
+
 }
 
 // afficher un automate
@@ -126,7 +113,7 @@ void fa_pretty_print(const struct fa *self, FILE *out)
   out = fopen("txt/automaton.txt", "w+");
   if(out == NULL)
   {
-    perror("fa_pretty_print, fopen");
+    perror("ERROR : fa_pretty_print() -> fopen()");
     exit (1);
   }
 
@@ -162,7 +149,7 @@ void fa_dot_print(const struct fa *self, FILE *out)
   out = fopen("img/automaton.dot", "w+");
   if(out == NULL)
   {
-    perror("fa_dot_print, fopen");
+    perror("ERROR : fa_dot_print() -> fopen()");
     exit (1);
   }
 
@@ -200,43 +187,29 @@ void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t
           -- self->transitions[alpha - 'a'][from].capacity;
         }
         else
-        {
-          perror("fa_remove_transition");
-          exit (1);
-        }
+          perror("ERROR : fa_remove_transition() -> to (1)");
       }
       else
-      {
-        perror("fa_remove_transition, to");
-        exit (1);
-      }
+        perror("ERROR : fa_remove_transition() -> to (2)");
     }
     else
-    {
-      perror("fa_remove_transition, alpha");
-      exit (1);
-    }
+      perror("ERROR : fa_remove_transition() -> alpha");
   }
   else
-  {
-    perror("fa_remove_transition, from");
-    exit (1);
-  }
+    perror("ERROR : fa_remove_transition() -> from");
 }
 
 //reset state of a state
 void fa_reset_state_final_or_initial(struct fa *self, size_t state)
 {
-    if (-1 > state && state < self->state_count)
-    {
-      self->states[state].is_final = 0;
-      self->states[state].is_initial = 0;
-    }
-    else
-    {
-      perror("fa_reset_state_final_or_initial");
-      exit (1);
-    }
+  if (-1 > state && state < self->state_count)
+  {
+    self->states[state].is_final = 0;
+    self->states[state].is_initial = 0;
+  }
+  else
+    perror("fa_reset_state_final_or_initial");
+
 }
 
 // delete a state
