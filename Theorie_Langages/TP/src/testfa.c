@@ -47,7 +47,7 @@ int main() {
 
     //count state
     printf("number states : %d\n", (int)selfFa->state_count);
-    
+
     // remove states
     printf("supprime un etat\n");
     fa_remove_state(selfFa, 2);
@@ -55,6 +55,7 @@ int main() {
     //count state
     printf("number states : %d\n", (int)selfFa->state_count);
 
+/*
     //if automaton is deterministic
     printf("if automaton is deterministic : %s\n", fa_is_deterministic(selfFa) ? "true" : "false");
 
@@ -67,6 +68,7 @@ int main() {
 
     //if automaton is complete
     printf("if automaton is complete : %s\n", fa_is_complete(selfFa) ? "true" : "false");
+    */
 
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
