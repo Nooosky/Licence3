@@ -83,7 +83,16 @@ int main() {
 
     //create graph with an automaton
     printf("cree un graph a partir d'un automate\n");
-    graph_create_from_fa(selfGraph, selfFa, false);
+    graph_create_from_fa(selfGraph, selfFa, true);
+    for (size_t i = 0; i < selfGraph->node_count; ++i)
+    {
+      printf("%zu: ", selfGraph->nodes[i].number);
+      for(size_t j = 0; j < selfGraph->nodes[i].nb_adjacent; ++j)
+      {
+        printf("%zu,", selfGraph->nodes[i].adjacent_nodes[j].number);
+      }
+      printf("\n");
+    }
 
     // if there is path between two states
     printf("if there is path between two states : %s\n", graph_has_path(selfGraph, 1, 4) ? "true" : "false");

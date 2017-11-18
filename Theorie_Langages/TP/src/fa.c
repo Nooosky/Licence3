@@ -315,41 +315,55 @@ void fa_make_complete(struct fa *self)
 void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted)
 {
   self->node_count = fa->state_count;
-
   self->nodes = (struct node *) malloc(self->node_count * sizeof(struct node));
 
-
-  for (int i = 0; i < fa->state_count; ++i)
+  for (size_t i = 0; i < fa->state_count; ++i)
   {
-      self->nodes->number = i;
-      self->nodes->nb_adjacent = 0;
-      self->nodes->adjacent_nodes = NULL;
-
-      for (int j = 0; j < fa->alpha_count; ++j)
-      {
-          for (int k = 0; k < fa->transitions[j][i].size; ++k)
-          {
-            bool trouver = false;
-            for(int l = 0; l < self->nodes->nb_adjacent; ++l)
-              if(self->nodes->adjacent_nodes[l].number == (int)fa->transitions[j][i].states[k])
-                trouver = true;
-
-            if (trouver == false)
-            {
-              self->nodes->nb_adjacent++;
-              self->nodes->adjacent_nodes = realloc (self->nodes->adjacent_nodes, self->nodes->nb_adjacent * sizeof(struct node));
-              self->nodes->adjacent_nodes[self->nodes->nb_adjacent - 1].number = (int)fa->transitions[j][i].states[k];
-            }
-          }
-      }
+    self->nodes[i].number = i;
+    self->nodes[i].nb_adjacent = 0;
+    self->nodes[i].adjacent_nodes = NULL;
   }
+
+  if (!inverted)
+    for (size_t i = 0; i < fa->state_count; ++i)
+    {
+      size_t valeur = 0;
+      for (size_t j = 0; j < fa->alpha_count; ++j)
+      {
+        self->nodes[i].nb_adjacent += fa->transitions[j][i].size;
+        self->nodes[i].adjacent_nodes = realloc(self->nodes[i].adjacent_nodes, self->nodes[i].nb_adjacent * sizeof(struct node));
+        for (size_t k = valeur; k < self->nodes[i].nb_adjacent; ++k)
+          self->nodes[i].adjacent_nodes[k].number = fa->transitions[j][i].states[k - valeur];
+        valeur = fa->transitions[j][i].size;
+      }
+    }
+  else if (inverted)
+    for (size_t i = 0; i < fa->state_count; ++i)
+      for (size_t j = 0; j < fa->alpha_count; ++j)
+        for (size_t k = 0; k < fa->transitions[j][i].size; ++k)
+        {
+          bool arc = false;
+          for (size_t l = 0; l < self->nodes[fa->transitions[j][i].states[k]].nb_adjacent; ++l)
+            if(self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes[l].number == i)
+            {
+              arc = true;
+              break;
+            }
+
+          if (!arc)
+          {
+            ++self->nodes[fa->transitions[j][i].states[k]].nb_adjacent;
+            self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes = realloc(self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes, self->nodes[fa->transitions[j][i].states[k]].nb_adjacent * sizeof(struct node));
+            self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes[self->nodes[fa->transitions[j][i].states[k]].nb_adjacent - 1].number = i;
+          }
+        }
 }
 
 // deletion a graph
-void graph_destroy(struct graph *self){
-    for (int i = 0; i < self->node_count; ++i) {
+void graph_destroy(struct graph *self)
+{
+    for (size_t i = 0; i < self->node_count; ++i)
         free(self->nodes[i].adjacent_nodes);
-    }
     free(self->nodes);
     free(self);
 }
