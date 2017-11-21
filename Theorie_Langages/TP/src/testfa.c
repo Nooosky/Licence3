@@ -39,8 +39,7 @@ int main() {
 
     // remove transitions to automaton
     printf("supprime des transitions\n");
-    fa_remove_transition(selfFa, 4, 'a', 4);
-    fa_remove_transition(selfFa, 2, 'a', 3);
+    fa_remove_transition(selfFa, 0, 'a', 2);
 
     //count transition
     printf("number transitions : %zu\n", fa_count_transitions(selfFa));
@@ -50,7 +49,7 @@ int main() {
 
     // remove states
     printf("supprime un etat\n");
-    fa_remove_state(selfFa, 2);
+    fa_remove_state(selfFa, 1);
 
     //count state
     printf("number states : %zu\n", selfFa->state_count);
@@ -69,21 +68,12 @@ int main() {
     //if automaton is complete
     printf("if automaton is complete : %s\n", fa_is_complete(selfFa) ? "true" : "false");
 
-    // print automaton in file
-    printf("dessine l'automate dans un .txt\n");
-    fa_pretty_print(selfFa, file);
-
-    // print automaton in file .dot
-    printf("dessine l'automate dans un .dot\n");
-    fa_dot_print(selfFa, file);
-
-
 
     struct graph *selfGraph = (struct graph *) malloc(sizeof(struct graph));
 
     //create graph with an automaton
     printf("cree un graph a partir d'un automate\n");
-    graph_create_from_fa(selfGraph, selfFa, true);
+    graph_create_from_fa(selfGraph, selfFa, false);
     for (size_t i = 0; i < selfGraph->node_count; ++i)
     {
       printf("%zu: ", selfGraph->nodes[i].number);
@@ -93,6 +83,15 @@ int main() {
       }
       printf("\n");
     }
+
+    //tel state who are visited with depth first search
+    bool tabBool[selfGraph->node_count];
+    for (size_t i = 0; i < selfGraph->node_count; ++i)
+      tabBool[i] = false;
+    graph_depth_first_search(selfGraph, 0, &tabBool);
+    for (size_t i = 0; i < selfGraph->node_count; ++i)
+      printf("%zu: %s, ", i, tabBool[i] ? "true" : "false");
+    printf("\n");
 
     // if there is path between two states
     printf("if there is path between two states : %s\n", graph_has_path(selfGraph, 1, 4) ? "true" : "false");
@@ -104,6 +103,14 @@ int main() {
     printf("remove non accessible and non co accessible state\n");
     fa_remove_non_accessible_states(selfFa);
     fa_remove_non_co_accessible_states(selfFa);
+
+    // print automaton in file
+    printf("dessine l'automate dans un .txt\n");
+    fa_pretty_print(selfFa, file);
+
+    // print automaton in file .dot
+    printf("dessine l'automate dans un .dot\n");
+    fa_dot_print(selfFa, file);
 
     //destruction of a automaton
     printf("detruie l'automate\n");

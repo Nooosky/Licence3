@@ -369,7 +369,8 @@ void graph_destroy(struct graph *self)
 }
 
 // make in depth
-void graph_depth_first_search(const struct graph *self, size_t state, bool *visited){
+void graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
+{
     visited[state] = true;
     for (int i = 0; i < self->nodes[state].nb_adjacent; ++i) {
         if(visited[self->nodes[state].adjacent_nodes[i].number] == false){
@@ -379,81 +380,65 @@ void graph_depth_first_search(const struct graph *self, size_t state, bool *visi
 }
 
 //tells if a path exists in the graph between two states
-bool graph_has_path(const struct graph *self, size_t from, size_t to){
+bool graph_has_path(const struct graph *self, size_t from, size_t to)
+{
     bool *visited = malloc(self->node_count * sizeof(bool));
     graph_depth_first_search(self, from, visited);
     return visited[to];
 }
 
 //tells if the language of a graph is empty
-bool fa_is_language_empty(const struct fa *self){
-    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
-    graph_create_from_fa(graph1, self, false);
+bool fa_is_language_empty(const struct fa *self)
+{
+    struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
+    graph_create_from_fa(graph, self, false);
 
-    for (int i = 0; i < self->state_count; ++i) {
-        for (int j = 0; j < self->state_count; ++j) {
-            if(self->states[i].is_initial && self->states[j].is_final){
-                if(graph_has_path(graph1, i, j)){
-                    return true;
-                }
-            }
-        }
-    }
-    free(graph1);
-    return false;
+    for (int i = 0; i < self->state_count; ++i)
+        for (int j = 0; j < self->state_count; ++j)
+            if(self->states[i].is_initial && self->states[j].is_final)
+                if(graph_has_path(graph, i, j))
+                    return false;
+
+    free(graph);
+    return true;
 }
 
 
 //remove all non accessible states
-void fa_remove_non_accessible_states(struct fa *self){
-    size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
+void fa_remove_non_accessible_states(struct fa *self)
+{
+  struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
+  graph_create_from_fa(graph, self, false);
 
-    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
-    graph_create_from_fa(graph1, self, false);
+  bool tabBool[graph->node_count];
+  for (size_t i = 0; i < graph->node_count; ++i)
+    tabBool[i] = false;
 
-    for (int i = 0; i < self->state_count; ++i) {
-        for (int j = 0; j < self->state_count; ++j) {
-            if(self->states[i].is_initial){
-                if(!graph_has_path(graph1, i, j)){
-                    states_to_remove[j]++;
-                }
-            }
-        }
-    }
-    for (int k = 0; k < self->state_count; ++k) {
-        if(states_to_remove[k] > 0){
-            fa_remove_state(self, k);
-        }
-    }
-    free(states_to_remove);
-    free(graph1);
+  graph_depth_first_search(graph, 0, &tabBool);
+  for (size_t i = 0; i < graph->node_count; ++i)
+    if (!tabBool[i])
+      fa_remove_state(self, i);
+
+  free(graph);
 }
 
 
 //remove all non co accessible states
-void fa_remove_non_co_accessible_states(struct fa *self){
-    size_t * states_to_remove = malloc(self->state_count * sizeof(size_t));
+void fa_remove_non_co_accessible_states(struct fa *self)
+{
+  struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
+  graph_create_from_fa(graph, self, false);
 
-    struct graph *graph1 = (struct graph *) malloc(sizeof(struct graph));
-    graph_create_from_fa(graph1, self, false);
+  for (size_t i = 0; i < self->state_count; ++i)
+    if(self->states[i].is_final)
+      for (size_t j = 0; j < self->state_count; ++j)
+        if(!graph_has_path(graph, j, i))
+          fa_remove_state(self, j);
 
-    for (int i = 0; i < self->state_count; ++i) {
-        for (int j = 0; j < self->state_count; ++j) {
-            if(self->states[j].is_final){
-                if(!graph_has_path(graph1, i, j)){
-                    states_to_remove[i]++;
-                }
-            }
-        }
-    }
-    for (int k = 0; k < self->state_count; ++k) {
-        if(states_to_remove[k] > 0){
-            fa_remove_state(self, k);
-        }
-    }
-    free(states_to_remove);
-    free(graph1);
+  free(graph);
 }
+
+
 void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs){
 
     fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
