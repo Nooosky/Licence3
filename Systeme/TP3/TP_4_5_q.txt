@@ -1,0 +1,50 @@
+TP 4/5
+
+1 (b) Q5
+
+La commande free donne des informations sur la memoire libre et utilisee ainsi que l' "espace SWAP" disponoble sur
+l'ordinateur.
+
+Pour obtenir un affichage toutes les 5 secondes, on peut utiliser la commande suivante :
+'free -s 5'
+Sur un total de 5 iterations de la commande 'free -s 5', on remarque que :
+- la memoire et le swap total ne changent pas
+- la memoire utilisee varie tandis que le swap reste a 0
+- la memoire libre varie tandis que le swap reste a sa taille maximale (swap total)
+- la memoire partagee, le buffer, le cache et la memoire disponible varient
+
+1 (c) Q8
+
+On peut utiliser la commande suivante :
+'ps -o min_flt,maj_flt,cmd,args,uid,gid [PID_NUMBER]'
+Ou :
+- min_flt est le nombre de defauts de pages mineurs
+- maj_flt est le nombre de defauts de pages majeurs
+- cmd est la commande du processus
+- args sont les arguments de la commande du processus
+- uid est l'id user qui utilise le processus
+- gid est l'id group de l'user
+- [PID_NUMBER] le numero du pid sur lequel lancer la commande
+
+
+TP 6
+
+I.2
+Q7-On peut utiliser lscpu ou lshw
+Sur lscpu, 
+Nombre de supports (socket/processeur) : Dans Socket
+Nombre de coeur : Dans CPU(s), ici 4  
+Technologie Hyperthreading : Si Thread(s) per core est egal a 2, alors oui
+
+Q12
+
+Voir le fichier question12.c
+
+Q13
+
+Voir le fichier question13.c
+
+II
+Q7-
+On peut utiliser la commande suivante :
+sudo ifconfig eth1 192.168.10.20 netmask 255.255.255.0
