@@ -1,0 +1,8 @@
+/*LOW*/
+//la liste des utilisateurs du système
+
+//trouver tous les utilisateurs dont le nom contient la lettre “A”
+
+//la version de la base de données utilisée
+
+//l’hôte sur lequel la base de données est hébergée
