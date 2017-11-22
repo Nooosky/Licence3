@@ -15,3 +15,9 @@
 <script type="text/javascript">
     document.getElementsByTagName("head")[0].src = http://i.imgur.com/soPydKo.gif;
 </script>
+
+//remplacez le formulaire afin que, lors de la soumission, l’utilisateur ouvre google en cherchant
+son nom
+<script type="text/javascript">
+  document.location.href= "http://www.google/" + document.getElementsByName("txtName").value;
+</script>
