@@ -13,5 +13,5 @@
 
 //remplacez le logo de DVWA par celle-ci: http://i.imgur.com/soPydKo.gif
 <script type="text/javascript">
-    document.getElementsByTagName("head")[0].src = http://i.imgur.com/soPydKo.gif;
+    document.getElementsByTagName("img")[0].src = http://i.imgur.com/soPydKo.gif;
 </script>
