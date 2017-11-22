@@ -8,7 +8,10 @@
 
 //inserez le cookie de l’utilisateur dans le commentaire
 <script type="text/javascript">
-   document.getElementById(this).value = document.cookie;
+   document.write(document.cookie);
 </script>
 
 //remplacez le logo de DVWA par celle-ci: http://i.imgur.com/soPydKo.gif
+<script type="text/javascript">
+    document.getElementsByTagName("head")[0].src = http://i.imgur.com/soPydKo.gif;
+</script>
