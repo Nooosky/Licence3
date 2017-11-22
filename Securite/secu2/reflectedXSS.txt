@@ -1,0 +1,17 @@
+/*LOW*/
+//affichez un message pop-up de type “alert” après soumission du formulaire
+<script type="text/javascript">
+   alert('BONJOUR');
+</script>
+
+//affichez les cookies de l’utilisateur
+<script type="text/javascript">
+   alert(document.cookie);
+</script>
+
+//redirigez l’utilisateur sur Google
+<script type="text/javascript">
+  document.location.href="http://www.google.com";
+</script>
+
+/*MEDIUM*/
