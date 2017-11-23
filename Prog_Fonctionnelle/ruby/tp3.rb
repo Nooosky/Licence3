@@ -61,3 +61,24 @@ def look_4_pdf_files(path)
   end
   pdf_files_a
 end
+
+def sort_by_path(path)
+  dir_a = []
+  Find.find(path) do |path_0| dir_a.push(path_0) if File.directory?(path_0) end
+  dir_a.sort! do |dir_0, dir_1|
+    File.whole_size(dir_0) <=> File.whole_size(dir_1)
+end
+
+
+def sort_by_path_v2(path)
+  h = {}
+  Find.find(path) do |path_0|
+    h[path_0] = File.whole_size(path_0) if File.directory?(path_0)
+  end
+  (h.sort do |pair_0, pair_1|
+    pair_0[1] <=> pair_1[1]
+  end).
+    map do |pair| 
+      pair[0]
+    end
+  end
