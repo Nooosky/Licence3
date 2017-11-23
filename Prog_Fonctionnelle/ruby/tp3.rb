@@ -102,11 +102,13 @@ class Array
 end
 
 def outofboundsnb(a, index_a)
-  begin
-    result = 0
-    index_a.each do |index| a.protected_i(index)
+  result = 0
+  index_a.each do |index|
+    begin
+      a.protected_i(index)
+    rescue OutOfBounds
+      result += 1
     end
-  rescue OutOfBounds
-    result += 1
   end
+  result
 end
