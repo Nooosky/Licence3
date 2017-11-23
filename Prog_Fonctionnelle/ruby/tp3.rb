@@ -87,7 +87,8 @@ def sort_by_path_v2(path)
   end
 end
 
-class outOfBounds < Exception
+class OutOfBounds < Exception
+end
 
 class Array
   #
@@ -95,7 +96,17 @@ class Array
     if (-length...length) === index
       at(index)
     else
-      raise outOfBounds
+      raise OutOfBounds
     end
+  end
+end
+
+def outofboundsnb(a, index_a)
+  begin
+    result = 0
+    index_a.each do |index| a.protected_i(index)
+    end
+  rescue OutOfBounds
+    result += 1
   end
 end
