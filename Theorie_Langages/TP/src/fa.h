@@ -42,34 +42,34 @@ struct node
 
 
 // automaton creation
-void fa_create(struct fa *self, size_t alpha_count, size_t state_count);
+int fa_create(struct fa *self, size_t alpha_count, size_t state_count);
 
 // automaton deletion
-void fa_destroy(struct fa *self);
+int fa_destroy(struct fa *self);
 
 // make a state initial
-void fa_set_state_initial(struct fa *self, size_t state);
+int fa_set_state_initial(struct fa *self, size_t state);
 
 // make a state final
-void fa_set_state_final(struct fa *self, size_t state);
+int fa_set_state_final(struct fa *self, size_t state);
 
 // add a transition to the automaton
-void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
+int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
 
 // print an automaton
-void fa_pretty_print(const struct fa *self, FILE *out);
+int fa_pretty_print(const struct fa *self, FILE *out);
 
 // print an automaton (DOT)
-void fa_dot_print(const struct fa *self, FILE *out);
+int fa_dot_print(const struct fa *self, FILE *out);
 
 // delete a transition
-void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
+int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
 
 //reset state of a state
-void fa_reset_state_final_or_initial(struct fa *self, size_t state);
+int fa_reset_state_final_or_initial(struct fa *self, size_t state);
 
 // delete a state
-void fa_remove_state(struct fa *self, size_t state);
+int fa_remove_state(struct fa *self, size_t state);
 
 // count transitions
 size_t fa_count_transitions(const struct fa *self);
@@ -84,7 +84,7 @@ bool fa_is_complete(const struct fa *self);
 void fa_make_complete(struct fa *self);
 
 // make in depth
-void graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
+int graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
 
 // find a path between from and to
 bool graph_has_path(const struct graph *self, size_t from, size_t to);

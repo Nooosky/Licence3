@@ -1,7 +1,7 @@
 #include "fa.h"
 
 // crée un automate
-void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
+int fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 {
   if(-1 < (int)alpha_count && (int)alpha_count <= 26)
   {
@@ -31,18 +31,19 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
     else
     {
       perror("ERROR : fa_create() -> state_count");
-      exit (1);
+      return -1;
     }
   }
   else
   {
     perror("ERROR : fa_create() -> alpha_count");
-    exit (1);
+    return -1;
   }
+  return 0;
 }
 
 // détruire un automate
-void fa_destroy(struct fa *self)
+int fa_destroy(struct fa *self)
 {
   for (size_t i = 0; i < self->alpha_count; ++i)
   {
@@ -53,28 +54,33 @@ void fa_destroy(struct fa *self)
   free(self->transitions);
   free(self->states);
   free(self);
+  return 0;
 }
 
 //make a state initial
-void fa_set_state_initial(struct fa *self, size_t state)
+int fa_set_state_initial(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
     self->states[state].is_initial = 1;
+    return 0;
   else
     perror("ERROR : fa_set_state_initial() -> state");
+    return -1;
 }
 
 //make a state final
-void fa_set_state_final(struct fa *self, size_t state)
+int fa_set_state_final(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
     self->states[state].is_final = 1;
+    return 0;
   else
     perror("ERROR : fa_set_state_final() -> state");
+    return -1;
 }
 
 // ajouter un transition à l'automate
-void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
+int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 {
   if(-1 < (int)from && from < self->state_count)
   {
@@ -84,32 +90,35 @@ void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
       {
         for (size_t i = 0; i < self->transitions[alpha - 'a'][from].size; ++i)
             if(self->transitions[alpha - 'a'][from].states[i] == to)
-              return;
+              return 1;
 
         ++ self->transitions[alpha - 'a'][from].size;
         self->transitions[alpha - 'a'][from].states = realloc(self->transitions[alpha - 'a'][from].states, self->transitions[alpha - 'a'][from].size * sizeof(size_t));
         self->transitions[alpha - 'a'][from].states[self->transitions[alpha - 'a'][from].size - 1] = to;
+        return 0;
       }
       else
         perror("ERROR : fa_add_transition() -> to");
-
+        return -1;
     }
     else
       perror("ERROR : fa_add_transition() -> alpha");
+      return -1;
   }
   else
     perror("ERROR : fa_add_transition() -> from");
+    return -1;
 
 }
 
 // afficher un automate
-void fa_pretty_print(const struct fa *self, FILE *out)
+int fa_pretty_print(const struct fa *self, FILE *out)
 {
   out = fopen("txt/automaton.txt", "w+");
   if(out == NULL)
   {
     perror("ERROR : fa_pretty_print() -> fopen()");
-    exit (1);
+    return -1;
   }
 
   fprintf(out, "Initial states:\n\t");
@@ -136,16 +145,17 @@ void fa_pretty_print(const struct fa *self, FILE *out)
   }
 
   fclose(out);
+  return 0;
 }
 
 // affiche en automate en format DOT
-void fa_dot_print(const struct fa *self, FILE *out)
+int fa_dot_print(const struct fa *self, FILE *out)
 {
   out = fopen("img/automaton.dot", "w+");
   if(out == NULL)
   {
     perror("ERROR : fa_dot_print() -> fopen()");
-    exit (1);
+    return -1;
   }
 
   fprintf(out, "digraph finite_state_machine {\n");
@@ -164,10 +174,11 @@ void fa_dot_print(const struct fa *self, FILE *out)
    fprintf(out, "}");
 
   fclose(out);
+  return 0;
 }
 
 // delete a transition
-void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
+int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
   if(-1 < (int)from && from < self->state_count)
   {
@@ -183,21 +194,24 @@ void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t
               self->transitions[alpha - 'a'][from].states[j] = self->transitions[alpha - 'a'][from].states[j+1];
 
             self->transitions[alpha - 'a'][from].states = realloc(self->transitions[alpha - 'a'][from].states, self->transitions[alpha - 'a'][from].size * sizeof(size_t));
-            return;
+            return 0;
           }
       }
       else
         perror("ERROR : fa_remove_transition() -> to");
+        return -1;
     }
     else
       perror("ERROR : fa_remove_transition() -> alpha");
+      return -1;
   }
   else
     perror("ERROR : fa_remove_transition() -> from");
+    return -1;
 }
 
 // delete a state
-void fa_remove_state(struct fa *self, size_t state)
+int fa_remove_state(struct fa *self, size_t state)
 {
   if(-1 < (int)state && state < self->state_count)
   {
@@ -234,9 +248,11 @@ void fa_remove_state(struct fa *self, size_t state)
 
     --self->state_count;
     self->states = realloc(self->states, sizeof(size_t) * self->state_count);
+    return 0;
   }
   else
     perror("ERROR : fa_remove_state() -> state");
+    return -1;
 }
 
 //count transition in an automaton
