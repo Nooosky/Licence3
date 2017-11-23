@@ -42,40 +42,43 @@ struct node
 
 
 // automaton creation
-void fa_create(struct fa *self, size_t alpha_count, size_t state_count);
+int fa_create(struct fa *self, size_t alpha_count, size_t state_count);
 
 // automaton deletion
-void fa_destroy(struct fa *self);
+int fa_destroy(struct fa *self);
 
 // make a state initial
-void fa_set_state_initial(struct fa *self, size_t state);
+int fa_set_state_initial(struct fa *self, size_t state);
 
 // make a state final
-void fa_set_state_final(struct fa *self, size_t state);
+int fa_set_state_final(struct fa *self, size_t state);
 
 // add a transition to the automaton
-void fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
+int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
 
 // print an automaton
-void fa_pretty_print(const struct fa *self, FILE *out);
+int fa_pretty_print(const struct fa *self, FILE *out);
 
 // print an automaton (DOT)
-void fa_dot_print(const struct fa *self, FILE *out);
+int fa_dot_print(const struct fa *self, FILE *out);
 
 // delete a transition
-void fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
+int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
 
 //reset state of a state
-void fa_reset_state_final_or_initial(struct fa *self, size_t state);
+int fa_reset_state_final_or_initial(struct fa *self, size_t state);
 
 // delete a state
-void fa_remove_state(struct fa *self, size_t state);
+int fa_remove_state(struct fa *self, size_t state);
 
 // count transitions
 size_t fa_count_transitions(const struct fa *self);
 
 // tells if a automaton is deterministic
 bool fa_is_deterministic(const struct fa *self);
+#if __cplusplus
+extern "C" {
+#endif
 
 //tells if a automaton is complete
 bool fa_is_complete(const struct fa *self);
@@ -127,3 +130,8 @@ void fa_create_minimal_moore(struct fa *self, const struct fa *other);
 
 // delet epsilon of an automaton
 void fa_create_without_epsilon(struct fa *self, const struct fa *other);
+
+
+#if __cplusplus
+}
+#endif

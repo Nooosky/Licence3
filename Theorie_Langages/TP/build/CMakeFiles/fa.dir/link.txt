@@ -1,0 +1,2 @@
+/usr/bin/ar qc libfa.a  CMakeFiles/fa.dir/src/fa.c.o CMakeFiles/fa.dir/src/testfa.c.o
+/usr/bin/ranlib libfa.a

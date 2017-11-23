@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/near/L3/Licence3/Theorie_Langages/TP/src/fa.c
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/src/fa.h
+
+/home/near/L3/Licence3/Theorie_Langages/TP/src/fa.h
+stdio.h
+-
+stdlib.h
+-
+stdbool.h
+-
+
+/home/near/L3/Licence3/Theorie_Langages/TP/src/testfa.c
+stdlib.h
+-
+stdio.h
+-
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/src/fa.h
+
