@@ -52,3 +52,12 @@ def sort_both_fixnum_string_v2(a0)
     touch_x0 ? (touch_x1 ? x0.to_i <=> x1.to_i : -1) : touch_x1 ? 1 : x0 <=> x1
   end
 end
+
+require 'find'
+
+def look_4_pdf_files(path)
+  pdf_files_a = []
+  Find.find(path) do |path_0| pdf_files_a.push(path_0) if path_0 =~ /\.pdf\z/
+  end
+  pdf_files_a
+end

@@ -103,7 +103,7 @@ end)
 
 class String
   #
-  ACCENTED_LETTER_MAPPING = { 
+  ACCENTED_LETTER_MAPPING = {
     'A' => [192,193,194,195,196,197],'C' => [199],'E' => [200,201,202,203],
     'I' => [204,205,206,207],'N' => [209],'O' => [210,211,212,213,214,216],
     'U' => [217,218,219,220],'Y' => [221],'a' => [224,225,226,227,228,229,230],
@@ -112,7 +112,7 @@ class String
     'y' => [253,255],'AE' => [306],'ae' => [346],'OE' => [188],'oe' => [189]
   }
   #
-  def removeaccents    
+  def removeaccents
     str = String.new(self)
     String::ACCENTED_LETTER_MAPPING.each do |letter,accents|
       packed = accents.pack('U*')
@@ -121,5 +121,5 @@ class String
     end
     str
   end
-  # 
+  #
 end
