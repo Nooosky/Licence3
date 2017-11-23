@@ -76,6 +76,9 @@ size_t fa_count_transitions(const struct fa *self);
 
 // tells if a automaton is deterministic
 bool fa_is_deterministic(const struct fa *self);
+#if __cplusplus
+extern "C" {
+#endif
 
 //tells if a automaton is complete
 bool fa_is_complete(const struct fa *self);
@@ -84,7 +87,7 @@ bool fa_is_complete(const struct fa *self);
 void fa_make_complete(struct fa *self);
 
 // make in depth
-int graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
+void graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
 
 // find a path between from and to
 bool graph_has_path(const struct graph *self, size_t from, size_t to);
@@ -127,3 +130,8 @@ void fa_create_minimal_moore(struct fa *self, const struct fa *other);
 
 // delet epsilon of an automaton
 void fa_create_without_epsilon(struct fa *self, const struct fa *other);
+
+
+#if __cplusplus
+}
+#endif

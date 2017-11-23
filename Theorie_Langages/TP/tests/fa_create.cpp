@@ -1,9 +1,19 @@
 #include "gtest/gtest.h"
-#include "example.h"
 
-TEST(example, add)
+extern "C"
 {
-    double res;
-    res = add_numbers(1.0, 2.0);
-    ASSERT_NEAR(res, 3.0, 1.0e-11);
+    #include "fa.h"
+}
+
+
+TEST(fa, create)
+{
+  struct fa *selfFa = (struct fa *) malloc(sizeof(struct fa));
+
+  EXPECT_EQ(-1, fa_create(selfFa, 0, 0));
+  EXPECT_EQ(-1, fa_create(selfFa, 1, 0));
+  EXPECT_EQ(-1, fa_create(selfFa, -1, 0));
+
+  EXPECT_EQ(0, fa_create(selfFa, 0, 1));
+  EXPECT_EQ(0, fa_create(selfFa, 1, 1));
 }

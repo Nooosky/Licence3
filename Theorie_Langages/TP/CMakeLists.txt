@@ -43,8 +43,7 @@ add_library(googletest ${GOOGLETEST_SOURCES})
 add_executable(
     unit_tests
     tests/main.cpp
-    tests/fa_add.cpp
-    tests/fa_subtract.cpp
+    tests/fa_create.cpp
     )
 
 add_dependencies(unit_tests googletest)

@@ -61,22 +61,26 @@ int fa_destroy(struct fa *self)
 int fa_set_state_initial(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
+  {
     self->states[state].is_initial = 1;
     return 0;
-  else
+  }else{
     perror("ERROR : fa_set_state_initial() -> state");
     return -1;
+  }
 }
 
 //make a state final
 int fa_set_state_final(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
+  {
     self->states[state].is_final = 1;
     return 0;
-  else
+  }else{
     perror("ERROR : fa_set_state_final() -> state");
     return -1;
+  }
 }
 
 // ajouter un transition à l'automate
