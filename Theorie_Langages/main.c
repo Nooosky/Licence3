@@ -406,37 +406,29 @@ void fa_remove_non_co_accessible_states(struct fa *self){
     free(graph1);
 }
 
-void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs){
+void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs)
+{
 
-    fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
-    for (int i = 0; i < lhs->state_count; ++i) {
-        for (int j = 0; j < rhs->state_count; ++j) {
-            if(lhs->states[i].is_initial && rhs->states[j].is_initial){
-                fa_set_state_initial(self, (i * rhs->state_count + j));
-            }
-            if(lhs->states[i].is_final && rhs->states[j].is_final){
-                fa_set_state_final(self, (i * rhs->state_count + j));
-            }
-        }
-    }
+fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
 
-    for (int k = 0; k < lhs->alpha_count; ++k) {
-        for (int i = 0; i < lhs->state_count; ++i) {
-            for (int j = 0; j < rhs->alpha_count; ++j) {
-                for (int l = 0; l < rhs->state_count; ++l) {
-                    if (k == j){
-                        for (int m = 0; m < lhs->transitions[k][i].size; ++m) {
-                            for (int n = 0; n < rhs->transitions[j][l].size; ++n) {
-                                fa_add_transition(self, (i * rhs->state_count + l), (char) (97 + k),
-                                (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]));
-                            }
-                        }
+for (int i = 0; i < lhs->state_count; ++i)
+  for (int j = 0; j < rhs->state_count; ++j)
+  {
+    if(lhs->states[i].is_initial && rhs->states[j].is_initial)
+      fa_set_state_initial(self, (i * rhs->state_count + j));
+    if(lhs->states[i].is_final && rhs->states[j].is_final)
+      fa_set_state_final(self, (i * rhs->state_count + j));
+  }
 
-                    }
-                }
-            }
-        }
-    }
+
+for (int k = 0; k < lhs->alpha_count; ++k)
+  for (int i = 0; i < lhs->state_count; ++i)
+    for (int j = 0; j < rhs->alpha_count; ++j)
+      for (int l = 0; l < rhs->state_count; ++l)
+        if (k == j)
+          for (int m = 0; m < lhs->transitions[k][i].size; ++m)
+            for (int n = 0; n < rhs->transitions[j][l].size; ++n)
+                fa_add_transition(self, (i * rhs->state_count + l), (char) ('a' + k), (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]));
 }
 
 bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs){

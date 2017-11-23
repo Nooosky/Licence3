@@ -5,13 +5,10 @@ Final states:
 Transitions:
 	For state 0:
 		For letter a: 1 
-		For letter b: 3 
+		For letter b: 
 	For state 1:
 		For letter a: 1 
 		For letter b: 2 
 	For state 2:
 		For letter a: 2 
-		For letter b: 3 
-	For state 3:
-		For letter a: 3 
-		For letter b: 3 
+		For letter b: 

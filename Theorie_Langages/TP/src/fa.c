@@ -5,7 +5,7 @@ void fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 {
   if(-1 < (int)alpha_count && (int)alpha_count <= 26)
   {
-    if(-1 < (int)state_count)
+    if(0 < (int)state_count)
     {
       self->alpha_count = alpha_count;
       self->state_count = state_count;
@@ -372,7 +372,7 @@ void graph_destroy(struct graph *self)
 void graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
 {
     visited[state] = true;
-    for (int i = 0; i < self->nodes[state].nb_adjacent; ++i) {
+    for (size_t i = 0; i < self->nodes[state].nb_adjacent; ++i) {
         if(visited[self->nodes[state].adjacent_nodes[i].number] == false){
             graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
         }
@@ -393,8 +393,8 @@ bool fa_is_language_empty(const struct fa *self)
     struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
     graph_create_from_fa(graph, self, false);
 
-    for (int i = 0; i < self->state_count; ++i)
-        for (int j = 0; j < self->state_count; ++j)
+    for (size_t i = 0; i < self->state_count; ++i)
+        for (size_t j = 0; j < self->state_count; ++j)
             if(self->states[i].is_initial && self->states[j].is_final)
                 if(graph_has_path(graph, i, j))
                     return false;
@@ -439,34 +439,26 @@ void fa_remove_non_co_accessible_states(struct fa *self)
 }
 
 
-void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs){
+void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs)
+{
+  fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
 
-    fa_create(self, ((lhs->alpha_count + rhs->alpha_count)/2), rhs->state_count*lhs->state_count);
-    for (int i = 0; i < lhs->state_count; ++i) {
-        for (int j = 0; j < rhs->state_count; ++j) {
-            if(lhs->states[i].is_initial && rhs->states[j].is_initial){
-                fa_set_state_initial(self, (i * rhs->state_count + j));
-            }
-            if(lhs->states[i].is_final && rhs->states[j].is_final){
-                fa_set_state_final(self, (i * rhs->state_count + j));
-            }
-        }
+  for (size_t i = 0; i < lhs->state_count; ++i)
+    for (size_t j = 0; j < rhs->state_count; ++j)
+    {
+      if(lhs->states[i].is_initial && rhs->states[j].is_initial)
+        fa_set_state_initial(self, (i * rhs->state_count + j));
+      if(lhs->states[i].is_final && rhs->states[j].is_final)
+        fa_set_state_final(self, (i * rhs->state_count + j));
     }
 
-    for (int k = 0; k < lhs->alpha_count; ++k) {
-        for (int i = 0; i < lhs->state_count; ++i) {
-            for (int j = 0; j < rhs->alpha_count; ++j) {
-                for (int l = 0; l < rhs->state_count; ++l) {
-                    if (k == j){
-                        for (int m = 0; m < lhs->transitions[k][i].size; ++m) {
-                            for (int n = 0; n < rhs->transitions[j][l].size; ++n) {
-                                fa_add_transition(self, (i * rhs->state_count + l), (char) (97 + k),
-                                (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+
+  for (size_t k = 0; k < lhs->alpha_count; ++k)
+    for (size_t i = 0; i < lhs->state_count; ++i)
+      for (size_t j = 0; j < rhs->alpha_count; ++j)
+        for (size_t l = 0; l < rhs->state_count; ++l)
+          if (k == j)
+            for (size_t m = 0; m < lhs->transitions[k][i].size; ++m)
+              for (size_t n = 0; n < rhs->transitions[j][l].size; ++n)
+                  fa_add_transition(self, (i * rhs->state_count + l), (char) ('a' + k), (lhs->transitions[k][i].states[m] * rhs->state_count + rhs->transitions[j][l].states[n]));
 }

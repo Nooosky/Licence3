@@ -104,13 +104,39 @@ int main() {
     fa_remove_non_accessible_states(selfFa);
     fa_remove_non_co_accessible_states(selfFa);
 
+    printf("remove non accessible and non co accessible state\n");
+    struct fa *selfFa1 = (struct fa *) malloc(sizeof(struct fa));
+    struct fa *selfFa2 = (struct fa *) malloc(sizeof(struct fa));
+    struct fa *selfFa3 = (struct fa *) malloc(sizeof(struct fa));
+    fa_create(selfFa2, 2, 3);
+    fa_set_state_initial(selfFa2, 0);
+    fa_set_state_final(selfFa2, 2);
+    fa_add_transition(selfFa2, 0, 'a', 1);
+    fa_add_transition(selfFa2, 1, 'a', 0);
+    fa_add_transition(selfFa2, 1, 'b', 2);
+    fa_add_transition(selfFa2, 2, 'b', 2);
+
+    fa_create(selfFa3, 2, 3);
+    fa_set_state_initial(selfFa3, 0);
+    fa_set_state_initial(selfFa3, 1);
+    fa_set_state_final(selfFa3, 2);
+    fa_add_transition(selfFa2, 0, 'a', 1);
+    fa_add_transition(selfFa2, 1, 'a', 2);
+    fa_add_transition(selfFa2, 1, 'b', 2);
+    fa_add_transition(selfFa2, 2, 'b', 1);
+
+    fa_create_product(selfFa1, selfFa2, selfFa3);
+
+
+
+
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
     fa_pretty_print(selfFa, file);
 
     // print automaton in file .dot
     printf("dessine l'automate dans un .dot\n");
-    fa_dot_print(selfFa, file);
+    fa_dot_print(selfFa1, file);
 
     //destruction of a automaton
     printf("detruie l'automate\n");
