@@ -1,3 +1,6 @@
+#load 'for-lc-7.rb'
+
+
 #to integer
 
 ' 273.15 '.to_i
@@ -78,7 +81,21 @@ def sort_by_path_v2(path)
   (h.sort do |pair_0, pair_1|
     pair_0[1] <=> pair_1[1]
   end).
-    map do |pair| 
+    map do |pair|
       pair[0]
     end
   end
+end
+
+class outOfBounds < Exception
+
+class Array
+  #
+  def protected_i(index)
+    if (-length...length) === index
+      at(index)
+    else
+      raise outOfBounds
+    end
+  end
+end
