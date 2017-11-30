@@ -137,9 +137,15 @@ end
 
 
 def sumeverywhereignore_v2(x)
-  sumeverywhereperform(x) do 0 end
+  sumeverywhereperform(x) do 0
   end
+end
 
 def sumeverywherereject_v2(x)
-  sumeverywhereperform(x) do return nil end
+  sumeverywhereperform(x) do return nil
   end
+end
+
+...
+  2016 + sumeverywhereperform([18,11,['today'],2017]) do ... end
+...
