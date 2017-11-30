@@ -34,10 +34,17 @@ def superscan_v2(path)
   unsaved_a = []
   renamed_a = []
   remaining_a = []
+<<<<<<< HEAD
   exists_or_about =
     Proc.new do |path_0|
       File.exist?(path_0) or renamed_a.find do |path_1| path_1 == path_0 end
       end
+=======
+  exist_or_about =
+    Proc.new do |path_0|
+      File.exists?(path_0) or renamed_a.find do |path_1| path_1 == path_0 end
+    end
+>>>>>>> 71afab5c440a581b3263ceb0014d6da7fdead15b
 
   Find.find(path) do |path_0|
     if File.directory?(path_0)
