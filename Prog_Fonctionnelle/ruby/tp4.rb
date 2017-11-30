@@ -100,5 +100,21 @@ def sumeverywhereignore(x)
       alreadysummed
     end
   end
-  goingeverywhere.call0, x)
+  goingeverywhere.call(0, x)
+end
+
+def sumeverywherereject(x)
+  goingeverywhere = Proc.new do |alreadysummed,x0|
+    x0_class = x0.class
+    if x0_class == Fixnum
+      alreadysummed + x0
+    elsif x0_class == Array
+      x0.inject(alreadysummed) do |alreadysummed_0, x1|
+        goingeverywhere[alreadysummed_0, x1]
+      end
+    else
+      return nil
+    end
+  end
+  goingeverywhere.call(0, x)
 end
