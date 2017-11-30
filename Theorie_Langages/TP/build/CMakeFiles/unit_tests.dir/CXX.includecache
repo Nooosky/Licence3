@@ -292,6 +292,24 @@ gtest/gtest.h
 fa.h
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
 
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_destroy.cpp
+gtest/gtest.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_final.cpp
+gtest/gtest.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_initial.cpp
+gtest/gtest.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
+
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/main.cpp
 gtest/gtest.h
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h

@@ -659,6 +659,87 @@ tests/fa_create.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_create.cpp.s
 .PHONY : tests/fa_create.cpp.s
 
+tests/fa_destroy.o: tests/fa_destroy.cpp.o
+
+.PHONY : tests/fa_destroy.o
+
+# target to build an object file
+tests/fa_destroy.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o
+.PHONY : tests/fa_destroy.cpp.o
+
+tests/fa_destroy.i: tests/fa_destroy.cpp.i
+
+.PHONY : tests/fa_destroy.i
+
+# target to preprocess a source file
+tests/fa_destroy.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.i
+.PHONY : tests/fa_destroy.cpp.i
+
+tests/fa_destroy.s: tests/fa_destroy.cpp.s
+
+.PHONY : tests/fa_destroy.s
+
+# target to generate assembly for a file
+tests/fa_destroy.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s
+.PHONY : tests/fa_destroy.cpp.s
+
+tests/fa_set_state_final.o: tests/fa_set_state_final.cpp.o
+
+.PHONY : tests/fa_set_state_final.o
+
+# target to build an object file
+tests/fa_set_state_final.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o
+.PHONY : tests/fa_set_state_final.cpp.o
+
+tests/fa_set_state_final.i: tests/fa_set_state_final.cpp.i
+
+.PHONY : tests/fa_set_state_final.i
+
+# target to preprocess a source file
+tests/fa_set_state_final.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.i
+.PHONY : tests/fa_set_state_final.cpp.i
+
+tests/fa_set_state_final.s: tests/fa_set_state_final.cpp.s
+
+.PHONY : tests/fa_set_state_final.s
+
+# target to generate assembly for a file
+tests/fa_set_state_final.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.s
+.PHONY : tests/fa_set_state_final.cpp.s
+
+tests/fa_set_state_initial.o: tests/fa_set_state_initial.cpp.o
+
+.PHONY : tests/fa_set_state_initial.o
+
+# target to build an object file
+tests/fa_set_state_initial.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o
+.PHONY : tests/fa_set_state_initial.cpp.o
+
+tests/fa_set_state_initial.i: tests/fa_set_state_initial.cpp.i
+
+.PHONY : tests/fa_set_state_initial.i
+
+# target to preprocess a source file
+tests/fa_set_state_initial.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.i
+.PHONY : tests/fa_set_state_initial.cpp.i
+
+tests/fa_set_state_initial.s: tests/fa_set_state_initial.cpp.s
+
+.PHONY : tests/fa_set_state_initial.s
+
+# target to generate assembly for a file
+tests/fa_set_state_initial.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.s
+.PHONY : tests/fa_set_state_initial.cpp.s
+
 tests/main.o: tests/main.cpp.o
 
 .PHONY : tests/main.o
@@ -741,6 +822,15 @@ help:
 	@echo "... tests/fa_create.o"
 	@echo "... tests/fa_create.i"
 	@echo "... tests/fa_create.s"
+	@echo "... tests/fa_destroy.o"
+	@echo "... tests/fa_destroy.i"
+	@echo "... tests/fa_destroy.s"
+	@echo "... tests/fa_set_state_final.o"
+	@echo "... tests/fa_set_state_final.i"
+	@echo "... tests/fa_set_state_final.s"
+	@echo "... tests/fa_set_state_initial.o"
+	@echo "... tests/fa_set_state_initial.i"
+	@echo "... tests/fa_set_state_initial.s"
 	@echo "... tests/main.o"
 	@echo "... tests/main.i"
 	@echo "... tests/main.s"

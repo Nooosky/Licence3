@@ -105,21 +105,99 @@ CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o.provides: CMakeFiles/unit_tests.
 CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o
 
 
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o: ../tests/fa_destroy.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o -c /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_destroy.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_destroy.cpp > CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_destroy.cpp -o CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o
+
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o: ../tests/fa_set_state_initial.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o -c /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_initial.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_initial.cpp > CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_initial.cpp -o CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o
+
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o: ../tests/fa_set_state_final.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o -c /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_final.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_final.cpp > CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_set_state_final.cpp -o CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o
+
+
 # Object files for target unit_tests
 unit_tests_OBJECTS = \
 "CMakeFiles/unit_tests.dir/tests/main.cpp.o" \
-"CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o"
+"CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o"
 
 # External object files for target unit_tests
 unit_tests_EXTERNAL_OBJECTS =
 
 unit_tests: CMakeFiles/unit_tests.dir/tests/main.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/build.make
 unit_tests: libgoogletest.a
 unit_tests: libfa.a
 unit_tests: CMakeFiles/unit_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable unit_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable unit_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -129,6 +207,9 @@ CMakeFiles/unit_tests.dir/build: unit_tests
 
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/main.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.requires
 
 .PHONY : CMakeFiles/unit_tests.dir/requires
 

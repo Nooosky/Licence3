@@ -1,31 +1,59 @@
-Start testing: Nov 23 14:49 CET
+Start testing: Nov 30 14:43 CET
 ----------------------------------------------------------
 1/1 Testing: unit
 1/1 Test: unit
 Command: "/home/near/L3/Licence3/Theorie_Langages/TP/build/unit_tests"
 Directory: /home/near/L3/Licence3/Theorie_Langages/TP/build
-"unit" start time: Nov 23 14:49 CET
+"unit" start time: Nov 30 14:43 CET
 Output:
 ----------------------------------------------------------
-[==========] Running 1 test from 1 test case.
+[==========] Running 10 tests from 4 test cases.
 [----------] Global test environment set-up.
-[----------] 1 test from fa
-[ RUN      ] fa.create
-ERROR : fa_create() -> state_count: Inappropriate ioctl for device
-ERROR : fa_create() -> state_count: Invalid argument
-ERROR : fa_create() -> alpha_count: Invalid argument
-[       OK ] fa.create (0 ms)
-[----------] 1 test from fa (0 ms total)
+[----------] 5 tests from fa_create
+[ RUN      ] fa_create.cond
+[       OK ] fa_create.cond (0 ms)
+[ RUN      ] fa_create.counts
+[       OK ] fa_create.counts (0 ms)
+[ RUN      ] fa_create.is_initial
+[       OK ] fa_create.is_initial (0 ms)
+[ RUN      ] fa_create.is_final
+[       OK ] fa_create.is_final (0 ms)
+[ RUN      ] fa_create.transitions
+[       OK ] fa_create.transitions (0 ms)
+[----------] 5 tests from fa_create (0 ms total)
+
+[----------] 1 test from fa_destroy
+[ RUN      ] fa_destroy.good_return
+[       OK ] fa_destroy.good_return (0 ms)
+[----------] 1 test from fa_destroy (0 ms total)
+
+[----------] 2 tests from fa_set_state_initial
+[ RUN      ] fa_set_state_initial.conds
+ERROR : fa_set_state_initial() -> state: Inappropriate ioctl for device
+ERROR : fa_set_state_initial() -> state: Invalid argument
+[       OK ] fa_set_state_initial.conds (0 ms)
+[ RUN      ] fa_set_state_initial.result
+[       OK ] fa_set_state_initial.result (0 ms)
+[----------] 2 tests from fa_set_state_initial (0 ms total)
+
+[----------] 2 tests from fa_set_state_final
+[ RUN      ] fa_set_state_final.conds
+ERROR : fa_set_state_final() -> state: Invalid argument
+ERROR : fa_set_state_final() -> state: Invalid argument
+[       OK ] fa_set_state_final.conds (0 ms)
+[ RUN      ] fa_set_state_final.result
+[       OK ] fa_set_state_final.result (0 ms)
+[----------] 2 tests from fa_set_state_final (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test case ran. (0 ms total)
-[  PASSED  ] 1 test.
+[==========] 10 tests from 4 test cases ran. (0 ms total)
+[  PASSED  ] 10 tests.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"unit" end time: Nov 23 14:49 CET
+"unit" end time: Nov 30 14:43 CET
 "unit" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Nov 23 14:49 CET
+End testing: Nov 30 14:43 CET
