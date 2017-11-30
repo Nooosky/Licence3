@@ -16,12 +16,11 @@
 
 #define BUFSIZE 4096
 
-
 int main(int argc, char *argv[])
 {
   // récupération des paramètres
   if (argc != 2) {
-    fprintf(stderr, "USAGE: ./serveur <port_serveur>\n");
+    fprintf(stderr,"USAGE: ./serveur <port_serveur>\n");
     exit(EXIT_FAILURE);
   }
 
@@ -49,13 +48,16 @@ int main(int argc, char *argv[])
 
   struct sockaddr_in client_addr;
 
-  // envoie message client
-  char reponse[] = "message du serveur";
-  if (sendto(sock, reponse, BUFSIZE, 0, (struct sockaddr *) &client_addr,  (socklen_t) sizeof(client_addr)) == -1)
+  // recoie message
+  char messageRecu[BUFSIZE];
+  socklen_t size = sizeof(client_addr);
+  if (recvfrom(sock, messageRecu, sizeof(messageRecu), 0, (struct sockaddr *) &client_addr, &size) == -1)
   {
-    perror("send()");
+    perror("recvfrom()");
     exit(errno);
   }
+  // affiche message recu
+  puts((char *)messageRecu);
 
   // fermeture de la socket serveur
   if (close(sock) == -1)
