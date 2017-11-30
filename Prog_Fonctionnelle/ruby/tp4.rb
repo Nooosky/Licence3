@@ -34,9 +34,9 @@ def superscan_v2(path)
   unsaved_a = []
   renamed_a = []
   remaining_a = []
-  exist_or_about? =
+  exists_or_about =
     Proc.new do |path_0|
-      File.exist?(path_0) or renamed_a.find do |path_1| path_1 = path_0 end
+      File.exist?(path_0) or renamed_a.find do |path_1| path_1 == path_0 end
       end
 
   Find.find(path) do |path_0|
@@ -49,7 +49,7 @@ def superscan_v2(path)
           basename_0 = the_basename.removeaccents.gsub($s_regexp, '_')
           basename_1 = basename_0
           nb_4_suffix = 1
-          while File.exist?(path_1 = File.join(the_dirname, basename_1))
+          while exists_or_about[path_1 = File.join(the_dirname, basename_1)]
             basename_1 = "#{basename_0}-#{nb_4_suffix}"
             nb_4_suffix += 1
           end
