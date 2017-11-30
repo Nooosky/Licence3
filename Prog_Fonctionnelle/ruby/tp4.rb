@@ -86,3 +86,17 @@ def scan_and_rename(path)
   end
   unsaved_a
 end
+
+def sumeverywhereignore(x)
+  goingeverywhere = Proc.new do |alreadysymmed,x0|
+    x0_class = x0.class
+    if x0_class == Fixnum
+      ...
+    elsif x0_class == Array
+      ...
+    else
+      ...
+    end
+  end
+  goingeverywhere.call(..., x)
+end
