@@ -76,9 +76,6 @@ size_t fa_count_transitions(const struct fa *self);
 
 // tells if a automaton is deterministic
 bool fa_is_deterministic(const struct fa *self);
-#if __cplusplus
-extern "C" {
-#endif
 
 //tells if a automaton is complete
 bool fa_is_complete(const struct fa *self);
@@ -107,10 +104,10 @@ void fa_remove_non_accessible_states(struct fa *self);
 // remove non co accesible states
 void fa_remove_non_co_accessible_states(struct fa *self);
 
-// product of tho automaton
+// create an automaton with the product of two automatons
 void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs);
 
-// if there is a empty intersection
+// tell if the product of two automaton is a empty language
 bool fa_has_empty_intersection(const struct fa *lhs, const struct fa * rhs);
 
 // create a automaton deterministic about automaton non deterministic
@@ -130,8 +127,3 @@ void fa_create_minimal_moore(struct fa *self, const struct fa *other);
 
 // delet epsilon of an automaton
 void fa_create_without_epsilon(struct fa *self, const struct fa *other);
-
-
-#if __cplusplus
-}
-#endif

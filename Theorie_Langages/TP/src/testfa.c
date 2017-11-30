@@ -120,19 +120,18 @@ int main() {
     fa_set_state_initial(selfFa3, 0);
     fa_set_state_initial(selfFa3, 1);
     fa_set_state_final(selfFa3, 2);
-    fa_add_transition(selfFa2, 0, 'a', 1);
-    fa_add_transition(selfFa2, 1, 'a', 2);
-    fa_add_transition(selfFa2, 1, 'b', 2);
-    fa_add_transition(selfFa2, 2, 'b', 1);
+    fa_add_transition(selfFa3, 0, 'a', 1);
+    fa_add_transition(selfFa3, 1, 'a', 2);
+    fa_add_transition(selfFa3, 1, 'b', 2);
+    fa_add_transition(selfFa3, 2, 'b', 1);
 
+    printf("product of two automatons\n");
     fa_create_product(selfFa1, selfFa2, selfFa3);
-
-
 
 
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
-    fa_pretty_print(selfFa, file);
+    fa_pretty_print(selfFa1, file);
 
     // print automaton in file .dot
     printf("dessine l'automate dans un .dot\n");

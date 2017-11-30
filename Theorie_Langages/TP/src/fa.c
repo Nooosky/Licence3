@@ -458,7 +458,7 @@ void fa_remove_non_co_accessible_states(struct fa *self)
   free(graph);
 }
 
-
+// create an automaton with the product of two automatons
 void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs)
 {
   fa_create(self, (lhs->alpha_count < rhs->alpha_count)?lhs->alpha_count:rhs->alpha_count, rhs->state_count*lhs->state_count);
@@ -478,4 +478,20 @@ void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *r
               for (size_t n = 0; n < rhs->transitions[k][l].size; ++n)
                   fa_add_transition(self, (j * rhs->state_count + l), (char) ('a' + i), (lhs->transitions[i][j].states[m] * rhs->state_count + rhs->transitions[k][l].states[n]));
         }
+}
+
+// tell if the product of two automaton is a empty language
+bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
+{
+  struct fa *selfFa = (struct fa *) malloc(sizeof(struct fa));
+  fa_create_product(selfFa, lhs,rhs);
+  bool variable = fa_is_language_empty(selfFa);
+  free (selfFa);
+  return variable;
+}
+
+// create a automaton deterministic about automaton non deterministic
+void fa_create_deterministic(struct fa *self, const struct fa *nfa)
+{
+
 }

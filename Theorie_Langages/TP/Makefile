@@ -1,5 +1,5 @@
 CC := gcc -std=c11 -O2
-CFLAGS := -pedantic -Wall -Wextra -Wfloat-equal -Wwrite-strings -Wpointer-arith -Wcast-qual -Wcast-align -Wconversion -Wshadow -Wredundant-decls -Wdouble-promotion -Winit-self -Wswitch-default -Wswitch-enum -Wundef -Wlogical-op -Winline
+CFLAGS := -Wall -Wextra
 
 DIRECSRC := ./src
 DIRECBIN := ./bin
