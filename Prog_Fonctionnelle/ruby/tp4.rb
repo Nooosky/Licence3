@@ -88,14 +88,16 @@ def scan_and_rename(path)
 end
 
 def sumeverywhereignore(x)
-  goingeverywhere = Proc.new do |alreadysymmed,x0|
+  goingeverywhere = Proc.new do |alreadysummed,x0|
     x0_class = x0.class
     if x0_class == Fixnum
-      ...
+      alreadysummed + x0
     elsif x0_class == Array
-      ...
+      x0.inject(alreadysummed) do |alreadysummed_0, x1|
+        goingeverywhere[alreadysummed_0, x1]
+      end
     else
-      ...
+      alreadysummed
     end
   end
   goingeverywhere.call(..., x)
