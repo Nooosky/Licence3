@@ -146,6 +146,14 @@ def sumeverywherereject_v2(x)
   end
 end
 
-...
-  2016 + sumeverywhereperform([18,11,['today'],2017]) do ... end
-...
+def f
+  2016 + sumeverywhereperform([18,11,['today'],2017]) do return nil
+  end
+end
+
+p((catch :done do
+  # throw;s 2nd argument defaults to 'nil'.
+  2016 + sumeverywhereperform([18,11,['today'], 2017]) do
+    throw :done
+  end
+end))
