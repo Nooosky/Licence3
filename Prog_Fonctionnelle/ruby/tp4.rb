@@ -100,5 +100,5 @@ def sumeverywhereignore(x)
       alreadysummed
     end
   end
-  goingeverywhere.call(..., x)
+  goingeverywhere.call0, x)
 end
