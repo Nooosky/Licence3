@@ -129,7 +129,7 @@ def sumeverywhereperform(x)
         goingeverywhere[alreadysummed_0, x1]
       end
     else
-      ???????????????
+      alreadysummed + yield
     end
   end
   goingeverywhere.call(0, x)
