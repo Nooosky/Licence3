@@ -18,4 +18,6 @@ netstat -lp
 
 Question 11
 'netstat -tnp'
+Les processus qui les utilisent sont les processus affilliés aux navigateurs web comme I.E., Firefox, Chrome, etc...
 
+Question 12
