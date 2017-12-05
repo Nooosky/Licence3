@@ -27,12 +27,14 @@ int main(int argc, char *argv[])
   }
 
   // création de la socket
+  sleep(5);
   int sock;
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {
     perror("socket()");
     exit(errno);
   }
+  sleep(5);
 
   // association de la socket au port donné
   struct sockaddr_in server_addr;
@@ -48,6 +50,8 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
+  sleep(5);
+
   struct sockaddr_in client_addr;
 
   // attend un client
@@ -58,6 +62,8 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
+  sleep(5);
+
   int sockClient;
   socklen_t size = sizeof(client_addr);
   if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
@@ -65,6 +71,8 @@ int main(int argc, char *argv[])
     perror("accept()");
     exit(errno);
   }
+
+  sleep(5);
 
 
   fd_set writefs;
@@ -74,6 +82,8 @@ int main(int argc, char *argv[])
      FD_ZERO(&writefs);
      FD_SET(sockClient, &writefs);
 
+     sleep(5);
+
      // temporisation
      if(select(sockClient + 1, NULL, &writefs, NULL, NULL) < 0)
      {
@@ -82,10 +92,13 @@ int main(int argc, char *argv[])
      }
 
      // si des donnes sur la socket
+     sleep(5);
+
      if(FD_ISSET(sockClient, &writefs))
      {
        // envoie message client
        char reponse[] = "message du serveur";
+       sleep(5);
        if (send(sockClient, reponse, BUFSIZE, 0) == -1)
        {
          perror("send()");
@@ -95,6 +108,7 @@ int main(int argc, char *argv[])
        break;
      }
    }
+   sleep(5);
 
   //fermer le flux de connexion
   if (shutdown(sockClient, SHUT_RDWR) == -1)
