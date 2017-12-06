@@ -10,7 +10,6 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
-#include <sys/select.h>
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
@@ -27,14 +26,12 @@ int main(int argc, char *argv[])
   }
 
   // création de la socket
-  sleep(5);
   int sock;
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
   {
     perror("socket()");
     exit(errno);
   }
-  sleep(5);
 
   // association de la socket au port donné
   struct sockaddr_in server_addr;
@@ -50,8 +47,6 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  sleep(5);
-
   struct sockaddr_in client_addr;
 
   // attend un client
@@ -62,8 +57,6 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  sleep(5);
-
   int sockClient;
   socklen_t size = sizeof(client_addr);
   if ((sockClient = accept(sock, (struct sockaddr *) &client_addr, &size)) == -1)
@@ -72,43 +65,24 @@ int main(int argc, char *argv[])
     exit(errno);
   }
 
-  sleep(5);
-
-
-  fd_set writefs;
-
-  while(1)
+  //Recoie le nom du client
+  char messageRecu[BUFSIZE];
+  if (recv(sockClient, messageRecu, sizeof(messageRecu), 0) == -1)
   {
-     FD_ZERO(&writefs);
-     FD_SET(sockClient, &writefs);
+    perror("recvfrom()");
+    exit(errno);
+  }
+  // affiche message recu
+  puts((char *)messageRecu);
 
-     sleep(5);
-
-     // temporisation
-     if(select(sockClient + 1, NULL, &writefs, NULL, NULL) < 0)
-     {
-        perror("select()");
-        exit(errno);
-     }
-
-     // si des donnes sur la socket
-     sleep(5);
-
-     if(FD_ISSET(sockClient, &writefs))
-     {
-       // envoie message client
-       char reponse[] = "message du serveur";
-       sleep(5);
-       if (send(sockClient, reponse, BUFSIZE, 0) == -1)
-       {
-         perror("send()");
-         exit(errno);
-       }
-
-       break;
-     }
-   }
-   sleep(5);
+  // envoie message client
+  char reponse[] = "Bonjour ";
+  strcat(reponse, messageRecu);
+  if (send(sockClient, reponse, BUFSIZE, 0) == -1)
+  {
+    perror("send()");
+    exit(errno);
+  }
 
   //fermer le flux de connexion
   if (shutdown(sockClient, SHUT_RDWR) == -1)
