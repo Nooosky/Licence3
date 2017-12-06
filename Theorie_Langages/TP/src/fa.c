@@ -507,5 +507,8 @@ bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
 // create a automaton deterministic about automaton non deterministic
 void fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
+  for (size_t i = 0; i < nfa->state_count; ++i)
+    if (nfa->states[i].is_initial)
 
+    
 }
