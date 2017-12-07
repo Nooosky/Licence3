@@ -102,16 +102,22 @@ int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
         return 0;
       }
       else
+      {
         perror("ERROR : fa_add_transition() -> to");
         return -1;
+      }
     }
     else
+    {
       perror("ERROR : fa_add_transition() -> alpha");
       return -1;
+    }
   }
   else
+  {
     perror("ERROR : fa_add_transition() -> from");
     return -1;
+  }
 
 }
 
@@ -202,16 +208,22 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
           }
       }
       else
+      {
         perror("ERROR : fa_remove_transition() -> to");
         return -1;
+      }
     }
     else
+    {
       perror("ERROR : fa_remove_transition() -> alpha");
       return -1;
+    }
   }
   else
+  {
     perror("ERROR : fa_remove_transition() -> from");
     return -1;
+  }
 }
 
 // delete a state
@@ -255,8 +267,10 @@ int fa_remove_state(struct fa *self, size_t state)
     return 0;
   }
   else
+  {
     perror("ERROR : fa_remove_state() -> state");
     return -1;
+  }
 }
 
 //count transition in an automaton
@@ -493,5 +507,8 @@ bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
 // create a automaton deterministic about automaton non deterministic
 void fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
+  for (size_t i = 0; i < nfa->state_count; ++i)
+    if (nfa->states[i].is_initial)
 
+    
 }

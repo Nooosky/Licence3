@@ -18,4 +18,11 @@ netstat -lp
 
 Question 11
 'netstat -tnp'
+Les processus qui les utilisent sont les processus affilliés aux navigateurs web comme I.E., Firefox, Chrome, etc...
 
+Question 12
+Les différents états sont :
+LISTEN -> Le serveur attend un client
+ESTABLISHED -> La connexion client/serveur est établie
+CLOSED -> La socket est fermée
+FIN_WAIT1 -> La socket est fermée, et la connexion est en cours de terminaison. 
