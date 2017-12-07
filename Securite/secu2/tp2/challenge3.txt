@@ -1,0 +1,4 @@
+./ch3 aaaaaaaaaaaaaaaa'less passwd;'
+yes
+
+//eviter strcpy et sprintf

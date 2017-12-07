@@ -1,0 +1,4 @@
+cd ../../tmp/
+ln -s ../home/challenge5/passwd passs
+cd ../home/challenge5/
+./ch5 passs
