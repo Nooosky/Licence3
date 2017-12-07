@@ -286,6 +286,12 @@ stdlib.h
 stdbool.h
 -
 
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp
+gtest/gtest.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
+
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_create.cpp
 gtest/gtest.h
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
@@ -293,6 +299,12 @@ fa.h
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
 
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_destroy.cpp
+gtest/gtest.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/L3/Licence3/Theorie_Langages/TP/tests/fa_remove_transition.cpp
 gtest/gtest.h
 /home/near/L3/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
 fa.h

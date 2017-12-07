@@ -632,6 +632,33 @@ src/testfa.c.s:
 	$(MAKE) -f CMakeFiles/fa.dir/build.make CMakeFiles/fa.dir/src/testfa.c.s
 .PHONY : src/testfa.c.s
 
+tests/fa_add_transition.o: tests/fa_add_transition.cpp.o
+
+.PHONY : tests/fa_add_transition.o
+
+# target to build an object file
+tests/fa_add_transition.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
+.PHONY : tests/fa_add_transition.cpp.o
+
+tests/fa_add_transition.i: tests/fa_add_transition.cpp.i
+
+.PHONY : tests/fa_add_transition.i
+
+# target to preprocess a source file
+tests/fa_add_transition.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i
+.PHONY : tests/fa_add_transition.cpp.i
+
+tests/fa_add_transition.s: tests/fa_add_transition.cpp.s
+
+.PHONY : tests/fa_add_transition.s
+
+# target to generate assembly for a file
+tests/fa_add_transition.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s
+.PHONY : tests/fa_add_transition.cpp.s
+
 tests/fa_create.o: tests/fa_create.cpp.o
 
 .PHONY : tests/fa_create.o
@@ -685,6 +712,33 @@ tests/fa_destroy.s: tests/fa_destroy.cpp.s
 tests/fa_destroy.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s
 .PHONY : tests/fa_destroy.cpp.s
+
+tests/fa_remove_transition.o: tests/fa_remove_transition.cpp.o
+
+.PHONY : tests/fa_remove_transition.o
+
+# target to build an object file
+tests/fa_remove_transition.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o
+.PHONY : tests/fa_remove_transition.cpp.o
+
+tests/fa_remove_transition.i: tests/fa_remove_transition.cpp.i
+
+.PHONY : tests/fa_remove_transition.i
+
+# target to preprocess a source file
+tests/fa_remove_transition.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.i
+.PHONY : tests/fa_remove_transition.cpp.i
+
+tests/fa_remove_transition.s: tests/fa_remove_transition.cpp.s
+
+.PHONY : tests/fa_remove_transition.s
+
+# target to generate assembly for a file
+tests/fa_remove_transition.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.s
+.PHONY : tests/fa_remove_transition.cpp.s
 
 tests/fa_set_state_final.o: tests/fa_set_state_final.cpp.o
 
@@ -819,12 +873,18 @@ help:
 	@echo "... src/testfa.o"
 	@echo "... src/testfa.i"
 	@echo "... src/testfa.s"
+	@echo "... tests/fa_add_transition.o"
+	@echo "... tests/fa_add_transition.i"
+	@echo "... tests/fa_add_transition.s"
 	@echo "... tests/fa_create.o"
 	@echo "... tests/fa_create.i"
 	@echo "... tests/fa_create.s"
 	@echo "... tests/fa_destroy.o"
 	@echo "... tests/fa_destroy.i"
 	@echo "... tests/fa_destroy.s"
+	@echo "... tests/fa_remove_transition.o"
+	@echo "... tests/fa_remove_transition.i"
+	@echo "... tests/fa_remove_transition.s"
 	@echo "... tests/fa_set_state_final.o"
 	@echo "... tests/fa_set_state_final.i"
 	@echo "... tests/fa_set_state_final.s"
