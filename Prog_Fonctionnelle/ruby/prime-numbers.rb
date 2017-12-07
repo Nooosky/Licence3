@@ -31,7 +31,7 @@ $prime_number_thread = Thread.new do
   sleep
   loop do
     current += 1
-    the_floor_sqrt = Math.sqrt(current).floor 
+    the_floor_sqrt = Math.sqrt(current).floor
     if the_floor_sqrt == 1 or
         current.no_divisor_found?(prime_number_a) do |presumed_divisor|
           presumed_divisor > the_floor_sqrt
