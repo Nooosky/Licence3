@@ -285,6 +285,10 @@ stdlib.h
 -
 stdbool.h
 -
+string.h
+-
+math.h
+-
 
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp
 gtest/gtest.h
@@ -348,6 +352,18 @@ string.h
 fa.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
 
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_non_accessible_states.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_non_co_accessible_states.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp
 gtest/gtest.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
@@ -367,6 +383,12 @@ fa.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
 
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_set_state_initial.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/graph_has_path.cpp
 gtest/gtest.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
 fa.h

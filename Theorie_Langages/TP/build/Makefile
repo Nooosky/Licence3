@@ -875,6 +875,60 @@ tests/fa_pretty_print.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.s
 .PHONY : tests/fa_pretty_print.cpp.s
 
+tests/fa_remove_non_accessible_states.o: tests/fa_remove_non_accessible_states.cpp.o
+
+.PHONY : tests/fa_remove_non_accessible_states.o
+
+# target to build an object file
+tests/fa_remove_non_accessible_states.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_accessible_states.cpp.o
+.PHONY : tests/fa_remove_non_accessible_states.cpp.o
+
+tests/fa_remove_non_accessible_states.i: tests/fa_remove_non_accessible_states.cpp.i
+
+.PHONY : tests/fa_remove_non_accessible_states.i
+
+# target to preprocess a source file
+tests/fa_remove_non_accessible_states.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_accessible_states.cpp.i
+.PHONY : tests/fa_remove_non_accessible_states.cpp.i
+
+tests/fa_remove_non_accessible_states.s: tests/fa_remove_non_accessible_states.cpp.s
+
+.PHONY : tests/fa_remove_non_accessible_states.s
+
+# target to generate assembly for a file
+tests/fa_remove_non_accessible_states.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_accessible_states.cpp.s
+.PHONY : tests/fa_remove_non_accessible_states.cpp.s
+
+tests/fa_remove_non_co_accessible_states.o: tests/fa_remove_non_co_accessible_states.cpp.o
+
+.PHONY : tests/fa_remove_non_co_accessible_states.o
+
+# target to build an object file
+tests/fa_remove_non_co_accessible_states.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_co_accessible_states.cpp.o
+.PHONY : tests/fa_remove_non_co_accessible_states.cpp.o
+
+tests/fa_remove_non_co_accessible_states.i: tests/fa_remove_non_co_accessible_states.cpp.i
+
+.PHONY : tests/fa_remove_non_co_accessible_states.i
+
+# target to preprocess a source file
+tests/fa_remove_non_co_accessible_states.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_co_accessible_states.cpp.i
+.PHONY : tests/fa_remove_non_co_accessible_states.cpp.i
+
+tests/fa_remove_non_co_accessible_states.s: tests/fa_remove_non_co_accessible_states.cpp.s
+
+.PHONY : tests/fa_remove_non_co_accessible_states.s
+
+# target to generate assembly for a file
+tests/fa_remove_non_co_accessible_states.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_non_co_accessible_states.cpp.s
+.PHONY : tests/fa_remove_non_co_accessible_states.cpp.s
+
 tests/fa_remove_state.o: tests/fa_remove_state.cpp.o
 
 .PHONY : tests/fa_remove_state.o
@@ -983,6 +1037,33 @@ tests/fa_set_state_initial.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.s
 .PHONY : tests/fa_set_state_initial.cpp.s
 
+tests/graph_has_path.o: tests/graph_has_path.cpp.o
+
+.PHONY : tests/graph_has_path.o
+
+# target to build an object file
+tests/graph_has_path.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/graph_has_path.cpp.o
+.PHONY : tests/graph_has_path.cpp.o
+
+tests/graph_has_path.i: tests/graph_has_path.cpp.i
+
+.PHONY : tests/graph_has_path.i
+
+# target to preprocess a source file
+tests/graph_has_path.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/graph_has_path.cpp.i
+.PHONY : tests/graph_has_path.cpp.i
+
+tests/graph_has_path.s: tests/graph_has_path.cpp.s
+
+.PHONY : tests/graph_has_path.s
+
+# target to generate assembly for a file
+tests/graph_has_path.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/graph_has_path.cpp.s
+.PHONY : tests/graph_has_path.cpp.s
+
 tests/main.o: tests/main.cpp.o
 
 .PHONY : tests/main.o
@@ -1089,6 +1170,12 @@ help:
 	@echo "... tests/fa_pretty_print.o"
 	@echo "... tests/fa_pretty_print.i"
 	@echo "... tests/fa_pretty_print.s"
+	@echo "... tests/fa_remove_non_accessible_states.o"
+	@echo "... tests/fa_remove_non_accessible_states.i"
+	@echo "... tests/fa_remove_non_accessible_states.s"
+	@echo "... tests/fa_remove_non_co_accessible_states.o"
+	@echo "... tests/fa_remove_non_co_accessible_states.i"
+	@echo "... tests/fa_remove_non_co_accessible_states.s"
 	@echo "... tests/fa_remove_state.o"
 	@echo "... tests/fa_remove_state.i"
 	@echo "... tests/fa_remove_state.s"
@@ -1101,6 +1188,9 @@ help:
 	@echo "... tests/fa_set_state_initial.o"
 	@echo "... tests/fa_set_state_initial.i"
 	@echo "... tests/fa_set_state_initial.s"
+	@echo "... tests/graph_has_path.o"
+	@echo "... tests/graph_has_path.i"
+	@echo "... tests/graph_has_path.s"
 	@echo "... tests/main.o"
 	@echo "... tests/main.i"
 	@echo "... tests/main.s"

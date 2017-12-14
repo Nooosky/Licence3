@@ -42,6 +42,7 @@ add_library(googletest ${GOOGLETEST_SOURCES})
 
 add_executable(
     unit_tests
+    tests/fa_remove_non_accessible_states.cpp
     tests/main.cpp
     tests/fa_create.cpp
     tests/fa_destroy.cpp
@@ -56,6 +57,8 @@ add_executable(
     tests/fa_is_complete.cpp
     tests/fa_make_complete.cpp
     tests/fa_is_deterministic.cpp
+    tests/fa_remove_non_co_accessible_states.cpp
+    tests/graph_has_path.cpp
     )
 
 add_dependencies(unit_tests googletest)

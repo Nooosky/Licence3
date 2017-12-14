@@ -17,6 +17,10 @@ stdlib.h
 -
 stdbool.h
 -
+string.h
+-
+math.h
+-
 
 /home/near/Documents/Licence3/Theorie_Langages/TP/src/testfa.c
 stdlib.h

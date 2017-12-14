@@ -120,6 +120,7 @@ TEST(fa_is_deterministic, are_deterministic)
 
   ASSERT_EQ(true, fa_is_deterministic(selfDet5));
   fa_destroy(selfDet5);
+
 }
 
 TEST(fa_is_deterministic, not_deterministics)
@@ -173,7 +174,7 @@ TEST(fa_is_deterministic, not_deterministics)
   fa_create(selfNDet4, 0, 0);
 
   ASSERT_EQ(false, fa_is_deterministic(selfNDet4));
-  fa_destroy(selfNDet4);
+  //fa_destroy(selfNDet4);
 
   struct fa *selfNDet5 = (struct fa *) malloc(sizeof(struct fa));
   fa_create(selfNDet5, 1, 1);
@@ -183,4 +184,5 @@ TEST(fa_is_deterministic, not_deterministics)
 
   ASSERT_EQ(false, fa_is_deterministic(selfNDet5));
   fa_destroy(selfNDet5);
+
 }

@@ -136,6 +136,10 @@ int main() {
     printf("dessine l'automate dans un .dot\n");
     fa_dot_print(selfFa1, file, "img/automaton.dot");
 
+    struct fa *selfFaDet = (struct fa *) malloc(sizeof(struct fa));
+
+    fa_create_deterministic(selfFaDet, selfFa);
+
     //destruction of a automaton
     printf("detruie l'automate\n");
     fa_destroy(selfFa);
@@ -143,6 +147,8 @@ int main() {
     //destruction of a graph
     printf("detruie le graph\n");
     graph_destroy(selfGraph);
+
+
 
     return 0;
 }

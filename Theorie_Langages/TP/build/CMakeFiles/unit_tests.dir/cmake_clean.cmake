@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/unit_tests.dir/tests/fa_remove_non_accessible_states.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/main.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/fa_create.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o"
@@ -13,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/fa_make_complete.cpp.o"
   "CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/fa_remove_non_co_accessible_states.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/graph_has_path.cpp.o"
   "unit_tests.pdb"
   "unit_tests"
 )
