@@ -713,6 +713,87 @@ tests/fa_destroy.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s
 .PHONY : tests/fa_destroy.cpp.s
 
+tests/fa_dot_print.o: tests/fa_dot_print.cpp.o
+
+.PHONY : tests/fa_dot_print.o
+
+# target to build an object file
+tests/fa_dot_print.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o
+.PHONY : tests/fa_dot_print.cpp.o
+
+tests/fa_dot_print.i: tests/fa_dot_print.cpp.i
+
+.PHONY : tests/fa_dot_print.i
+
+# target to preprocess a source file
+tests/fa_dot_print.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.i
+.PHONY : tests/fa_dot_print.cpp.i
+
+tests/fa_dot_print.s: tests/fa_dot_print.cpp.s
+
+.PHONY : tests/fa_dot_print.s
+
+# target to generate assembly for a file
+tests/fa_dot_print.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.s
+.PHONY : tests/fa_dot_print.cpp.s
+
+tests/fa_pretty_print.o: tests/fa_pretty_print.cpp.o
+
+.PHONY : tests/fa_pretty_print.o
+
+# target to build an object file
+tests/fa_pretty_print.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o
+.PHONY : tests/fa_pretty_print.cpp.o
+
+tests/fa_pretty_print.i: tests/fa_pretty_print.cpp.i
+
+.PHONY : tests/fa_pretty_print.i
+
+# target to preprocess a source file
+tests/fa_pretty_print.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.i
+.PHONY : tests/fa_pretty_print.cpp.i
+
+tests/fa_pretty_print.s: tests/fa_pretty_print.cpp.s
+
+.PHONY : tests/fa_pretty_print.s
+
+# target to generate assembly for a file
+tests/fa_pretty_print.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.s
+.PHONY : tests/fa_pretty_print.cpp.s
+
+tests/fa_remove_state.o: tests/fa_remove_state.cpp.o
+
+.PHONY : tests/fa_remove_state.o
+
+# target to build an object file
+tests/fa_remove_state.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
+.PHONY : tests/fa_remove_state.cpp.o
+
+tests/fa_remove_state.i: tests/fa_remove_state.cpp.i
+
+.PHONY : tests/fa_remove_state.i
+
+# target to preprocess a source file
+tests/fa_remove_state.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i
+.PHONY : tests/fa_remove_state.cpp.i
+
+tests/fa_remove_state.s: tests/fa_remove_state.cpp.s
+
+.PHONY : tests/fa_remove_state.s
+
+# target to generate assembly for a file
+tests/fa_remove_state.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s
+.PHONY : tests/fa_remove_state.cpp.s
+
 tests/fa_remove_transition.o: tests/fa_remove_transition.cpp.o
 
 .PHONY : tests/fa_remove_transition.o
@@ -882,6 +963,15 @@ help:
 	@echo "... tests/fa_destroy.o"
 	@echo "... tests/fa_destroy.i"
 	@echo "... tests/fa_destroy.s"
+	@echo "... tests/fa_dot_print.o"
+	@echo "... tests/fa_dot_print.i"
+	@echo "... tests/fa_dot_print.s"
+	@echo "... tests/fa_pretty_print.o"
+	@echo "... tests/fa_pretty_print.i"
+	@echo "... tests/fa_pretty_print.s"
+	@echo "... tests/fa_remove_state.o"
+	@echo "... tests/fa_remove_state.i"
+	@echo "... tests/fa_remove_state.s"
 	@echo "... tests/fa_remove_transition.o"
 	@echo "... tests/fa_remove_transition.i"
 	@echo "... tests/fa_remove_transition.s"
