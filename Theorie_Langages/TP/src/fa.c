@@ -118,7 +118,7 @@ int fa_pretty_print(const struct fa *self, FILE *out, char * path)
   //out = fopen("txt/automaton.txt", "w+");
   if(out == NULL)
   {
-    perror("ERROR : fa_pretty_print() -> fopen()");
+    //perror("ERROR : fa_pretty_print() -> fopen()");
     return -1;
   }
 
@@ -150,12 +150,12 @@ int fa_pretty_print(const struct fa *self, FILE *out, char * path)
 }
 
 // affiche en automate en format DOT
-int fa_dot_print(const struct fa *self, FILE *out)
+int fa_dot_print(const struct fa *self, FILE *out, char* path)
 {
-  out = fopen("img/automaton.dot", "w+");
+  out = fopen(path, "w+");
   if(out == NULL)
   {
-    perror("ERROR : fa_dot_print() -> fopen()");
+    //perror("ERROR : fa_dot_print() -> fopen()");
     return -1;
   }
 
@@ -279,9 +279,9 @@ bool fa_is_deterministic(const struct fa *self)
     if (self->states[i].is_initial == 1)
     {
       ++nbStatesInitiaux;
-      if (nbStatesInitiaux != 1)
-        return false;
     }
+    if (nbStatesInitiaux != 1)
+      return false;
 
   for (size_t i = 0; i < self->state_count; ++i)
     for (size_t j = 0; j < self->alpha_count; ++j)
@@ -294,22 +294,28 @@ bool fa_is_deterministic(const struct fa *self)
 //tells if a automaton is complete
 bool fa_is_complete(const struct fa *self)
 {
+  if(fa_is_deterministic(self))
+  {
+    return true;
+  }
   for (size_t i = 0; i < self->state_count; ++i)
     for (size_t j = 0; j < self->alpha_count; ++j)
-      if(self->transitions[j][i].size != 1)
+      if(self->transitions[j][i].size < 1)
         return false;
 
   return true;
 }
 
 //makes an automaton complete
-void fa_make_complete(struct fa *self)
+int fa_make_complete(struct fa *self)
 {
   if (!fa_is_complete(self))
   {
     bool etatPoubelle = false;
     for (size_t i = 0; i < self->state_count; ++i)
+    {
       for (size_t j = 0; j < self->alpha_count; ++j)
+      {
         if(self->transitions[j][i].size == 0)
         {
           if (!etatPoubelle)
@@ -332,6 +338,11 @@ void fa_make_complete(struct fa *self)
 
           fa_add_transition(self, i, (char)(j + 'a'), self->state_count - 1);
         }
+      }
+    }
+    return 0;
+  }else{
+    return -1;
   }
 }
 

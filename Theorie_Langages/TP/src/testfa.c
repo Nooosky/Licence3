@@ -134,7 +134,7 @@ int main() {
 
     // print automaton in file .dot
     printf("dessine l'automate dans un .dot\n");
-    fa_dot_print(selfFa1, file);
+    fa_dot_print(selfFa1, file, "img/automaton.dot");
 
     //destruction of a automaton
     printf("detruie l'automate\n");
