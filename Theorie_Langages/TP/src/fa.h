@@ -113,7 +113,7 @@ void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *r
 bool fa_has_empty_intersection(const struct fa *lhs, const struct fa * rhs);
 
 // create a automaton deterministic about automaton non deterministic
-void fa_create_deterministic(struct fa *self, const struct fa *nfa);
+int fa_create_deterministic(struct fa *self, const struct fa *nfa);
 
 // if a automaton is included into an other automaton
 bool fa_is_included(const struct fa *lhs, const struct fa *rhs);

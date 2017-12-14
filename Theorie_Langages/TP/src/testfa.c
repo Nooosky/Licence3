@@ -138,6 +138,7 @@ int main() {
 
     struct fa *selfFaDet = (struct fa *) malloc(sizeof(struct fa));
 
+    printf("cree l'automate deterministe\n");
     fa_create_deterministic(selfFaDet, selfFa);
 
     //destruction of a automaton

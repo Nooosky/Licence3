@@ -273,11 +273,10 @@ bool fa_is_deterministic(const struct fa *self)
   size_t nbInitialStates = 0;
   for (size_t i = 0; i < self->state_count; ++i)
     if (self->states[i].is_initial == 1)
-    {
       ++nbInitialStates;
-    }
-    if (nbInitialStates != 1)
-      return false;
+
+  if (nbInitialStates != 1)
+    return false;
 
   for (size_t i = 0; i < self->state_count; ++i)
     for (size_t j = 0; j < self->alpha_count; ++j)
@@ -463,7 +462,7 @@ void fa_remove_non_accessible_states(struct fa *self)
     if (!tabBool[i])
       fa_remove_state(self, i);
 
-    graph_destroy(graph);
+  graph_destroy(graph);
 }
 
 
@@ -516,103 +515,88 @@ bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
 }
 
 //Creates a deterministic automata from a non-derministic one
-void fa_create_deterministic(struct fa *self, const struct fa *nfa)
+int fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
-  if(fa_is_deterministic(self)){return;}
-  //nombre de sous ensemble maximum -> 2 pow nombreD'Etat
-  int maxState = pow(2, nfa->state_count);
+  if(!fa_is_deterministic(self))
+  {
+    size_t maxState = pow(2, nfa->state_count);
+    int correspondence[maxState][nfa->state_count];
+    int transition[maxState][nfa->alpha_count];
+    size_t size = 0, countStateNfa = 0, numState = 0, stateNfa = 0;
+    bool equal = true;
+    int state[nfa->state_count];
 
-  int correspondence[maxState][nfa->state_count];
-  for(int i = 0; i < maxState; i++){
-    for(int j = 0; j < nfa->state_count; j++){
-      correspondence[i][j] = -1;
+    for(size_t i = 0; i < maxState; ++i)
+    {
+      for(size_t j = 0; j < nfa->state_count; ++j)
+        correspondence[i][j] = 0;
+
+      for(size_t j = 0; j < nfa->alpha_count; ++j)
+          transition[i][j] = 0;
     }
-  }
 
-  int transition[maxState][nfa->alpha_count];
-  for(int i = 0; i < maxState; i++){
-    for(int j = 0; j < nfa->alpha_count; j++){
-        transition[i][j] = -1;
-    }
-  }
+    //recherche des états initiaux
+    for(size_t i = 0; i < nfa->state_count; ++i)
+      if(nfa->states[i].is_initial)
+        correspondence[numState][i] = i;
+    countStateNfa++;
 
-  int size = 0;
-  int countStateNfa = 0;
-  int numState = 0;
-  int equal = 1;
-  int state[nfa->state_count];
-  int stateNfa;
+    do{
+      //pour chaque lettre on cherche les états accecibles par un sous ensemble d'état
+      for(size_t j = 0; j < nfa->alpha_count; ++j)
+      {
+        for(size_t i = 0; i < nfa->state_count; ++i)
+          state[i] = 0;
 
+        for(size_t i = 0; i < nfa->state_count; ++i)
+            if(correspondence[numState][i] != 0 && nfa->transitions[correspondence[numState][i]][j].size != 0)
+              for(size_t k = 0; k < nfa->transitions[correspondence[numState][i]][j].size; ++k)
+              {
+                state[nfa->transitions[correspondence[numState][i]][j].states[k]] = nfa->transitions[correspondence[numState][i]][j].states[k];
+                size++;
+              }
 
-  //recherche des états initiaux
-  for(int i = 0; i < nfa->state_count; i++){
-    if(nfa->states[i].is_initial == true){
-      correspondence[numState][i] = i;
-    }
-  }
-  countStateNfa++;
+        if(size > 0)
+        {
+          for(stateNfa = 0; stateNfa < countStateNfa; ++stateNfa)
+          {
+            equal = true;
 
-  do{
-    //pour chaque lettre on cherche les états accecibles par un sous ensemble d'état
-    for(int j = 0; j < nfa->alpha_count; j++){
-      for(int i = 0; i < nfa->state_count; i++){
-        state[i] = -1;
-      }
-      for(int i = 0; i < nfa->state_count; i++){ // les états du sous ensemble
+            for(size_t k = 0; k <  nfa->state_count; ++k)
+              if(correspondence[stateNfa][k] != state[k])
+              {
+                equal = false;
+                break;
+              }
 
-        if(correspondence[numState][i] != -1) {
-          if(nfa->transitions[correspondence[numState][i]][j].size != 0){
-            //si il y a au moins une transition avec un état et une lettre, on ajoute ces transitions dans un autre tableau
-            for(int k = 0; k < nfa->transitions[correspondence[numState][i]][j].size; k++){
-              state[nfa->transitions[correspondence[numState][i]][j].states[k]] = nfa->transitions[correspondence[numState][i]][j].states[k];
-              size++;
-            }
-          }
-        }
-      }
-      //si ce sous ensemble à des états accecibles grace à une lettre on cherche si ces états ne sont pas un sous ensembel existant
-      if(size){
-        for(stateNfa = 0; stateNfa < countStateNfa; stateNfa++){
-          equal = 1;
-
-          for(int k = 0; k <  nfa->state_count; k++){
-            if(correspondence[stateNfa][k] != state[k]){
-              equal = 0;
+            if(equal)
               break;
-            }
           }
-
-          if(equal){
-            break;
-          }
+          if(!equal)
+          {
+            transition[numState][j] = countStateNfa;
+            memcpy(correspondence[countStateNfa], state, nfa->state_count*sizeof(size_t));
+            countStateNfa++;
+          }else
+            transition[numState][j] = stateNfa;
         }
-        if(!equal){
-          transition[numState][j] = countStateNfa;
-          memcpy(correspondence[countStateNfa], state, nfa->state_count*sizeof(size_t));
-          countStateNfa++;
-        }else{
-          transition[numState][j] = stateNfa;
-        }
+        size = 0;
       }
-      size = 0;
-    }
-    numState++;
-  }while(numState != countStateNfa);
+      numState++;
+    }while(numState != countStateNfa);
 
-  fa_create(self, nfa->alpha_count, countStateNfa);
-  for(int i = 0; i < countStateNfa; i++){
-    for(int j = 0; j < nfa->alpha_count; j++){
-      if(transition[i][j] != -1){
-        fa_add_transition(self, i, j+'a', transition[i][j]);
+    fa_create(self, nfa->alpha_count, countStateNfa);
+    fa_set_state_initial(self, 0);
+    for(size_t i = 0; i < countStateNfa; ++i)
+      for(size_t j = 0; j < nfa->alpha_count; ++j)
+      {
+        if(transition[i][j] != 0)
+          fa_add_transition(self, i, j+'a', transition[i][j]);
+
+        if(nfa->states[correspondence[i][j]].is_final)
+          fa_set_state_final(self, i);
       }
-    }
+    return 0;
   }
-  fa_set_state_initial(self, 0);
-  for(int i = 0; i < countStateNfa; i++){
-    for(int j = 0; j < nfa->alpha_count; j++){
-      if(nfa->states[correspondence[i][j]].is_final == true){
-        fa_set_state_final(self, i);
-      }
-    }
-  }
+  return -1;
 }

@@ -1,5 +1,6 @@
 CC := gcc -std=c11 -O2
 CFLAGS := -Wall -Wextra
+LIBS := -lm
 
 DIRECSRC := ./src
 DIRECBIN := ./bin
@@ -12,7 +13,7 @@ all: $(EXENAME) install execute
 
 $(EXENAME): $(OBJ)
 	@echo "** Building"
-	$(CC) $(CFLAGS) -o $(DIRECSRC)/$@ $^
+	$(CC) $(CFLAGS) -o $(DIRECSRC)/$@ $^ $(LIBS)
 
 $(DIRECSRC)/%.o: $(DIRECSRC)/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
