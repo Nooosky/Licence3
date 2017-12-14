@@ -1,6 +1,6 @@
 #include "fa.h"
 
-// crée un automate
+//Creates an automata
 int fa_create(struct fa *self, size_t alpha_count, size_t state_count)
 {
   if(-1 < (int)alpha_count && (int)alpha_count <= 26)
@@ -42,7 +42,7 @@ int fa_create(struct fa *self, size_t alpha_count, size_t state_count)
   return 0;
 }
 
-// détruire un automate
+//Destroys an automata
 int fa_destroy(struct fa *self)
 {
   for (size_t i = 0; i < self->alpha_count; ++i)
@@ -57,7 +57,7 @@ int fa_destroy(struct fa *self)
   return 0;
 }
 
-//make a state initial
+//Marks a state as initial
 int fa_set_state_initial(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
@@ -70,7 +70,7 @@ int fa_set_state_initial(struct fa *self, size_t state)
   }
 }
 
-//make a state final
+//Marks a state as initial
 int fa_set_state_final(struct fa *self, size_t state)
 {
   if(-1 < (int) state && state < self->state_count)
@@ -83,7 +83,7 @@ int fa_set_state_final(struct fa *self, size_t state)
   }
 }
 
-// ajouter un transition à l'automate
+//Adds a transition to an automata
 int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
 {
   if(-1 < (int)from && from < self->state_count)
@@ -111,7 +111,7 @@ int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
     return -1;
 }
 
-// afficher un automate
+//Prints all the infos about an automata
 int fa_pretty_print(const struct fa *self, FILE *out, char * path)
 {
   out = fopen(path, "w+");
@@ -149,7 +149,7 @@ int fa_pretty_print(const struct fa *self, FILE *out, char * path)
   return 0;
 }
 
-// affiche en automate en format DOT
+//Prints an automata in a .DOT file
 int fa_dot_print(const struct fa *self, FILE *out, char* path)
 {
   out = fopen(path, "w+");
@@ -178,7 +178,7 @@ int fa_dot_print(const struct fa *self, FILE *out, char* path)
   return 0;
 }
 
-// delete a transition
+//Deletes a transition in an automata
 int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
   int already = 1;
@@ -215,7 +215,7 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
     return -1;
 }
 
-// delete a state
+//Deletes a state in an automata
 int fa_remove_state(struct fa *self, size_t state)
 {
   if(-1 < (int)state && state < self->state_count)
@@ -260,7 +260,7 @@ int fa_remove_state(struct fa *self, size_t state)
     return -1;
 }
 
-//count transition in an automaton
+//Sums the number of transitions in an automata
 size_t fa_count_transitions(const struct fa *self)
 {
   size_t nbTransitions = 0;
@@ -271,16 +271,16 @@ size_t fa_count_transitions(const struct fa *self)
   return nbTransitions;
 }
 
-//check if an automaton is deterministic
+//Checks if an automata is deterministic
 bool fa_is_deterministic(const struct fa *self)
 {
-  size_t nbStatesInitiaux = 0;
+  size_t nbInitialStates = 0;
   for (size_t i = 0; i < self->state_count; ++i)
     if (self->states[i].is_initial == 1)
     {
-      ++nbStatesInitiaux;
+      ++nbInitialStates;
     }
-    if (nbStatesInitiaux != 1)
+    if (nbInitialStates != 1)
       return false;
 
   for (size_t i = 0; i < self->state_count; ++i)
@@ -291,14 +291,14 @@ bool fa_is_deterministic(const struct fa *self)
   return true;
 }
 
-//tells if a automaton is complete
+//Tells if a automaton is complete
 bool fa_is_complete(const struct fa *self)
 {
   if(fa_is_deterministic(self))
   {
     return true;
   }
-  for (size_t i = 0; i < self->state_count; ++i)
+  for (size_t i = 0; i  < self->state_count; ++i)
     for (size_t j = 0; j < self->alpha_count; ++j)
       if(self->transitions[j][i].size < 1)
         return false;
@@ -306,19 +306,19 @@ bool fa_is_complete(const struct fa *self)
   return true;
 }
 
-//makes an automaton complete
+//Makes an automaton complete
 int fa_make_complete(struct fa *self)
 {
   if (!fa_is_complete(self))
   {
-    bool etatPoubelle = false;
+    bool trashState = false;
     for (size_t i = 0; i < self->state_count; ++i)
     {
       for (size_t j = 0; j < self->alpha_count; ++j)
       {
         if(self->transitions[j][i].size == 0)
         {
-          if (!etatPoubelle)
+          if (!trashState)
           {
             self->state_count++;
             self->states = realloc(self->states, self->state_count * sizeof(struct state));
@@ -333,7 +333,7 @@ int fa_make_complete(struct fa *self)
               self->transitions[k][self->state_count - 1].states[0] = self->state_count - 1;
             }
 
-            etatPoubelle = true;
+            trashState = true;
           }
 
           fa_add_transition(self, i, (char)(j + 'a'), self->state_count - 1);
@@ -346,7 +346,7 @@ int fa_make_complete(struct fa *self)
   }
 }
 
-//create graph with automaton
+//Create graph from an automata
 void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted)
 {
   self->node_count = fa->state_count;
@@ -362,14 +362,14 @@ void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted
   if (!inverted)
     for (size_t i = 0; i < fa->state_count; ++i)
     {
-      size_t valeur = 0;
+      size_t value = 0;
       for (size_t j = 0; j < fa->alpha_count; ++j)
       {
         self->nodes[i].nb_adjacent += fa->transitions[j][i].size;
         self->nodes[i].adjacent_nodes = realloc(self->nodes[i].adjacent_nodes, self->nodes[i].nb_adjacent * sizeof(struct node));
-        for (size_t k = valeur; k < self->nodes[i].nb_adjacent; ++k)
-          self->nodes[i].adjacent_nodes[k].number = fa->transitions[j][i].states[k - valeur];
-        valeur = fa->transitions[j][i].size;
+        for (size_t k = value; k < self->nodes[i].nb_adjacent; ++k)
+          self->nodes[i].adjacent_nodes[k].number = fa->transitions[j][i].states[k - value];
+        value = fa->transitions[j][i].size;
       }
     }
   else if (inverted)
@@ -377,15 +377,15 @@ void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted
       for (size_t j = 0; j < fa->alpha_count; ++j)
         for (size_t k = 0; k < fa->transitions[j][i].size; ++k)
         {
-          bool arc = false;
+          bool edge = false;
           for (size_t l = 0; l < self->nodes[fa->transitions[j][i].states[k]].nb_adjacent; ++l)
             if(self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes[l].number == i)
             {
-              arc = true;
+              edge = true;
               break;
             }
 
-          if (!arc)
+          if (!edge)
           {
             ++self->nodes[fa->transitions[j][i].states[k]].nb_adjacent;
             self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes = realloc(self->nodes[fa->transitions[j][i].states[k]].adjacent_nodes, self->nodes[fa->transitions[j][i].states[k]].nb_adjacent * sizeof(struct node));
@@ -394,7 +394,7 @@ void graph_create_from_fa(struct graph *self, const struct fa *fa, bool inverted
         }
 }
 
-// deletion a graph
+//Destroys a graph
 void graph_destroy(struct graph *self)
 {
     for (size_t i = 0; i < self->node_count; ++i)
@@ -403,7 +403,7 @@ void graph_destroy(struct graph *self)
     free(self);
 }
 
-// make in depth
+//Makes in depth first search
 int graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
 {
   if (state < self->node_count)
@@ -419,7 +419,7 @@ int graph_depth_first_search(const struct graph *self, size_t state, bool *visit
       return -1;
 }
 
-//tells if a path exists in the graph between two states
+//Tells if a path exists in the graph between two nodes
 bool graph_has_path(const struct graph *self, size_t from, size_t to)
 {
     if (from < self->node_count)
@@ -434,7 +434,7 @@ bool graph_has_path(const struct graph *self, size_t from, size_t to)
     return false;
 }
 
-//tells if the language of a graph is empty
+//Tells if the language of a graph is empty
 bool fa_is_language_empty(const struct fa *self)
 {
     struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
@@ -443,15 +443,16 @@ bool fa_is_language_empty(const struct fa *self)
     for (size_t i = 0; i < self->state_count; ++i)
         for (size_t j = 0; j < self->state_count; ++j)
             if(self->states[i].is_initial && self->states[j].is_final)
-                if(graph_has_path(graph, i, j))
-                    return false;
-
+                if(graph_has_path(graph, i, j)){
+                  //graph_destroy(graph);
+                  return false;
+                }
     free(graph);
     return true;
 }
 
 
-//remove all non accessible states
+//Removes all non accessible states
 void fa_remove_non_accessible_states(struct fa *self)
 {
   struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
@@ -470,7 +471,7 @@ void fa_remove_non_accessible_states(struct fa *self)
 }
 
 
-//remove all non co accessible states
+//Remove all non co-accessible states
 void fa_remove_non_co_accessible_states(struct fa *self)
 {
   struct graph *graph = (struct graph *) malloc(sizeof(struct graph));
@@ -485,7 +486,7 @@ void fa_remove_non_co_accessible_states(struct fa *self)
   free(graph);
 }
 
-
+//Creates the product of two graphs
 void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs)
 {
   fa_create(self, (lhs->alpha_count < rhs->alpha_count)?lhs->alpha_count:rhs->alpha_count, rhs->state_count*lhs->state_count);
@@ -507,17 +508,17 @@ void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *r
         }
 }
 
-// tell if the product of two automaton is a empty language
+//Tells if the product of two automaton is an empty language
 bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
 {
   struct fa *selfFa = (struct fa *) malloc(sizeof(struct fa));
   fa_create_product(selfFa, lhs,rhs);
   bool variable = fa_is_language_empty(selfFa);
-  free (selfFa);
+  free(selfFa);
   return variable;
 }
 
-// create a automaton deterministic about automaton non deterministic
+//Creates a deterministic automata from a non-derministic one
 void fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
 

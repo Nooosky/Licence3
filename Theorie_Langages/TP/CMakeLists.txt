@@ -48,14 +48,14 @@ add_executable(
     tests/fa_set_state_final.cpp
     tests/fa_set_state_initial.cpp
     tests/fa_remove_transition.cpp
+    tests/fa_remove_state.cpp
     tests/fa_pretty_print.cpp
     tests/fa_add_transition.cpp
     tests/fa_count_transitions.cpp
     tests/fa_dot_print.cpp
     tests/fa_is_complete.cpp
+    tests/fa_make_complete.cpp
     tests/fa_is_deterministic.cpp
-    tests/fa_remove_state.cpp
-
     )
 
 add_dependencies(unit_tests googletest)

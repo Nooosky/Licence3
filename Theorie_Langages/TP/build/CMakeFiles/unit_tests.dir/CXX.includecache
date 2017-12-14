@@ -332,6 +332,12 @@ gtest/gtest.h
 fa.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
 
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_make_complete.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_pretty_print.cpp
 gtest/gtest.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
