@@ -102,20 +102,23 @@ int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
         return 0;
       }
       else
-        return -3;
+        perror("ERROR : fa_add_transition() -> to");
+        return -1;
     }
     else
-      return -2;
+      perror("ERROR : fa_add_transition() -> alpha");
+      return -1;
   }
   else
+    perror("ERROR : fa_add_transition() -> from");
     return -1;
+
 }
 
 // afficher un automate
-int fa_pretty_print(const struct fa *self, FILE *out, char * path)
+int fa_pretty_print(const struct fa *self, FILE *out)
 {
-  out = fopen(path, "w+");
-  //out = fopen("txt/automaton.txt", "w+");
+  out = fopen("txt/automaton.txt", "w+");
   if(out == NULL)
   {
     perror("ERROR : fa_pretty_print() -> fopen()");
@@ -181,7 +184,6 @@ int fa_dot_print(const struct fa *self, FILE *out)
 // delete a transition
 int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
-  int already = 1;
   if(-1 < (int)from && from < self->state_count)
   {
     if(-1 < (alpha - 'a') && (alpha - 'a') < (int)self->alpha_count)
@@ -189,10 +191,8 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
       if(-1 < (int)to && to < self->state_count)
       {
         for (size_t i = 0; i < self->transitions[alpha - 'a'][from].size; ++i)
-        {
           if (self->transitions[alpha - 'a'][from].states[i] == to)
           {
-            already = 0;
             -- self->transitions[alpha - 'a'][from].size;
             for (size_t j = i; j < self->transitions[alpha - 'a'][from].size; ++j)
               self->transitions[alpha - 'a'][from].states[j] = self->transitions[alpha - 'a'][from].states[j+1];
@@ -200,18 +200,17 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
             self->transitions[alpha - 'a'][from].states = realloc(self->transitions[alpha - 'a'][from].states, self->transitions[alpha - 'a'][from].size * sizeof(size_t));
             return 0;
           }
-        }
-        if(already == 1){
-          return -4;
-        }
       }
       else
-        return -3;
+        perror("ERROR : fa_remove_transition() -> to");
+        return -1;
     }
     else
-      return -2;
+      perror("ERROR : fa_remove_transition() -> alpha");
+      return -1;
   }
   else
+    perror("ERROR : fa_remove_transition() -> from");
     return -1;
 }
 

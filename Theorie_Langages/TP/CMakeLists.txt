@@ -44,6 +44,11 @@ add_executable(
     unit_tests
     tests/main.cpp
     tests/fa_create.cpp
+    tests/fa_destroy.cpp
+    tests/fa_set_state_final.cpp
+    tests/fa_set_state_initial.cpp
+    tests/fa_remove_transition.cpp
+    tests/fa_add_transition.cpp
     )
 
 add_dependencies(unit_tests googletest)
