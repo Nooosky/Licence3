@@ -57,7 +57,7 @@ int fa_set_state_final(struct fa *self, size_t state);
 int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
 
 // print an automaton
-int fa_pretty_print(const struct fa *self, FILE *out);
+int fa_pretty_print(const struct fa *self, FILE *out, char * path);
 
 // print an automaton (DOT)
 int fa_dot_print(const struct fa *self, FILE *out);
@@ -84,7 +84,7 @@ bool fa_is_complete(const struct fa *self);
 void fa_make_complete(struct fa *self);
 
 // make in depth
-void graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
+int graph_depth_first_search(const struct graph *self, size_t state, bool *visited);
 
 // find a path between from and to
 bool graph_has_path(const struct graph *self, size_t from, size_t to);

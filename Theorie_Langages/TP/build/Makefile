@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/near/L3/Licence3/Theorie_Langages/TP
+CMAKE_SOURCE_DIR = /home/near/Documents/Licence3/Theorie_Langages/TP
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/near/L3/Licence3/Theorie_Langages/TP/build
+CMAKE_BINARY_DIR = /home/near/Documents/Licence3/Theorie_Langages/TP/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -632,6 +632,60 @@ src/testfa.c.s:
 	$(MAKE) -f CMakeFiles/fa.dir/build.make CMakeFiles/fa.dir/src/testfa.c.s
 .PHONY : src/testfa.c.s
 
+tests/fa_add_transition.o: tests/fa_add_transition.cpp.o
+
+.PHONY : tests/fa_add_transition.o
+
+# target to build an object file
+tests/fa_add_transition.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
+.PHONY : tests/fa_add_transition.cpp.o
+
+tests/fa_add_transition.i: tests/fa_add_transition.cpp.i
+
+.PHONY : tests/fa_add_transition.i
+
+# target to preprocess a source file
+tests/fa_add_transition.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i
+.PHONY : tests/fa_add_transition.cpp.i
+
+tests/fa_add_transition.s: tests/fa_add_transition.cpp.s
+
+.PHONY : tests/fa_add_transition.s
+
+# target to generate assembly for a file
+tests/fa_add_transition.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s
+.PHONY : tests/fa_add_transition.cpp.s
+
+tests/fa_count_transitions.o: tests/fa_count_transitions.cpp.o
+
+.PHONY : tests/fa_count_transitions.o
+
+# target to build an object file
+tests/fa_count_transitions.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o
+.PHONY : tests/fa_count_transitions.cpp.o
+
+tests/fa_count_transitions.i: tests/fa_count_transitions.cpp.i
+
+.PHONY : tests/fa_count_transitions.i
+
+# target to preprocess a source file
+tests/fa_count_transitions.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i
+.PHONY : tests/fa_count_transitions.cpp.i
+
+tests/fa_count_transitions.s: tests/fa_count_transitions.cpp.s
+
+.PHONY : tests/fa_count_transitions.s
+
+# target to generate assembly for a file
+tests/fa_count_transitions.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s
+.PHONY : tests/fa_count_transitions.cpp.s
+
 tests/fa_create.o: tests/fa_create.cpp.o
 
 .PHONY : tests/fa_create.o
@@ -685,6 +739,141 @@ tests/fa_destroy.s: tests/fa_destroy.cpp.s
 tests/fa_destroy.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.s
 .PHONY : tests/fa_destroy.cpp.s
+
+tests/fa_dot_print.o: tests/fa_dot_print.cpp.o
+
+.PHONY : tests/fa_dot_print.o
+
+# target to build an object file
+tests/fa_dot_print.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o
+.PHONY : tests/fa_dot_print.cpp.o
+
+tests/fa_dot_print.i: tests/fa_dot_print.cpp.i
+
+.PHONY : tests/fa_dot_print.i
+
+# target to preprocess a source file
+tests/fa_dot_print.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.i
+.PHONY : tests/fa_dot_print.cpp.i
+
+tests/fa_dot_print.s: tests/fa_dot_print.cpp.s
+
+.PHONY : tests/fa_dot_print.s
+
+# target to generate assembly for a file
+tests/fa_dot_print.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.s
+.PHONY : tests/fa_dot_print.cpp.s
+
+tests/fa_is_deterministic.o: tests/fa_is_deterministic.cpp.o
+
+.PHONY : tests/fa_is_deterministic.o
+
+# target to build an object file
+tests/fa_is_deterministic.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o
+.PHONY : tests/fa_is_deterministic.cpp.o
+
+tests/fa_is_deterministic.i: tests/fa_is_deterministic.cpp.i
+
+.PHONY : tests/fa_is_deterministic.i
+
+# target to preprocess a source file
+tests/fa_is_deterministic.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.i
+.PHONY : tests/fa_is_deterministic.cpp.i
+
+tests/fa_is_deterministic.s: tests/fa_is_deterministic.cpp.s
+
+.PHONY : tests/fa_is_deterministic.s
+
+# target to generate assembly for a file
+tests/fa_is_deterministic.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.s
+.PHONY : tests/fa_is_deterministic.cpp.s
+
+tests/fa_pretty_print.o: tests/fa_pretty_print.cpp.o
+
+.PHONY : tests/fa_pretty_print.o
+
+# target to build an object file
+tests/fa_pretty_print.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o
+.PHONY : tests/fa_pretty_print.cpp.o
+
+tests/fa_pretty_print.i: tests/fa_pretty_print.cpp.i
+
+.PHONY : tests/fa_pretty_print.i
+
+# target to preprocess a source file
+tests/fa_pretty_print.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.i
+.PHONY : tests/fa_pretty_print.cpp.i
+
+tests/fa_pretty_print.s: tests/fa_pretty_print.cpp.s
+
+.PHONY : tests/fa_pretty_print.s
+
+# target to generate assembly for a file
+tests/fa_pretty_print.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.s
+.PHONY : tests/fa_pretty_print.cpp.s
+
+tests/fa_remove_state.o: tests/fa_remove_state.cpp.o
+
+.PHONY : tests/fa_remove_state.o
+
+# target to build an object file
+tests/fa_remove_state.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
+.PHONY : tests/fa_remove_state.cpp.o
+
+tests/fa_remove_state.i: tests/fa_remove_state.cpp.i
+
+.PHONY : tests/fa_remove_state.i
+
+# target to preprocess a source file
+tests/fa_remove_state.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i
+.PHONY : tests/fa_remove_state.cpp.i
+
+tests/fa_remove_state.s: tests/fa_remove_state.cpp.s
+
+.PHONY : tests/fa_remove_state.s
+
+# target to generate assembly for a file
+tests/fa_remove_state.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s
+.PHONY : tests/fa_remove_state.cpp.s
+
+tests/fa_remove_transition.o: tests/fa_remove_transition.cpp.o
+
+.PHONY : tests/fa_remove_transition.o
+
+# target to build an object file
+tests/fa_remove_transition.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o
+.PHONY : tests/fa_remove_transition.cpp.o
+
+tests/fa_remove_transition.i: tests/fa_remove_transition.cpp.i
+
+.PHONY : tests/fa_remove_transition.i
+
+# target to preprocess a source file
+tests/fa_remove_transition.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.i
+.PHONY : tests/fa_remove_transition.cpp.i
+
+tests/fa_remove_transition.s: tests/fa_remove_transition.cpp.s
+
+.PHONY : tests/fa_remove_transition.s
+
+# target to generate assembly for a file
+tests/fa_remove_transition.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.s
+.PHONY : tests/fa_remove_transition.cpp.s
 
 tests/fa_set_state_final.o: tests/fa_set_state_final.cpp.o
 
@@ -819,12 +1008,33 @@ help:
 	@echo "... src/testfa.o"
 	@echo "... src/testfa.i"
 	@echo "... src/testfa.s"
+	@echo "... tests/fa_add_transition.o"
+	@echo "... tests/fa_add_transition.i"
+	@echo "... tests/fa_add_transition.s"
+	@echo "... tests/fa_count_transitions.o"
+	@echo "... tests/fa_count_transitions.i"
+	@echo "... tests/fa_count_transitions.s"
 	@echo "... tests/fa_create.o"
 	@echo "... tests/fa_create.i"
 	@echo "... tests/fa_create.s"
 	@echo "... tests/fa_destroy.o"
 	@echo "... tests/fa_destroy.i"
 	@echo "... tests/fa_destroy.s"
+	@echo "... tests/fa_dot_print.o"
+	@echo "... tests/fa_dot_print.i"
+	@echo "... tests/fa_dot_print.s"
+	@echo "... tests/fa_is_deterministic.o"
+	@echo "... tests/fa_is_deterministic.i"
+	@echo "... tests/fa_is_deterministic.s"
+	@echo "... tests/fa_pretty_print.o"
+	@echo "... tests/fa_pretty_print.i"
+	@echo "... tests/fa_pretty_print.s"
+	@echo "... tests/fa_remove_state.o"
+	@echo "... tests/fa_remove_state.i"
+	@echo "... tests/fa_remove_state.s"
+	@echo "... tests/fa_remove_transition.o"
+	@echo "... tests/fa_remove_transition.i"
+	@echo "... tests/fa_remove_transition.s"
 	@echo "... tests/fa_set_state_final.o"
 	@echo "... tests/fa_set_state_final.i"
 	@echo "... tests/fa_set_state_final.s"

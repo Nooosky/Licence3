@@ -130,7 +130,7 @@ int main() {
 
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
-    fa_pretty_print(selfFa1, file);
+    fa_pretty_print(selfFa1, file, "txt/automaton.txt");
 
     // print automaton in file .dot
     printf("dessine l'automate dans un .dot\n");

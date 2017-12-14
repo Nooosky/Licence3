@@ -30,14 +30,14 @@ int fa_create(struct fa *self, size_t alpha_count, size_t state_count)
     }
     else
     {
-      perror("ERROR : fa_create() -> state_count");
+      //perror("ERROR : fa_create() -> state_count");
       return -1;
     }
   }
   else
   {
-    perror("ERROR : fa_create() -> alpha_count");
-    return -1;
+    //perror("ERROR : fa_create() -> alpha_count");
+    return -2;
   }
   return 0;
 }
@@ -65,7 +65,7 @@ int fa_set_state_initial(struct fa *self, size_t state)
     self->states[state].is_initial = 1;
     return 0;
   }else{
-    perror("ERROR : fa_set_state_initial() -> state");
+    //perror("ERROR : fa_set_state_initial() -> state");
     return -1;
   }
 }
@@ -78,7 +78,7 @@ int fa_set_state_final(struct fa *self, size_t state)
     self->states[state].is_final = 1;
     return 0;
   }else{
-    perror("ERROR : fa_set_state_final() -> state");
+    //perror("ERROR : fa_set_state_final() -> state");
     return -1;
   }
 }
@@ -102,29 +102,20 @@ int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to)
         return 0;
       }
       else
-      {
-        perror("ERROR : fa_add_transition() -> to");
-        return -1;
-      }
+        return -3;
     }
     else
-    {
-      perror("ERROR : fa_add_transition() -> alpha");
-      return -1;
-    }
+      return -2;
   }
   else
-  {
-    perror("ERROR : fa_add_transition() -> from");
     return -1;
-  }
-
 }
 
 // afficher un automate
-int fa_pretty_print(const struct fa *self, FILE *out)
+int fa_pretty_print(const struct fa *self, FILE *out, char * path)
 {
-  out = fopen("txt/automaton.txt", "w+");
+  out = fopen(path, "w+");
+  //out = fopen("txt/automaton.txt", "w+");
   if(out == NULL)
   {
     perror("ERROR : fa_pretty_print() -> fopen()");
@@ -190,6 +181,7 @@ int fa_dot_print(const struct fa *self, FILE *out)
 // delete a transition
 int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
+  int already = 1;
   if(-1 < (int)from && from < self->state_count)
   {
     if(-1 < (alpha - 'a') && (alpha - 'a') < (int)self->alpha_count)
@@ -197,8 +189,10 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
       if(-1 < (int)to && to < self->state_count)
       {
         for (size_t i = 0; i < self->transitions[alpha - 'a'][from].size; ++i)
+        {
           if (self->transitions[alpha - 'a'][from].states[i] == to)
           {
+            already = 0;
             -- self->transitions[alpha - 'a'][from].size;
             for (size_t j = i; j < self->transitions[alpha - 'a'][from].size; ++j)
               self->transitions[alpha - 'a'][from].states[j] = self->transitions[alpha - 'a'][from].states[j+1];
@@ -206,24 +200,19 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
             self->transitions[alpha - 'a'][from].states = realloc(self->transitions[alpha - 'a'][from].states, self->transitions[alpha - 'a'][from].size * sizeof(size_t));
             return 0;
           }
+        }
+        if(already == 1){
+          return -4;
+        }
       }
       else
-      {
-        perror("ERROR : fa_remove_transition() -> to");
-        return -1;
-      }
+        return -3;
     }
     else
-    {
-      perror("ERROR : fa_remove_transition() -> alpha");
-      return -1;
-    }
+      return -2;
   }
   else
-  {
-    perror("ERROR : fa_remove_transition() -> from");
     return -1;
-  }
 }
 
 // delete a state
@@ -267,10 +256,8 @@ int fa_remove_state(struct fa *self, size_t state)
     return 0;
   }
   else
-  {
-    perror("ERROR : fa_remove_state() -> state");
+    //perror("ERROR : fa_remove_state() -> state");
     return -1;
-  }
 }
 
 //count transition in an automaton
@@ -318,31 +305,34 @@ bool fa_is_complete(const struct fa *self)
 //makes an automaton complete
 void fa_make_complete(struct fa *self)
 {
-  bool etatPoubelle = false;
-  for (size_t i = 0; i < self->state_count; ++i)
-    for (size_t j = 0; j < self->alpha_count; ++j)
-      if(self->transitions[j][i].size == 0)
-      {
-        if (!etatPoubelle)
+  if (!fa_is_complete(self))
+  {
+    bool etatPoubelle = false;
+    for (size_t i = 0; i < self->state_count; ++i)
+      for (size_t j = 0; j < self->alpha_count; ++j)
+        if(self->transitions[j][i].size == 0)
         {
-          self->state_count++;
-          self->states = realloc(self->states, self->state_count * sizeof(struct state));
-          self->states[self->state_count - 1].is_initial = 0;
-          self->states[self->state_count - 1].is_final = 0;
-
-          for (size_t k = 0; k < self->alpha_count; ++k)
+          if (!etatPoubelle)
           {
-            self->transitions[k] = realloc(self->transitions[k], self->state_count*sizeof(struct state_set));
-            self->transitions[k][self->state_count - 1].size = 1;
-            self->transitions[k][self->state_count - 1].states = (size_t *) malloc(sizeof(size_t));
-            self->transitions[k][self->state_count - 1].states[0] = self->state_count - 1;
+            self->state_count++;
+            self->states = realloc(self->states, self->state_count * sizeof(struct state));
+            self->states[self->state_count - 1].is_initial = 0;
+            self->states[self->state_count - 1].is_final = 0;
+
+            for (size_t k = 0; k < self->alpha_count; ++k)
+            {
+              self->transitions[k] = realloc(self->transitions[k], self->state_count*sizeof(struct state_set));
+              self->transitions[k][self->state_count - 1].size = 1;
+              self->transitions[k][self->state_count - 1].states = (size_t *) malloc(sizeof(size_t));
+              self->transitions[k][self->state_count - 1].states[0] = self->state_count - 1;
+            }
+
+            etatPoubelle = true;
           }
 
-          etatPoubelle = true;
+          fa_add_transition(self, i, (char)(j + 'a'), self->state_count - 1);
         }
-
-        fa_add_transition(self, i, (char)(j + 'a'), self->state_count - 1);
-      }
+  }
 }
 
 //create graph with automaton
@@ -403,22 +393,34 @@ void graph_destroy(struct graph *self)
 }
 
 // make in depth
-void graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
+int graph_depth_first_search(const struct graph *self, size_t state, bool *visited)
 {
-    visited[state] = true;
-    for (size_t i = 0; i < self->nodes[state].nb_adjacent; ++i) {
-        if(visited[self->nodes[state].adjacent_nodes[i].number] == false){
-            graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
-        }
+  if (state < self->node_count)
+  {
+      visited[state] = true;
+      for (size_t i = 0; i < self->nodes[state].nb_adjacent; ++i)
+        if(visited[self->nodes[state].adjacent_nodes[i].number] == false)
+          graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
+
+      return 0;
     }
+    else
+      return -1;
 }
 
 //tells if a path exists in the graph between two states
 bool graph_has_path(const struct graph *self, size_t from, size_t to)
 {
-    bool *visited = malloc(self->node_count * sizeof(bool));
-    graph_depth_first_search(self, from, visited);
-    return visited[to];
+    if (from < self->node_count)
+    {
+      if (to < self->node_count)
+      {
+          bool *visited = malloc(self->node_count * sizeof(bool));
+          graph_depth_first_search(self, from, visited);
+          return visited[to];
+      }
+    }
+    return false;
 }
 
 //tells if the language of a graph is empty
@@ -472,7 +474,7 @@ void fa_remove_non_co_accessible_states(struct fa *self)
   free(graph);
 }
 
-// create an automaton with the product of two automatons
+
 void fa_create_product(struct fa *self, const struct fa *lhs, const struct fa *rhs)
 {
   fa_create(self, (lhs->alpha_count < rhs->alpha_count)?lhs->alpha_count:rhs->alpha_count, rhs->state_count*lhs->state_count);
@@ -507,8 +509,7 @@ bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
 // create a automaton deterministic about automaton non deterministic
 void fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
-  for (size_t i = 0; i < nfa->state_count; ++i)
-    if (nfa->states[i].is_initial)
+
 
 
 }
