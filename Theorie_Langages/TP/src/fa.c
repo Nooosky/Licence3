@@ -298,7 +298,7 @@ bool fa_is_deterministic(const struct fa *self)
 
   for (size_t i = 0; i < self->state_count; ++i)
     for (size_t j = 0; j < self->alpha_count; ++j)
-      if(self->transitions[j][i].size > 1)
+      if(self->transitions[j][i].size != 1)
         return false;
 
   return true;
@@ -510,5 +510,5 @@ void fa_create_deterministic(struct fa *self, const struct fa *nfa)
   for (size_t i = 0; i < nfa->state_count; ++i)
     if (nfa->states[i].is_initial)
 
-    
+
 }

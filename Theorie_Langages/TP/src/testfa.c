@@ -128,7 +128,6 @@ int main() {
     printf("product of two automatons\n");
     fa_create_product(selfFa1, selfFa2, selfFa3);
 
-
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
     fa_pretty_print(selfFa1, file);
