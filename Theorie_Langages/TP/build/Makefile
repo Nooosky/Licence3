@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/near/L3/Licence3/Theorie_Langages/TP
+CMAKE_SOURCE_DIR = /home/near/Documents/Licence3/Theorie_Langages/TP
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/near/L3/Licence3/Theorie_Langages/TP/build
+CMAKE_BINARY_DIR = /home/near/Documents/Licence3/Theorie_Langages/TP/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -91,9 +91,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/L3/Licence3/Theorie_Langages/TP/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

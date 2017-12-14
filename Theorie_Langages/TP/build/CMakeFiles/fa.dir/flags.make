@@ -6,5 +6,5 @@ C_FLAGS =
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/near/L3/Licence3/Theorie_Langages/TP/src -I/home/near/L3/Licence3/Theorie_Langages/TP/external/googletest/googletest -I/home/near/L3/Licence3/Theorie_Langages/TP/external/googletest/googletest/include 
+C_INCLUDES = -I/home/near/Documents/Licence3/Theorie_Langages/TP/src -I/home/near/Documents/Licence3/Theorie_Langages/TP/external/googletest/googletest -I/home/near/Documents/Licence3/Theorie_Langages/TP/external/googletest/googletest/include 
 
