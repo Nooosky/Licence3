@@ -659,6 +659,33 @@ tests/fa_add_transition.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s
 .PHONY : tests/fa_add_transition.cpp.s
 
+tests/fa_count_transitions.o: tests/fa_count_transitions.cpp.o
+
+.PHONY : tests/fa_count_transitions.o
+
+# target to build an object file
+tests/fa_count_transitions.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o
+.PHONY : tests/fa_count_transitions.cpp.o
+
+tests/fa_count_transitions.i: tests/fa_count_transitions.cpp.i
+
+.PHONY : tests/fa_count_transitions.i
+
+# target to preprocess a source file
+tests/fa_count_transitions.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i
+.PHONY : tests/fa_count_transitions.cpp.i
+
+tests/fa_count_transitions.s: tests/fa_count_transitions.cpp.s
+
+.PHONY : tests/fa_count_transitions.s
+
+# target to generate assembly for a file
+tests/fa_count_transitions.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s
+.PHONY : tests/fa_count_transitions.cpp.s
+
 tests/fa_create.o: tests/fa_create.cpp.o
 
 .PHONY : tests/fa_create.o
@@ -739,6 +766,33 @@ tests/fa_dot_print.s: tests/fa_dot_print.cpp.s
 tests/fa_dot_print.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.s
 .PHONY : tests/fa_dot_print.cpp.s
+
+tests/fa_is_deterministic.o: tests/fa_is_deterministic.cpp.o
+
+.PHONY : tests/fa_is_deterministic.o
+
+# target to build an object file
+tests/fa_is_deterministic.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o
+.PHONY : tests/fa_is_deterministic.cpp.o
+
+tests/fa_is_deterministic.i: tests/fa_is_deterministic.cpp.i
+
+.PHONY : tests/fa_is_deterministic.i
+
+# target to preprocess a source file
+tests/fa_is_deterministic.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.i
+.PHONY : tests/fa_is_deterministic.cpp.i
+
+tests/fa_is_deterministic.s: tests/fa_is_deterministic.cpp.s
+
+.PHONY : tests/fa_is_deterministic.s
+
+# target to generate assembly for a file
+tests/fa_is_deterministic.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.s
+.PHONY : tests/fa_is_deterministic.cpp.s
 
 tests/fa_pretty_print.o: tests/fa_pretty_print.cpp.o
 
@@ -957,6 +1011,9 @@ help:
 	@echo "... tests/fa_add_transition.o"
 	@echo "... tests/fa_add_transition.i"
 	@echo "... tests/fa_add_transition.s"
+	@echo "... tests/fa_count_transitions.o"
+	@echo "... tests/fa_count_transitions.i"
+	@echo "... tests/fa_count_transitions.s"
 	@echo "... tests/fa_create.o"
 	@echo "... tests/fa_create.i"
 	@echo "... tests/fa_create.s"
@@ -966,6 +1023,9 @@ help:
 	@echo "... tests/fa_dot_print.o"
 	@echo "... tests/fa_dot_print.i"
 	@echo "... tests/fa_dot_print.s"
+	@echo "... tests/fa_is_deterministic.o"
+	@echo "... tests/fa_is_deterministic.i"
+	@echo "... tests/fa_is_deterministic.s"
 	@echo "... tests/fa_pretty_print.o"
 	@echo "... tests/fa_pretty_print.i"
 	@echo "... tests/fa_pretty_print.s"

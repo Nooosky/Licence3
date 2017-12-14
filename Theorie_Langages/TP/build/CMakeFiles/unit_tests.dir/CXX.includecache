@@ -292,6 +292,12 @@ gtest/gtest.h
 fa.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
 
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_create.cpp
 gtest/gtest.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
@@ -311,6 +317,12 @@ cstring
 -
 string.h
 -
+fa.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
+
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_is_deterministic.cpp
+gtest/gtest.h
+/home/near/Documents/Licence3/Theorie_Langages/TP/tests/gtest/gtest.h
 fa.h
 /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa.h
 
