@@ -60,7 +60,7 @@ int fa_add_transition(struct fa *self, size_t from, char alpha, size_t to);
 int fa_pretty_print(const struct fa *self, FILE *out, char * path);
 
 // print an automaton (DOT)
-int fa_dot_print(const struct fa *self, FILE *out);
+int fa_dot_print(const struct fa *self, FILE *out, char* path);
 
 // delete a transition
 int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to);
@@ -81,7 +81,7 @@ bool fa_is_deterministic(const struct fa *self);
 bool fa_is_complete(const struct fa *self);
 
 //makes an automaton complete
-void fa_make_complete(struct fa *self);
+int fa_make_complete(struct fa *self);
 
 // make in depth
 int graph_depth_first_search(const struct graph *self, size_t state, bool *visited);

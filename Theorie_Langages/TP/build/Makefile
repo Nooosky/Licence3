@@ -767,6 +767,33 @@ tests/fa_dot_print.cpp.s:
 	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.s
 .PHONY : tests/fa_dot_print.cpp.s
 
+tests/fa_is_complete.o: tests/fa_is_complete.cpp.o
+
+.PHONY : tests/fa_is_complete.o
+
+# target to build an object file
+tests/fa_is_complete.cpp.o:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o
+.PHONY : tests/fa_is_complete.cpp.o
+
+tests/fa_is_complete.i: tests/fa_is_complete.cpp.i
+
+.PHONY : tests/fa_is_complete.i
+
+# target to preprocess a source file
+tests/fa_is_complete.cpp.i:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.i
+.PHONY : tests/fa_is_complete.cpp.i
+
+tests/fa_is_complete.s: tests/fa_is_complete.cpp.s
+
+.PHONY : tests/fa_is_complete.s
+
+# target to generate assembly for a file
+tests/fa_is_complete.cpp.s:
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.s
+.PHONY : tests/fa_is_complete.cpp.s
+
 tests/fa_is_deterministic.o: tests/fa_is_deterministic.cpp.o
 
 .PHONY : tests/fa_is_deterministic.o
@@ -1023,6 +1050,9 @@ help:
 	@echo "... tests/fa_dot_print.o"
 	@echo "... tests/fa_dot_print.i"
 	@echo "... tests/fa_dot_print.s"
+	@echo "... tests/fa_is_complete.o"
+	@echo "... tests/fa_is_complete.i"
+	@echo "... tests/fa_is_complete.s"
 	@echo "... tests/fa_is_deterministic.o"
 	@echo "... tests/fa_is_deterministic.i"
 	@echo "... tests/fa_is_deterministic.s"

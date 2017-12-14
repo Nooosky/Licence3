@@ -201,33 +201,9 @@ CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o.provides: CMakeFiles/
 CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o
 
 
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o: CMakeFiles/unit_tests.dir/flags.make
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o: ../tests/fa_add_transition.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp
-
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp > CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i
-
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp -o CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s
-
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires:
-
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
-
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
-	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides.build
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides
-
-CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
-
-
 CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o: ../tests/fa_pretty_print.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_pretty_print.cpp
 
 CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.i: cmake_force
@@ -249,9 +225,57 @@ CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o.provides: CMakeFiles/unit_
 CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o
 
 
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o: ../tests/fa_add_transition.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp > CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_add_transition.cpp -o CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
+
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o: ../tests/fa_count_transitions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp > CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp -o CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o
+
+
 CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o: CMakeFiles/unit_tests.dir/flags.make
 CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o: ../tests/fa_dot_print.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_dot_print.cpp
 
 CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.i: cmake_force
@@ -273,52 +297,28 @@ CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o.provides: CMakeFiles/unit_tes
 CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o
 
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o: CMakeFiles/unit_tests.dir/flags.make
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o: ../tests/fa_remove_state.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o: ../tests/fa_is_complete.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_is_complete.cpp
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp > CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_is_complete.cpp > CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.i
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp -o CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_is_complete.cpp -o CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.s
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires:
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.requires:
 
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.requires
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
-	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides.build
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.provides
 
-CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
-
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o: CMakeFiles/unit_tests.dir/flags.make
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o: ../tests/fa_count_transitions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp > CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.i
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_count_transitions.cpp -o CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.s
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires:
-
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires
-	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides.build
-.PHONY : CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides
-
-CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o
+CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o
 
 
 CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o: CMakeFiles/unit_tests.dir/flags.make
@@ -345,6 +345,30 @@ CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o.provides: CMakeFiles/u
 CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o
 
 
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o: ../tests/fa_remove_state.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o -c /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp
+
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp > CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/near/Documents/Licence3/Theorie_Langages/TP/tests/fa_remove_state.cpp -o CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires:
+
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
+
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
+	$(MAKE) -f CMakeFiles/unit_tests.dir/build.make CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides.build
+.PHONY : CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides
+
+CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.provides.build: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
+
+
 # Object files for target unit_tests
 unit_tests_OBJECTS = \
 "CMakeFiles/unit_tests.dir/tests/main.cpp.o" \
@@ -353,12 +377,13 @@ unit_tests_OBJECTS = \
 "CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o" \
 "CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o" \
 "CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o" \
-"CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o" \
 "CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o" \
-"CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o" \
-"CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o" \
 "CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o" \
-"CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o"
+"CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o" \
+"CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o"
 
 # External object files for target unit_tests
 unit_tests_EXTERNAL_OBJECTS =
@@ -369,17 +394,18 @@ unit_tests: CMakeFiles/unit_tests.dir/tests/fa_destroy.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o
-unit_tests: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o
-unit_tests: CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o
-unit_tests: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o
+unit_tests: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o
 unit_tests: CMakeFiles/unit_tests.dir/build.make
 unit_tests: libgoogletest.a
 unit_tests: libfa.a
 unit_tests: CMakeFiles/unit_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable unit_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/near/Documents/Licence3/Theorie_Langages/TP/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable unit_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unit_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -393,12 +419,13 @@ CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_destroy.c
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_set_state_final.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_set_state_initial.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_remove_transition.cpp.o.requires
-CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_pretty_print.cpp.o.requires
-CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o.requires
-CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_add_transition.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_count_transitions.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_dot_print.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_is_complete.cpp.o.requires
 CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_is_deterministic.cpp.o.requires
+CMakeFiles/unit_tests.dir/requires: CMakeFiles/unit_tests.dir/tests/fa_remove_state.cpp.o.requires
 
 .PHONY : CMakeFiles/unit_tests.dir/requires
 
