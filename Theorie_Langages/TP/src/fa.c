@@ -181,7 +181,6 @@ int fa_dot_print(const struct fa *self, FILE *out, char* path)
 //Deletes a transition in an automata
 int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t to)
 {
-  int already = 1;
   if(-1 < (int)from && from < self->state_count)
   {
     if(-1 < (alpha - 'a') && (alpha - 'a') < (int)self->alpha_count)
@@ -192,7 +191,6 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
         {
           if (self->transitions[alpha - 'a'][from].states[i] == to)
           {
-            already = 0;
             -- self->transitions[alpha - 'a'][from].size;
             for (size_t j = i; j < self->transitions[alpha - 'a'][from].size; ++j)
               self->transitions[alpha - 'a'][from].states[j] = self->transitions[alpha - 'a'][from].states[j+1];
@@ -201,9 +199,7 @@ int fa_remove_transition(const struct fa *self, size_t from, char alpha, size_t 
             return 0;
           }
         }
-        if(already == 1){
-          return -4;
-        }
+        return -4;
       }
       else
         return -3;
