@@ -1,0 +1,20 @@
+Initial states:
+	0 
+Final states:
+	3 
+Transitions:
+	For state 0:
+		For letter a: 2 
+		For letter b: 4 
+	For state 1:
+		For letter a: 2 
+		For letter b: 3 
+	For state 2:
+		For letter a: 2 
+		For letter b: 3 
+	For state 3:
+		For letter a: 3 
+		For letter b: 4 
+	For state 4:
+		For letter a: 4 
+		For letter b: 4 
