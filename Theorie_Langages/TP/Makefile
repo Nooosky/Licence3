@@ -1,4 +1,4 @@
-CC := gcc -std=c11 -O2
+CC := gcc -std=c11 -O2 -g 
 CFLAGS := -Wall -Wextra
 LIBS := -lm
 

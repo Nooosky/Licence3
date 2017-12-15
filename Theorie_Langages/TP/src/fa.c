@@ -409,9 +409,8 @@ int graph_depth_first_search(const struct graph *self, size_t state, bool *visit
           graph_depth_first_search(self, self->nodes[state].adjacent_nodes[i].number, visited);
 
       return 0;
-    }
-    else
-      return -1;
+  }
+  return -1;
 }
 
 //Tells if a path exists in the graph between two nodes
@@ -514,89 +513,105 @@ bool fa_has_empty_intersection(const struct fa *lhs, const struct fa *rhs)
   return variable;
 }
 
+
 //Creates a deterministic automata from a non-derministic one
 int fa_create_deterministic(struct fa *self, const struct fa *nfa)
 {
-  if(!fa_is_deterministic(self))
+  if(fa_is_deterministic(nfa))
   {
-    size_t maxState = pow(2, nfa->state_count);
-    int correspondence[maxState][nfa->state_count];
-    int transition[maxState][nfa->alpha_count];
-    size_t size = 0, countStateNfa = 0, numState = 0, stateNfa = 0;
-    bool equal = true;
-    int state[nfa->state_count];
+    fa_create(self, nfa->alpha_count, nfa->state_count);
 
-    for(size_t i = 0; i < maxState; ++i)
+    for (size_t i = 0; i < nfa->state_count; ++i)
     {
-      for(size_t j = 0; j < nfa->state_count; ++j)
-        correspondence[i][j] = 0;
-
-      for(size_t j = 0; j < nfa->alpha_count; ++j)
-          transition[i][j] = 0;
+        self->states[i].is_initial = nfa->states[i].is_initial;
+        self->states[i].is_final = nfa->states[i].is_final;
+        for (size_t j = 0; j < nfa->alpha_count; ++j)
+            for (size_t k = 0; k < nfa->transitions[j][i].size; ++k)
+                fa_add_transition(self, i, j + 'a', nfa->transitions[j][i].states[k]);
     }
 
-    //recherche des états initiaux
-    for(size_t i = 0; i < nfa->state_count; ++i)
-      if(nfa->states[i].is_initial)
-        correspondence[numState][i] = i;
-    countStateNfa++;
-
-    do{
-      //pour chaque lettre on cherche les états accecibles par un sous ensemble d'état
-      for(size_t j = 0; j < nfa->alpha_count; ++j)
-      {
-        for(size_t i = 0; i < nfa->state_count; ++i)
-          state[i] = 0;
-
-        for(size_t i = 0; i < nfa->state_count; ++i)
-            if(correspondence[numState][i] != 0 && nfa->transitions[correspondence[numState][i]][j].size != 0)
-              for(size_t k = 0; k < nfa->transitions[correspondence[numState][i]][j].size; ++k)
-              {
-                state[nfa->transitions[correspondence[numState][i]][j].states[k]] = nfa->transitions[correspondence[numState][i]][j].states[k];
-                size++;
-              }
-
-        if(size > 0)
-        {
-          for(stateNfa = 0; stateNfa < countStateNfa; ++stateNfa)
-          {
-            equal = true;
-
-            for(size_t k = 0; k <  nfa->state_count; ++k)
-              if(correspondence[stateNfa][k] != state[k])
-              {
-                equal = false;
-                break;
-              }
-
-            if(equal)
-              break;
-          }
-          if(!equal)
-          {
-            transition[numState][j] = countStateNfa;
-            memcpy(correspondence[countStateNfa], state, nfa->state_count*sizeof(size_t));
-            countStateNfa++;
-          }else
-            transition[numState][j] = stateNfa;
-        }
-        size = 0;
-      }
-      numState++;
-    }while(numState != countStateNfa);
-
-    fa_create(self, nfa->alpha_count, countStateNfa);
-    fa_set_state_initial(self, 0);
-    for(size_t i = 0; i < countStateNfa; ++i)
-      for(size_t j = 0; j < nfa->alpha_count; ++j)
-      {
-        if(transition[i][j] != 0)
-          fa_add_transition(self, i, j+'a', transition[i][j]);
-
-        if(nfa->states[correspondence[i][j]].is_final)
-          fa_set_state_final(self, i);
-      }
     return 0;
   }
-  return -1;
+  else
+  {
+    size_t nbMaxEtat = pow(2, nfa->state_count);
+    int etat[nbMaxEtat][nfa->state_count];
+    int transition[nbMaxEtat][nfa->alpha_count][nfa->state_count];
+    size_t numEtat = 0, nbEtat_nfa = 0;
+
+    for(size_t i = 0; i < nbMaxEtat; ++i)
+    {
+      for(size_t j = 0; j < nfa->state_count; ++j)
+      {
+        for(size_t k = 0; k < nfa->alpha_count; ++k)
+            transition[i][k][j] = -1;
+        etat[i][j] = -1;
+        if(nfa->states[j].is_initial)
+          etat[numEtat][j] = j;
+      }
+    }
+
+    nbEtat_nfa++;
+
+    do{
+      // ajout
+      for(size_t j = 0; j < nfa->alpha_count; ++j)
+        for(size_t i = 0; i < nfa->state_count; ++i)
+            if(etat[numEtat][i] != -1)
+              for(size_t k = 0; k < nfa->transitions[j][i].size; ++k)
+                transition[numEtat][j][i] = nfa->transitions[j][i].states[k];
+
+
+      // verifie si pas dans les etats et l'ajoute
+      size_t iterateur = nbEtat_nfa;
+      for(size_t j = 0; j < nfa->alpha_count; ++j)
+        for(size_t l = 0; l < iterateur; ++l)
+        {
+          bool exist = true;
+          for(size_t i = 0; i < nfa->state_count; ++i)
+            if(etat[l][i] != transition[numEtat][j][i])
+            {
+              exist = false;
+              break;
+            }
+
+          if (!exist)
+          {
+            nbEtat_nfa++;
+            for(size_t i = 0; i < nfa->state_count; ++i)
+              etat[nbEtat_nfa - 1][i] = transition[numEtat][j][i];
+          }
+        }
+
+      numEtat++;
+    }while(numEtat != nbEtat_nfa);
+
+    printf("test\n");
+
+    fa_create(self, nfa->alpha_count, nbEtat_nfa);
+    fa_set_state_initial(self, 0);
+
+
+    for(size_t j = 0; j < nfa->alpha_count; ++j)
+      for(size_t l = 0; l < nbEtat_nfa; ++l)
+      {
+        for(size_t k = 0; k < nbEtat_nfa; ++k)
+        {
+          bool exist = true;
+          for(size_t i = 0; i < nfa->state_count; ++i)
+          {
+            if(etat[k][i] != transition[numEtat][j][i])
+            {
+              exist = false;
+              break;
+            }
+
+            if (exist)
+              fa_add_transition(self, l, j+'a', k);
+          }
+        }
+      }
+
+    return 1;
+  }
 }

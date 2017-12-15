@@ -54,7 +54,6 @@ int main() {
     //count state
     printf("number states : %zu\n", selfFa->state_count);
 
-
     //if automaton is deterministic
     printf("if automaton is deterministic : %s\n", fa_is_deterministic(selfFa) ? "true" : "false");
 
@@ -67,6 +66,14 @@ int main() {
 
     //if automaton is complete
     printf("if automaton is complete : %s\n", fa_is_complete(selfFa) ? "true" : "false");
+
+    // print automaton in file
+    printf("dessine l'automate dans un .txt\n");
+    fa_pretty_print(selfFa, file, "txt/automatonProf.txt");
+
+    // print automaton in file .dot
+    printf("dessine l'automate dans un .dot\n");
+    fa_dot_print(selfFa, file, "img/automatonProf.dot");
 
 
     struct graph *selfGraph = (struct graph *) malloc(sizeof(struct graph));
@@ -130,20 +137,33 @@ int main() {
 
     // print automaton in file
     printf("dessine l'automate dans un .txt\n");
-    fa_pretty_print(selfFa1, file, "txt/automaton.txt");
+    fa_pretty_print(selfFa2, file, "txt/automatonFA2.txt");
+    fa_pretty_print(selfFa3, file, "txt/automatonFA3.txt");
+    fa_pretty_print(selfFa1, file, "txt/automatonProduitFA2etFA3.txt");
 
     // print automaton in file .dot
     printf("dessine l'automate dans un .dot\n");
-    fa_dot_print(selfFa1, file, "img/automaton.dot");
+    fa_dot_print(selfFa2, file, "img/automatonFA2.dot");
+    fa_dot_print(selfFa3, file, "img/automatonFA3.dot");
+    fa_dot_print(selfFa1, file, "img/automatonProduitFA2etFA3.dot");
 
-    struct fa *selfFaDet = (struct fa *) malloc(sizeof(struct fa));
 
     printf("cree l'automate deterministe\n");
+    struct fa *selfFaDet = (struct fa *) malloc(sizeof(struct fa));
     fa_create_deterministic(selfFaDet, selfFa);
+
+    // print automaton in file
+    printf("dessine l'automate dans un .txt\n");
+    fa_pretty_print(selfFaDet, file, "txt/automatonProfDeter.txt");
+
+    // print automaton in file .dot
+    printf("dessine l'automate dans un .dot\n");
+    fa_dot_print(selfFaDet, file, "img/automatonProfDeter.dot");
 
     //destruction of a automaton
     printf("detruie l'automate\n");
     fa_destroy(selfFa);
+    fa_destroy(selfFaDet);
 
     //destruction of a graph
     printf("detruie le graph\n");
