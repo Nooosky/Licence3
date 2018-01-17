@@ -1,0 +1,11 @@
+Question 7
+L'ordre des regles a uine importance uniquement s'il y a
+un conflit dans les inputs.
+
+Question 8
+La regle sert pour les caracteres speciaux espace et tabulations, sans
+qu'ils ne soient consideres comme des tokens invalides.
+
+Question 9
+La regle placee en derniere position permet de terminer le programme en cas
+de token invalide.
