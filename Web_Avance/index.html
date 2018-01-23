@@ -5,9 +5,9 @@
   <title>Robocode</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="html/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
@@ -23,7 +23,7 @@
   <div class="container">
     <div id="robocode">
       <div class="jumbotron">
-       <img class="img-responsive" src="html/images/logo.png">
+       <img class="img-responsive" src="./images/logo.png">
        <h2>Le grand défi des robots</h2>
        <p>Un jeu original pour 2 joueurs, sur mobile ou en ligne.</p>
      </div>
@@ -31,7 +31,6 @@
       <p>Robocode est un jeu dans lequel deux robots s'affrontent au tour par tour en aller chercher des drapeaux en vue de les poser dans la base adverse. Le premier robot à déposer deux drapeaux dans la base de l'adversaire gagne la partie.</p>
 
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -39,22 +38,21 @@
           <li data-target="#myCarousel" data-slide-to="3"></li>
         </ol>
 
-        <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <img src="html/images/carousel1.jpg">
+            <img src="./images/carousel1.jpg">
           </div>
 
           <div class="item">
-            <img src="html/images/carousel2.png">
+            <img src="./images/carousel2.png">
           </div>
 
           <div class="item">
-            <img src="html/images/carousel3.png">
+            <img src="./images/carousel3.png">
           </div>
 
           <div class="item">
-            <img src="html/images/carousel4.png">
+            <img src="./images/carousel4.png">
           </div>
         </div>
       </div>
@@ -90,79 +88,98 @@
       </div>
     </div>
 
-    <div class="robotBleu"></div>
+    <div class="hidden-xs hidden-sm robotBleu"></div>
 
-    <div id="action">
+    <div id="action" class="container-fluid">
       <h2 ><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Les actions/instructions possibles</h2>
-      <table>
-        <tr>
-          <td>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/nord-bleu.png">
+              <img src="./images/nord-rouge.png">
+            </div>
             <h3>Nord, Sud, Est, Ouest</h3>
             <p>Le robot se tourne dans la direction indiquée et avance d'une case. Il n'est pas possible d'avancer sur une case déjà occupée par l'autre robot.</p>
-          </td>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/est-rouge.png">
+              <img src="./images/ouest-bleu.png">
+            </div>
             <h3>Est ×2 - Ouest ×2</h3>
             <p>Le robot avance de deux cases dans vers l'ouest (robot bleu) ou vers l'est (robot rouge).</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/prendre-rouge.png">
+              <img src="./images/prendre-bleu.png">
+            </div>
             <h3>Prendre</h3>
             <p>Le robot prend le drapeau qui est sur la case où il se trouve. Le robot ne peut prendre qu'un drapeau à la fois.</p>
-          </td>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/deposer-bleu.png">
+              <img src="./images/deposer-rouge.png">
+            </div>
             <h3>Déposer</h3>
             <p>Le robot dépose le drapeau qu'il porte sur la case où il se trouve. Il ne peut y avoir qu'un seul drapeau par case.</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/repousser-bleu.png">
+              <img src="./images/repousser-rouge.png">
+            </div>
             <h3>Repousser</h3>
             <p>Le robot adverse recule d'une case dans la direction de sa base (vers l'est pour le bleu, vers l'ouest pour le rouge)</p>
-          </td>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/annuler-rouge.png">
+              <img src="./images/annuler-bleu.png">
+            </div>
             <h3>Annuler</h3>
             <p>L'action que le robot adverse doit faire à ce tour est annulée, même si celui-ci joue en premier. En conséquence, le robot ne fait rien.</p>
-          </td>
-        </tr>
-        <tr>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/x2-rouge.png">
+              <img src="./images/x2-bleu.png">
+            </div>
             <h3>×2</h3>
             <p>Répète l'action indiquée sur la carte précédente.</p>
-          </td>
-          <td>
+          </div>
+          <div class="col-md-6 regle">
+            <div>
+              <img src="./images/pause-bleu.png">
+              <img src="./images/pause-rouge.png">
+            </div>
             <h3>Pause</h3>
             <p>Le robot ne fait rien.</p>
-          </td>
-        </tr>
-      </table>
+          </div>
     </div>
 
-    <div class="robotRouge"></div>
+    <div class="hidden-xs  hidden-sm robotRouge"></div>
 
-    <div id="jouer">
+    <div id="jouer" class="container-fluid">
       <h2><span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> Prêt ? C'est parti !</h2>
 
       <p>Pour jouer, saisissez les instructions composant votre programme et validez celui-ci. Dès que les deux joueurs ont validé leurs instructions, vous pouvez faire exécuter le programme aux robots.</p>
 
       <p>Faites votre choix :</p>
 
-      <table>
-        <tr>
-          <td>
-            <p>Jouer à deux sur un même écran avec un mobile (téléphone, tablette). A tour de rôles, chaque joueur prendra l'appareil pour écrire son programme, en se cachant de l'autre joueur.</p>
-          </td>
-          <td>
-            <p>Jouer en ligne, contre un autre joueur connecté au même moment. Connectez-vous au chat pour discuter avec les joueurs présents, et créer ou rejoindre une partie.</p>
-          </td>
-        </tr>
-      </table>
+      <div class="col-md-5 zoneJouer">
+          <span class="glyphicon glyphicon-phone big-icon" aria-hidden="true"></span>
+          <a href="jeuDuo.html">Jouer à deux sur un même écran avec un mobile (téléphone, tablette). A tour de rôles, chaque joueur prendra l'appareil pour écrire son programme, en se cachant de l'autre joueur.</a>
+      </div>
+      <div class="col-md-5 zoneJouer">
+        <span class="glyphicon glyphicon-globe big-icon" aria-hidden="true"></span>
+        <a href="chat.html">Jouer en ligne, contre un autre joueur connecté au même moment. Connectez-vous au chat pour discuter avec les joueurs présents, et créer ou rejoindre une partie.</a>
+      </div>
     </div>
   </div>
 
   <footer class="footer">
       <div>© Astrapi (jeu proposé dans le N°875 - Fév. 2017) - Licence Informatique de l'Université de Franche-Comté</div>
   </footer>
-
 </body>
 </html>
