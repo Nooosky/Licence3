@@ -17,5 +17,5 @@ Pour l'expression 1 + 2 + 3 + 4 ∗ 5 ∗ 6, bison va faire :
                 +
                 
                 
-Question 14 :
+Question :
 
