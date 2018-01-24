@@ -1,1 +1,6 @@
-b
+Question 10 :
+%token <name>     NAME        "name"
+
+Question 11 :
+C'est pour indiquer que l'operation contenant l'operateur suivant le mot clef %left est associatif a gauche, comme les additions, multiplications, soustractions et divisions par exemple. Il y a egalement la notion de priorite, le parser effectuera l'operation la plus a gauche avant de continuer. 
+
