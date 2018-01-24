@@ -166,7 +166,6 @@ body
   padding-bottom: 30px;
   float: left;
   margin: auto;
-
 }
 
 .zoneJouer
@@ -181,12 +180,12 @@ body
   color: black;
 }
 
-#jouer .zoneJouer:first-child:hover .big-icon
+.selection .zoneJouer:first-child:hover .big-icon
 {
   color: red;
 }
 
-#jouer .zoneJouer:last-child:hover .big-icon
+.selection .zoneJouer:last-child:hover .big-icon
 {
   color: blue;
 }
