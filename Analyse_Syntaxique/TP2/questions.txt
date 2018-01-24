@@ -3,7 +3,19 @@ Dans parser.y ligne21
 %token <name>     NAME        "name"
 
 Question 11 :
-C'est pour indiquer que l'operation contenant l'operateur suivant le mot clef %left est associatif a gauche, comme les additions, multiplications, soustractions et divisions par exemple. Il y a egalement la notion de priorite, le parser effectuera l'operation la plus a gauche avant de continuer. 
+C'est pour indiquer que l'operation contenant l'operateur suivant le mot clef %left est associatif a gauche, comme les
+additions, multiplications, soustractions et divisions par exemple. Il y a egalement la notion de priorite, le parser
+effectuera l'operation la plus a gauche avant de continuer. 
 
 Question 12 :
-Oui, cela a sont importance, ils faut les definir par ordre de priorite croissante.
+Oui, cela a son importance, ils faut les definir par ordre de priorite croissante.
+
+Question 13 : 
+Pour l'expression 1 + 2 + 3 + 4 ∗ 5 ∗ 6, bison va faire :
+1 + 2                   4 * 5
+      + 3                     * 6
+                +
+                
+                
+Question 14 :
+
