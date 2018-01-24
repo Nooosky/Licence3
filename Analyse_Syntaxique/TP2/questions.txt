@@ -1,5 +1,5 @@
 Question 10 :
-Dans parser.y ligne21
+Dans parser.y ligne 21
 %token <name>     NAME        "name"
 
 Question 11 :
@@ -8,7 +8,7 @@ additions, multiplications, soustractions et divisions par exemple. Il y a egale
 effectuera l'operation la plus a gauche avant de continuer. 
 
 Question 12 :
-Oui, cela a son importance, ils faut les definir par ordre de priorite croissante.
+Oui, cela a son importance, il faut les definir par ordre de priorite croissante.
 
 Question 13 : 
 Pour l'expression 1 + 2 + 3 + 4 ∗ 5 ∗ 6, bison va faire :
@@ -17,5 +17,5 @@ Pour l'expression 1 + 2 + 3 + 4 ∗ 5 ∗ 6, bison va faire :
                 +
                 
                 
-Question 14 :
+Question :
 
