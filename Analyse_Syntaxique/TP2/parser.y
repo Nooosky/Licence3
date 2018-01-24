@@ -20,6 +20,7 @@ void yyerror(const char *);
 %token <value>    VALUE       "value"
 %token <name>     NAME        "name"
 
+
 %left '+' '-'
 %left '*' '/'
 
@@ -44,6 +45,7 @@ expr:
   | expr '-' expr     { $$ = $1 - $3; }
   | expr '*' expr     { $$ = $1 * $3; }
   | expr '/' expr     { $$ = $1 / $3; }
+  | '(' expr ')'       { $$ = $2; }
 ;
 
 %%

@@ -12,6 +12,8 @@ ID    [A-Z][A-Z0-9]*
 
 %%
 
+"("           { return '('; }
+")"           { return ')'; }
 "+"           { return '+'; }
 "-"           { return '-'; }
 "*"           { return '*'; }
