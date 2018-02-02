@@ -1,0 +1,61 @@
+p
+{
+  margin: 0;
+}
+
+#chat
+{
+  width: 600px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+#message
+{
+  background-color: white;
+  width: 600px;
+  height: 400px;
+  padding: 3px;
+}
+
+#utilisateur
+{
+  width: 200px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+#pseudo
+{
+  background-color: white;
+  width: 200px;
+  height: 400px;
+  padding: 3px;
+}
+
+.container
+{
+  background-color: AntiqueWhite;
+  width: 830px;
+  height: 462px;
+  padding: 0;
+}
+
+input
+{
+  margin-top: 5px;
+}
+
+.input-zone
+{
+  width: 600px;
+  margin: 0px;
+  margin-left: 10px;
+}
+
+.deconnection
+{
+  width: 150px;
+  text-align: center;
+  margin-left: 75px;
+}

@@ -55,7 +55,7 @@ struct ast {
 };
 
 // do not forget to destroy properly! no leaks allowed!
-void ast_destroy(struct ast *self);
+void ast_destroy(struct ast_node *self);
 
 // the execution context
 struct context {
@@ -72,9 +72,9 @@ struct context {
 void context_create(struct context *self);
 
 // print the tree as if it was a Turtle program
-void ast_print(const struct ast *self);
+void ast_print(const struct ast_node *self);
 
 // evaluate the tree and generate some basic primitives
-void ast_eval(const struct ast *self, struct context *ctx);
+void ast_eval(const struct ast_node *self, struct context *ctx);
 
 #endif /* TURTLE_AST_H */

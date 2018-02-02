@@ -17,8 +17,10 @@ struct ast_node *make_expr_value(double value) {
 }
 
 
-void ast_destroy(struct ast *self) {
-
+void ast_destroy(struct ast_node *self) {
+  (*self)->kind = NULL;
+  (*self)->u.value = NULL;
+  free(self);
 }
 
 /*
@@ -33,7 +35,7 @@ void context_create(struct context *self) {
  * eval
  */
 
-void ast_eval(const struct ast *self, struct context *ctx) {
+void ast_eval(const struct ast_node *self, struct context *ctx) {
 
 }
 
@@ -41,6 +43,6 @@ void ast_eval(const struct ast *self, struct context *ctx) {
  * print
  */
 
-void ast_print(const struct ast *self) {
+void ast_print(const struct ast_node *self) {
 
 }

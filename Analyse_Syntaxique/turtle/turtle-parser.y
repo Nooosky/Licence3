@@ -56,6 +56,12 @@ expr_primary:
 
 expr:
     expr_primary      { $$ = $1; }
+    | expr '+' expr     { $$ = $1 + $3; }
+    | expr '-' expr     { $$ = $1 - $3; }
+    | expr '*' expr     { $$ = $1 * $3; }
+    | expr '/' expr     { $$ = $1 / $3; }
+    | '-' expr %prec '-'  { $$=-$2; }
+    | '(' expr ')'       { $$ = $2; }
 ;
 
 %%
