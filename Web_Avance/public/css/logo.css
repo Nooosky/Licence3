@@ -1,15 +1,30 @@
 #canvas1
 {
-   border: 2px solid black;
-   opacity: 0.8;
+  border: 2px solid black;
+  background-image: url("../images/bgDessin.png");
+  background-repeat: repeat;
+  background-size: 50px 50px;
 
-   position: absolute;
+  position: absolute;
 }
 
 #canvas2
 {
-   border: 2px solid black;
-   background-image: url("../images/bgDessin.png");
-   background-repeat: repeat;
-   background-size: 50px 50px;
+  border: 2px solid black;
+  opacity: 0.8;
+
+  position: relative;
+  cursor: none;
+}
+
+img,#size
+{
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+#pinceau,#gomme,#trait,#rectangle
+{
+  border: 1px solid black;
 }

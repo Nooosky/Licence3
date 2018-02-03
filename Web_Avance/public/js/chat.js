@@ -173,3 +173,16 @@ function message()
       }
     }
 }
+
+function makeSmiley(var str)
+{
+  str.replace(/:1/g, "red")
+  str.replace(/:2/g, "red")
+  str.replace(/:3/g, "red")
+  str.replace(/:4/g, "red")
+  str.replace(/:5/g, "red")
+  str.replace(/:6/g, "red")
+  str.replace(/:7/g, "red")
+  str.replace(/:8/g, "red")
+  str.replace(/:9/g, "red")
+}

@@ -4,15 +4,32 @@
   <meta charset="utf-8">
   <title>Logo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/logo.css">
   <script src="../js/logo.js"></script>
-</head>
+</head><link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<body>
-  <canvas id="canvas1" width="500" height="500">
-  </canvas>
-  <canvas id="canvas2" width="500" height="500"  onmousemove="mouseMove(event)" onmouseover="draw()" onmouseleave="mouseOut()" onmousedown="buttonDown()" onmouseup="buttonRelease()">
-  </canvas>
-  <input type="range" id="circleSize" onchange="getSizeOfCircle()" value="5" min="1" max="30">
+<body onload="getSize(); getPinceau();">
+
+  <div>
+    <div>
+      <canvas id="canvas1" width="500" height="500"></canvas>
+      <canvas id="canvas2" width="500" height="500" onmousemove="mouseMove(event)" onmouseover="draw()" onmouseleave="mouseOut()" onmousedown="buttonDown()" onmouseup="buttonRelease()"></canvas>
+    </div>
+    <div>
+      <img id="pinceau" src="../images/icone-pinceau.png" onclick="getPinceau()"/>
+      <img id="gomme" src="../images/icone-gomme.png" onclick="getGomme()"/>
+      <img id="trait" src="../images/icone-trait.png" onclick="getTrait()"/>
+      <img id="rectangle" src="../images/icone-rectangle.png" onclick="getRectangle()"/>
+      <input type="range" id="size" onchange="getSize()" value="5" min="1" max="30">
+      <img id="nouveau" src="../images/icone-nouveau.png" onclick="getNouveau()"/>
+      <img id="ouvrir" src="../images/icone-ouvrir.png" onclick="getOuvrir()"/>
+      <img id="enregistrer" src="../images/icone-enregistrer.png" onclick="getEnregistrer()"/>
+    </div>
+    <div id="selectionnerImage">
+      <h2>Image enregistrees</h2>
+      <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>
+  </div>
 </body>
 </html>
