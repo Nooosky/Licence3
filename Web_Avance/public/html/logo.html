@@ -9,7 +9,7 @@
   <script src="../js/logo.js"></script>
 </head><link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<body onload="getSize(); getPinceau();">
+<body onload="getOuvrirClose(); getSize(); getPinceau();">
 
   <div>
     <div>
@@ -28,7 +28,8 @@
     </div>
     <div id="selectionnerImage">
       <h2>Image enregistrees</h2>
-      <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" onclick="getOuvrirClose()" style="cursor: pointer"></span>
+      <div id="images"></div>
     </div>
   </div>
 </body>

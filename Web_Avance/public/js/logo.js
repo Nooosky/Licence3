@@ -214,15 +214,29 @@ function getNouveau()
 
 function getOuvrir()
 {
+  var myNode = document.getElementById("images");
+  while (myNode.firstChild) {myNode.removeChild(myNode.firstChild);}
 
-  var c1 = document.getElementById("canvas1");
-  var ctx1 = c1.getContext("2d");
-  var imageObj = new Image();
-  imageObj.onload = function() {
-    ctx1.drawImage(this, 0, 0);
-  };
+  var divImage = document.getElementById("images");
+  for(var i = 0; i < localStorage.length; ++i)
+  {
+    var div = document.createElement("div");
+    var p = document.createElement("p");
+    p.innerHTML = localStorage.key(i);
+    var img = document.createElement("img");
+    img.src = localStorage.getItem(localStorage.key(i));
+    img.setAttribute('style', 'border: 1px solid black');
+    img.setAttribute('onclick', "chargerImage('"+ localStorage.getItem(localStorage.key(i))+"')");
+    var icon = document.createElement("img");
+    icon.setAttribute('src', '../images/icone-supprimer.png');
+    icon.setAttribute('onclick', "removeImageSaved('"+localStorage.key(i)+"',this)");
+    div.appendChild(p);
+    div.appendChild(img);
+    div.appendChild(icon);
+    divImage.appendChild(div);
+  }
 
-  imageObj.src = dataURL;
+  document.getElementById('selectionnerImage').setAttribute("style", "display:block");
 }
 
 function getEnregistrer()
@@ -241,4 +255,31 @@ function removeShadow()
     document.getElementById("gomme").style.cssText = "box-shadow: 0px 0px 0px black;";
     document.getElementById("trait").style.cssText = "box-shadow: 0px 0px 0px black;";
     document.getElementById("rectangle").style.cssText = "box-shadow: 0px 0px 0px black;";
+}
+
+function removeImageSaved(key, node)
+{
+  localStorage.removeItem(key);
+  node.parentNode.remove();
+}
+
+function getOuvrirClose()
+{
+  document.getElementById('selectionnerImage').setAttribute("style", "display:none");
+}
+
+function chargerImage(dataURL)
+{
+  getNouveau();
+  
+  var c1 = document.getElementById("canvas1");
+  var ctx1 = c1.getContext("2d");
+  var imageObj = new Image();
+  imageObj.onload = function() {
+    ctx1.drawImage(this, 0, 0);
+  };
+
+  imageObj.src = dataURL;
+
+  document.getElementById('selectionnerImage').setAttribute("style", "display:none");
 }
