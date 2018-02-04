@@ -137,12 +137,12 @@ function message()
         }
         else if(general[indiceGeneral].from == user)
         {
-          message.innerHTML =  strTime + " - "  + general[indiceGeneral].from + " : " + general[indiceGeneral].text;
+          message.innerHTML =  strTime + " - "  + general[indiceGeneral].from + " : " + makeSmiley(general[indiceGeneral].text);
           message.style.color = "green";
         }
         else
         {
-          message.innerHTML =  strTime + " - "  + general[indiceGeneral].from + " : " + general[indiceGeneral].text;
+          message.innerHTML =  strTime + " - "  + general[indiceGeneral].from + " : " + makeSmiley(general[indiceGeneral].text);
         }
         zoneMessage.appendChild(message);
       }
@@ -174,15 +174,17 @@ function message()
     }
 }
 
-function makeSmiley(var str)
+function makeSmiley(str)
 {
-  str.replace(/:1/g, "red")
-  str.replace(/:2/g, "red")
-  str.replace(/:3/g, "red")
-  str.replace(/:4/g, "red")
-  str.replace(/:5/g, "red")
-  str.replace(/:6/g, "red")
-  str.replace(/:7/g, "red")
-  str.replace(/:8/g, "red")
-  str.replace(/:9/g, "red")
+  str = str.replace(/:1/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: 0 60px -60px 0'></div>");
+  str = str.replace(/:2/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: 0 30px -60px -30px'></div>");
+  str = str.replace(/:3/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: 0 0 -60px -60px'></div>");
+  str = str.replace(/:4/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -30px 60px -30px 0'></div>");
+  str = str.replace(/:5/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -30px 30px -30px -30px'></div>");
+  str = str.replace(/:6/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -30px 0 -30px -60px'></div>");
+  str = str.replace(/:7/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -60px 60px 0 0'></div>");
+  str = str.replace(/:8/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -60px 30px 0 -30px'></div>");
+  str = str.replace(/:9/g, "<div class='emoji'><img class='imgEmoji' src='../images/emoji.png' style='margin: -60px 0 0 -60px'></div>");
+
+  return str;
 }

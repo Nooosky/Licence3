@@ -16,6 +16,7 @@ p
   width: 600px;
   height: 400px;
   padding: 3px;
+  overflow: scroll;
 }
 
 #utilisateur
@@ -31,6 +32,7 @@ p
   width: 200px;
   height: 400px;
   padding: 3px;
+  overflow: scroll;
 }
 
 .container
@@ -58,4 +60,18 @@ input
   width: 150px;
   text-align: center;
   margin-left: 75px;
+}
+
+.emoji
+{
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.imgEmoji
+{
+  width: 90px;
+  height: 90px;
 }
