@@ -223,13 +223,15 @@ function getOuvrir()
     var div = document.createElement("div");
     var p = document.createElement("p");
     p.innerHTML = localStorage.key(i);
+    p.setAttribute('style', "display:inline-block;");
     var img = document.createElement("img");
     img.src = localStorage.getItem(localStorage.key(i));
-    img.setAttribute('style', 'border: 1px solid black');
     img.setAttribute('onclick', "chargerImage('"+ localStorage.getItem(localStorage.key(i))+"')");
+    img.setAttribute('style', "border: 1px solid black; display:inline-block;");
     var icon = document.createElement("img");
     icon.setAttribute('src', '../images/icone-supprimer.png');
     icon.setAttribute('onclick', "removeImageSaved('"+localStorage.key(i)+"',this)");
+    icon.setAttribute('style', "display:inline-block; width:25px; height:25px;");
     div.appendChild(p);
     div.appendChild(img);
     div.appendChild(icon);
@@ -271,7 +273,7 @@ function getOuvrirClose()
 function chargerImage(dataURL)
 {
   getNouveau();
-  
+
   var c1 = document.getElementById("canvas1");
   var ctx1 = c1.getContext("2d");
   var imageObj = new Image();

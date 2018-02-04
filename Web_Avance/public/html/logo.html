@@ -12,11 +12,11 @@
 <body onload="getOuvrirClose(); getSize(); getPinceau();">
 
   <div>
-    <div>
+    <div style="float:left;">
       <canvas id="canvas1" width="500" height="500"></canvas>
       <canvas id="canvas2" width="500" height="500" onmousemove="mouseMove(event)" onmouseover="draw()" onmouseleave="mouseOut()" onmousedown="buttonDown()" onmouseup="buttonRelease()"></canvas>
     </div>
-    <div>
+    <div style="float:left;">
       <img id="pinceau" src="../images/icone-pinceau.png" onclick="getPinceau()"/>
       <img id="gomme" src="../images/icone-gomme.png" onclick="getGomme()"/>
       <img id="trait" src="../images/icone-trait.png" onclick="getTrait()"/>
@@ -27,8 +27,8 @@
       <img id="enregistrer" src="../images/icone-enregistrer.png" onclick="getEnregistrer()"/>
     </div>
     <div id="selectionnerImage">
-      <h2>Image enregistrees</h2>
-      <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" onclick="getOuvrirClose()" style="cursor: pointer"></span>
+      <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true" onclick="getOuvrirClose()" style="cursor: pointer; float:right; color:black;"></span>
+      <h2 >Image enregistrees</h2>
       <div id="images"></div>
     </div>
   </div>
