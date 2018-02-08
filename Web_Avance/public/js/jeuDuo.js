@@ -1,46 +1,76 @@
-function startGame()
+class Player
 {
-  var divInstructionBlue = document.getElementById("instructionBlue");
-  var divInstructionRed = document.getElementById("instructionRed");
-  for(var i = 0; i < 5; ++i)
+  //variable
+  var m_name;
+  var m_color;
+  var m_icon;
+  var m_score;
+
+  //methode
+  constructor(name, color, icon)
   {
-    var divBlue = document.createElement("div");
-    divBlue.setAttribute('id', "divInstructionBlue"+i);
-    var imgBlue = document.createElement("img");
-    imgBlue.src = "../images/block-vide-bleu.png"
-    imgBlue.setAttribute('style', "width:100%;");
-    divBlue.appendChild(imgBlue);
-
-    var divRed = document.createElement("div");
-    divRed.setAttribute('id', "divInstructionRed"+i);
-    var imgRed = document.createElement("img");
-    imgRed.src = "../images/block-vide-rouge.png"
-    imgRed.setAttribute('style', "width:100%;");
-    divRed.appendChild(imgRed);
-
-    var divNumber = document.createElement("div");
-    divNumber.innerHTML = ""+i;
-    divNumber.setAttribute('id', "centered");
-
-    divBlue.appendChild(divNumber);
-    divRed.appendChild(divNumber);
-
-    divInstructionBlue.appendChild(divBlue);
-    divInstructionRed.appendChild(divRed);
+    m_name = name;
+    m_color = color;
+    m_icon = icon;
+    m_score = 0;
   }
 }
 
-function board()
+class Robot
 {
-  var divBoard = document.getElementById("board");
-  for(var i = 0; i < 9; ++i)
+  //variable
+  var m_color;
+  var m_postionX;
+  var m_postionY;
+  var m_hasLFag;
+
+  //methode
+  constructor(color, postionX, positionY)
   {
-    for(var j = 0; j < 9; ++j)
-    {
-      var tile = document.createElement("div");
-      tile.setAttribute('id', "tile"+i+j);
-      tile.setAttribute('style', "width:70px; height:70px; display: inline-block; background-color:lightgrey; border: 1px solid gray; margin-bottom: -5px;");
-      divBoard.appendChild(tile);
-    }
+    m_color = color;
+    m_postionX = postionX;
+    m_postionY = positionY;
   }
 }
+
+class Flag
+{
+  //variable
+  var m_color;
+  var m_postionX;
+  var m_postionY;
+
+  //methode
+  constructor(color, postionX, positionY)
+  {
+    m_color = color;
+    m_postionX = postionX;
+    m_postionY = positionY;
+  }
+}
+
+class Instruction
+{
+  //variable
+  var m_name;
+  var m_action;
+
+  //methode
+  constructor()
+  {
+  }
+}
+
+class Game
+{
+  //variable
+  var m_time;
+
+  //methode
+  constructor()
+  {
+    m_time = 0;
+  }
+}
+
+/* main */
