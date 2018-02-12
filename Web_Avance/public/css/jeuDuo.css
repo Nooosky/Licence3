@@ -1,19 +1,5 @@
-#centered {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    transform: translate(-25%, -25%);
-}
-
 #board
 {
-  display: inline-block;
-  width: 630px;
-  height: 630px;
-}
-
-#instructionBlue, #instructionRed
-{
-  width: 100px;
-  display: inline-block;
+  background-color:lightgrey;
+  border: 2px solid black;
 }
