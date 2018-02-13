@@ -20,9 +20,9 @@ class Player
         this.robot = new Robot('bleu', 7, 4, 180);
   }
 
-  drawRobot()
+  getRobot()
   {
-    this.robot.draw();
+    return this.robot;
   }
 }
 
@@ -55,18 +55,14 @@ class Robot
     ctx.restore();
   }
 
-  move(orientation)
+  rotation(orientation)
   {
-    var id = setInterval(frame, 10);
-    function frame() {
-    if (pos == 350) {
-      clearInterval(id);
-    } else {
-      pos++;
-      elem.style.top = pos + 'px';
-      elem.style.left = pos + 'px';
-    }
+
   }
+
+  move()
+  {
+
   }
 }
 
@@ -217,8 +213,9 @@ class Game
 
     this.drawBoard();
 
-    this.player1.drawRobot();
-    this.player2.drawRobot();
+    this.player1.getRobot().draw();
+    this.player2.getRobot().draw();
+
 
     for (var i = 0; i < this.flagArray.length; ++i)
       this.flagArray[i].draw();
@@ -228,6 +225,11 @@ class Game
   {
       this.display();
   }
+
+  test()
+  {
+    this.player2.getRobot().rotation(100);
+  }
 }
 
 /* main */
@@ -236,4 +238,5 @@ function main()
   var game = new Game();
   game.initGame();
   game.game();
+  document.getElementById("board").onclick = function() {game.test()};
 }
