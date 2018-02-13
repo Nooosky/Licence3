@@ -6,27 +6,79 @@ class Player
     this.color = color;
     this.icon = icon;
     this.score = 0;
+    this.robot = null;
+
+    if (color == "bleu")
+      if (Math.floor(Math.random() * Math.floor(4)) != 0)
+        this.robot = new Robot('rouge', 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
+      else
+        this.robot = new Robot('rouge', 1, 4, 0);
+    else if (color == "rouge")
+      if (Math.floor(Math.random() * Math.floor(4)) != 0)
+        this.robot = new Robot('bleu', 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
+      else
+        this.robot = new Robot('bleu', 7, 4, 180);
+  }
+
+  drawRobot()
+  {
+    this.robot.draw();
   }
 }
 
 class Robot
 {
-  constructor(color, postionX, positionY)
+  constructor(color, postionX, positionY, orientation)
   {
     this.color = color;
     this.postionX = postionX;
     this.postionY = positionY;
+    this.orientation = orientation;
     this.hasLFag = false;
+
+    this.imgRobot = new Image();
+    this.imgWheel = new Image();
+    this.imgRobot.src = "../images/robot-corps-"+ this.color +".png";
+    this.imgWheel.src = "../images/robot-chenilles.png";
+  }
+
+  draw()
+  {
+    var c = document.getElementById("board");
+    var ctx = c.getContext("2d");
+    ctx.save();
+    ctx.translate((this.postionX * 75 + 10 + 55/2), (this.postionY * 75 + 20 + 35/2));
+    ctx.rotate(Math.PI / 180 * this.orientation);
+    ctx.translate(-(this.postionX * 75 + 20 + 35/2), -(this.postionY * 75 + 10 + 55/2));
+    ctx.drawImage(this.imgWheel, this.postionX * 75 + 20, this.postionY * 75 + 10, 35, 55);
+    ctx.drawImage(this.imgRobot, this.postionX * 75 + 10, this.postionY * 75 + 20, 55, 35);
+    ctx.restore();
+  }
+
+  move(orientation)
+  {
+    var id = setInterval(frame, 10);
+    function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++;
+      elem.style.top = pos + 'px';
+      elem.style.left = pos + 'px';
+    }
+  }
   }
 }
 
 class Flag
 {
-  constructor(color, postionX, positionY)
+  constructor(postionX, positionY)
   {
-    this.color = color;
     this.postionX = postionX;
     this.postionY = positionY;
+
+    this.img = new Image();
+    this.color = '';
   }
 
   setPosition(postionX, positionY)
@@ -38,15 +90,14 @@ class Flag
   setColor(color)
   {
     this.color = color;
+    this.img.src = "../images/flag-" + this.color + ".png";
   }
 
   draw()
   {
     var c = document.getElementById("board");
     var ctx = c.getContext("2d");
-    var img = new Image();
-    img.src = "../images/flag-" + this.color + ".png";
-    ctx.drawImage(img, this.postionX * 75 + 10, this.postionY * 75 + 10, 55, 55);
+    ctx.drawImage(this.img, this.postionX * 75 + 10, this.postionY * 75 + 10, 55, 55);
   }
 }
 
@@ -65,6 +116,8 @@ class Game
   {
     this.time = 0;
     this.flagArray = [];
+    this.player1 = null;
+    this.player2 = null;
   }
 
   clear()
@@ -76,8 +129,7 @@ class Game
 
   drawBoard()
   {
-    var createSquare =
-    function(color, positionX, positionY)
+    function createSquare(color, positionX, positionY)
     {
         var c = document.getElementById("board");
         var ctx = c.getContext("2d");
@@ -86,8 +138,7 @@ class Game
         ctx.fillRect(75 * positionX, 75 * positionY, 75, 75);
     }
 
-    var createLine =
-    function(color, width, positionX1, positionY1, positionX2, positionY2)
+    function createLine(color, width, positionX1, positionY1, positionX2, positionY2)
     {
       var c = document.getElementById("board");
       var ctx = c.getContext("2d");
@@ -130,13 +181,14 @@ class Game
 
   initGame()
   {
+    // flaf
     for (var i = 3; i < 6; ++i)
-      this.flagArray.push(new Flag('', i, 0));
-    this.flagArray.push(new Flag('', 4, 1));
+      this.flagArray.push(new Flag(i, 0));
+    this.flagArray.push(new Flag(4, 1));
 
     for (var i = 3; i < 6; ++i)
-      this.flagArray.push(new Flag('', i, 8));
-    this.flagArray.push(new Flag('', 4, 7));
+      this.flagArray.push(new Flag(i, 8));
+    this.flagArray.push(new Flag(4, 7));
 
     var blue = 0, red = 0;
     var color = ''
@@ -154,6 +206,9 @@ class Game
       if (i == this.flagArray.length/2 - 1)
         blue = 0, red = 0;
     }
+
+    this.player1 = new Player("test1", "rouge", '');
+    this.player2 = new Player("test2", "bleu", '');
   }
 
   display()
@@ -161,6 +216,9 @@ class Game
     this.clear();
 
     this.drawBoard();
+
+    this.player1.drawRobot();
+    this.player2.drawRobot();
 
     for (var i = 0; i < this.flagArray.length; ++i)
       this.flagArray[i].draw();
