@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!ELEMENT cine-club  (showing,film-list)>
+<!ELEMENT showing    (opening+)>
+<!ELEMENT opening    (date,time,ending)>
+<!ELEMENT date       EMPTY>
+<!ELEMENT time       EMPTY>
+<!ELEMENT ending     EMPTY>
+<!ELEMENT film-list  (film+)>
+<!ELEMENT film       (title)>
+<!ELEMENT title      (#PCDATA)>
+
+<!ENTITY % hhmm  "hours   CDATA #REQUIRED
+                  minutes CDATA #REQUIRED">
+
+<!ATTLIST cine-club  name       CDATA      #IMPLIED>
+<!ATTLIST opening    for-film   IDREF      #REQUIRED>
+<!ATTLIST date       day        CDATA      #REQUIRED
+                     month      CDATA      #REQUIRED
+                     year       CDATA      #REQUIRED>
+<!ATTLIST time       %hhmm;>
+<!ATTLIST ending     %hhmm;>
+<!ATTLIST film       key        ID         #REQUIRED
+                     dvd-issued (yes | no) "no">
+<!ATTLIST title      with-vhs   CDATA         #IMPLIED>

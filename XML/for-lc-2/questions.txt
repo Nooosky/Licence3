@@ -1,0 +1,113 @@
+java net.sf.saxon.Transform -s:automne0.xml -sl:fr0-count-plus.xsl
+
+http://johnbokma.com/mexit/2011/07/04/installing-saxon-he-ubuntu.html
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-count-plus.xsl
+Le nombre de strophes est : 4
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-cumulate-count-plus.xsl
+Les nombres de lignes cumulées sont
+6
+9
+12
+18
+
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-2-fr1-plus.xsl
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE poemefr1
+  SYSTEM "poemefr1.dtd">
+<poemefr1>
+   <preambule titre="Chanson d'automne"
+              recueil="Po�mes saturniens"
+              date="1866"
+              prenom="Paul"
+              nom="Verlaine"
+              naissance="1844"
+              deces="1896"/>
+   <corps>
+      <ligne strophe="oui">Les sanglots longs</ligne>
+      <ligne>Des violons</ligne>
+      <ligne r="6pt">De l'automne</ligne>
+      <ligne>Blessent mon c&#x153;ur</ligne>
+      <ligne>D'une langueur</ligne>
+      <ligne r="6pt">Monotone.</ligne>
+      <ligne strophe="oui">Tout suffocant,</ligne>
+      <ligne>Et bl�me, quand</ligne>
+      <ligne r="6pt">Sonne l'heure,</ligne>
+      <ligne strophe="oui">Je me souviens</ligne>
+      <ligne>Des jours anciens</ligne>
+      <ligne r="6pt">Et je pleure ;</ligne>
+      <ligne strophe="oui">Et je m'en vais</ligne>
+      <ligne>Au vent mauvais</ligne>
+      <ligne r="6pt">Qui m'emporte</ligne>
+      <ligne>De�a, del�,</ligne>
+      <ligne>Pareil � la</ligne>
+      <ligne r="6pt">Feuille morte.</ligne>
+   </corps>
+</poemefr1>
+
+
+
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-2-html-plus.xsl -o:q2.html
+voir q2.html
+
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-2-latex-plus.xsl -o:q2.txt
+> pdflatex q2.txt
+
+> saxon9he-xslt -s:automne-0.xml -xsl:fr0-2-xhtml-plus.xsl -o:q2.html
+voir q2b.html
+
+> saxon9he-xslt -s:automne-1.xml -xsl:fr1-2-fr0-plus.xsl
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE poemefr0
+  SYSTEM "poemefr0.dtd">
+<poemefr0>
+   <preambule>
+      <titre>Chanson d'automne</titre>
+      <recueil>Po�mes saturniens</recueil>
+      <date>1866</date>
+      <auteur>
+         <prenom>Paul</prenom>
+         <nom>Verlaine</nom>
+         <naissance>1844</naissance>
+         <deces>1896</deces>
+      </auteur>
+   </preambule>
+   <corps>
+      <strophe>
+         <ligne>Les sanglots longs</ligne>
+         <ligne>Des violons</ligne>
+         <ligne>
+            <r/>De l'automne</ligne>
+         <ligne>Blessent mon c&#x153;ur</ligne>
+         <ligne>D'une langueur</ligne>
+         <ligne>
+            <r/>Monotone.</ligne>
+      </strophe>
+      <strophe>
+         <ligne>Tout suffocant,</ligne>
+         <ligne>Et bl�me, quand</ligne>
+         <ligne>
+            <r/>Sonne l'heure,</ligne>
+      </strophe>
+      <strophe>
+         <ligne>Je me souviens</ligne>
+         <ligne>Des jours anciens</ligne>
+         <ligne>
+            <r/>Et je pleure ;</ligne>
+      </strophe>
+      <strophe>
+         <ligne>Et je m'en vais</ligne>
+         <ligne>Au vent mauvais</ligne>
+         <ligne>
+            <r/>Qui m'emporte</ligne>
+         <ligne>De�a, del�,</ligne>
+         <ligne>Pareil � la</ligne>
+         <ligne>
+            <r/>Feuille morte.</ligne>
+      </strophe>
+   </corps>
+</poemefr0>

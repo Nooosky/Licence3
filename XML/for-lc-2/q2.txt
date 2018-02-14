@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+
+\title{Chanson d'automne \\ (\emph{in} Po�mes saturniens)}
+\author{Paul Verlaine (1844--1896)}
+\date{1866}
+
+\begin{document}
+
+\maketitle
+
+\begin{verse}
+Les sanglots longs \\
+Des violons \\
+\qquad De l'automne \\
+Blessent mon coeur \\
+D'une langueur \\
+\qquad Monotone.
+
+Tout suffocant, \\
+Et bl�me, quand \\
+\qquad Sonne l'heure,
+
+Je me souviens \\
+Des jours anciens \\
+\qquad Et je pleure ;
+
+Et je m'en vais \\
+Au vent mauvais \\
+\qquad Qui m'emporte \\
+De�a, del�, \\
+Pareil � la \\
+\qquad Feuille morte.
+
+\end{verse}
+
+\end{document}

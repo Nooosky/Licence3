@@ -1,0 +1,108 @@
+xmllint --shell <fichier.xml>
+
+> cat //sf-0/book[1]
+
+> xpath count(//sf-0/book)
+
+> cd //sf-0/book[5]
+
+books> ls
+
+books> cd author....
+
+books> pwd
+
+1/ Getting started
+
+> cat /sf-0/node()[2]
+  => premier book car noeud blanc
+
+> cat /sf-0/*[2]
+  => second book
+
+/!\ INDICES COMMENCENT A 1 ET NON 0 /!\
+
+2/ Decouverte d'XPath
+
+Sur automne-0.xml :
+
+cd poemefr0/corps/strophe[1]/ligne[1]
+
+cat following-sibling::node()
+  => reste de la strophe 1 avec noeuds blancs
+
+cat following-sibling::ligne
+  => reste de la strophe 1 sans noeuds blancs
+
+cat following-sibling::ligne[1]
+  => ligne suivante
+
+-------------------------------------------
+
+> cat /poemefr0/corps/strophe[2]/ligne[2]
+  => Deuxieme ligne de la deuxieme strophe
+
+> cat /poemefr0/corps/strophe/ligne[2]
+  => Deuxieme ligne de chaque strophe
+
+> cat /poemefr0/corps/descendant::ligne[10]
+  => 10 eme ligme du poeme
+
+> cat /poemefr0/corps/descendant::ligne[following-sibling::ligne[1]/r]
+  => Toutes les lignes qui precedent un renfoncement
+
+> cat /poemefr0/corps/strophe/ligne[position()!=2]
+  => Toutes les lignes sauf la deuxieme ligne de chaque strophe
+
+
+Sur automne-1.xml :
+
+-----------------------------------------
+
+> cat /poemefr1/corps/ligne[@strophe="oui"][2]/following-sibling::ligne[1]
+  => Deuxieme ligne de la deuxieme strophe
+
+> cat /poemefr1/corps/ligne[@strophe="oui"]/following-sibling::ligne[1]
+  => Deuxieme ligne de la chaque strophe
+
+> cat /poemefr1/corps/ligne[10]
+  => 10 eme ligne du poeme
+
+> cat /poemefr1/corps/ligne[following-sibling::ligne[1][@r != "0pt"]]
+  => Toutes les lignes qui precedent un renfoncement
+
+> cat /poemefr1/corps/ligne[not(preceding-sibling::ligne[1][@strophe="oui"])]
+  => Toutes les lignes sauf la deuxieme ligne de chaque strophe
+
+
+3/ Decouverte des attributs de type ID et IDREF(S)
+
+Voir code
+
+
+4/ Intermezzo : espaces de noms
+
+
+5.3
+
+<!ELEMENT title (..... | skipable)*
+
+5.4
+
+> cat /sf-1/entries/*[@xml:lang="de"]/title
+
+> count (/sf-1/entries/inprocessings)
+
+> count (/sf-1/entries/books[editor])
+ou
+> count (/sf-1/entries/books[editor and not(author)])
+ou
+> count (/sf-1/entries/books[editor][not(author)])
+
+> count (/sf-1//entries/*/note[descendant::group/@xml:lang="de"])
+
+> id(/sf-1/entries/*/authors/[count(id@to)>1])/@key
+
+> ????
+
+> /sf-1/entries/*[id(author/personrefs@to)/pseudonymof]/title
