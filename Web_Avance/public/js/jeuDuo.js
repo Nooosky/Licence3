@@ -8,12 +8,12 @@ class Player
     this.score = 0;
     this.robot = null;
 
-    if (color == "bleu")
+    if (color == "rouge")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot('rouge', 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
       else
         this.robot = new Robot('rouge', 1, 4, 0);
-    else if (color == "rouge")
+    else if (color == "bleu")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot('bleu', 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
       else
@@ -28,12 +28,17 @@ class Player
 
 class Robot
 {
-  constructor(color, postionX, positionY, orientation)
+  constructor(color, positionX, positionY, orientation)
   {
     this.color = color;
-    this.postionX = postionX;
-    this.postionY = positionY;
+    this.positionX = positionX;
+    this.positionY = positionY;
     this.orientation = orientation;
+
+    this.destinationPositionX = this.positionX;
+    this.destinationPositionY = this.positionY;
+    this.destinationOrientation = this.orientation;
+
     this.hasLFag = false;
 
     this.imgRobot = new Image();
@@ -42,22 +47,78 @@ class Robot
     this.imgWheel.src = "../images/robot-chenilles.png";
   }
 
+  update()
+  {
+    //change orientation
+    if (this.destinationOrientation != this.orientation)
+    {
+      this.orientation += this.destinationOrientation - this.orientation > 0 ? 1 : -1;
+
+      if (this.destinationOrientation == this.orientation && this.orientation == 360)
+      {
+          this.orientation = 0;
+          this.destinationOrientation = 0;
+      }
+    }
+
+    //change position
+    if (this.destinationOrientation == this.orientation)
+    {
+      if(this.destinationPositionX > this.positionX)
+        this.positionX+= 1 * 0.02;
+      if(this.destinationPositionX < this.positionX)
+        this.positionX-= 1 * 0.02;
+      if(this.destinationPositionY > this.positionY)
+        this.positionY+= 1 * 0.02;
+      if(this.destinationPositionY < this.positionY)
+        this.positionY-= 1 * 0.02;
+    }
+  }
+
   draw()
   {
     var c = document.getElementById("board");
     var ctx = c.getContext("2d");
     ctx.save();
-    ctx.translate((this.postionX * 75 + 10 + 55/2), (this.postionY * 75 + 20 + 35/2));
+    ctx.translate((this.positionX * 75 + 10 + 55/2), (this.positionY * 75 + 20 + 35/2));
     ctx.rotate(Math.PI / 180 * this.orientation);
-    ctx.translate(-(this.postionX * 75 + 20 + 35/2), -(this.postionY * 75 + 10 + 55/2));
-    ctx.drawImage(this.imgWheel, this.postionX * 75 + 20, this.postionY * 75 + 10, 35, 55);
-    ctx.drawImage(this.imgRobot, this.postionX * 75 + 10, this.postionY * 75 + 20, 55, 35);
+    ctx.translate(-(this.positionX * 75 + 20 + 35/2), -(this.positionY * 75 + 10 + 55/2));
+    ctx.drawImage(this.imgWheel, this.positionX * 75 + 20, this.positionY * 75 + 10, 35, 55);
+    ctx.drawImage(this.imgRobot, this.positionX * 75 + 10, this.positionY * 75 + 20, 55, 35);
     ctx.restore();
   }
 
-  rotation(orientation)
+  executeInstruction(instruction, robot)
   {
-
+    switch(instruction)
+    {
+      case "nord":
+      {
+        this.destinationOrientation = 270;
+        this.destinationPositionY-= (this.destinationPositionY > 0  && this.destinationPositionY-1 != robot.positionY) ? 1 : 0;
+        break;
+      }
+      case "sud":
+      {
+        this.destinationOrientation = 90;
+        this.destinationPositionY+= (this.destinationPositionY < 8  && this.destinationPositionY+1 != robot.positionY) ? 1 : 0;
+        break;
+      }
+      case "est":
+      {
+        this.destinationOrientation = 180;
+        this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
+        break;
+      }
+      case "ouest":
+      {
+        this.destinationOrientation = this.orientation > 180 ? 360: 0;
+        this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   move()
@@ -68,19 +129,19 @@ class Robot
 
 class Flag
 {
-  constructor(postionX, positionY)
+  constructor(positionX, positionY)
   {
-    this.postionX = postionX;
-    this.postionY = positionY;
+    this.positionX = positionX;
+    this.positionY = positionY;
 
     this.img = new Image();
     this.color = '';
   }
 
-  setPosition(postionX, positionY)
+  setPosition(positionX, positionY)
   {
-    this.postionX = postionX;
-    this.postionY = positionY;
+    this.positionX = positionX;
+    this.positionY = positionY;
   }
 
   setColor(color)
@@ -89,11 +150,16 @@ class Flag
     this.img.src = "../images/flag-" + this.color + ".png";
   }
 
+  update()
+  {
+
+  }
+
   draw()
   {
     var c = document.getElementById("board");
     var ctx = c.getContext("2d");
-    ctx.drawImage(this.img, this.postionX * 75 + 10, this.postionY * 75 + 10, 55, 55);
+    ctx.drawImage(this.img, this.positionX * 75 + 10, this.positionY * 75 + 10, 55, 55);
   }
 }
 
@@ -207,6 +273,15 @@ class Game
     this.player2 = new Player("test2", "bleu", '');
   }
 
+  update()
+  {
+    this.player1.getRobot().update();
+    this.player2.getRobot().update();
+
+    for (var i = 0; i < this.flagArray.length; ++i)
+      this.flagArray[i].update();
+  }
+
   display()
   {
     this.clear();
@@ -216,19 +291,19 @@ class Game
     this.player1.getRobot().draw();
     this.player2.getRobot().draw();
 
-
     for (var i = 0; i < this.flagArray.length; ++i)
       this.flagArray[i].draw();
   }
 
   game()
   {
+      this.update();
       this.display();
   }
 
   test()
   {
-    this.player2.getRobot().rotation(100);
+    this.player1.getRobot().executeInstruction("ouest", this.player2.getRobot());
   }
 }
 
@@ -237,6 +312,16 @@ function main()
 {
   var game = new Game();
   game.initGame();
-  game.game();
+  var id = setInterval(frame, 1000/60);
+  function frame()
+  {
+   if (false)
+     clearInterval(id);
+   else
+   {
+     game.game();
+   }
+  }
+
   document.getElementById("board").onclick = function() {game.test()};
 }
