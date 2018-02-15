@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-11c69b3e0bc65df05c61a4b4510d6b44 lexer.c

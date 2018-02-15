@@ -16,11 +16,19 @@ struct ast_node *make_expr_value(double value) {
   return node;
 }
 
+struct ast_node *make_fwd_cmd(struct ast_node *node_fils) {
+  struct ast_node *node = calloc(1, sizeof(struct ast_node));
+  node->kind = KIND_CMD_SIMPLE;
+  node->u.cmd = CMD_FORWARD;
+  node->children[node->children_count] = node_fils;
+  node->children_count ++;
+  return node;
+}
 
-void ast_destroy(struct ast_node *self) {
-  (*self)->kind = NULL;
-  (*self)->u.value = NULL;
-  free(self);
+
+
+void ast_destroy(struct ast *self) {
+
 }
 
 /*
@@ -35,7 +43,7 @@ void context_create(struct context *self) {
  * eval
  */
 
-void ast_eval(const struct ast_node *self, struct context *ctx) {
+void ast_eval(const struct ast *self, struct context *ctx) {
 
 }
 
@@ -43,6 +51,6 @@ void ast_eval(const struct ast_node *self, struct context *ctx) {
  * print
  */
 
-void ast_print(const struct ast_node *self) {
+void ast_print(const struct ast *self) {
 
 }

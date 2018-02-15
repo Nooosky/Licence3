@@ -1,3 +1,0 @@
-/home/near/L3/Licence3/Analyse_Syntaxique/TP1/build/CMakeFiles/rebuild_cache.dir
-/home/near/L3/Licence3/Analyse_Syntaxique/TP1/build/CMakeFiles/flex-test.dir
-/home/near/L3/Licence3/Analyse_Syntaxique/TP1/build/CMakeFiles/edit_cache.dir

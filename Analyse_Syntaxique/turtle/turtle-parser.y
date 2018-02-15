@@ -1,4 +1,4 @@
-%{
+    %{
 #include <stdio.h>
 
 #include "turtle-ast.h"
@@ -41,7 +41,7 @@ cmds:
 ;
 
 cmd:
-    KW_FORWARD expr   { /* TODO */ }
+    KW_FORWARD expr   { $$ = make_fwd_cmd($2); }
 ;
 
 expr_literal:
@@ -56,12 +56,6 @@ expr_primary:
 
 expr:
     expr_primary      { $$ = $1; }
-    | expr '+' expr     { $$ = $1 + $3; }
-    | expr '-' expr     { $$ = $1 - $3; }
-    | expr '*' expr     { $$ = $1 * $3; }
-    | expr '/' expr     { $$ = $1 / $3; }
-    | '-' expr %prec '-'  { $$=-$2; }
-    | '(' expr ')'       { $$ = $2; }
 ;
 
 %%

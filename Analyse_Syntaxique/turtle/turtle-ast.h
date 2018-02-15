@@ -48,6 +48,7 @@ struct ast_node {
 // TODO: make some constructors to use in parser.y
 // for example:
 struct ast_node *make_expr_value(double value);
+struct ast_node *make_fwd_cmd(struct ast_node *node_fils);
 
 // root of the abstract syntax tree
 struct ast {
@@ -55,7 +56,7 @@ struct ast {
 };
 
 // do not forget to destroy properly! no leaks allowed!
-void ast_destroy(struct ast_node *self);
+void ast_destroy(struct ast *self);
 
 // the execution context
 struct context {
@@ -72,9 +73,9 @@ struct context {
 void context_create(struct context *self);
 
 // print the tree as if it was a Turtle program
-void ast_print(const struct ast_node *self);
+void ast_print(const struct ast *self);
 
 // evaluate the tree and generate some basic primitives
-void ast_eval(const struct ast_node *self, struct context *ctx);
+void ast_eval(const struct ast *self, struct context *ctx);
 
 #endif /* TURTLE_AST_H */
