@@ -5,19 +5,18 @@ class Player
     this.name = name;
     this.color = color;
     this.icon = icon;
-    this.score = 0;
     this.robot = null;
 
-    if (color == "rouge")
+    if (this.color == "red")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
-        this.robot = new Robot('rouge', 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
+        this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
       else
-        this.robot = new Robot('rouge', 1, 4, 0);
-    else if (color == "bleu")
+        this.robot = new Robot(this.color, 1, 4, 0);
+    else if (this.color == "blue")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
-        this.robot = new Robot('bleu', 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
+        this.robot = new Robot(this.color, 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
       else
-        this.robot = new Robot('bleu', 7, 4, 180);
+        this.robot = new Robot(this.color, 7, 4, 180);
   }
 
   getRobot()
@@ -39,7 +38,7 @@ class Robot
     this.destinationPositionY = this.positionY;
     this.destinationOrientation = this.orientation;
 
-    this.hasLFag = false;
+    this.flag = null;
 
     this.imgRobot = new Image();
     this.imgWheel = new Image();
@@ -72,6 +71,10 @@ class Robot
         this.positionY+= 1 * 0.02;
       if(this.destinationPositionY < this.positionY)
         this.positionY-= 1 * 0.02;
+
+      // change position of flag if the robot carry a flag
+      if(this.flag != null)
+        this.flag.setPosition(this.positionX, this.positionY);
     }
   }
 
@@ -88,7 +91,7 @@ class Robot
     ctx.restore();
   }
 
-  executeInstruction(instruction, robot)
+  executeInstruction(instruction, robot, flagArray)
   {
     switch(instruction)
     {
@@ -116,14 +119,43 @@ class Robot
         this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
         break;
       }
+      case "prendre":
+      {
+        for (var i = 0; i < flagArray.length; ++i)
+          if(this.flag == null && flagArray[i].positionX == positionX && flagArray[i].positionY == positionY && flagArray[i].color == color)
+            this.flag = flagArray[i];
+        break;
+      }
+      case "deposer":
+      {
+        var canDrop = true;
+        for (var i = 0; i < flagArray.length; ++i)
+          if(this.flag != null && flagArray[i].positionX == this.flag.positionX && flagArray[i].positionY == this.flag.positionY)
+            canDrop = false;
+
+        if(canDrop)
+          this.flag = null;
+        break;
+      }
+      case "repousser":
+      {
+        if (this.color == "red")
+          this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
+        else if (this.color == "blue")
+          this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+        break;
+      }
+      case "annuler":
+      {
+        break;
+      }
+      case "pause":
+      {
+        break;
+      }
       default:
         break;
     }
-  }
-
-  move()
-  {
-
   }
 }
 
@@ -148,11 +180,6 @@ class Flag
   {
     this.color = color;
     this.img.src = "../images/flag-" + this.color + ".png";
-  }
-
-  update()
-  {
-
   }
 
   draw()
@@ -213,12 +240,12 @@ class Game
     }
 
 
-    // rectangle rouge
+    // rectangle red
     for(var i = 3; i < 6; ++i)
       createSquare("#ffaaaa", 0, i)
     createSquare("#ffaaaa", 1, 4)
 
-    // rectangle bleu
+    // rectangle blue
     for(var i = 3; i < 6; ++i)
       createSquare("#aaaaff", 8, i)
     createSquare("#aaaaff", 7, 4)
@@ -269,17 +296,14 @@ class Game
         blue = 0, red = 0;
     }
 
-    this.player1 = new Player("test1", "rouge", '');
-    this.player2 = new Player("test2", "bleu", '');
+    this.player1 = new Player("test1", "red", '');
+    this.player2 = new Player("test2", "blue", '');
   }
 
   update()
   {
     this.player1.getRobot().update();
     this.player2.getRobot().update();
-
-    for (var i = 0; i < this.flagArray.length; ++i)
-      this.flagArray[i].update();
   }
 
   display()
@@ -301,9 +325,11 @@ class Game
       this.display();
   }
 
-  test()
+  test(event)
   {
-    this.player1.getRobot().executeInstruction("ouest", this.player2.getRobot());
+    console.log(event.key);
+
+    this.player1.getRobot().executeInstruction("repousser", this.player2.getRobot(), this.flagArray);
   }
 }
 
@@ -323,5 +349,5 @@ function main()
    }
   }
 
-  document.getElementById("board").onclick = function() {game.test()};
+  document.getElementById("body").onkeypress = function() {game.test(event)};
 }
