@@ -1,0 +1,1 @@
+export CLASSPATH=${CLASSPATH}:/home/bastien/Documents/github/Licence3/xml/SaxonHE9-8-0-8J/saxon9he.jar
