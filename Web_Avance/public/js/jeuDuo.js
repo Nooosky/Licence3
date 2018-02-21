@@ -7,12 +7,15 @@ class Player
     this.icon = icon;
     this.robot = null;
 
-    if (this.color == "red")
+    this.instructionArray = [];
+    this.popUpIsOpen = false;
+
+    if (this.color == "rouge")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
       else
         this.robot = new Robot(this.color, 1, 4, 0);
-    else if (this.color == "blue")
+    else if (this.color == "bleu")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot(this.color, 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
       else
@@ -192,10 +195,9 @@ class Flag
 
 class Instruction
 {
-  constructor(name, action)
+  constructor(name)
   {
     this.name = name;
-    this.action = action;
   }
 }
 
@@ -286,9 +288,9 @@ class Game
       var rand = Math.floor(Math.random() * Math.floor(2));
 
       if ( rand == 0 && red != 2 || blue == 2)
-        { red++; color = 'red'; }
+        { red++; color = 'rouge'; }
       else
-        { blue++; color = 'blue'; }
+        { blue++; color = 'bleu'; }
 
       this.flagArray[i].setColor(color);
 
@@ -296,8 +298,8 @@ class Game
         blue = 0, red = 0;
     }
 
-    this.player1 = new Player("test1", "red", '');
-    this.player2 = new Player("test2", "blue", '');
+    this.player1 = new Player("test1", "rouge", '');
+    this.player2 = new Player("test2", "bleu", '');
   }
 
   update()
@@ -321,14 +323,24 @@ class Game
 
   game()
   {
+      if(this.player1.instructionArray.length == 0 && this.player1.popUpIsOpen == false && this.player2.popUpIsOpen != true)
+      {
+        this.player1.popUpIsOpen = true;
+        PopupCenter(800, 200, this.player1.color);
+      }
+
+      if(this.player2.instructionArray.length == 0 && this.player2.popUpIsOpen == false && this.player1.popUpIsOpen != true)
+      {
+        this.player2.popUpIsOpen = true;
+        PopupCenter(800, 200, this.player2.color);
+      }
+
       this.update();
       this.display();
   }
 
-  test(event)
+  test()
   {
-    console.log(event.key);
-
     this.player1.getRobot().executeInstruction("repousser", this.player2.getRobot(), this.flagArray);
   }
 }
@@ -348,6 +360,4 @@ function main()
      game.game();
    }
   }
-
-  document.getElementById("body").onkeypress = function() {game.test(event)};
 }
