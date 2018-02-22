@@ -8,7 +8,7 @@ class Player
     this.robot = null;
 
     this.instructionArray = [];
-    this.popUpIsOpen = false;
+    this.indiceInstruction = 0;
 
     if (this.color == "rouge")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
@@ -66,14 +66,14 @@ class Robot
     //change position
     if (this.destinationOrientation == this.orientation)
     {
-      if(this.destinationPositionX > this.positionX)
-        this.positionX+= 1 * 0.02;
-      if(this.destinationPositionX < this.positionX)
-        this.positionX-= 1 * 0.02;
-      if(this.destinationPositionY > this.positionY)
-        this.positionY+= 1 * 0.02;
-      if(this.destinationPositionY < this.positionY)
-        this.positionY-= 1 * 0.02;
+      if(this.destinationPositionX > Math.round(this.positionX * 100) / 100)
+        this.positionX+= 0.02;
+      if(this.destinationPositionX < Math.round(this.positionX * 100) / 100)
+        this.positionX-= 0.02;
+      if(this.destinationPositionY > Math.round(this.positionY * 100) / 100)
+        this.positionY+= 0.02;
+      if(this.destinationPositionY < Math.round(this.positionY * 100) / 100)
+        this.positionY-= 0.02;
 
       // change position of flag if the robot carry a flag
       if(this.flag != null)
@@ -112,20 +112,20 @@ class Robot
       }
       case "est":
       {
-        this.destinationOrientation = 180;
-        this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
+        this.destinationOrientation = this.orientation > 180 ? 360: 0;
+        this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
         break;
       }
       case "ouest":
       {
-        this.destinationOrientation = this.orientation > 180 ? 360: 0;
-        this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+        this.destinationOrientation = 180;
+        this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
         break;
       }
       case "prendre":
       {
         for (var i = 0; i < flagArray.length; ++i)
-          if(this.flag == null && flagArray[i].positionX == positionX && flagArray[i].positionY == positionY && flagArray[i].color == color)
+          if(this.flag == null && flagArray[i].positionX == this.positionX && flagArray[i].positionY == this.positionY && flagArray[i].color == this.color)
             this.flag = flagArray[i];
         break;
       }
@@ -160,6 +160,22 @@ class Robot
         break;
     }
   }
+
+  canMove()
+  {
+    console.log(
+      this.color + " " +
+      this.destinationOrientation + " " +
+      this.orientation + " " +
+      this.destinationPositionX + " " +
+      (Math.round(this.positionX * 100) / 100) + " " +
+      this.destinationPositionY + " " +
+      (Math.round(this.positionY * 100) / 100)
+  );
+    return this.destinationOrientation == this.orientation &&
+      this.destinationPositionX == (Math.round(this.positionX * 100) / 100) &&
+      this.destinationPositionY == (Math.round(this.positionY * 100) / 100);
+  }
 }
 
 class Flag
@@ -193,14 +209,6 @@ class Flag
   }
 }
 
-class Instruction
-{
-  constructor(name)
-  {
-    this.name = name;
-  }
-}
-
 class Game
 {
   constructor()
@@ -209,65 +217,6 @@ class Game
     this.flagArray = [];
     this.player1 = null;
     this.player2 = null;
-  }
-
-  clear()
-  {
-    var c = document.getElementById("board");
-    var ctx = c.getContext("2d");
-    ctx.clearRect(0, 0, c.width, c.height);
-  }
-
-  drawBoard()
-  {
-    function createSquare(color, positionX, positionY)
-    {
-        var c = document.getElementById("board");
-        var ctx = c.getContext("2d");
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.fillRect(75 * positionX, 75 * positionY, 75, 75);
-    }
-
-    function createLine(color, width, positionX1, positionY1, positionX2, positionY2)
-    {
-      var c = document.getElementById("board");
-      var ctx = c.getContext("2d");
-      ctx.strokeStyle = color;
-      ctx.beginPath();
-      ctx.lineWidth = width;
-      ctx.moveTo(positionX1 * 75, positionY1 * 75);
-      ctx.lineTo(positionX2 * 75, positionY2 * 75);
-      ctx.stroke();
-    }
-
-
-    // rectangle red
-    for(var i = 3; i < 6; ++i)
-      createSquare("#ffaaaa", 0, i)
-    createSquare("#ffaaaa", 1, 4)
-
-    // rectangle blue
-    for(var i = 3; i < 6; ++i)
-      createSquare("#aaaaff", 8, i)
-    createSquare("#aaaaff", 7, 4)
-
-    // rectangle vert haut
-    for(var i = 3; i < 6; ++i)
-      createSquare("#aaffaa", i, 0)
-    createSquare("#aaffaa", 4, 1)
-
-    // rectangle vert bas
-    for(var i = 3; i < 6; ++i)
-      createSquare("#aaffaa", i, 8)
-    createSquare("#aaffaa", 4, 7)
-
-    // quadrillage
-    for(var i = 1; i < 9; ++i)
-    {
-      createLine("gray", 2, 0, i, 9, i);
-      createLine("gray", 2, i, 0, i, 9);
-    }
   }
 
   initGame()
@@ -304,15 +253,39 @@ class Game
 
   update()
   {
+    this.player1.instructionArray = getInstructionArray(this.player1.color);
+    this.player2.instructionArray = getInstructionArray(this.player2.color);
+
+    if(this.player1.instructionArray.length == 5 && this.player2.instructionArray.length == 5)
+    {
+      if(this.player1.getRobot().canMove() && this.player2.getRobot().canMove())
+      {
+        console.log("instruction");
+        this.player1.getRobot().executeInstruction(this.player1.instructionArray[this.player1.indiceInstruction], this.player2.getRobot(), this.flagArray);
+        this.player2.getRobot().executeInstruction(this.player2.instructionArray[this.player2.indiceInstruction], this.player1.getRobot(), this.flagArray);
+        this.player1.indiceInstruction++;
+        this.player2.indiceInstruction++;
+
+        if (this.player1.indiceInstruction == 5-1 && this.player2.indiceInstruction == 5-1)
+        {
+          this.player1.indiceInstruction=0;
+          this.player2.indiceInstruction=0;
+          eraseInstruction();
+          drawLeftCanvas();
+          drawRightCanvas();
+        }
+      }
+    }
+
     this.player1.getRobot().update();
     this.player2.getRobot().update();
   }
 
   display()
   {
-    this.clear();
+    clear();
 
-    this.drawBoard();
+    drawBoard();
 
     this.player1.getRobot().draw();
     this.player2.getRobot().draw();
@@ -323,25 +296,8 @@ class Game
 
   game()
   {
-      if(this.player1.instructionArray.length == 0 && this.player1.popUpIsOpen == false && this.player2.popUpIsOpen != true)
-      {
-        this.player1.popUpIsOpen = true;
-        PopupCenter(800, 200, this.player1.color);
-      }
-
-      if(this.player2.instructionArray.length == 0 && this.player2.popUpIsOpen == false && this.player1.popUpIsOpen != true)
-      {
-        this.player2.popUpIsOpen = true;
-        PopupCenter(800, 200, this.player2.color);
-      }
-
       this.update();
       this.display();
-  }
-
-  test()
-  {
-    this.player1.getRobot().executeInstruction("repousser", this.player2.getRobot(), this.flagArray);
   }
 }
 
