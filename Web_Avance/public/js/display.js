@@ -160,7 +160,6 @@ function drawRightInstruction(index){
 
 
 function drawSelectedInstruction(colour, index, instructionName, newWindow) {
-  console.log(index);
   var sizeImg = 80;
   var baseImgX = 30;
   var baseImgY = 16;
@@ -179,14 +178,12 @@ function drawSelectedInstruction(colour, index, instructionName, newWindow) {
 
   icon.src = "../images/" + instructionName + "-" + colour + ".png";
   newWindow.document.title = "Choose instruction " + (index+1);
-  console.log(instructionName);
   addInstructionToArray(colour, instructionName);
   newWindow.document.getElementById(instructionName).style.filter = "grayscale(100%)";
   newWindow.document.getElementById(instructionName).setAttribute('onclick', 'return false;');
   newWindow.document.getElementById(instructionName).onclick = function() {return false;};
 
   if(index + 1 == 6){
-    console.log("end");
     newWindow.close();
   }
 

@@ -12,9 +12,9 @@ class Player
 
     if (this.color == "rouge")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
-        this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
+        this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 360);
       else
-        this.robot = new Robot(this.color, 1, 4, 0);
+        this.robot = new Robot(this.color, 1, 4, 360);
     else if (this.color == "bleu")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot(this.color, 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
@@ -54,13 +54,9 @@ class Robot
     //change orientation
     if (this.destinationOrientation != this.orientation)
     {
-      this.orientation += this.destinationOrientation - this.orientation > 0 ? 1 : -1;
+      this.orientation += 1;
 
-      if (this.destinationOrientation == this.orientation && this.orientation == 360)
-      {
-          this.orientation = 0;
-          this.destinationOrientation = 0;
-      }
+      if (this.orientation > 360) this.orientation -= 360;
     }
 
     //change position
@@ -112,7 +108,7 @@ class Robot
       }
       case "est":
       {
-        this.destinationOrientation = this.orientation > 180 ? 360: 0;
+        this.destinationOrientation = 360;
         this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
         break;
       }
@@ -125,7 +121,7 @@ class Robot
       case "prendre":
       {
         for (var i = 0; i < flagArray.length; ++i)
-          if(this.flag == null && flagArray[i].positionX == this.positionX && flagArray[i].positionY == this.positionY && flagArray[i].color == this.color)
+          if(this.flag == null && flagArray[i].positionX == (Math.round(this.positionX * 100) / 100) && flagArray[i].positionY == (Math.round(this.positionY * 100) / 100) && flagArray[i].color == this.color)
             this.flag = flagArray[i];
         break;
       }
@@ -133,7 +129,7 @@ class Robot
       {
         var canDrop = true;
         for (var i = 0; i < flagArray.length; ++i)
-          if(this.flag != null && flagArray[i].positionX == this.flag.positionX && flagArray[i].positionY == this.flag.positionY)
+          if(this.flag != null && flagArray[i].positionX == (Math.round(this.flag.positionX * 100) / 100) && flagArray[i].positionY == (Math.round(this.flag.positionY * 100) / 100))
             canDrop = false;
 
         if(canDrop)
@@ -142,10 +138,10 @@ class Robot
       }
       case "repousser":
       {
-        if (this.color == "red")
-          this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
-        else if (this.color == "blue")
-          this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+        if (robot.color == "rouge")
+          robot.destinationPositionX-= (robot.destinationPositionX > 0 && robot.destinationPositionX-1 != (Math.round(this.positionX * 100) / 100)) ? 1 : 0;
+        else if (robot.color == "bleu")
+          robot.destinationPositionX+= (robot.destinationPositionX < 8 && robot.destinationPositionX+1 != (Math.round(this.positionX * 100) / 100)) ? 1 : 0;
         break;
       }
       case "annuler":
@@ -163,15 +159,6 @@ class Robot
 
   canMove()
   {
-    console.log(
-      this.color + " " +
-      this.destinationOrientation + " " +
-      this.orientation + " " +
-      this.destinationPositionX + " " +
-      (Math.round(this.positionX * 100) / 100) + " " +
-      this.destinationPositionY + " " +
-      (Math.round(this.positionY * 100) / 100)
-  );
     return this.destinationOrientation == this.orientation &&
       this.destinationPositionX == (Math.round(this.positionX * 100) / 100) &&
       this.destinationPositionY == (Math.round(this.positionY * 100) / 100);
@@ -260,13 +247,12 @@ class Game
     {
       if(this.player1.getRobot().canMove() && this.player2.getRobot().canMove())
       {
-        console.log("instruction");
         this.player1.getRobot().executeInstruction(this.player1.instructionArray[this.player1.indiceInstruction], this.player2.getRobot(), this.flagArray);
         this.player2.getRobot().executeInstruction(this.player2.instructionArray[this.player2.indiceInstruction], this.player1.getRobot(), this.flagArray);
         this.player1.indiceInstruction++;
         this.player2.indiceInstruction++;
 
-        if (this.player1.indiceInstruction == 5-1 && this.player2.indiceInstruction == 5-1)
+        if (this.player1.indiceInstruction == 5 && this.player2.indiceInstruction == 5)
         {
           this.player1.indiceInstruction=0;
           this.player2.indiceInstruction=0;
