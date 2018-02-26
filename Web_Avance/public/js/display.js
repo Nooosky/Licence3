@@ -205,10 +205,18 @@ function getInstructionArray(colour)
     return instructionArrayRed;
 }
 
-function eraseInstruction()
+function eraseInstruction(colour)
 {
-  instructionArrayBlue=[];
-  instructionArrayRed=[];
+  if (colour == "bleu")
+  {
+    instructionArrayBlue=[];
+    drawRightCanvas();
+  }
+  else if (colour == "rouge")
+  {
+    instructionArrayRed=[];
+    drawLeftCanvas();
+  }
 }
 
 function PopupCenter(w, h, colour) {
