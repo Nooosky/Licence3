@@ -10,6 +10,9 @@ var score_context = null;
 var popOpen = false;
 var popUpWindow = null;
 
+var displayIndex;
+var x2alreadyDrwn = false;
+
 var rectX = 0;
 var rectY = 0;
 var rectWidth = 150;
@@ -184,13 +187,17 @@ function drawSelectedInstruction(colour, index, instructionName, newWindow) {
   var baseTextX = 75;
   var baseTextY = 76;
   var icon = new Image();
+
+  //console.log(displayIndex);
+
+
   if (colour == "bleu")
     icon.onload = function() {
-      right_context.drawImage(icon, baseImgX, baseImgY + index*(32+sizeImg), sizeImg, sizeImg);
+      right_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(32+sizeImg), sizeImg, sizeImg);
     }
   else if (colour == "rouge")
     icon.onload = function() {
-      left_context.drawImage(icon, baseImgX, baseImgY + index*(32+sizeImg), sizeImg, sizeImg);
+      left_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(32+sizeImg), sizeImg, sizeImg);
     }
 
 
@@ -201,7 +208,19 @@ function drawSelectedInstruction(colour, index, instructionName, newWindow) {
   newWindow.document.getElementById(instructionName).setAttribute('onclick', 'return false;');
   newWindow.document.getElementById(instructionName).onclick = function() {return false;};
 
-  if(index + 1 == 6){
+  if(displayIndex  >= 1 && x2alreadyDrwn == false){
+    x2x2alreadyDrwn = true;
+    var x2 = newWindow.document.createElement("img");
+    x2.setAttribute("id", "x2");
+    x2.setAttribute("src", "http://localhost/Web_Avance/public/images/x2-"+colour+".png");
+    x2.setAttribute("height", "70");
+    x2.setAttribute("width", "70");
+    newWindow.document.getElementsByTagName("body")[0].appendChild(x2);
+    x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
+    x2.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+  }
+
+  if(displayIndex + 1 == 6){
     newWindow.close();
     popOpen = false;
     popUpWindow = null;
@@ -242,7 +261,21 @@ function PopupCenter(w, h, colour) {
 
 
   var validated = 0;
+
+  displayIndex = 1;
+
+  if(colour == "rouge"){
+    displayIndex = instructionArrayRed.length + 1;
+  }else if(colour == "bleu"){
+    displayIndex = instructionArrayBlue.length + 1;
+  }
+  if(displayIndex == 6){
+    displayIndex = 1;
+  }
+
   var index = 1;
+
+
     // Fixes dual-screen position                         Most browsers      Firefox
   var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
   var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
@@ -264,14 +297,15 @@ function PopupCenter(w, h, colour) {
 
   if(!popOpen)
   {
+
     var annuler = newWindow.document.createElement("img");
     annuler.setAttribute("id", "annuler");
     annuler.setAttribute("src", "http://localhost/Web_Avance/public/images/annuler-"+colour+".png");
     annuler.setAttribute("height", "70");
     annuler.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(annuler);
-    annuler.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "annuler", newWindow); index ++;');
-    annuler.onclick = function() {drawSelectedInstruction(colour, index, "annuler", newWindow);index ++;};
+    annuler.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "annuler", newWindow); displayIndex ++;');
+    annuler.onclick = function() {drawSelectedInstruction(colour, index, "annuler", newWindow);displayIndex ++;};
 
     var deposer = newWindow.document.createElement("img");
     deposer.setAttribute("id", "deposer");
@@ -279,8 +313,8 @@ function PopupCenter(w, h, colour) {
     deposer.setAttribute("height", "70");
     deposer.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(deposer);
-    deposer.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "deposer", newWindow); index ++;');
-    deposer.onclick = function() {drawSelectedInstruction(colour, index, "deposer", newWindow);index ++;};
+    deposer.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "deposer", newWindow); displayIndex ++;');
+    deposer.onclick = function() {drawSelectedInstruction(colour, index, "deposer", newWindow);displayIndex ++;};
 
     var est = newWindow.document.createElement("img");
     est.setAttribute("id", "est");
@@ -288,8 +322,8 @@ function PopupCenter(w, h, colour) {
     est.setAttribute("height", "70");
     est.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(est);
-    est.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "est", newWindow); index ++;');
-    est.onclick = function() {drawSelectedInstruction(colour, index, "est", newWindow);index ++;};
+    est.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "est", newWindow); displayIndex ++;');
+    est.onclick = function() {drawSelectedInstruction(colour, index, "est", newWindow);displayIndex ++;};
 
     var nord = newWindow.document.createElement("img");
     nord.setAttribute("id", "nord");
@@ -297,8 +331,8 @@ function PopupCenter(w, h, colour) {
     nord.setAttribute("height", "70");
     nord.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(nord);
-    nord.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "nord", newWindow); index ++;');
-    nord.onclick = function() {drawSelectedInstruction(colour, index, "nord", newWindow);index ++;};
+    nord.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "nord", newWindow); displayIndex ++;');
+    nord.onclick = function() {drawSelectedInstruction(colour, index, "nord", newWindow);displayIndex ++;};
 
     var ouest = newWindow.document.createElement("img");
     ouest.setAttribute("id", "ouest");
@@ -306,8 +340,8 @@ function PopupCenter(w, h, colour) {
     ouest.setAttribute("height", "70");
     ouest.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(ouest);
-    ouest.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "ouest", newWindow); index ++;');
-    ouest.onclick = function() {drawSelectedInstruction(colour, index, "ouest", newWindow);index ++;};
+    ouest.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "ouest", newWindow); displayIndex ++;');
+    ouest.onclick = function() {drawSelectedInstruction(colour, index, "ouest", newWindow);displayIndex ++;};
 
     var pause = newWindow.document.createElement("img");
     pause.setAttribute("id", "pause");
@@ -315,8 +349,8 @@ function PopupCenter(w, h, colour) {
     pause.setAttribute("height", "70");
     pause.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(pause);
-    pause.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "pause", newWindow); index ++;');
-    pause.onclick = function() {drawSelectedInstruction(colour, index, "pause", newWindow);index ++;};
+    pause.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "pause", newWindow); displayIndex ++;');
+    pause.onclick = function() {drawSelectedInstruction(colour, index, "pause", newWindow);displayIndex ++;};
 
 
     var prendre = newWindow.document.createElement("img");
@@ -325,17 +359,17 @@ function PopupCenter(w, h, colour) {
     prendre.setAttribute("height", "70");
     prendre.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(prendre);
-    prendre.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "prendre", newWindow); index ++;');
-    prendre.onclick = function() {drawSelectedInstruction(colour, index, "prendre", newWindow);index ++;};
+    prendre.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "prendre", newWindow); displayIndex ++;');
+    prendre.onclick = function() {drawSelectedInstruction(colour, index, "prendre", newWindow);displayIndex ++;};
 
     var repousser = newWindow.document.createElement("img");
     repousser.setAttribute("id", "repousser");
-    repousser.setAttribute("src", "http://canvaslocalhost/Web_Avance/public/images/repousser-"+colour+".png");
+    repousser.setAttribute("src", "http://localhost/Web_Avance/public/images/repousser-"+colour+".png");
     repousser.setAttribute("height", "70");
     repousser.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(repousser);
-    repousser.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "repousser", newWindow); index ++;');
-    repousser.onclick = function() {drawSelectedInstruction(colour, index, "repousser", newWindow);index ++;};
+    repousser.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "repousser", newWindow); displayIndex ++;');
+    repousser.onclick = function() {drawSelectedInstruction(colour, index, "repousser", newWindow);displayIndex ++;};
 
     var sud = newWindow.document.createElement("img");
     sud.setAttribute("id", "sud");
@@ -343,17 +377,31 @@ function PopupCenter(w, h, colour) {
     sud.setAttribute("height", "70");
     sud.setAttribute("width", "70");
     newWindow.document.getElementsByTagName("body")[0].appendChild(sud);
-    sud.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "sud", newWindow); index ++;');
-    sud.onclick = function() {drawSelectedInstruction(colour, index, "sud", newWindow);index ++;};
+    sud.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "sud", newWindow); displayIndex ++;');
+    sud.onclick = function() {drawSelectedInstruction(colour, index, "sud", newWindow);displayIndex ++;}
 
-    var x2 = newWindow.document.createElement("img");
-    x2.setAttribute("id", "x2");
-    x2.setAttribute("src", "http://localhost/Web_Avance/public/images/x2-"+colour+".png");
-    x2.setAttribute("height", "70");
-    x2.setAttribute("width", "70");
-    newWindow.document.getElementsByTagName("body")[0].appendChild(x2);
-    x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "x2", newWindow); index ++;');
-    x2.onclick = function() {drawSelectedInstruction(colour, index, "x2", newWindow);index ++;};
+
+    if(colour == "rouge")
+    {
+      var est_x2 = newWindow.document.createElement("img");
+      est_x2.setAttribute("id", "est_x2");
+      est_x2.setAttribute("src", "http://localhost/Web_Avance/public/images/est-x2-"+colour+".png");
+      est_x2.setAttribute("height", "70");
+      est_x2.setAttribute("width", "70");
+      newWindow.document.getElementsByTagName("body")[0].appendChild(est_x2);
+      est_x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "est_x2", newWindow); displayIndex ++;');
+      est_x2.onclick = function() {drawSelectedInstruction(colour, index, "est_x2", newWindow);displayIndex ++;};
+    }else if(colour == "bleu")
+    {
+      var ouest_x2 = newWindow.document.createElement("img");
+      ouest_x2.setAttribute("id", "ouest_x2");
+      ouest_x2.setAttribute("src", "http://localhost/Web_Avance/public/images/ouest_x2-"+colour+".png");
+      ouest_x2.setAttribute("height", "70");
+      ouest_x2.setAttribute("width", "70");
+      newWindow.document.getElementsByTagName("body")[0].appendChild(ouest_x2);
+      ouest_x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "ouest_x2", newWindow); displayIndex ++;');
+      ouest_x2.onclick = function() {drawSelectedInstruction(colour, index, "ouest_x2", newWindow);displayIndex ++;};
+    }
   }
 
   popOpen = true;
@@ -367,11 +415,39 @@ function PopupCenter(w, h, colour) {
 }
 
 
+function flashyText(text) {
+    var count = 6,
+        timer = setInterval(function() {
+            count--;
+            if( count%2 == 1) {
+                // draw the text
+                score_context.font = "20px Courier New";
+                score_context.fillStyle = "#660066";
+                score_context.textAlign = "center";
+                score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
+            }
+            else {
+                // don't draw it (ie. clear it off)
+                drawScoreCanvas();
+            }
+            if(count == 0){
+              score_context.font = "20px Courier New";
+              score_context.fillStyle = "#660066";
+              score_context.textAlign = "center";
+              score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
+            }
+            if( count == 0) clearInterval(timer);
+        },1000);
+
+
+}
+
 function scoreChooseInstr(){
-  score_context.font = "20px Courier New";
-  score_context.fillStyle = "#660066";
-  score_context.textAlign = "center";
-  score_context.fillText("May the players choose their instructions", score_canvas.width/2, score_canvas.height/2+5);
+  flashyText("May the players choose their instructions");
+}
+
+function scoreRobotPlaying(){
+  flashyText("The robots are doing their maneuvers");
 }
 
 function init()
