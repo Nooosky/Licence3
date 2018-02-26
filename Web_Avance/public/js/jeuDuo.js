@@ -64,11 +64,11 @@ class Robot
     {
       if(this.destinationPositionX > Math.round(this.positionX * 100) / 100)
         this.positionX+= 0.02;
-      if(this.destinationPositionX < Math.round(this.positionX * 100) / 100)
+      else if(this.destinationPositionX < Math.round(this.positionX * 100) / 100)
         this.positionX-= 0.02;
-      if(this.destinationPositionY > Math.round(this.positionY * 100) / 100)
+      else if(this.destinationPositionY > Math.round(this.positionY * 100) / 100)
         this.positionY+= 0.02;
-      if(this.destinationPositionY < Math.round(this.positionY * 100) / 100)
+      else if(this.destinationPositionY < Math.round(this.positionY * 100) / 100)
         this.positionY-= 0.02;
 
       // change position of flag if the robot carry a flag
