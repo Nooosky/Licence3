@@ -36,7 +36,7 @@
       <contains><body>NO(-)</body><mass-concentration value="2."/></contains>
     </analysis>
     <comes-from country="FR">
-      <town>Aurèle</town>
+      <town>Aurï¿½le</town>
       <french-department no="06">Alpes-Maritimes</french-department>
     </comes-from>
     <barcode>3268840001008</barcode>
@@ -57,7 +57,7 @@
     </analysis>
     <comes-from country="FR">
       <town>Volvic</town>
-      <french-department no="2B">Puy-de-Dôme</french-department>
+      <french-department no="2B">Puy-de-Dï¿½me</french-department>
     </comes-from>
     <barcode>3057640117008</barcode>
     <pH value="7."/>
@@ -82,7 +82,7 @@
     <barcode>3216702376008</barcode>
     <pH value="7.7"/>
   </water-bottle>
-    
+
   <water-bottle>
     <name>
       B&latin-small-letter-i-with-acute;linsk&latin-small-letter-a-with-acute;
