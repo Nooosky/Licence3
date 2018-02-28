@@ -1,3 +1,3 @@
-/home/near/Documents/turtle/build/CMakeFiles/rebuild_cache.dir
-/home/near/Documents/turtle/build/CMakeFiles/turtle.dir
-/home/near/Documents/turtle/build/CMakeFiles/edit_cache.dir
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/CMakeFiles/rebuild_cache.dir
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/CMakeFiles/turtle.dir
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/CMakeFiles/edit_cache.dir

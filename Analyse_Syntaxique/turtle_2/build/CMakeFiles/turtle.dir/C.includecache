@@ -11,8 +11,10 @@ stddef.h
 -
 stdbool.h
 -
+string.h
+-
 
-/home/near/Documents/turtle/build/turtle-lexer.c
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-lexer.c
 stdio.h
 -
 string.h
@@ -30,17 +32,17 @@ stdlib.h
 string.h
 -
 turtle-ast.h
-/home/near/Documents/turtle/build/turtle-ast.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-ast.h
 turtle-parser.h
-/home/near/Documents/turtle/build/turtle-parser.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.h
 unistd.h
 -
 
-/home/near/Documents/turtle/build/turtle-parser.c
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.c
 stdio.h
 -
 turtle-ast.h
-/home/near/Documents/turtle/build/turtle-ast.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-ast.h
 stddef.h
 -
 libintl.h
@@ -56,11 +58,11 @@ stdlib.h
 stdio.h
 -
 
-/home/near/Documents/turtle/build/turtle-parser.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.h
 
-/home/near/Documents/turtle/turtle-ast.c
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-ast.c
 turtle-ast.h
-/home/near/Documents/turtle/turtle-ast.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-ast.h
 assert.h
 -
 stdarg.h
@@ -74,13 +76,15 @@ string.h
 math.h
 -
 
-/home/near/Documents/turtle/turtle-ast.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-ast.h
 stddef.h
 -
 stdbool.h
 -
+string.h
+-
 
-/home/near/Documents/turtle/turtle.c
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle.c
 assert.h
 -
 stdlib.h
@@ -88,11 +92,11 @@ stdlib.h
 time.h
 -
 turtle-ast.h
-/home/near/Documents/turtle/turtle-ast.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-ast.h
 turtle-lexer.h
-/home/near/Documents/turtle/turtle-lexer.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-lexer.h
 turtle-parser.h
-/home/near/Documents/turtle/turtle-parser.h
+/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/turtle-parser.h
 
 turtle-lexer.h
 stdio.h

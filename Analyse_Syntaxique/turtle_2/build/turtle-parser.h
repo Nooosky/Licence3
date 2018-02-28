@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_NEAR_DOCUMENTS_TURTLE_BUILD_TURTLE_PARSER_H_INCLUDED
-# define YY_YY_HOME_NEAR_DOCUMENTS_TURTLE_BUILD_TURTLE_PARSER_H_INCLUDED
+#ifndef YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TURTLE_2_BUILD_TURTLE_PARSER_H_INCLUDED
+# define YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TURTLE_2_BUILD_TURTLE_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -46,8 +46,16 @@ extern int yydebug;
   enum yytokentype
   {
     VALUE = 258,
-    NAME = 259,
-    KW_FORWARD = 260
+    COLOUR_NAME_VALUE = 259,
+    NAME = 260,
+    KW_FORWARD = 261,
+    KW_LEFT = 262,
+    KW_UP = 263,
+    KW_DOWN = 264,
+    KW_RIGHT = 265,
+    KW_BACKWARD = 266,
+    KW_HEADING = 267,
+    KW_COLOUR = 268
   };
 #endif
 
@@ -60,9 +68,10 @@ union YYSTYPE
 
   double value;
   const char *name;
+  const char *colour_name_value;
   struct ast_node *node;
 
-#line 66 "/home/near/Documents/turtle/build/turtle-parser.h" /* yacc.c:1909  */
+#line 75 "/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -75,4 +84,4 @@ extern YYSTYPE yylval;
 
 int yyparse (struct ast *ret);
 
-#endif /* !YY_YY_HOME_NEAR_DOCUMENTS_TURTLE_BUILD_TURTLE_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TURTLE_2_BUILD_TURTLE_PARSER_H_INCLUDED  */

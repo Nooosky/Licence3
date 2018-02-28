@@ -3,10 +3,18 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+#include <string.h>
 
 // simple commands
 enum ast_cmd {
   CMD_FORWARD,
+  CMD_LEFT,
+  CMD_RIGHT,
+  CMD_UP,
+  CMD_HEADING,
+  CMD_DOWN,
+  CMD_BACKWARD,
+  CMD_COLOUR,
   // TODO: add simple commands
 };
 
@@ -22,6 +30,7 @@ enum ast_kind {
   // TODO: add non-simple commands: repeat, block, proc, call, set
 
   KIND_EXPR_VALUE,
+  KIND_EXPR_BINOP,
   // TODO: add expressions kind: func, binop, block, name
 };
 
@@ -48,7 +57,17 @@ struct ast_node {
 // TODO: make some constructors to use in parser.y
 // for example:
 struct ast_node *make_expr_value(double value);
-struct ast_node *make_fwd_cmd(struct ast_node *node_fils);
+struct ast_node *make_expr_colour(const char* colour_name);
+
+
+struct ast_node *make_cmd(struct ast_node *node_fils, char * name);
+
+struct ast_node *make_pen_cmd(char * name);
+
+struct ast_node *make_colour_cmd_one(struct ast_node *node_fils);
+struct ast_node *make_colour_cmd_three(struct ast_node *node_r, struct ast_node *node_g, struct ast_node *node_b);
+
+struct ast_node *make_operande_exp(struct ast_node *node_fils1, struct ast_node *node_fils2, char operande);
 
 // root of the abstract syntax tree
 struct ast {

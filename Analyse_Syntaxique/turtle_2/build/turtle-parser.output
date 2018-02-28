@@ -13,128 +13,435 @@ Grammar
     3     | %empty
 
     4 cmd: "forward" expr
+    5    | "right" expr
+    6    | "left" expr
+    7    | "heading" expr
+    8    | "backward" expr
+    9    | "up"
+   10    | "down"
+   11    | "colour" expr
 
-    5 expr_literal: "value"
+   12 expr_literal: "value"
+   13             | "colour_name_value"
 
-    6 expr_primary: expr_literal
+   14 expr_primary: expr_literal
+   15             | expr '+' expr
+   16             | expr '-' expr
+   17             | expr '/' expr
+   18             | expr '*' expr
 
-    7 expr: expr_primary
+   19 expr: expr_primary
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
+'*' (42) 18
+'+' (43) 15
+'-' (45) 16
+'/' (47) 17
 error (256)
-"value" (258) 5
-"name" (259)
-"forward" (260) 4
+"value" (258) 12
+"colour_name_value" (259) 13
+"name" (260)
+"forward" (261) 4
+"left" (262) 6
+"up" (263) 9
+"down" (264) 10
+"right" (265) 5
+"backward" (266) 8
+"heading" (267) 7
+"colour" (268) 11
 
 
 Nonterminals, with rules where they appear
 
-$accept (6)
+$accept (18)
     on left: 0
-unit (7)
+unit (19)
     on left: 1, on right: 0
-cmds (8)
+cmds (20)
     on left: 2 3, on right: 1 2
-cmd (9)
-    on left: 4, on right: 2
-expr_literal (10)
-    on left: 5, on right: 6
-expr_primary (11)
-    on left: 6, on right: 7
-expr (12)
-    on left: 7, on right: 4
+cmd (21)
+    on left: 4 5 6 7 8 9 10 11, on right: 2
+expr_literal (22)
+    on left: 12 13, on right: 14
+expr_primary (23)
+    on left: 14 15 16 17 18, on right: 19
+expr (24)
+    on left: 19, on right: 4 5 6 7 8 11 15 16 17 18
 
 
 State 0
 
     0 $accept: . unit $end
 
-    "forward"  shift, and go to state 1
+    "forward"   shift, and go to state 1
+    "left"      shift, and go to state 2
+    "up"        shift, and go to state 3
+    "down"      shift, and go to state 4
+    "right"     shift, and go to state 5
+    "backward"  shift, and go to state 6
+    "heading"   shift, and go to state 7
+    "colour"    shift, and go to state 8
 
     $default  reduce using rule 3 (cmds)
 
-    unit  go to state 2
-    cmds  go to state 3
-    cmd   go to state 4
+    unit  go to state 9
+    cmds  go to state 10
+    cmd   go to state 11
 
 
 State 1
 
     4 cmd: "forward" . expr
 
-    "value"  shift, and go to state 5
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
 
-    expr_literal  go to state 6
-    expr_primary  go to state 7
-    expr          go to state 8
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 16
 
 
 State 2
 
-    0 $accept: unit . $end
+    6 cmd: "left" . expr
 
-    $end  shift, and go to state 9
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 17
 
 
 State 3
+
+    9 cmd: "up" .
+
+    $default  reduce using rule 9 (cmd)
+
+
+State 4
+
+   10 cmd: "down" .
+
+    $default  reduce using rule 10 (cmd)
+
+
+State 5
+
+    5 cmd: "right" . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 18
+
+
+State 6
+
+    8 cmd: "backward" . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 19
+
+
+State 7
+
+    7 cmd: "heading" . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 20
+
+
+State 8
+
+   11 cmd: "colour" . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 21
+
+
+State 9
+
+    0 $accept: unit . $end
+
+    $end  shift, and go to state 22
+
+
+State 10
 
     1 unit: cmds .
 
     $default  reduce using rule 1 (unit)
 
 
-State 4
+State 11
 
     2 cmds: cmd . cmds
 
-    "forward"  shift, and go to state 1
+    "forward"   shift, and go to state 1
+    "left"      shift, and go to state 2
+    "up"        shift, and go to state 3
+    "down"      shift, and go to state 4
+    "right"     shift, and go to state 5
+    "backward"  shift, and go to state 6
+    "heading"   shift, and go to state 7
+    "colour"    shift, and go to state 8
 
     $default  reduce using rule 3 (cmds)
 
-    cmds  go to state 10
-    cmd   go to state 4
+    cmds  go to state 23
+    cmd   go to state 11
 
 
-State 5
+State 12
 
-    5 expr_literal: "value" .
+   12 expr_literal: "value" .
 
-    $default  reduce using rule 5 (expr_literal)
-
-
-State 6
-
-    6 expr_primary: expr_literal .
-
-    $default  reduce using rule 6 (expr_primary)
+    $default  reduce using rule 12 (expr_literal)
 
 
-State 7
+State 13
 
-    7 expr: expr_primary .
+   13 expr_literal: "colour_name_value" .
 
-    $default  reduce using rule 7 (expr)
+    $default  reduce using rule 13 (expr_literal)
 
 
-State 8
+State 14
+
+   14 expr_primary: expr_literal .
+
+    $default  reduce using rule 14 (expr_primary)
+
+
+State 15
+
+   19 expr: expr_primary .
+
+    $default  reduce using rule 19 (expr)
+
+
+State 16
 
     4 cmd: "forward" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
 
     $default  reduce using rule 4 (cmd)
 
 
-State 9
+State 17
+
+    6 cmd: "left" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 6 (cmd)
+
+
+State 18
+
+    5 cmd: "right" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 5 (cmd)
+
+
+State 19
+
+    8 cmd: "backward" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 8 (cmd)
+
+
+State 20
+
+    7 cmd: "heading" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 7 (cmd)
+
+
+State 21
+
+   11 cmd: "colour" expr .
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '+'  shift, and go to state 24
+    '-'  shift, and go to state 25
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 11 (cmd)
+
+
+State 22
 
     0 $accept: unit $end .
 
     $default  accept
 
 
-State 10
+State 23
 
     2 cmds: cmd cmds .
 
     $default  reduce using rule 2 (cmds)
+
+
+State 24
+
+   15 expr_primary: expr '+' . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 28
+
+
+State 25
+
+   16 expr_primary: expr '-' . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 29
+
+
+State 26
+
+   18 expr_primary: expr '*' . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 30
+
+
+State 27
+
+   17 expr_primary: expr '/' . expr
+
+    "value"              shift, and go to state 12
+    "colour_name_value"  shift, and go to state 13
+
+    expr_literal  go to state 14
+    expr_primary  go to state 15
+    expr          go to state 31
+
+
+State 28
+
+   15 expr_primary: expr . '+' expr
+   15             | expr '+' expr .
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 15 (expr_primary)
+
+
+State 29
+
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   16             | expr '-' expr .
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+
+    '*'  shift, and go to state 26
+    '/'  shift, and go to state 27
+
+    $default  reduce using rule 16 (expr_primary)
+
+
+State 30
+
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   18             | expr . '*' expr
+   18             | expr '*' expr .
+
+    $default  reduce using rule 18 (expr_primary)
+
+
+State 31
+
+   15 expr_primary: expr . '+' expr
+   16             | expr . '-' expr
+   17             | expr . '/' expr
+   17             | expr '/' expr .
+   18             | expr . '*' expr
+
+    $default  reduce using rule 17 (expr_primary)
