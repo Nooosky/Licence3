@@ -7,6 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var chat = require('./myChat');
+var jeuDuo = require('./myJeuDuo');
 
 /*
  *  Structure de l'API du chat
@@ -118,8 +119,6 @@ app.put('/chat/:from/:key', function(req, res) {
         res.status(401).end("Utilisateur incorrect");
     }
 });
-
-
 
 
 // redirection automatique vers le répertoire "public" pour les autres requêtes

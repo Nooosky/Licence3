@@ -393,7 +393,7 @@ function PopupCenter(w, h, colour) {
     {
       var est_x2 = newWindow.document.createElement("img");
       est_x2.setAttribute("id", "est_x2");
-      est_x2.setAttribute("src", "http://localhost/Web_Avance/public/images/est-x2-"+colour+".png");
+      est_x2.setAttribute("src", "http://localhost/Web_Avance/public/images/est_x2-"+colour+".png");
       est_x2.setAttribute("height", "70");
       est_x2.setAttribute("width", "70");
       newWindow.document.getElementsByTagName("body")[0].appendChild(est_x2);
@@ -424,38 +424,13 @@ function PopupCenter(w, h, colour) {
 
 
 function flashyText(text) {
-    var count = 6,
-        timer = setInterval(function() {
-            count--;
-            if( count%2 == 1) {
-                // draw the text
-                score_context.font = "20px Courier New";
-                score_context.fillStyle = "#660066";
-                score_context.textAlign = "center";
-                score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
-            }
-            else {
-                // don't draw it (ie. clear it off)
-                drawScoreCanvas();
-            }
-            if(count == 0){
-              score_context.font = "20px Courier New";
-              score_context.fillStyle = "#660066";
-              score_context.textAlign = "center";
-              score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
-            }
-            if( count == 0) clearInterval(timer);
-        },1000);
 
+  drawScoreCanvas();
 
-}
-
-function scoreChooseInstr(){
-  flashyText("May the players choose their instructions");
-}
-
-function scoreRobotPlaying(){
-  flashyText("The robots are doing their maneuvers");
+  score_context.font = "20px Courier New";
+  score_context.fillStyle = "#660066";
+  score_context.textAlign = "center";
+  score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
 }
 
 function init()
@@ -475,6 +450,4 @@ function init()
 
   left_canvas.addEventListener("click", function(){ PopupCenter(800, 200, "rouge"); }, false);
   right_canvas.addEventListener("click", function(){ PopupCenter(800, 200, "bleu"); }, false);
-
-  scoreChooseInstr();
 }

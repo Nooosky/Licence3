@@ -9,9 +9,9 @@ class Player
 
     if (this.color == "rouge")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
-        this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 360);
+        this.robot = new Robot(this.color, 0, 3 + Math.floor(Math.random() * Math.floor(3)), 0);
       else
-        this.robot = new Robot(this.color, 1, 4, 360);
+        this.robot = new Robot(this.color, 1, 4, 0);
     else if (this.color == "bleu")
       if (Math.floor(Math.random() * Math.floor(4)) != 0)
         this.robot = new Robot(this.color, 8, 3 + Math.floor(Math.random() * Math.floor(3)), 180);
@@ -55,6 +55,7 @@ class Robot
 
     if(this.instructionArray.length == 5 && robot.instructionArray.length == 5 && this.canMove() && robot.canMove())
     {
+      flashyText("The robots are doing their maneuvers");
       if (this.indiceInstruction == 5)
       {
         this.indiceInstruction = 0;
@@ -66,12 +67,16 @@ class Robot
         this.indiceInstruction++;
       }
     }
+    else if(this.instructionArray.length != 5 || robot.instructionArray.length != 5){
+      flashyText("May the players choose their instructions");
+    }
 
 
     //change orientation
     if (this.destinationOrientation != this.orientation)
     {
-      this.orientation += 1;
+      if(this.destinationOrientation >= 180 && this.orientation == 0) this.orientation = 360;
+      this.orientation += (this.orientation - this.destinationOrientation <= 90 && this.orientation - this.destinationOrientation > 0) ? -1 : 1;
       if (this.orientation > 360) this.orientation -= 360;
     }
 
@@ -125,7 +130,7 @@ class Robot
         }
         case "est":
         {
-          this.destinationOrientation = 360;
+          this.destinationOrientation = 0;
           this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
           break;
         }
@@ -266,14 +271,37 @@ class Game
         blue = 0, red = 0;
     }
 
-    this.player1 = new Player("test1", "rouge", '');
-    this.player2 = new Player("test2", "bleu", '');
+    this.player1 = new Player("Player1", "rouge", '');
+    this.player2 = new Player("Player2", "bleu", '');
   }
 
   update()
   {
     this.player1.getRobot().update(this.player2.getRobot(), this.flagArray);
     this.player2.getRobot().update(this.player1.getRobot(), this.flagArray);
+
+    var flagRed = 0;
+    var flagBlue = 0;
+    for (var i = 0; i < this.flagArray.length; ++i)
+      if(this.flagArray[i].color == "rouge" && (
+        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 3)||
+        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 4)||
+        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 5)||
+        (this.flagArray[i].positionX == 1 && this.flagArray[i].positionY == 4)
+        ))
+        flagRed++;
+      else if(this.flagArray[i].color == "bleu" && (
+        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 3)||
+        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 4)||
+        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 5)||
+        (this.flagArray[i].positionX == 7 && this.flagArray[i].positionY == 4)
+        ))
+        flagBlue++;
+
+    if(flagRed >= 2)
+      flashyText(this.player1.name + " wins! Congratulation!");
+    else if(flagBlue >= 2)
+      flashyText(this.player2.name + " wins! Congratulation!");
   }
 
   display()

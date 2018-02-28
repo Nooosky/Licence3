@@ -77,6 +77,18 @@ function sendMessage()
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send("message="+message.substring(4 + to.length + 1, message.lenght));
   }
+  else if(message.indexOf("/launch_game:") == 0)
+  {
+    
+  }
+  else if(message.indexOf("/accept:") == 0)
+  {
+
+  }
+  else if(message.indexOf("/refuse:") == 0)
+  {
+
+  }
   else
   {
     xhttp.open("PUT", "/chat/"+user+"/"+key);
