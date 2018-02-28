@@ -58,7 +58,14 @@
               <xsd:element name="barcode" type="xsd:token"/>
               <xsd:element name="pH">
                 <xsd:complexType>
-                  <xsd:attribute name="value" use="optional" type="xsd:decimal"/>
+                  <xsd:attribute name="value" use="required">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:decimal">
+                        <xsd:minExclusive value ="0."/>
+                        <xsd:maxInclusive value="14."/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
                 </xsd:complexType>
               </xsd:element>
             </xsd:sequence>
