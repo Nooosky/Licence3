@@ -76,7 +76,7 @@
   </xsd:element>
 
   <xsd:complexType name="measurement-type">
-    <xsd:attribute name="unit" default="mg.l(-1)" type="xsd:string"/>
+    <xsd:attribute name="unit" default="mg.L(-1)" type="xsd:string"/>
     <xsd:attribute name="value" type="xsd:float" use="required"/>
   </xsd:complexType>
 

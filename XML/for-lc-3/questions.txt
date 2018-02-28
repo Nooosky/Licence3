@@ -1,0 +1,1 @@
+xmllint --shell water.xml --schema water-bottles.xsd
