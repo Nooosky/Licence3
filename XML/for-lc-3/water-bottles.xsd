@@ -5,20 +5,20 @@
   <xsd:element name="water-bottles">
     <xsd:complexType>
       <xsd:sequence>
-        <xsd:element name="water-bottle" ...>
+        <xsd:element name="water-bottle" minOccurs="0" maxOccurs="unbounded">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element name="name" .../>
+              <xsd:element name="name" type="xsd:token"/>
               <xsd:element name="capacity" type="measurement-type"/>
               <xsd:element name="analysis">
                 <xsd:complexType>
                   <xsd:sequence>
-                    <xsd:element name="contains" ...>
+                    <xsd:element name="contains" minOccurs="1" maxOccurs="unbounded">
                       <xsd:complexType>
                         <xsd:sequence>
-                          <xsd:element name="body" type="..."/>
+                          <xsd:element name="body" type="xsd:token"/>
                           <xsd:element name="mass-concentration"
-                                       type="measurement-type" .../>
+                                       type="measurement-type" minOccurs="0" maxOccurs="1"/>
                         </xsd:sequence>
                       </xsd:complexType>
                     </xsd:element>
@@ -28,13 +28,13 @@
               <xsd:element name="comes-from">
                 <xsd:complexType>
                   <xsd:sequence>
-                    <xsd:element name="town" type="..."/>
+                    <xsd:element name="town" type="xsd:token"/>
                     <xsd:choice minOccurs="0">
-                      <xsd:element name="french-departement">
+                      <xsd:element name="french-department">
                         <xsd:complexType>
                           <xsd:simpleContent>
                             <xsd:extension base="xsd:token">
-                              <xsd:attribute name="no" use="..."
+                              <xsd:attribute name="no" use="required"
                                              type="xsd:string"/>
                             </xsd:extension>
                           </xsd:simpleContent>
@@ -52,13 +52,13 @@
                       </xsd:element>
                     </xsd:choice>
                   </xsd:sequence>
-                  <xsd:attribute name="country" type="xsd:token" use="..."/>
+                  <xsd:attribute name="country" type="xsd:token" use="required"/>
                 </xsd:complexType>
               </xsd:element>
               <xsd:element name="barcode" type="xsd:token"/>
               <xsd:element name="pH">
                 <xsd:complexType>
-                  <xsd:attribute name="value" use="..." type="xsd:decimal"/>
+                  <xsd:attribute name="value" use="optional" type="xsd:decimal"/>
                 </xsd:complexType>
               </xsd:element>
             </xsd:sequence>
@@ -69,8 +69,8 @@
   </xsd:element>
 
   <xsd:complexType name="measurement-type">
-    <xsd:attribute name="unit" use="..." type="xsd:string"/>
-    <xsd:attribute name="value" type="xsd:float" use="..."/>
+    <xsd:attribute name="unit" default="mg.L(-1)" type="xsd:string"/>
+    <xsd:attribute name="value" type="xsd:float" use="required"/>
   </xsd:complexType>
 
 </xsd:schema>
