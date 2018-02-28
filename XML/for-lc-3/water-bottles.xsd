@@ -52,10 +52,22 @@
                       </xsd:element>
                     </xsd:choice>
                   </xsd:sequence>
-                  <xsd:attribute name="country" type="xsd:token" use="required"/>
+                  <xsd:attribute name="country" use="required">
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:token">
+                        <xsd:pattern value="[A-Z]{2}"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:attribute>
                 </xsd:complexType>
               </xsd:element>
-              <xsd:element name="barcode" type="xsd:token"/>
+              <xsd:element name="barcode">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:token">
+                    <xsd:pattern value="[0-9]{13}"/>
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
               <xsd:element name="pH">
                 <xsd:complexType>
                   <xsd:attribute name="value" use="required">
