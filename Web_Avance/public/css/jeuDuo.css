@@ -1,40 +1,15 @@
-#board
+#body
 {
-  background-color:lightgrey;
+  margin: 0 auto;
+  width: 100%;
+}
+
+canvas
+{
   border: 2px solid black;
 }
 
-#score_canvas{
-    margin-left: 155px;
-    margin-bottom: 5px;
-}
-
-#left_canvas{
-  margin-right: 5px;
-}
-
-#right_canvas{
-  margin-left: 5px;
-}
-
-.blink {
-    animation-duration: 1s;
-    animation-name: blink;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-    animation-timing-function: ease-in-out;
-}
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-    80% {
-        opacity: 1;
-    }
-    81% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
+#board
+{
+  background-color:lightgrey;
 }

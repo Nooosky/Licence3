@@ -53,12 +53,13 @@
                     </xsd:choice>
                   </xsd:sequence>
                   <xsd:attribute name="country" use="required">
-                    <xsd:simpleType>
-                      <xsd:restriction base="xsd:token">
-                        <xsd:pattern value="[A-Z]{2}"/>
-                      </xsd:restriction>
-                    </xsd:simpleType>
-                  </xsd:attribute>
+                  <xsd:simpleType>
+                    <xsd:restriction base="xsd:token">
+                      <xsd:pattern value="[A-Z]{2}"/>
+                    </xsd:restriction>
+                  </xsd:simpleType>
+                </xsd:attribute>
+
                 </xsd:complexType>
               </xsd:element>
               <xsd:element name="barcode">

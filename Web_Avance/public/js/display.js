@@ -1,3 +1,6 @@
+var c = null;
+var ctx = null;
+
 var left_canvas = null;
 var left_context = null;
 
@@ -13,11 +16,18 @@ var popUpWindow = null;
 var displayIndex;
 var x2alreadyDrwn = false;
 
-var rectX = 0;
-var rectY = 0;
+var sizeBoard = 675;
 var rectWidth = 150;
 var rectHeight = 675;
-var cornerRadius = 8;
+var scoreWidth = 675;
+var scoreHeight = 50;
+var sizeImg = 80;
+var ecartImg = 32;
+var sizeFont = 60;
+var baseImgX = 35;
+var baseImgY = 16;
+var baseTextX = 75;
+var baseTextY = 76;
 
 var instructionArrayBlue = [];
 var instructionArrayRed = [];
@@ -33,22 +43,18 @@ function drawBoard()
 {
   function createSquare(color, positionX, positionY)
   {
-      var c = document.getElementById("board");
-      var ctx = c.getContext("2d");
       ctx.fillStyle = color;
       ctx.beginPath();
-      ctx.fillRect(75 * positionX, 75 * positionY, 75, 75);
+      ctx.fillRect(sizeBoard/9 * positionX, sizeBoard/9 * positionY, sizeBoard/9, sizeBoard/9);
   }
 
   function createLine(color, width, positionX1, positionY1, positionX2, positionY2)
   {
-    var c = document.getElementById("board");
-    var ctx = c.getContext("2d");
     ctx.strokeStyle = color;
     ctx.beginPath();
     ctx.lineWidth = width;
-    ctx.moveTo(positionX1 * 75, positionY1 * 75);
-    ctx.lineTo(positionX2 * 75, positionY2 * 75);
+    ctx.moveTo(positionX1 * sizeBoard/9, positionY1 * sizeBoard/9);
+    ctx.lineTo(positionX2 * sizeBoard/9, positionY2 * sizeBoard/9);
     ctx.stroke();
   }
 
@@ -83,15 +89,11 @@ function drawBoard()
 
 function drawLeftCanvas(){
   //Background
-  left_context.lineJoin = "round";
-  left_context.strokeStyle = "#0000000";
   left_context.fillStyle="#F1885C";
-  left_context.lineWidth = cornerRadius;
-  left_context.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
-  left_context.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+  left_context.fillRect(0, 0, rectWidth, rectHeight);
   left_context.fillStyle="white";
   left_context.textAlign="center";
-  left_context.font = "60px Courier New";
+  left_context.font = sizeFont+"px Courier New";
 
   //imgs
   for (var i = 0; i < 6; i++) {
@@ -101,12 +103,6 @@ function drawLeftCanvas(){
 }
 
 function drawLeftInstruction(index){
-  var sizeImg = 80;
-  var baseImgX = 35;
-  var baseImgY = 16;
-  var baseTextX = 75;
-  var baseTextY = 76;
-
   if(index == 0){
     var icon = new Image();
     icon.onload = function() {
@@ -117,8 +113,8 @@ function drawLeftInstruction(index){
   }else{
     var icon = new Image();
     icon.onload = function() {
-      left_context.drawImage(icon, baseImgX, baseImgY + index*(32+sizeImg), sizeImg, sizeImg);
-      left_context.fillText(index,baseTextX, baseTextY + index*(32+sizeImg));
+      left_context.drawImage(icon, baseImgX, baseImgY + index*(ecartImg+sizeImg), sizeImg, sizeImg);
+      left_context.fillText(index,baseTextX, baseTextY + index*(ecartImg+sizeImg));
     }
     icon.src = "../images/block-vide-rouge.png";
   }
@@ -126,15 +122,11 @@ function drawLeftInstruction(index){
 
 function drawRightCanvas(){
   //Background
-  right_context.lineJoin = "round";
-  right_context.strokeStyle = "#0000000";
   right_context.fillStyle="#B3D6E4";
-  right_context.lineWidth = cornerRadius;
-  right_context.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
-  right_context.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+  right_context.fillRect(0, 0, rectWidth, rectHeight);
   right_context.fillStyle="white";
   right_context.textAlign="center";
-  right_context.font = "60px Courier New";
+  right_context.font = sizeFont+"px Courier New";
 
   //imgs
   for (var i = 0; i < 6; i++) {
@@ -144,12 +136,6 @@ function drawRightCanvas(){
 }
 
 function drawRightInstruction(index){
-  var sizeImg = 80;
-  var baseImgX = 35;
-  var baseImgY = 16;
-  var baseTextX = 75;
-  var baseTextY = 76;
-
   if(index == 0){
     var icon = new Image();
     icon.onload = function() {
@@ -160,8 +146,8 @@ function drawRightInstruction(index){
   }else{
     var icon = new Image();
     icon.onload = function() {
-      right_context.drawImage(icon, baseImgX, baseImgY + index*(32+sizeImg), sizeImg, sizeImg);
-      right_context.fillText(index,baseTextX, baseTextY + index*(32+sizeImg));
+      right_context.drawImage(icon, baseImgX, baseImgY + index*(ecartImg+sizeImg), sizeImg, sizeImg);
+      right_context.fillText(index,baseTextX, baseTextY + index*(ecartImg+sizeImg));
     }
     icon.src = "../images/block-vide-bleu.png";
   }
@@ -169,35 +155,21 @@ function drawRightInstruction(index){
 
 function drawScoreCanvas(){
   //Background
-  score_context.lineJoin = "round";
-  score_context.strokeStyle = "#0000000";
   score_context.fillStyle="#efbbff";
-  score_context.lineWidth = cornerRadius;
-  score_context.strokeRect(0+(cornerRadius/2), 0+(cornerRadius/2), 685-cornerRadius, 50-cornerRadius);
-  score_context.fillRect(0+(cornerRadius/2), 0+(cornerRadius/2), 685-cornerRadius, 50-cornerRadius);
-  score_context.fillStyle="white";
-  score_context.textAlign="center";
+  score_context.fillRect(0, 0, 685, 50);
 }
 
 
 function drawSelectedInstruction(colour, index, instructionName, newWindow) {
-  var sizeImg = 80;
-  var baseImgX = 35;
-  var baseImgY = 16;
-  var baseTextX = 75;
-  var baseTextY = 76;
   var icon = new Image();
-
-  //console.log(displayIndex);
-
 
   if (colour == "bleu")
     icon.onload = function() {
-      right_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(32+sizeImg), sizeImg, sizeImg);
+      right_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(ecartImg+sizeImg), sizeImg, sizeImg);
     }
   else if (colour == "rouge")
     icon.onload = function() {
-      left_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(32+sizeImg), sizeImg, sizeImg);
+      left_context.drawImage(icon, baseImgX, baseImgY + (displayIndex-1)*(ecartImg+sizeImg), sizeImg, sizeImg);
     }
 
 
@@ -433,8 +405,49 @@ function flashyText(text) {
   score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
 }
 
+function resize()
+{
+    var coef = 1;
+    if(window.innerWidth > 1580)
+      coef = 1080/1580;
+    else
+      coef = 1080/window.innerWidth;
+    sizeBoard = 675/coef;
+    rectWidth = 150/coef;
+    rectHeight = 675/coef;
+    scoreWidth = 675/coef;
+    scoreHeight = 50/coef;
+    sizeImg = 80/coef;
+    ecartImg = 32/coef;
+    sizeFont = 60/coef;
+    baseImgX = 35/coef;
+    baseImgY = 16/coef;
+    baseTextX = 75/coef;
+    baseTextY = 76/coef;
+
+    c.width = sizeBoard;
+    c.height = sizeBoard;
+    left_canvas.width = rectWidth;
+    left_canvas.height = rectHeight;
+    right_canvas.width = rectWidth;
+    right_canvas.height = rectHeight;
+    score_canvas.width = scoreWidth;
+    score_canvas.height = scoreHeight;
+    drawLeftCanvas();
+    drawRightCanvas();
+    drawScoreCanvas();
+
+    var game = document.getElementById("game");
+    var title = document.getElementById("title");
+    game.setAttribute("style", "margin: 0 auto; width: "+(c.width+left_canvas.width+right_canvas.width+10+12)+"px;");
+    title.setAttribute("style", "margin: 0 auto; width: "+(score_canvas.width+4)+"px;");
+}
+
 function init()
 {
+  c = document.getElementById("board");
+  ctx = c.getContext("2d");
+
   left_canvas = document.getElementById('left_canvas');
   left_context = left_canvas.getContext('2d');
 
@@ -447,7 +460,9 @@ function init()
   drawLeftCanvas();
   drawRightCanvas();
   drawScoreCanvas();
+  resize();
 
   left_canvas.addEventListener("click", function(){ PopupCenter(800, 200, "rouge"); }, false);
   right_canvas.addEventListener("click", function(){ PopupCenter(800, 200, "bleu"); }, false);
+  window.addEventListener("resize", resize);
 }
