@@ -21,6 +21,7 @@ var rectWidth = 150;
 var rectHeight = 675;
 var scoreWidth = 675;
 var scoreHeight = 50;
+var scoreSizeFont = 20;
 var sizeImg = 80;
 var ecartImg = 32;
 var sizeFont = 60;
@@ -156,7 +157,7 @@ function drawRightInstruction(index){
 function drawScoreCanvas(){
   //Background
   score_context.fillStyle="#efbbff";
-  score_context.fillRect(0, 0, 685, 50);
+  score_context.fillRect(0, 0, scoreWidth, scoreHeight);
 }
 
 
@@ -399,7 +400,7 @@ function flashyText(text) {
 
   drawScoreCanvas();
 
-  score_context.font = "20px Courier New";
+  score_context.font = scoreSizeFont+"px Courier New";
   score_context.fillStyle = "#660066";
   score_context.textAlign = "center";
   score_context.fillText(text, score_canvas.width/2, score_canvas.height/2+5);
@@ -412,11 +413,13 @@ function resize()
       coef = 1080/1580;
     else
       coef = 1080/window.innerWidth;
+
     sizeBoard = 675/coef;
     rectWidth = 150/coef;
     rectHeight = 675/coef;
     scoreWidth = 675/coef;
     scoreHeight = 50/coef;
+    scoreSizeFont = 20/coef;
     sizeImg = 80/coef;
     ecartImg = 32/coef;
     sizeFont = 60/coef;

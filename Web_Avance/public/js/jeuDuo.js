@@ -100,14 +100,26 @@ class Robot
 
   draw()
   {
+    var coef = 1;
+    if(window.innerWidth > 1580)
+      coef = 1080/1580;
+    else
+      coef = 1080/window.innerWidth;
+
+    var carree = 75 / coef;
+    var decalage1 = 10 / coef;
+    var decalage2 = 20 / coef;
+    var taille1 = 55 / coef;
+    var taille2 = 35 / coef;
+
     var c = document.getElementById("board");
     var ctx = c.getContext("2d");
     ctx.save();
-    ctx.translate((this.positionX * 75 + 10 + 55/2), (this.positionY * 75 + 20 + 35/2));
+    ctx.translate((this.positionX * carree + decalage1 + taille1/2), (this.positionY * carree + decalage2 + taille2/2));
     ctx.rotate(Math.PI / 180 * this.orientation);
-    ctx.translate(-(this.positionX * 75 + 20 + 35/2), -(this.positionY * 75 + 10 + 55/2));
-    ctx.drawImage(this.imgWheel, this.positionX * 75 + 20, this.positionY * 75 + 10, 35, 55);
-    ctx.drawImage(this.imgRobot, this.positionX * 75 + 10, this.positionY * 75 + 20, 55, 35);
+    ctx.translate(-(this.positionX * carree + decalage2 + taille2/2), -(this.positionY * carree + decalage1 + taille1/2));
+    ctx.drawImage(this.imgWheel, this.positionX * carree + decalage2, this.positionY * carree + decalage1, taille2, taille1);
+    ctx.drawImage(this.imgRobot, this.positionX * carree + decalage1, this.positionY * carree + decalage2, taille1, taille2);
     ctx.restore();
   }
 
@@ -227,9 +239,19 @@ class Flag
 
   draw()
   {
+    var coef = 1;
+    if(window.innerWidth > 1580)
+      coef = 1080/1580;
+    else
+      coef = 1080/window.innerWidth;
+
+    var carree = 75 / coef;
+    var decalage = 10 / coef;
+    var taille = 55 / coef;
+
     var c = document.getElementById("board");
     var ctx = c.getContext("2d");
-    ctx.drawImage(this.img, this.positionX * 75 + 10, this.positionY * 75 + 10, 55, 55);
+    ctx.drawImage(this.img, this.positionX * carree + decalage, this.positionY * carree + decalage, taille, taille);
   }
 }
 
