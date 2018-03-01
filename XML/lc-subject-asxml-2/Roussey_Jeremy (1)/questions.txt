@@ -1,0 +1,30 @@
+File : questions.txt
+Creator : ROUSSEY Jeremy
+Group : TP1A
+
+1/ Validation
+
+Pour valider le document 'xml-2018-f.xml' avec la DTD 'comics.dtd', il faut apporter
+deux modifications qui sont :
+
+- Changer le #REQUIRED en #IMPLIED pour l'artist, a la ligne 9 de la DTD.
+- Changer le IDREF en ID pour derived-from, a la ligne 11. (Voir avant-avant-dernier paragraphe du sujet.)
+
+2/ Chemins XPath
+
+
+cat /comics/collections/series[@derived-from]/@name
+
+cat /comics/collections/series/item[@additional="true"]/@year
+
+count(/comics/collections/series/item[@scriptwriter and @artist])
+On remarque que le scriptwriter et l'artist ne sont definis que s'ils sont differents
+de ceux de la serie.
+Pour les hors-series, on pourrait rajouter ceci :
+series[not(derived-from)]
+pour les enlever.
+
+
+cat /descendant::item/following::siblings(10)
+
+cat /descendant::item/following::siblings[@date <= parent::/item[0]/@date]
