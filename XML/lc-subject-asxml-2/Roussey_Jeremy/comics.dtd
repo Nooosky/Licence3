@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!ELEMENT comics       (collections,people)>
+
+<!ELEMENT collections  (series+)>
+<!ELEMENT series       (item+)>
+<!ATTLIST series       name          CDATA   #REQUIRED
+                       scriptwriter  IDREFS  #IMPLIED
+                       artist        IDREFS  #IMPLIED
+                       id            CDATA   #IMPLIED
+                       derived-from  ID   #IMPLIED>
+
+<!ELEMENT item         (#PCDATA)>
+<!ATTLIST item         year          CDATA           #REQUIRED
+                       scriptwriter  IDREFS          #IMPLIED
+                       artist        IDREFS          #IMPLIED
+                       additional    (true | false)  "false">
+
+<!ELEMENT people       (person+)>
+<!ELEMENT person       EMPTY>
+<!ATTLIST person       id         ID     #REQUIRED
+                       firstname  CDATA  #REQUIRED
+                       lastname   CDATA  #REQUIRED
+                       pseudonym  CDATA  #IMPLIED
+                       born       CDATA  #IMPLIED
+                       dead       CDATA  #IMPLIED>

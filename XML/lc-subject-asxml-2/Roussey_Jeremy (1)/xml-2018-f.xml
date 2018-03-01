@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE comics SYSTEM "comics.dtd">
+
+<comics>
+  <collections>
+    <series name="XIII" scriptwriter="van-hamme" artist="vance" id="xiii">
+      <item year="1984">Le jour du soleil noir</item>
+      <item year="1985">Là où va l'indien</item>
+      <item year="1986">Toutes les larmes de l'enfer</item>
+      <item year="1987">SPADS</item>
+      <item year="1988">Rouge total</item>
+      <item year="1990">Le dossier Jason Fly</item>
+      <item year="1990">La nuit du 3 août</item>
+      <item year="1991">Treize contre un</item>
+      <item year="1992">Pour Maria</item>
+      <item year="1994">El Cascador</item>
+      <item year="1995">Trois montres d'argent</item>
+      <item year="1997">Le jugement</item>
+      <item year="1999">The XIII Mystery : l'enquête</item>
+      <item year="2000">Secret défense</item>
+      <item year="2002">Lâchez les chiens !</item>
+      <item year="2004" additional="true">Traquenards et sentiments</item>
+      <item year="2004">Opération Montecristo</item>
+      <item year="2005">L'or de Maximilien</item>
+      <item year="2007" artist="giraud">La version irlandaise</item>
+      <item year="2007">Le dernier round</item>
+      <item year="2011" scriptwriter="sente" artist="jigounov">
+        Le jour du Mayflower
+      </item>
+      <item year="2012" scriptwriter="sente" artist="jigounov">L'appât</item>
+      <item year="2013" scriptwriter="sente" artist="jigounov">
+        Retour à Greenfalls
+      </item>
+      <item year="2014" scriptwriter="sente" artist="jigounov">
+        Le message du martyr
+      </item>
+      <item year="2016" scriptwriter="sente" artist="jigounov">
+        L'héritage de Jason Mac Lane
+      </item>
+    </series>
+    <series name="XIII Mystery" derived-from="xiii">
+      <item year="2008" scriptwriter="dorison" artist="meyer">
+        La Mangouste
+      </item>
+      <item year="2009" scriptwriter="corbeyran" artist="berthet">Irina</item>
+      <item year="2010" scriptwriter="yann" artist="henninot">
+        Little Jones
+      </item>
+      <item year="2011" scriptwriter="alcante" artist="boucq">
+        Colonel Amos
+      </item>
+      <item year="2012" scriptwriter="nury" artist="guerineau">
+        Steve Rowland
+      </item>
+      <item year="2013" scriptwriter="bollee" artist="cuzor">
+        Billy Stockton
+      </item>
+      <item year="2014" scriptwriter="callede" artist="vallee">
+        Betty Barnowsky
+      </item>
+      <item year="2015" scriptwriter="giroud" artist="wilson">
+        Martha Shoebridge
+      </item>
+      <item year="2015" scriptwriter="matz" artist="rossi">
+        Felicity Brown
+      </item>
+      <item year="2016" scriptwriter="duval" artist="rouge">Calvin Wax</item>
+      <item year="2017" scriptwriter="brunschwig" artist="taduc">
+        Jonathan Fly
+      </item>
+    </series>
+    <series name="Alix" scriptwriter="martin" artist="martin" id="alix">
+      <item year="1956">Alix l'intrépide</item>
+      <item year="1956">Le sphinx d'or</item>
+      <item year="1957">L'île maudite</item>
+      <item year="1958">La tiare d'Oribal</item>
+      <item year="1959">La griffe noire</item>
+      <item year="1965">Les légions perdues</item>
+      <item year="1967">Le dernier Spartiate</item>
+      <item year="1968">Le tombeau étrusque</item>
+      <item year="1970">Le dieu sauvage</item>
+      <item year="1972">Iorix le grand</item>
+      <item year="1974">Le Prince du Nil</item>
+      <item year="1975">Le fils de Spartacus</item>
+      <item year="1977">Le spectre de Carthage</item>
+      <item year="1978">Les proies du volcan</item>
+      <item year="1980">L'enfant grec</item>
+      <item year="1981">La Tour de Babel</item>
+      <item year="1983">L'Empereur de Chine</item>
+      <item year="1985">Vercingétorix</item>
+      <item year="1986">Le cheval de Troie</item>
+      <item year="1996" artist="martin morales henniquiau">Ô Alexandrie</item>
+      <item year="1998" artist="morales henniquiau">Les Barbares</item>
+      <item year="2001" artist="morales henniquiau">La chute d'Icare</item>
+      <item year="2003" artist="morales henniquiau">Le fleuve de jade</item>
+      <item year="2005" artist="morales henniquiau">Roma, Roma</item>
+      <item year="2006" scriptwriter="martin maingoval" artist="hervan simon">
+        C'était à Khorsabad
+      </item>
+      <item year="2007" scriptwriter="maingoval weber martin" artist="simon">
+        L'Ibère
+      </item>
+      <item year="2008" scriptwriter="weber martin" artist="simon">
+        Le démon du Pharos
+      </item>
+      <item year="2009" scriptwriter="weber martin" artist="ferry">
+        La cité engloutie
+      </item>
+      <item year="2010" scriptwriter="venanzi" artist="venanzi">
+        Le testament de César
+      </item>
+      <item year="2011" scriptwriter="lafon" artist="simon">
+        La conjuration de Baal
+      </item>
+      <item year="2012" scriptwriter="corteggiani"
+            artist="venanzi barthelemy robin">
+        L'ombre de Sarapis
+      </item>
+      <item year="2013" scriptwriter="ranouil" artist="jailloux billon">
+        La dernière conquête
+      </item>
+      <item year="2014" scriptwriter="breda" artist="jailloux">Britannia</item>
+      <item year="2015" scriptwriter="breda" artist="jailloux">
+        Par-delà le Styx
+      </item>
+      <item year="2016" scriptwriter="valmour" artist="venanzi">
+        L'or de Saturne
+      </item>
+      <item year="2017" scriptwriter="breda" artist="jailloux">
+        Le serment du gladiateur
+      </item>
+    </series>
+    <series name="Alix Senator" scriptwriter="mangin" artist="demarez"
+            derived-from="alix">
+      <item year="2012">Les aigles de sang</item>
+      <item year="2013">Le dernier pharaon</item>
+      <item year="2014">La conjuration des rapaces</item>
+      <item year="2015">Les démons de Sparte</item>
+      <item year="2016">Le hurlement de Cybèle</item>
+      <item year="2017">La montagne des morts</item>
+      <item year="2018">La puissance et l'éternité</item>
+    </series>
+  </collections>
+  <people>
+    <person id="alcante" pseudonym="Alcante" firstname="Didier"
+            lastname="Swysen" born="1970"/>
+    <person id="barthelemy" firstname="Mathieu" lastname="Barthelémy"/>
+    <person id="berthet" firstname="Philippe" lastname="Berthet" born="1956"/>
+    <person id="billon" firstname="Corinne" lastname="Billon"/>
+    <person id="bollee" firstname="Laurent-Frédéric" lastname="Bollée"
+            born="1967"/>
+    <person id="boucq" firstname="François" lastname="Boucq" born="1955"/>
+    <person id="breda" firstname="Mathieu" lastname="Breda"/>
+    <person id="brunschwig" firstname="Luc" lastname="Brunschwig" born="1967"/>
+    <person id="callede" firstname="Joël" lastname="Callède" born="1972"/>
+    <person id="corbeyran" firstname="Éric" lastname="Corbeyran" born="1964"/>
+    <person id="corteggiani" firstname="François" lastname="Corteggiani"
+            born="1953"/>
+    <person id="cuzor" firstname="Steve" lastname="Cuzor" born="1971"/>
+    <person id="demarez" firstname="Thierry" lastname="Démarez" born="1971"/>
+    <person id="dorison" firstname="Xavier" lastname="Dorison" born="1972"/>
+    <person id="duval" firstname="Fred" lastname="Duval" born="1965"/>
+    <person id="ferry" firstname="Paschalis" lastname="Van Vosselen"
+            pseudonym="Ferry" born="1944"/>
+    <person id="henninot" firstname="Éric" lastname="Henninot" born="1974"/>
+    <person id="giraud" firstname="Jean" lastname="Giraud" born="1938"
+            dead="2012"/>
+    <person id="giroud" firstname="Frank" lastname="Giroud" born="1956"/>
+    <person id="guerineau" firstname="Richard" lastname="Guérineau"
+            born="1969"/>
+    <person id="henniquiau" firstname="Marc" lastname="Henniquiau"/>
+    <person id="hervan" firstname="Cédric" lastname="Hervan" born="1981"/>
+    <person id="jailloux" firstname="Marc" lastname="Jailloux"/>
+    <person id="jigounov" firstname="Youri" lastname="Jigounov" born="1967"/>
+    <person id="lafon" firstname="Michel" lastname="Lafon"/>
+    <person id="maingoval" firstname="François" lastname="Maingoval"
+            born="1975"/>
+    <person id="mangin" firstname="Valérie" lastname="Mangin" born="1973"/>
+    <person id="martin" firstname="Jacques" lastname="Martin" born="1921"
+            dead="2010"/>
+    <person id="matz" pseudonym="Matz" firstname="Alexis" lastname="Nolent"
+            born="1967"/>
+    <person id="meyer" firstname="Ralph" lastname="Meyer" born="1971"/>
+    <person id="morales" firstname="Rafael" lastname="Moralès"/>
+    <person id="nury" firstname="Fabien" lastname="Nury" born="1976"/>
+    <person id="ranouil" firstname="Géraldine" lastname="Ranouil"/>
+    <person id="robin" firstname="Véronique" lastname="Robin"/>
+    <person id="rossi" firstname="Christian" lastname="Rossi" born="1954"/>
+    <person id="rouge" firstname="Corentin" lastname="Rouge" born="1983"/>
+    <person id="sente" firstname="Yves" lastname="Sente" born="1964"/>
+    <person id="simon" firstname="Christophe" lastname="Simon" born="1974"/>
+    <person id="taduc" pseudonym="TaDuc" firstname="Olivier" lastname="Ta"
+            born="1962"/>
+    <person id="vallee" firstname="Sylvain" lastname="Vallée" born="1972"/>
+    <person id="valmour" firstname="Pierre" lastname="Valmour"/>
+    <person id="van-hamme" firstname="Jean" lastname="Van Hamme" born="1939"/>
+    <person id="vance" firstname="William" lastname="Vance" born="1935"/>
+    <person id="venanzi" firstname="Marco" lastname="Venanzi" born="1963"/>
+    <person id="weber" firstname="Patrick" lastname="Weber" born="1966"/>
+    <person id="wilson" firstname="Colin" lastname="Wilson" born="1949"/>
+    <person id="yann" pseudonym="Yann" firstname="Yann" lastname="Lepennetier"
+            born="1954"/>
+  </people>
+</comics>
+
+
+
+
+
+
