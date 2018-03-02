@@ -48,14 +48,27 @@ extern int yydebug;
     VALUE = 258,
     COLOUR_NAME_VALUE = 259,
     NAME = 260,
-    KW_FORWARD = 261,
-    KW_LEFT = 262,
-    KW_UP = 263,
-    KW_DOWN = 264,
-    KW_RIGHT = 265,
-    KW_BACKWARD = 266,
-    KW_HEADING = 267,
-    KW_COLOUR = 268
+    TURTLE_VAR = 261,
+    COS = 262,
+    SIN = 263,
+    TAN = 264,
+    SQRT = 265,
+    POW = 266,
+    RANDOM = 267,
+    KW_RIGHT = 268,
+    KW_LEFT = 269,
+    KW_HEADING = 270,
+    KW_UP = 271,
+    KW_DOWN = 272,
+    KW_PRINT = 273,
+    KW_FORWARD = 274,
+    KW_BACKWARD = 275,
+    KW_POSITION = 276,
+    KW_COLOUR = 277,
+    KW_REPEAT = 278,
+    KW_SET = 279,
+    KW_PROC = 280,
+    KW_CALL = 281
   };
 #endif
 
@@ -68,10 +81,12 @@ union YYSTYPE
 
   double value;
   const char *name;
+  const char *turtle_var;
   const char *colour_name_value;
+
   struct ast_node *node;
 
-#line 75 "/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.h" /* yacc.c:1909  */
+#line 90 "/home/near/L3/Licence3/Analyse_Syntaxique/turtle_2/build/turtle-parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

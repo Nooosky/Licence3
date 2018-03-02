@@ -1,3 +1,0 @@
-/home/near/Documents/turtle/build/CMakeFiles/rebuild_cache.dir
-/home/near/Documents/turtle/build/CMakeFiles/turtle.dir
-/home/near/Documents/turtle/build/CMakeFiles/edit_cache.dir

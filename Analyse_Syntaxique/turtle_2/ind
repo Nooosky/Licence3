@@ -1,0 +1,119 @@
+0. x Variables predefinies
+      x PI
+      x SQRT2
+      x SQRT3
+
+   x Nombre
+      x 1, 3.14, 1e10, -2.0
+
+   x Couleur
+      x red|Red|RED                 (1.0 0.0 0.0)
+      x green|Green|GREEN           (0.0 1.0 0.0)
+      x blue|Blue|BLUE              (0.0 0.0 1.0)
+      x black|Black|BLACK           (0.0 0.0 0.0)
+      x gray|Gray|GRAY              (0.5 0.5 0.5)
+      x cyan|Cyan|CYAN              (0.0 1.0 1.0)
+      x yellow|Yellow|YELLOW        (1.0 0.0 1.0)
+      x magenta|Magenta|MAGENTA     (1.0 1.0 0.0)
+      x white|White|WHITE           (1.0 1.0 1.0)
+
+  Expression
+      x reel
+      operation unaire (-)
+      x operation binaire (+ - / *)
+      x fonction internes
+      nom de variable
+      x expression ente parenthese
+
+  Fonctions internes
+      x sin(angle)
+      x cos(angle)
+      x tan(angle)
+      x sqrt(reel)
+      x pow(nb, expo)
+      x random(b_min, b_sup)
+
+
+1. Commandes Simples :
+      Commandes Impression
+        -> print
+
+      Commandes de Crayon
+        -> up
+        -> down
+
+      Commandes de deplacement
+        x -> forward/fw
+        x -> backward/bw
+        x -> pos/position => coo X et coo Y
+
+      Commandes d'orientation
+        x -> right/rt => angle
+        x -> left/lt => angle
+        x -> heading/hd => angle absolu (0 au nord)
+
+      Commandes de couleur
+        x -> color/colour => color
+
+2. AST Print
+
+3. AST Context
+
+4. AST Eval
+
+5.  Bloc de commandes
+      {} => considere comme une commande
+
+6.  Boucle
+      repeat => nb_rep (utiliser floor) et commande / bloc de commande
+
+7.  Variables
+      set => name et expr (resultat affecte a la variable)
+
+8.  Procedure
+      proc => name et commande
+      call => name defini anterieuement
+
+
+
+
+
+      "forward"|"fw"        { return KW_FORWARD; }
+      "bw"|"backward"       { return KW_BACKWARD; }
+      "rt"|"right"	        { return KW_RIGHT; }
+      "lt"|"left"	          { return KW_LEFT; }
+      "up"		              { return KW_UP; }
+      "dw"|"down"	          { return KW_DOWN; }
+      "hd"|"heading" 	      { return KW_HEADING; }
+      "+"           	      { return '+'; }
+      "-"           	      { return '-'; }
+      "*"           	      { return '*'; }
+      "/"           	      { return '/'; }
+      "color"|"colour"      { return KW_COLOUR; }
+
+
+
+
+
+      cmd:
+          KW_FORWARD expr               { $$ = make_cmd($2, "forward"); }
+          | KW_RIGHT expr               { $$ = make_cmd($2, "right"); }
+          | KW_LEFT expr                { $$ = make_cmd($2, "left"); }
+          | KW_HEADING expr             { $$ = make_cmd($2, "heading"); }
+          | KW_BACKWARD expr            { $$ = make_cmd($2, "backward"); }
+          | KW_UP                       { $$ = make_pen_cmd("up"); }
+          | KW_DOWN                     { $$ = make_pen_cmd("down"); }
+          | KW_COLOUR expr              { $$ = make_colour_cmd_one($2); }
+
+
+
+
+
+          expr_literal:
+              VALUE                 { $$ = make_expr_value($1); }
+              | COLOUR_NAME_VALUE   { $$ = make_expr_colour($1); }
+              /* TODO: add identifier */
+          ;
+
+
+| '-' expr %prec '-'  { $$=-$2; }

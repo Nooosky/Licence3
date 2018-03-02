@@ -1,6 +1,6 @@
-#line 2 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
+#line 2 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
 
-#line 4 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
+#line 4 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -463,7 +463,7 @@ char *yytext;
 #include <stdlib.h>
 
 #include "parser.h"
-#line 467 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
+#line 467 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
 
 #define INITIAL 0
 
@@ -684,7 +684,7 @@ YY_DECL
 #line 13 "lexer.l"
 
 
-#line 688 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
+#line 688 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -802,7 +802,7 @@ YY_RULE_SETUP
 #line 28 "lexer.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 806 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
+#line 806 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

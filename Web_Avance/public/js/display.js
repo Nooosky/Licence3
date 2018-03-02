@@ -14,7 +14,8 @@ var popOpen = false;
 var popUpWindow = null;
 
 var displayIndex;
-var x2alreadyDrwn = false;
+var x2alreadyDrwnRed = false;
+var x2alreadyDrwnBlue = false;
 
 var sizeBoard = 675;
 var rectWidth = 150;
@@ -32,6 +33,9 @@ var baseTextY = 76;
 
 var instructionArrayBlue = [];
 var instructionArrayRed = [];
+
+var nbPopupBlue = 0;
+var nbPopupRed = 0;
 
 function clear()
 {
@@ -181,19 +185,36 @@ function drawSelectedInstruction(colour, index, instructionName, newWindow) {
   newWindow.document.getElementById(instructionName).setAttribute('onclick', 'return false;');
   newWindow.document.getElementById(instructionName).onclick = function() {return false;};
 
-  if(displayIndex  >= 1 && x2alreadyDrwn == false){
-    x2x2alreadyDrwn = true;
-    var x2 = newWindow.document.createElement("img");
-    x2.setAttribute("id", "x2");
-    x2.setAttribute("src", "http://localhost/Web_Avance/public/images/x2-"+colour+".png");
-    x2.setAttribute("height", "70");
-    x2.setAttribute("width", "70");
-    newWindow.document.getElementsByTagName("body")[0].appendChild(x2);
-    x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
-    x2.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+  if(colour == "rouge"){
+    if(!x2alreadyDrwnRed){
+      x2alreadyDrwnRed = true;
+      test = newWindow.document.getElementById("x2");
+      console.log(test);
+      test.style.opacity = 1;
+      test.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
+      test.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+    }
+  }else if(colour == "bleu"){
+    if(!x2alreadyDrwnBlue){
+      x2alreadyDrwnBlue = true;
+      test = newWindow.document.getElementById("x2");
+      console.log(test);
+      test.style.opacity = 1;
+      test.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
+      test.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+    }
   }
 
+
   if(displayIndex + 1 == 6){
+    if(colour == "rouge"){
+      nbPopupRed = 0;
+      x2alreadyDrwnRed = false;
+    }else if (colour == "bleu") {
+      nbPopupBlue = 0;
+      x2alreadyDrwnBlue = false;
+    }
+
     newWindow.close();
     popOpen = false;
     popUpWindow = null;
@@ -278,6 +299,13 @@ function PopupCenter(w, h, colour) {
 
   if(!popOpen)
   {
+    if(colour == "rouge"){
+      nbPopupRed ++;
+      console.log(instructionArrayRed.length);
+
+    }else if (colour == "bleu") {
+      nbPopupBlue ++;
+    }
 
     var annuler = newWindow.document.createElement("img");
     annuler.setAttribute("id", "annuler");
@@ -383,6 +411,47 @@ function PopupCenter(w, h, colour) {
       ouest_x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index, "ouest_x2", newWindow); displayIndex ++;');
       ouest_x2.onclick = function() {drawSelectedInstruction(colour, index, "ouest_x2", newWindow);displayIndex ++;};
     }
+
+
+    var x2 = newWindow.document.createElement("img");
+    x2.setAttribute("id", "x2");
+    x2.setAttribute("src", "http://localhost/Web_Avance/public/images/x2-"+colour+".png");
+    x2.setAttribute("height", "70");
+    x2.setAttribute("width", "70");
+    newWindow.document.getElementsByTagName("body")[0].appendChild(x2);
+
+    if(colour == "rouge"){
+      if(x2alreadyDrwnRed){
+        x2.style.opacity = 1;
+        x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
+        x2.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+      }else{
+        x2.style.opacity = 0;
+      }
+    }else if(colour == "bleu"){
+      if(x2alreadyDrwnBlue){
+        x2.style.opacity = 1;
+        x2.setAttribute('onclick', 'drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;');
+        x2.onclick = function() {drawSelectedInstruction(colour, index+1, "x2", newWindow); displayIndex ++;};
+      }else{
+        x2.style.opacity = 0;
+      }
+    }
+
+    if(colour == "rouge" && nbPopupRed > 1){
+      instructionArrayRed.forEach(function(instructionName) {
+        newWindow.document.getElementById(instructionName).style.filter = "grayscale(100%)";
+        newWindow.document.getElementById(instructionName).setAttribute('onclick', 'return false;');
+        newWindow.document.getElementById(instructionName).onclick = function() {return false;};
+      });
+    }else if(colour == "bleu" && nbPopupBlue > 1){
+      instructionArrayBlue.forEach(function(instructionName) {
+        newWindow.document.getElementById(instructionName).style.filter = "grayscale(100%)";
+        newWindow.document.getElementById(instructionName).setAttribute('onclick', 'return false;');
+        newWindow.document.getElementById(instructionName).onclick = function() {return false;};
+      });
+    }
+
   }
 
   popOpen = true;

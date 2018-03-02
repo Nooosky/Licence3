@@ -71,7 +71,7 @@ int yylex();
 void yyerror(const char *);
 
 
-#line 75 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:339  */
+#line 75 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -91,8 +91,8 @@ void yyerror(const char *);
 
 /* In a future release of Bison, this section will be replaced
    by #include "parser.h".  */
-#ifndef YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
-# define YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
+#ifndef YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
+# define YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -121,7 +121,7 @@ union YYSTYPE
   double value;
   const char *name;
 
-#line 125 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:355  */
+#line 125 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -134,11 +134,11 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 142 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:358  */
+#line 142 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1221,59 +1221,59 @@ yyreduce:
         case 5:
 #line 38 "parser.y" /* yacc.c:1646  */
     { printf("> %.10g\n", (yyvsp[-1].value)); }
-#line 1225 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1225 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 6:
 #line 42 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[0].value); }
-#line 1231 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1231 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 7:
 #line 43 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = constant((yyvsp[0].name)); }
-#line 1237 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1237 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 8:
 #line 44 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[-2].value) + (yyvsp[0].value); }
-#line 1243 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1243 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 9:
 #line 45 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[-2].value) - (yyvsp[0].value); }
-#line 1249 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1249 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 10:
 #line 46 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[-2].value) * (yyvsp[0].value); }
-#line 1255 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1255 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 11:
 #line 47 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[-2].value) / (yyvsp[0].value); }
-#line 1261 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1261 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 12:
 #line 48 "parser.y" /* yacc.c:1646  */
     { (yyval.value)=-(yyvsp[0].value); }
-#line 1267 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1267 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
   case 13:
 #line 49 "parser.y" /* yacc.c:1646  */
     { (yyval.value) = (yyvsp[-1].value); }
-#line 1273 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1273 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
     break;
 
 
-#line 1277 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
+#line 1277 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
