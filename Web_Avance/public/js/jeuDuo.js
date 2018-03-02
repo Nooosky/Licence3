@@ -101,8 +101,8 @@ class Robot
   draw()
   {
     var coef = 1;
-    if(window.innerWidth > 1580)
-      coef = 1080/1580;
+    if(window.innerWidth > 1400)
+      coef = 1080/1400;
     else
       coef = 1080/window.innerWidth;
 
@@ -131,25 +131,25 @@ class Robot
         case "nord":
         {
           this.destinationOrientation = 270;
-          this.destinationPositionY-= (this.destinationPositionY > 0  && this.destinationPositionY-1 != robot.positionY) ? 1 : 0;
+          this.destinationPositionY-= (this.destinationPositionY == 0 || (this.destinationPositionY-1 == (Math.round(robot.positionY * 100) / 100) && this.destinationPositionX == (Math.round(robot.positionX * 100) / 100))) ? 0 : 1;
           break;
         }
         case "sud":
         {
           this.destinationOrientation = 90;
-          this.destinationPositionY+= (this.destinationPositionY < 8  && this.destinationPositionY+1 != robot.positionY) ? 1 : 0;
+          this.destinationPositionY+= (this.destinationPositionY == 8 || (this.destinationPositionY+1 == (Math.round(robot.positionY * 100) / 100) && this.destinationPositionX == (Math.round(robot.positionX * 100) / 100))) ? 0 : 1;
           break;
         }
         case "est":
         {
           this.destinationOrientation = 0;
-          this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+          this.destinationPositionX+= (this.destinationPositionX == 8 || (this.destinationPositionX+1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
           break;
         }
         case "ouest":
         {
           this.destinationOrientation = 180;
-          this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
+          this.destinationPositionX-= (this.destinationPositionX == 0 || (this.destinationPositionX-1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
           break;
         }
         case "prendre":
@@ -161,21 +161,24 @@ class Robot
         }
         case "deposer":
         {
-          var canDrop = true;
+          var canDrop = 0;
           for (var i = 0; i < flagArray.length; ++i)
+          {
+            console.log(flagArray[i].positionX +" == "+ (Math.round(this.flag.positionX * 100) / 100) +" && "+ flagArray[i].positionY +"=="+ (Math.round(this.flag.positionY * 100) / 100));
             if(this.flag != null && flagArray[i].positionX == (Math.round(this.flag.positionX * 100) / 100) && flagArray[i].positionY == (Math.round(this.flag.positionY * 100) / 100))
-              canDrop = false;
+              canDrop += 1;
+          }
 
-          if(canDrop)
+          if(canDrop == 1)
             this.flag = null;
           break;
         }
         case "repousser":
         {
           if (robot.color == "rouge")
-            robot.destinationPositionX-= (robot.destinationPositionX > 0 && robot.destinationPositionX-1 != (Math.round(this.positionX * 100) / 100)) ? 1 : 0;
+            robot.destinationPositionX-= (robot.destinationPositionX == 0 || (robot.destinationPositionX-1 == (Math.round(this.positionX * 100) / 100)  && robot.destinationPositionY == (Math.round(this.positionY * 100) / 100))) ? 0 : 1;
           else if (robot.color == "bleu")
-            robot.destinationPositionX+= (robot.destinationPositionX < 8 && robot.destinationPositionX+1 != (Math.round(this.positionX * 100) / 100)) ? 1 : 0;
+            robot.destinationPositionX+= (robot.destinationPositionX == 8 || (robot.destinationPositionX+1 == (Math.round(this.positionX * 100) / 100)  && robot.destinationPositionY == (Math.round(this.positionY * 100) / 100))) ? 0 : 1;
           break;
         }
         case "pause":
@@ -190,15 +193,15 @@ class Robot
         case "ouest_x2":
         {
           this.destinationOrientation = 180;
-          this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
-          this.destinationPositionX-= (this.destinationPositionX > 0  && this.destinationPositionX-1 != robot.positionX) ? 1 : 0;
+          this.destinationPositionX-= (this.destinationPositionX == 0 || (this.destinationPositionX-1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
+          this.destinationPositionX-= (this.destinationPositionX == 0 || (this.destinationPositionX-1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
           break;
         }
         case "est_x2":
         {
-          this.destinationOrientation = 360;
-          this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
-          this.destinationPositionX+= (this.destinationPositionX < 8 && this.destinationPositionX+1 != robot.positionX) ? 1 : 0;
+          this.destinationOrientation = 0;
+          this.destinationPositionX+= (this.destinationPositionX == 8 || (this.destinationPositionX+1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
+          this.destinationPositionX+= (this.destinationPositionX == 8 || (this.destinationPositionX+1 == (Math.round(robot.positionX * 100) / 100) && this.destinationPositionY == (Math.round(robot.positionY * 100) / 100))) ? 0 : 1;
           break;
         }
         default:
@@ -240,8 +243,8 @@ class Flag
   draw()
   {
     var coef = 1;
-    if(window.innerWidth > 1580)
-      coef = 1080/1580;
+    if(window.innerWidth > 1400)
+      coef = 1080/1400;
     else
       coef = 1080/window.innerWidth;
 
@@ -321,9 +324,15 @@ class Game
         flagBlue++;
 
     if(flagRed >= 2)
-      flashyText(this.player1.name + " wins! Congratulation!");
+    {
+      alert(this.player1.name + " wins! Congratulation!");
+      document.location.href="./Web_Avance/public/index.html"
+    }
     else if(flagBlue >= 2)
-      flashyText(this.player2.name + " wins! Congratulation!");
+    {
+      alert(this.player2.name + " wins! Congratulation!");
+      document.location.href="./Web_Avance/public/index.html"
+    }
   }
 
   display()

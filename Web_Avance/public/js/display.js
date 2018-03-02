@@ -409,8 +409,8 @@ function flashyText(text) {
 function resize()
 {
     var coef = 1;
-    if(window.innerWidth > 1580)
-      coef = 1080/1580;
+    if(window.innerWidth > 1400)
+      coef = 1080/1400;
     else
       coef = 1080/window.innerWidth;
 
