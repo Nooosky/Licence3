@@ -155,7 +155,7 @@ class Robot
         case "prendre":
         {
           for (var i = 0; i < flagArray.length; ++i)
-            if(this.flag == null && flagArray[i].positionX == (Math.round(this.positionX * 100) / 100) && flagArray[i].positionY == (Math.round(this.positionY * 100) / 100) && flagArray[i].color == this.color)
+            if(this.flag == null && (Math.round(flagArray[i].positionX * 100) / 100) == (Math.round(this.positionX * 100) / 100) && (Math.round(flagArray[i].positionY * 100) / 100) == (Math.round(this.positionY * 100) / 100) && flagArray[i].color == this.color)
               this.flag = flagArray[i];
           break;
         }
@@ -164,8 +164,7 @@ class Robot
           var canDrop = 0;
           for (var i = 0; i < flagArray.length; ++i)
           {
-            console.log(flagArray[i].positionX +" == "+ (Math.round(this.flag.positionX * 100) / 100) +" && "+ flagArray[i].positionY +"=="+ (Math.round(this.flag.positionY * 100) / 100));
-            if(this.flag != null && flagArray[i].positionX == (Math.round(this.flag.positionX * 100) / 100) && flagArray[i].positionY == (Math.round(this.flag.positionY * 100) / 100))
+            if(this.flag != null && (Math.round(flagArray[i].positionX * 100) / 100) == (Math.round(this.flag.positionX * 100) / 100) && (Math.round(flagArray[i].positionY * 100) / 100) == (Math.round(this.flag.positionY * 100) / 100))
               canDrop += 1;
           }
 
@@ -309,29 +308,29 @@ class Game
     var flagBlue = 0;
     for (var i = 0; i < this.flagArray.length; ++i)
       if(this.flagArray[i].color == "rouge" && (
-        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 3)||
-        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 4)||
-        (this.flagArray[i].positionX == 0 && this.flagArray[i].positionY == 5)||
-        (this.flagArray[i].positionX == 1 && this.flagArray[i].positionY == 4)
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 0 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 3)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 0 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 4)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 0 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 5)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 1 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 4)
         ))
         flagRed++;
       else if(this.flagArray[i].color == "bleu" && (
-        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 3)||
-        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 4)||
-        (this.flagArray[i].positionX == 8 && this.flagArray[i].positionY == 5)||
-        (this.flagArray[i].positionX == 7 && this.flagArray[i].positionY == 4)
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 8 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 3)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 8 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 4)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 8 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 5)||
+        ((Math.round(this.flagArray[i].positionX * 100) / 100) == 7 && (Math.round(this.flagArray[i].positionY * 100) / 100) == 4)
         ))
         flagBlue++;
 
     if(flagRed >= 2)
     {
       alert(this.player1.name + " wins! Congratulation!");
-      document.location.href="./Web_Avance/public/index.html"
+      document.location.href="..";
     }
     else if(flagBlue >= 2)
     {
       alert(this.player2.name + " wins! Congratulation!");
-      document.location.href="./Web_Avance/public/index.html"
+      document.location.href="..";
     }
   }
 
