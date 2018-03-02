@@ -8,7 +8,7 @@
 
 ..//main.h
 
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.c
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.c
 stdio.h
 -
 string.h
@@ -24,15 +24,15 @@ stdio.h
 stdlib.h
 -
 parser.h
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.h
 unistd.h
 -
 
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.c
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.c
 stdio.h
 -
 main.h
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/main.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/main.h
 stddef.h
 -
 libintl.h
@@ -48,19 +48,19 @@ stdlib.h
 stdio.h
 -
 
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.h
 
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/main.c
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/main.c
 main.h
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/main.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/main.h
 string.h
 -
 parser.h
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/parser.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/parser.h
 lexer.h
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/lexer.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/lexer.h
 
-/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/main.h
+//home/near/L3/Licence3/Analyse_Syntaxique/TP2/main.h
 
 lexer.h
 stdio.h

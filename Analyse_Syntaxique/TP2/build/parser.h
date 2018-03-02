@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
-# define YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
+#ifndef YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
+# define YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 1
@@ -60,7 +60,7 @@ union YYSTYPE
   double value;
   const char *name;
 
-#line 64 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/parser.h" /* yacc.c:1909  */
+#line 64 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/parser.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -73,4 +73,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_HOME_BASTIEN_DOCUMENTS_GITHUB_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_HOME_NEAR_L3_LICENCE3_ANALYSE_SYNTAXIQUE_TP2_BUILD_PARSER_H_INCLUDED  */

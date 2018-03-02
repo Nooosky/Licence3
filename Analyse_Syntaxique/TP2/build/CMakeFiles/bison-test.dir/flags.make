@@ -6,5 +6,5 @@ C_FLAGS = -Wall -std=c99 -O2 -g
 
 C_DEFINES = -D_POSIX_C_SOURCE=200809L
 
-C_INCLUDES = -I/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2 -I/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build 
+C_INCLUDES = -I//home/near/L3/Licence3/Analyse_Syntaxique/TP2 -I//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build 
 

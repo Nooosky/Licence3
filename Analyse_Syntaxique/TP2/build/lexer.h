@@ -2,9 +2,9 @@
 #define yyHEADER_H 1
 #define yyIN_HEADER 1
 
-#line 6 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
+#line 6 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
 
-#line 8 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
+#line 8 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -321,6 +321,6 @@ extern int yylex (void);
 #line 28 "lexer.l"
 
 
-#line 325 "/home/bastien/Documents/github/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
+#line 325 "//home/near/L3/Licence3/Analyse_Syntaxique/TP2/build/lexer.h"
 #undef yyIN_HEADER
 #endif /* yyHEADER_H */
